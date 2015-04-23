@@ -1,15 +1,16 @@
 swagger: "2.0"
 info:
+  title: Authentiq Client Management
+  version: "0.1.0"
   description: |
     Authentiq Client Management API.
 
     [Learn about Authentiq](http://authentiq.com) or join the IRC channel `#authentiq` on irc.freenode.net.
 
-  version: "0.1.0"
-  title: Authentiq Client Management
   termsOfService: http://authentiq.com/terms/
   contact:
     name: Authentiq team
+    url: http://authentiq.io/support
     email: hello@authentiq.com
   license:
     name: Apache 2.0
@@ -20,30 +21,85 @@ schemes:
   - https
 paths:
 
+  /authorize:
+    get:
+      summary: oAuth 2.0 authorize
+      tags:
+        - oAuth
+      responses:
+        200:
+          description: Success
+
+  /token:
+    get:
+      summary: oAuth 2.0 token
+      tags:
+        - oAuth
+      responses:
+        200:
+          description: Success
+
+  /session:
+    get:
+      summary: oAuth 2.0 session
+      tags:
+        - oAuth
+      responses:
+        200:
+          description: Success
+
+  /logout:
+    get:
+      summary: provider logout
+      tags:
+        - oAuth
+        - logout
+      responses:
+        200:
+          description: Success
+
+  /iframe:
+    get:
+      tags:
+        - oAuth
+        - logout
+      summary: provider iframe
+      responses:
+        200:
+          description: Success
+
   /client:
     get:
       summary: Get a list of Clients the current Account has access to
+      tags:
+        - admin
       description: ""
       operationId: getClientList
       produces:
         - application/json
       responses:
-        default:
+        200:
           description: Success
           schema:
             type: array
             items:
               $ref: "#/definitions/Client"
+        default:
+          $ref: '#/responses/ErrorResponse'
+
       security:
         - aq_auth:
           - oidc
 
     post:
       summary: create a new Client in the current Account
+      tags:
+        - admin
       description: ""
       operationId: createClient
       consumes:
         - application/json
+        - multipart/form-data
       parameters:
         - in: body
           name: body
@@ -65,41 +121,46 @@ paths:
   /client/{clientId}:
     get:
       summary: Get details of a Client object
+      tags:
+        - admin
       description: ""
       operationId: getClient
       produces:
         - application/json
       parameters:
-        - in: path
-          name: clientId
-          description: "ID of client"
-          required: true
-          type: string
+        - $ref: "#/parameters/clientParam"
       responses:
         "200":
           description: Success
           schema:
             $ref: "#/definitions/Client"
         "401":
-          description: No access to Client object
+          description: No access to Client object (incorrect secret)
+          schema:
+            $ref: '#/definitions/Error'
         "404":
-          description: Client ID does not exist
+          description: Client ID not found
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          $ref: '#/responses/ErrorResponse'
       security:
         - aq_auth:
           - oidc
 
     put:
       summary: Update an existing client
+      tags:
+        - admin
       description: ""
       operationId: updateClient
       consumes:
         - application/json
+        - multipart/form-data
+      produces:
+        - application/json
       parameters:
-        - in: path
-          name: clientId
-          description: "ID of client"
-          required: true
-          type: string
+        - $ref: "#/parameters/clientParam"
         - in: body
           name: body
           description: Client object that needs to be added to the Account
@@ -107,26 +168,30 @@ paths:
           schema:
             $ref: "#/definitions/Client"
       responses:
-        "401":
-          description: No access to Client object
-        "404":
-          description: Client ID does not exist
         "200":
           description: Success
+          schema:
+            $ref: "#/definitions/Client"
+        "401":
+          description: No access to Client object (incorrect secret)
+        "404":
+          description: Client ID not found
+        default:
+          description: Unexpected error (all 4xx and 5xx errors)
+          schema:
+            $ref: '#/definitions/Error'
       security:
         - aq_auth:
           - oidc
 
     delete:
       summary: Delete a Client object
+      tags:
+        - admin
       description: ""
       operationId: deleteClient
       parameters:
-        - in: path
-          name: clientId
-          description: "ID of client"
-          required: true
-          type: string
+        - $ref: "#/parameters/clientParam"
       responses:
         "200":
           description: Success
@@ -141,13 +206,32 @@ paths:
 securityDefinitions:
   aq_auth:
     type: oauth2
+    flow: accessCode
     authorizationUrl: https://connect.authentiq.io/authorize
-    flow: implicit
+    tokenUrl: https://connect.authentiq.io/token
     scopes:
       oidc: default iodc stuff
+
 definitions:
+  Error:
+    properties:
+      error:
+        type: string
+      error_description:
+        type: string
+      status:
+        type: integer
+      title:
+        type: string
+      type:
+        type: string
+      detail:
+        type: string
+
   Client:
     properties:
+      client_id:
+        type: string # only in responses
       redirect_uris:
         type: array
         items:
@@ -187,5 +271,19 @@ definitions:
         type: array
         items:
           type: string
+
+parameters:
+  clientParam:
+    name: clientId
+    in: path
+    description: "ID of client"
+    required: true
+    type: string
+
+responses:
+  ErrorResponse:
+    description: Unexpected error
+    schema:
+      $ref: '#/definitions/Error'
 
 # END
