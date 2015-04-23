@@ -9,7 +9,8 @@ info:
   title: Authentiq Client Management
   termsOfService: http://authentiq.com/terms/
   contact:
-    name: Authentiq team - hello@authentiq.com
+    name: Authentiq team
+    email: hello@authentiq.com
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -21,7 +22,7 @@ paths:
 
   /client:
     get:
-      summary: Get a list of my clients
+      summary: Get a list of Clients the current Account has access to
       description: ""
       operationId: getClientList
       produces:
@@ -38,24 +39,24 @@ paths:
           - oidc
 
     post:
-      summary: create a new clients
+      summary: create a new Client in the current Account
       description: ""
-      operationId: getClientList
-      produces:
+      operationId: createClient
+      consumes:
         - application/json
       parameters:
         - in: body
           name: body
-          description: Pet object that needs to be added to the store
-          required: false
+          description: Client object that needs to be added to the Account
+          required: true
           schema:
             $ref: "#/definitions/Client"
       responses:
-        default:
+        "201":
           description: Success
           headers:
             "Location":
-              description: location of new client object
+              description: "location of new Client object: /client/{clientId}"
               type: string
       security:
         - aq_auth:
@@ -63,7 +64,7 @@ paths:
 
   /client/{clientId}:
     get:
-      summary: Get a client
+      summary: Get details of a Client object
       description: ""
       operationId: getClient
       produces:
@@ -75,12 +76,14 @@ paths:
           required: true
           type: string
       responses:
-        "404":
-          description: N/A
         "200":
           description: Success
           schema:
             $ref: "#/definitions/Client"
+        "401":
+          description: No access to Client object
+        "404":
+          description: Client ID does not exist
       security:
         - aq_auth:
           - oidc
@@ -89,8 +92,6 @@ paths:
       summary: Update an existing client
       description: ""
       operationId: updateClient
-      produces:
-        - application/json
       consumes:
         - application/json
       parameters:
@@ -99,11 +100,40 @@ paths:
           description: "ID of client"
           required: true
           type: string
+        - in: body
+          name: body
+          description: Client object that needs to be added to the Account
+          required: true
+          schema:
+            $ref: "#/definitions/Client"
       responses:
+        "401":
+          description: No access to Client object
         "404":
-          description: N/A
+          description: Client ID does not exist
         "200":
           description: Success
+      security:
+        - aq_auth:
+          - oidc
+
+    delete:
+      summary: Delete a Client object
+      description: ""
+      operationId: deleteClient
+      parameters:
+        - in: path
+          name: clientId
+          description: "ID of client"
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+        "401":
+          description: No access to Client object
+        "404":
+          description: Client ID does not exist
       security:
         - aq_auth:
           - oidc
@@ -119,11 +149,17 @@ definitions:
   Client:
     properties:
       redirect_uris:
-        type: string
+        type: array
+        items:
+          type: string
       response_types:
-        type: string
+        type: array
+        items:
+          type: string
       grant_types:
-        type: string
+        type: array
+        items:
+          type: string
       application_type:
         type: string
       application_type:
@@ -131,7 +167,9 @@ definitions:
       application_type:
         type: string
       contacts:
-        type: string
+        type: array
+        items:
+          type: string
       client_name:
         type: string
       logo_uri:
@@ -146,4 +184,8 @@ definitions:
         type: integer
         format: int64
       default_scopes:
-        type: string
+        type: array
+        items:
+          type: string
+
+# END
