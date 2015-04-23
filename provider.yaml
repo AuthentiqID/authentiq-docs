@@ -1,0 +1,149 @@
+swagger: "2.0"
+info:
+  description: |
+    Authentiq Client Management API.
+
+    [Learn about Authentiq](http://authentiq.com) or join the IRC channel `#authentiq` on irc.freenode.net.
+
+  version: "0.1.0"
+  title: Authentiq Client Management
+  termsOfService: http://authentiq.com/terms/
+  contact:
+    name: Authentiq team - hello@authentiq.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: connect.authentiq.io
+basePath: /v0
+schemes:
+  - https
+paths:
+
+  /client:
+    get:
+      summary: Get a list of my clients
+      description: ""
+      operationId: getClientList
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Client"
+      security:
+        - aq_auth:
+          - oidc
+
+    post:
+      summary: create a new clients
+      description: ""
+      operationId: getClientList
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Pet object that needs to be added to the store
+          required: false
+          schema:
+            $ref: "#/definitions/Client"
+      responses:
+        default:
+          description: Success
+          headers:
+            "Location":
+              description: location of new client object
+              type: string
+      security:
+        - aq_auth:
+          - oidc
+
+  /client/{clientId}:
+    get:
+      summary: Get a client
+      description: ""
+      operationId: getClient
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: clientId
+          description: "ID of client"
+          required: true
+          type: string
+      responses:
+        "404":
+          description: N/A
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Client"
+      security:
+        - aq_auth:
+          - oidc
+
+    put:
+      summary: Update an existing client
+      description: ""
+      operationId: updateClient
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: clientId
+          description: "ID of client"
+          required: true
+          type: string
+      responses:
+        "404":
+          description: N/A
+        "200":
+          description: Success
+      security:
+        - aq_auth:
+          - oidc
+
+securityDefinitions:
+  aq_auth:
+    type: oauth2
+    authorizationUrl: https://connect.authentiq.io/authorize
+    flow: implicit
+    scopes:
+      oidc: default iodc stuff
+definitions:
+  Client:
+    properties:
+      redirect_uris:
+        type: string
+      response_types:
+        type: string
+      grant_types:
+        type: string
+      application_type:
+        type: string
+      application_type:
+        type: string
+      application_type:
+        type: string
+      contacts:
+        type: string
+      client_name:
+        type: string
+      logo_uri:
+        type: string
+      client_uri:
+        type: string
+      policy_uri:
+        type: string
+      tos_uri:
+        type: string
+      default_max_age:
+        type: integer
+        format: int64
+      default_scopes:
+        type: string
