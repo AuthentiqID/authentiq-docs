@@ -16,7 +16,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 host: connect.authentiq.io
-basePath: /v0
+basePath: /
 schemes:
   - https
 paths:
@@ -24,49 +24,200 @@ paths:
   /authorize:
     get:
       summary: oAuth 2.0 authorize
+      description: "
+        See http://openid.net/specs/openid-connect-core-1_0.html#AuthRequest         "
       tags:
-        - oAuth
+        - OAuth
+        - signin
+      parameters:
+        - in: query
+          name: scope
+          type: string
+          description: ""
+          required: true
+        - in: query
+          name: response_type
+          type: string
+          description: ""
+          required: true
+        - in: query
+          name: client_id
+          type: string
+          description: ""
+          required: true
+        - in: query
+          name: redirect_uri
+          type: string
+          description: ""
+          required: true
+        - in: query
+          name: state
+          type: string
+          description: "recommended"
+          required: false
+        - in: query
+          name: response_mode
+          type: string
+          description: ""
+          required: false
+        - in: query
+          name: nonce
+          type: string
+          description: ""
+          required: false
+        - in: query
+          name: display
+          type: string
+          description: ""
+          required: false
+        - in: query
+          name: prompt
+          type: string
+          description: ""
+          required: false
+        - in: query
+          name: max_age
+          type: string
+          description: ""
+          required: false
+        - in: query
+          name: ui_locales
+          type: string
+          description: ""
+          required: false
+#        - in: query
+#          name: id_token_hint
+#          type: string
+#          description: ""
+#          required: false
+#        - in: query
+#          name: login_hint
+#          type: string
+#          description: ""
+#          required: false
+#        - in: query
+#          name: acr_values
+#          type: string
+#          description: ""
+#          required: false
+      produces:
+        - text/html
       responses:
         200:
-          description: Success
+          description: Login with Authentiq screen
+        302:
+          description: Found (code) or Error (error)
+          headers:
+            "Location":
+              description: Authorization URI with code or error parameter
+              type: string
+        400:
+          description: Not found
+        default:
+          description: Other Errors
 
   /token:
-    get:
+    post:
       summary: oAuth 2.0 token
+      description: "
+        To obtain an Access Token, an ID Token, and optionally a 
+        Refresh Token, the RP (Client) sends a Token Request to the 
+        Token Endpoint to obtain a Token Response, as described in 
+        Section 3.2 of OAuth 2.0 [RFC6749], when using the 
+        Authorization Code Flow.
+        Communication with the Token Endpoint MUST utilize TLS
+        "
       tags:
-        - oAuth
+        - OAuth
+        - signin
+      consumes:
+        - application/x-www-form-urlencoded
+      parameters:
+        - name: grant_type
+          in: formData
+          description: "value: authorization_code"
+          required: true
+          type: string
+        - name: code
+          in: formData
+          description: ""
+          required: true
+          type: string
+        - name: redirect_uri
+          in: formData
+          description: ""
+          required: false
+          type: string
+      produces:
+        - application/json
       responses:
         200:
           description: Success
+          schema:
+            type: object
+            required:
+            - id_token
+            - access_token
+            - token_type
+            - expires_in
+            properties:
+              id_token:
+                type: string
+              access_token:
+                type: string
+              token_type:
+                type: string
+              expires_in:
+                type: integer
+                format: int32
+                minimum: 0          
+              refresh_token:
+                type: string
+          headers:
+            "Cache-Control":
+              description: no-store
+              type: string
+            "Pragma":
+              description: no-cache
+              type: string
+        default:
+          $ref: '#/responses/ErrorResponse'
 
   /session:
     get:
       summary: oAuth 2.0 session
       tags:
-        - oAuth
+        - OAuth
+        - signin
       responses:
         200:
           description: Success
+        default:
+          $ref: '#/responses/ErrorResponse'
 
-  /logout:
+  /authorize/logout:
     get:
       summary: provider logout
       tags:
-        - oAuth
-        - logout
+        - OAuth
+        - signout
       responses:
         200:
           description: Success
+        default:
+          $ref: '#/responses/ErrorResponse'
 
-  /iframe:
+  /authorize/iframe:
     get:
       tags:
-        - oAuth
-        - logout
+        - OAuth
+        - signout
       summary: provider iframe
       responses:
         200:
           description: Success
+        default:
+          $ref: '#/responses/ErrorResponse'
 
   /client:
     get:
@@ -214,21 +365,33 @@ securityDefinitions:
 
 definitions:
   Error:
+    description: "Error Response defined as in Section 5.2 
+      of OAuth 2.0 [RFC6749] ; 
+      status, type, title, detail are application specific
+      "
+    required:
+    - error
     properties:
       error:
         type: string
       error_description:
         type: string
+      state:
+        type: integer
       status:
         type: integer
-      title:
-        type: string
       type:
+        type: string
+      title:
         type: string
       detail:
         type: string
 
   Client:
+    description: "Client object"
+    required:
+      - client_name
+      - client_uri
     properties:
       client_id:
         type: string # only in responses
