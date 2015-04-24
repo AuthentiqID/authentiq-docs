@@ -170,7 +170,7 @@ paths:
               expires_in:
                 type: integer
                 format: int32
-                minimum: 0          
+                minimum: 0
               refresh_token:
                 type: string
           headers:
@@ -184,14 +184,89 @@ paths:
           $ref: '#/responses/ErrorResponse'
 
   /session:
-    get:
-      summary: oAuth 2.0 session
+    post:
+      summary: create an anonymous session
       tags:
         - OAuth
         - signin
+      parameters:
+        - in: formData
+          name: scope
+          type: string
+          description: "space sep list of strings"
+          required: true
+      responses:
+        201:
+          description: Success
+          schema:
+            $ref: "#/definitions/Session"
+        default:
+          $ref: '#/responses/ErrorResponse'
+
+  /session/{sessionId}:
+    post:
+      summary: add authentication tokens
+      description: "(websocket)"
+      consumes:
+        - application/jwt
+        - application/x-www-form-urlencoded
+        - multipart/form-data
+      parameters:
+        - in: path
+          name: sessionId
+          type: string
+          description: "when application/jwt"
+        - in: query
+          name: token
+          type: string
+          description: ""
+          required: false
+        - in: formData
+          name: bind_token
+          type: string
+          description: ""
+          required: false
+        - in: formData
+          name: push_token
+          type: string
+          description: ""
+          required: false
+        - in: formData
+          name: id_token
+          type: string
+          description: ""
+          required: false
+        - in: formData
+          name: userinfo
+          type: string
+          description: ""
+          required: false
       responses:
         200:
           description: Success
+          schema:
+            $ref: "#/definitions/Session"
+        default:
+          $ref: '#/responses/ErrorResponse'
+
+  /client/{clientId}/session:
+    post:
+      summary: create a session for this client
+      tags:
+        - OAuth
+        - signin
+      parameters:
+        - $ref: "#/parameters/clientParam"
+        - in: formData
+          name: scope
+          type: string
+          description: "space sep list of strings"
+          required: false
+      responses:
+        201:
+          description: Success
+          schema:
+            $ref: "#/definitions/Session"
         default:
           $ref: '#/responses/ErrorResponse'
 
@@ -224,7 +299,7 @@ paths:
       summary: Get a list of Clients the current Account has access to
       tags:
         - admin
-      description: ""
+      description: "scope, ui_locales, claims_locales"
       operationId: getClientList
       produces:
         - application/json
@@ -386,6 +461,82 @@ definitions:
         type: string
       detail:
         type: string
+
+  Session:
+    description: "Session object"
+    properties:
+      version:
+        type: integer
+      sub:
+        type: string
+      session_id:
+        type: string
+      session_state:
+        type: string
+      session_uri:
+        type: string
+      client_id:
+        type: string
+      scopes:
+        type: array
+        items:
+          type: string
+      scopes_optional:
+        type: array
+        items:
+          type: string
+      scopes_required:
+        type: array
+        items:
+          type: string
+      scopes_signed:
+        type: array
+        items:
+          type: string
+      tokens_seen:
+        type: array
+        items:
+          type: string
+      scopes_seen:
+        type: array
+        items:
+          type: string
+      redirect_uri:
+        type: string
+      response_type:
+        type: string
+      response_mode:
+        type: string
+      nonce:
+        type: string
+      created_at:
+        type: string
+      connected_at:
+        type: string
+        format: date-time
+      authenticated_at:
+        type: string
+        format: date-time
+      concluded_at:
+        type: string
+        format: date-time
+      deleted_at:
+        type: string
+        format: date-time
+      client_name:
+        type: string
+      client_uri:
+        type: string
+      logo_uri:
+        type: string
+      policy_uri:
+        type: string
+      tos_uri:
+        type: string
+      contacts:
+        type: array
+        items:
+          type: string
 
   Client:
     description: "Client object"
