@@ -1,13 +1,25 @@
 swagger: "2.0"
 info:
-  version: 0.4.0
   title: Authentiq API
+  version: "4"
+  contact:
+    name: Authentiq team
+    url: "http://authentiq.io/support"
+    email: "hello@authentiq.com"
+  license:
+    name: Apache 2.0
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+  termsOfService: "http://authentiq.com/terms/"
+host: 4-dot-authentiqio.appspot.com
+basePath: /
+schemes:
+  - https
 paths:
   /key:
     post:
-      description: ""
+      description: "Register a new ID `JWT(sub, devtoken)`"
       parameters:
-        - $ref: "#/definitions/Key"
+        - $ref: "#/parameters/AuthentiqID"
       consumes:
         - application/jwt
       produces:
@@ -17,13 +29,46 @@ paths:
           description: Successful response
         default:
           $ref: "#/responses/ErrorResponse"
+    delete:
+      description: "Revoke an Authentiq ID using email & phone.\n\nIf called with `email` and `phone` only, a verification code \nwill be sent by email. Do a second call adding `code` to \ncomplete the revocation.\n"
+      parameters:
+        - name: email
+          in: query
+          type: string
+          description: primary email associated to Key (ID)
+          required: true
+        - name: phone
+          in: query
+          type: string
+          description: "primary phone number, international representation"
+          required: true
+        - name: code
+          in: query
+          type: string
+          description: verification code sent by email
+          required: false
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: pending or done
+        "409":
+          $ref: "#/responses/ErrorResponse"
+        default:
+          $ref: "#/responses/ErrorResponse"
   "/key/{PK}":
     get:
       description: "Gets `Key` object details.\n"
       parameters:
         - $ref: "#/parameters/PK"
       produces:
-        - application/jwt
+        - application/json
       responses:
         "200":
           description: Successful response
@@ -37,16 +82,19 @@ paths:
               status:
                 type: string
               since:
-                type: integer
-                format: int64
+                type: string
+                format: date-time
+        "410":
+          $ref: "#/responses/ErrorResponse"
         default:
           $ref: "#/responses/ErrorResponse"
     post:
-      description: ""
+      description: "update properties of an Authentiq ID.\n(not operational in v4; use PUT for now)\n"
       parameters:
         - $ref: "#/parameters/PK"
+        - $ref: "#/parameters/AuthentiqID"
       consumes:
-        - application/json
+        - application/jwt
       produces:
         - application/json
       responses:
@@ -55,27 +103,30 @@ paths:
         default:
           $ref: "#/responses/ErrorResponse"
     head:
-      description: ""
+      description: "HEAD info on Authentiq ID\n"
       parameters:
         - $ref: "#/parameters/PK"
-      produces:
-        - application/jwt
       responses:
         "200":
           description: Successful response
+        "410":
+          $ref: "#/responses/ErrorResponse"
         default:
           $ref: "#/responses/ErrorResponse"
     put:
-      description: ""
+      description: "Update Authentiq ID by replacing the object.\n(v4: to bind email/phone hash)\n"
       parameters:
         - $ref: "#/parameters/PK"
+        - $ref: "#/parameters/AuthentiqID"
       consumes:
         - application/jwt
       produces:
-        - application/jwt
+        - application/json
       responses:
         "200":
           description: Successful response
+        "409":
+          $ref: "#/responses/ErrorResponse"
         default:
           $ref: "#/responses/ErrorResponse"
     delete:
@@ -86,10 +137,9 @@ paths:
           in: query
           type: string
           description: revokation secret
-      consumes:
-        - application/json
+          required: true
       produces:
-        - application/jwt
+        - application/json
       responses:
         "200":
           description: Successful response
@@ -99,18 +149,26 @@ paths:
               status:
                 type: string
                 description: done
+        "401":
+          $ref: "#/responses/ErrorResponse"
         default:
           $ref: "#/responses/ErrorResponse"
 definitions:
-  Key:
-    description: Key object representing an ID
+  AuthentiqID:
+    description: "Authentiq ID in JWT format, self-signed"
+    required:
+      - sub
     properties:
       sub:
+        description: UUID and public signing key
         type: string
       devtoken:
+        description: device token for push messages
+        type: string
+      pk:
+        description: public encryption key
         type: string
   Error:
-    description: Error Response in JSON structure
     required:
       - error
     properties:
@@ -127,9 +185,16 @@ parameters:
   PK:
     name: PK
     in: path
-    description: Public Signing Key
+    description: Public Signing Key - Authentiq ID
     required: true
     type: string
+  AuthentiqID:
+    name: body
+    in: body
+    description: Authentiq ID to register
+    required: true
+    schema:
+      $ref: "#/definitions/AuthentiqID"
 responses:
   ErrorResponse:
     description: Error response
