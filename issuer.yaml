@@ -1,0 +1,137 @@
+swagger: "2.0"
+info:
+  version: 0.4.0
+  title: Authentiq API
+paths:
+  /key:
+    post:
+      description: ""
+      parameters:
+        - $ref: "#/definitions/Key"
+      consumes:
+        - application/jwt
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Successful response
+        default:
+          $ref: "#/responses/ErrorResponse"
+  "/key/{PK}":
+    get:
+      description: "Gets `Key` object details.\n"
+      parameters:
+        - $ref: "#/parameters/PK"
+      produces:
+        - application/jwt
+      responses:
+        "200":
+          description: Successful response
+          schema:
+            title: JWT
+            type: object
+            properties:
+              sub:
+                type: string
+                description: base64safe encoded public signing key
+              status:
+                type: string
+              since:
+                type: integer
+                format: int64
+        default:
+          $ref: "#/responses/ErrorResponse"
+    post:
+      description: ""
+      parameters:
+        - $ref: "#/parameters/PK"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Successful response
+        default:
+          $ref: "#/responses/ErrorResponse"
+    head:
+      description: ""
+      parameters:
+        - $ref: "#/parameters/PK"
+      produces:
+        - application/jwt
+      responses:
+        "200":
+          description: Successful response
+        default:
+          $ref: "#/responses/ErrorResponse"
+    put:
+      description: ""
+      parameters:
+        - $ref: "#/parameters/PK"
+      consumes:
+        - application/jwt
+      produces:
+        - application/jwt
+      responses:
+        "200":
+          description: Successful response
+        default:
+          $ref: "#/responses/ErrorResponse"
+    delete:
+      description: Revoke an Identity (Key) with a revocation secret
+      parameters:
+        - $ref: "#/parameters/PK"
+        - name: secret
+          in: query
+          type: string
+          description: revokation secret
+      consumes:
+        - application/json
+      produces:
+        - application/jwt
+      responses:
+        "200":
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: done
+        default:
+          $ref: "#/responses/ErrorResponse"
+definitions:
+  Key:
+    description: Key object representing an ID
+    properties:
+      sub:
+        type: string
+      devtoken:
+        type: string
+  Error:
+    description: Error Response in JSON structure
+    required:
+      - error
+    properties:
+      error:
+        type: integer
+      type:
+        type: string
+        description: unique uri for this error
+      title:
+        type: string
+      detail:
+        type: string
+parameters:
+  PK:
+    name: PK
+    in: path
+    description: Public Signing Key
+    required: true
+    type: string
+responses:
+  ErrorResponse:
+    description: Error response
+    schema:
+      $ref: "#/definitions/Error"
