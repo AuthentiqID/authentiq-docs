@@ -17,7 +17,10 @@ schemes:
 paths:
   /key:
     post:
-      description: "Register a new ID `JWT(sub, devtoken)`"
+      description: "Register a new ID `JWT(sub, devtoken)`\n\nv5: `JWT(sub, pk, devtoken, ...)`\n"
+      operationId: key_register
+      tags:
+        - key
       parameters:
         - $ref: "#/parameters/AuthentiqID"
       consumes:
@@ -31,6 +34,9 @@ paths:
           $ref: "#/responses/ErrorResponse"
     delete:
       description: "Revoke an Authentiq ID using email & phone.\n\nIf called with `email` and `phone` only, a verification code \nwill be sent by email. Do a second call adding `code` to \ncomplete the revocation.\n"
+      operationId: key_revoke_nosecret
+      tags:
+        - key
       parameters:
         - name: email
           in: query
@@ -65,6 +71,9 @@ paths:
   "/key/{PK}":
     get:
       description: "Gets `Key` object details.\n"
+      operationId: key_retrieve
+      tags:
+        - key
       parameters:
         - $ref: "#/parameters/PK"
       produces:
@@ -89,7 +98,10 @@ paths:
         default:
           $ref: "#/responses/ErrorResponse"
     post:
-      description: "update properties of an Authentiq ID.\n(not operational in v4; use PUT for now)\n"
+      description: "update properties of an Authentiq ID.\n(not operational in v4; use PUT for now)\n\nv5: POST issuer-signed email & phone scopes in\na self-signed JWT\n"
+      operationId: key_update5
+      tags:
+        - key
       parameters:
         - $ref: "#/parameters/PK"
         - $ref: "#/parameters/AuthentiqID"
@@ -104,6 +116,9 @@ paths:
           $ref: "#/responses/ErrorResponse"
     head:
       description: "HEAD info on Authentiq ID\n"
+      operationId: key_retrieve
+      tags:
+        - key
       parameters:
         - $ref: "#/parameters/PK"
       responses:
@@ -114,7 +129,10 @@ paths:
         default:
           $ref: "#/responses/ErrorResponse"
     put:
-      description: "Update Authentiq ID by replacing the object.\n(v4: to bind email/phone hash)\n"
+      description: "Update Authentiq ID by replacing the object.\n\nv4: `JWT(sub,email,phone)` to bind email/phone hash; \n\nv5: POST issuer-signed email & phone scopes\nand PUT to update registration `JWT(sub, pk, devtoken, ...)`\n"
+      operationId: key_bind
+      tags:
+        - key
       parameters:
         - $ref: "#/parameters/PK"
         - $ref: "#/parameters/AuthentiqID"
@@ -131,6 +149,9 @@ paths:
           $ref: "#/responses/ErrorResponse"
     delete:
       description: Revoke an Identity (Key) with a revocation secret
+      operationId: key_revoke
+      tags:
+        - key
       parameters:
         - $ref: "#/parameters/PK"
         - name: secret
@@ -153,6 +174,159 @@ paths:
           $ref: "#/responses/ErrorResponse"
         default:
           $ref: "#/responses/ErrorResponse"
+  /scope:
+    post:
+      description: scope verification request
+      operationId: sign_request
+      tags:
+        - scope
+      parameters:
+        - $ref: "#/parameters/Scope"
+        - name: test
+          in: query
+          type: integer
+          description: "test only mode, using test issuer"
+          required: false
+      consumes:
+        - application/jwt
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              job:
+                type: string
+                description: 20-character ID
+              status:
+                type: string
+                description: waiting
+        default:
+          $ref: "#/responses/ErrorResponse"
+  "/scope/{job}":
+    post:
+      description: this is a scope confirmation
+      operationId: sign_confirm
+      tags:
+        - scope
+      parameters:
+        - $ref: "#/parameters/JobID"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        "202":
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: confirmed
+        "404":
+          $ref: "#/responses/ErrorResponse"
+        default:
+          $ref: "#/responses/ErrorResponse"
+    put:
+      description: authority updates a JWT with its signature
+      operationId: sign_update
+      tags:
+        - scope
+      parameters:
+        - $ref: "#/parameters/JobID"
+      consumes:
+        - application/jwt
+      produces:
+        - application/jwt
+      responses:
+        "200":
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: ready
+              jwt:
+                type: string
+                description: result is JWT or JSON??
+        "409":
+          $ref: "#/responses/ErrorResponse"
+        default:
+          $ref: "#/responses/ErrorResponse"
+    get:
+      description: get the status / current content of a verification job
+      operationId: sign_retrieve
+      tags:
+        - scope
+      parameters:
+        - $ref: "#/parameters/JobID"
+      produces:
+        - application/json
+        - application/jwt
+      responses:
+        "200":
+          description: Successful response (JWT)
+          schema:
+            title: JWT
+            type: object
+            properties:
+              sub:
+                type: string
+                description: base64safe encoded public signing key
+              field:
+                type: string
+              exp:
+                type: integer
+        "204":
+          description: waiting/confirmed
+        "404":
+          $ref: "#/responses/ErrorResponse"
+        default:
+          $ref: "#/responses/ErrorResponse"
+    head:
+      description: HEAD to get the status of a verification job
+      operationId: sign_retrieve_head
+      tags:
+        - scope
+      parameters:
+        - $ref: "#/parameters/JobID"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Successful response
+        "204":
+          description: waiting/confirmed
+        "404":
+          $ref: "#/responses/ErrorResponse"
+        default:
+          $ref: "#/responses/ErrorResponse"
+    delete:
+      description: delete a verification job
+      operationId: sign_delete
+      tags:
+        - scope
+      parameters:
+        - $ref: "#/parameters/JobID"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: done
+        "404":
+          $ref: "#/responses/ErrorResponse"
+        default:
+          $ref: "#/responses/ErrorResponse"
 definitions:
   AuthentiqID:
     description: "Authentiq ID in JWT format, self-signed"
@@ -165,8 +339,26 @@ definitions:
       devtoken:
         description: device token for push messages
         type: string
-      pk:
-        description: public encryption key
+  Claims:
+    description: "Claim in JWT format, self- or issuer-signed"
+    required:
+      - sub
+      - scope
+    properties:
+      sub:
+        description: UUID
+        type: string
+      scope:
+        description: claim scope
+        type: string
+      email:
+        description: ""
+        type: string
+      phone:
+        description: ""
+        type: string
+      type:
+        description: ""
         type: string
   Error:
     required:
@@ -195,6 +387,19 @@ parameters:
     required: true
     schema:
       $ref: "#/definitions/AuthentiqID"
+  JobID:
+    name: job
+    in: path
+    description: Job ID
+    required: true
+    type: string
+  Scope:
+    name: body
+    in: body
+    description: Claims of scope
+    required: true
+    schema:
+      $ref: "#/definitions/Claims"
 responses:
   ErrorResponse:
     description: Error response
