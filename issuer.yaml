@@ -17,7 +17,7 @@ schemes:
 paths:
   /key:
     post:
-      description: "Register a new ID `JWT(sub, devtoken)`\n\nv5: `JWT(sub, pk, devtoken, ...)`\n"
+      description: "Register a new ID `JWT(sub, devtoken)`\n\nv5: `JWT(sub, pk, devtoken, ...)`\n\nSee: https://github.com/skion/authentiq/wiki/JWT-Examples\n"
       operationId: key_register
       tags:
         - key
@@ -98,7 +98,7 @@ paths:
         default:
           $ref: "#/responses/ErrorResponse"
     post:
-      description: "update properties of an Authentiq ID.\n(not operational in v4; use PUT for now)\n\nv5: POST issuer-signed email & phone scopes in\na self-signed JWT\n"
+      description: "update properties of an Authentiq ID.\n(not operational in v4; use PUT for now)\n\nv5: POST issuer-signed email & phone scopes in\na self-signed JWT\n\nSee: https://github.com/skion/authentiq/wiki/JWT-Examples\n"
       operationId: key_update5
       tags:
         - key
@@ -129,7 +129,7 @@ paths:
         default:
           $ref: "#/responses/ErrorResponse"
     put:
-      description: "Update Authentiq ID by replacing the object.\n\nv4: `JWT(sub,email,phone)` to bind email/phone hash; \n\nv5: POST issuer-signed email & phone scopes\nand PUT to update registration `JWT(sub, pk, devtoken, ...)`\n"
+      description: "Update Authentiq ID by replacing the object.\n\nv4: `JWT(sub,email,phone)` to bind email/phone hash; \n\nv5: POST issuer-signed email & phone scopes\nand PUT to update registration `JWT(sub, pk, devtoken, ...)`\n\nSee: https://github.com/skion/authentiq/wiki/JWT-Examples\n"
       operationId: key_bind
       tags:
         - key
@@ -176,7 +176,7 @@ paths:
           $ref: "#/responses/ErrorResponse"
   /login:
     post:
-      description: push sign-in request
+      description: "push sign-in request\nSee: https://github.com/skion/authentiq/wiki/JWT-Examples\n"
       operationId: push_login_request
       tags:
         - login
@@ -206,7 +206,7 @@ paths:
           $ref: "#/responses/ErrorResponse"
   /scope:
     post:
-      description: scope verification request
+      description: "scope verification request\nSee: https://github.com/skion/authentiq/wiki/JWT-Examples\n"
       operationId: sign_request
       tags:
         - scope
@@ -261,7 +261,7 @@ paths:
         default:
           $ref: "#/responses/ErrorResponse"
     put:
-      description: authority updates a JWT with its signature
+      description: "authority updates a JWT with its signature\nSee: https://github.com/skion/authentiq/wiki/JWT-Examples\n"
       operationId: sign_update
       tags:
         - scope
@@ -359,7 +359,7 @@ paths:
           $ref: "#/responses/ErrorResponse"
 definitions:
   AuthentiqID:
-    description: "Authentiq ID in JWT format, self-signed"
+    description: "Authentiq ID in JWT format, self-signed.\n"
     required:
       - sub
     properties:
@@ -370,7 +370,7 @@ definitions:
         description: device token for push messages
         type: string
   Claims:
-    description: "Claim in JWT format, self- or issuer-signed"
+    description: "Claim in JWT format, self- or issuer-signed. \n"
     required:
       - sub
       - scope
@@ -391,7 +391,7 @@ definitions:
         description: ""
         type: string
   PushToken:
-    description: "PushToken in JWT format, self-signed. See: \nhttps://github.com/skion/authentiq/wiki/JWT-Examples\nfor all fields\n"
+    description: "PushToken in JWT format, self-signed. \n"
     required:
       - sub
       - iss
