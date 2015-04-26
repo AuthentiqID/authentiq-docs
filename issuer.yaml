@@ -70,7 +70,7 @@ paths:
           $ref: "#/responses/ErrorResponse"
   "/key/{PK}":
     get:
-      description: "Gets `Key` object details.\n"
+      description: "Get public details of an Authentiq ID.\n"
       operationId: key_retrieve
       tags:
         - key
@@ -170,6 +170,36 @@ paths:
               status:
                 type: string
                 description: done
+        "401":
+          $ref: "#/responses/ErrorResponse"
+        default:
+          $ref: "#/responses/ErrorResponse"
+  /login:
+    post:
+      description: push sign-in request
+      operationId: push_login_request
+      tags:
+        - login
+      parameters:
+        - $ref: "#/parameters/PushToken"
+        - name: callback
+          in: query
+          type: string
+          description: URI App will connect to
+          required: true
+      consumes:
+        - application/jwt
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: sent
         "401":
           $ref: "#/responses/ErrorResponse"
         default:
@@ -360,6 +390,28 @@ definitions:
       type:
         description: ""
         type: string
+  PushToken:
+    description: "PushToken in JWT format, self-signed. See: \nhttps://github.com/skion/authentiq/wiki/JWT-Examples\nfor all fields\n"
+    required:
+      - sub
+      - iss
+      - aud
+    properties:
+      sub:
+        description: UUID and public signing key
+        type: string
+      iss:
+        description: issuer (URI)
+        type: string
+      aud:
+        description: audience (URI)
+        type: string
+      exp:
+        type: integer
+      nbf:
+        type: integer
+      iat:
+        type: integer
   Error:
     required:
       - error
@@ -377,7 +429,7 @@ parameters:
   PK:
     name: PK
     in: path
-    description: Public Signing Key - Authentiq ID
+    description: Public Signing Key - Authentiq ID (43 chars)
     required: true
     type: string
   AuthentiqID:
@@ -390,7 +442,7 @@ parameters:
   JobID:
     name: job
     in: path
-    description: Job ID
+    description: Job ID (20 chars)
     required: true
     type: string
   Scope:
@@ -400,6 +452,13 @@ parameters:
     required: true
     schema:
       $ref: "#/definitions/Claims"
+  PushToken:
+    name: body
+    in: body
+    description: Push Token.
+    required: true
+    schema:
+      $ref: "#/definitions/PushToken"
 responses:
   ErrorResponse:
     description: Error response
