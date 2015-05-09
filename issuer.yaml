@@ -29,7 +29,16 @@ paths:
         - application/json
       responses:
         "201":
-          description: Successful response
+          description: Successfully registered
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: registered
+              secret:
+                type: string
+                description: revoke key
         default:
           $ref: "#/responses/ErrorResponse"
     delete:
@@ -57,7 +66,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response
+          description: Successfully deleted
           schema:
             type: object
             properties:
@@ -86,7 +95,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response
+          description: Successfully retrieved
           schema:
             title: JWT
             type: object
@@ -123,7 +132,13 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response
+          description: Successfully updated
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: confirmed
         "404":
           description: Unknown key
           schema:
@@ -139,7 +154,7 @@ paths:
         - $ref: "#/parameters/PK"
       responses:
         "200":
-          description: Successful response
+          description: Key exists
         "404":
           description: Unknown key
           schema:
@@ -164,7 +179,13 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response
+          description: Successfully updated
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: confirmed
         "404":
           description: Unknown key
           schema:
@@ -285,7 +306,7 @@ paths:
         - application/json
       responses:
         "202":
-          description: Successful response
+          description: Successfully confirmed
           schema:
             type: object
             properties:
@@ -315,7 +336,7 @@ paths:
         - application/jwt
       responses:
         "200":
-          description: Successful response
+          description: Successfully updated
           schema:
             type: object
             properties:
@@ -378,7 +399,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response
+          description: Confirmed and signed
         "204":
           description: Confirmed, waiting for signing
         "404":
@@ -398,7 +419,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successful response
+          description: Successfully deleted
           schema:
             type: object
             properties:
