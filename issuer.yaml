@@ -28,7 +28,7 @@ paths:
       produces:
         - application/json
       responses:
-        "200":
+        "201":
           description: Successful response
         default:
           $ref: "#/responses/ErrorResponse"
@@ -65,7 +65,13 @@ paths:
                 type: string
                 description: pending or done
         "409":
-          $ref: "#/responses/ErrorResponse"
+          description: Confirm with code sent
+          schema:
+            $ref: "#/definitions/Error"
+        "401":
+          description: Authentication error
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
   "/key/{PK}":
@@ -94,7 +100,13 @@ paths:
                 type: string
                 format: date-time
         "410":
-          $ref: "#/responses/ErrorResponse"
+          description: Key is revoked
+          schema:
+            $ref: "#/definitions/Error"
+        "404":
+          description: Unknown key
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
     post:
@@ -112,6 +124,10 @@ paths:
       responses:
         "200":
           description: Successful response
+        "404":
+          description: Unknown key
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
     head:
@@ -124,8 +140,14 @@ paths:
       responses:
         "200":
           description: Successful response
+        "404":
+          description: Unknown key
+          schema:
+            $ref: "#/definitions/Error"
         "410":
-          $ref: "#/responses/ErrorResponse"
+          description: Key is revoked
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
     put:
@@ -143,8 +165,14 @@ paths:
       responses:
         "200":
           description: Successful response
+        "404":
+          description: Unknown key
+          schema:
+            $ref: "#/definitions/Error"
         "409":
-          $ref: "#/responses/ErrorResponse"
+          description: Already bound to another key
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
     delete:
@@ -171,7 +199,13 @@ paths:
                 type: string
                 description: done
         "401":
-          $ref: "#/responses/ErrorResponse"
+          description: Key not found / wrong code
+          schema:
+            $ref: "#/definitions/Error"
+        "404":
+          description: Unknown key
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
   /login:
@@ -201,7 +235,9 @@ paths:
                 type: string
                 description: sent
         "401":
-          $ref: "#/responses/ErrorResponse"
+          description: Unauthorized for this callback (aud)
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
   /scope:
@@ -256,8 +292,14 @@ paths:
               status:
                 type: string
                 description: confirmed
+        "401":
+          description: Confirmation error
+          schema:
+            $ref: "#/definitions/Error"
         "404":
-          $ref: "#/responses/ErrorResponse"
+          description: Job not found
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
     put:
@@ -283,8 +325,14 @@ paths:
               jwt:
                 type: string
                 description: result is JWT or JSON??
+        "404":
+          description: Job not found
+          schema:
+            $ref: "#/definitions/Error"
         "409":
-          $ref: "#/responses/ErrorResponse"
+          description: Job not confirmed yet
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
     get:
@@ -312,9 +360,11 @@ paths:
               exp:
                 type: integer
         "204":
-          description: waiting/confirmed
+          description: Confirmed, waiting for signing
         "404":
-          $ref: "#/responses/ErrorResponse"
+          description: Job not found
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
     head:
@@ -330,9 +380,11 @@ paths:
         "200":
           description: Successful response
         "204":
-          description: waiting/confirmed
+          description: Confirmed, waiting for signing
         "404":
-          $ref: "#/responses/ErrorResponse"
+          description: Job not found
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
     delete:
@@ -354,7 +406,9 @@ paths:
                 type: string
                 description: done
         "404":
-          $ref: "#/responses/ErrorResponse"
+          description: Job not found
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
 definitions:
