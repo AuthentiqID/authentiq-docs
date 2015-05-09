@@ -73,12 +73,16 @@ paths:
               status:
                 type: string
                 description: pending or done
+        "404":
+          description: Unknown key `unknown-key`
+          schema:
+            $ref: "#/definitions/Error"
         "409":
-          description: Confirm with code sent
+          description: Confirm with code sent `confirm-first`
           schema:
             $ref: "#/definitions/Error"
         "401":
-          description: Authentication error
+          description: Authentication error `auth-error`
           schema:
             $ref: "#/definitions/Error"
         default:
@@ -109,18 +113,18 @@ paths:
                 type: string
                 format: date-time
         "410":
-          description: Key is revoked
+          description: Key is revoked `revoked-key`
           schema:
             $ref: "#/definitions/Error"
         "404":
-          description: Unknown key
+          description: Unknown key `unknown-key`
           schema:
             $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
     post:
       description: "update properties of an Authentiq ID.\n(not operational in v4; use PUT for now)\n\nv5: POST issuer-signed email & phone scopes in\na self-signed JWT\n\nSee: https://github.com/skion/authentiq/wiki/JWT-Examples\n"
-      operationId: key_update5
+      operationId: key_update
       tags:
         - key
       parameters:
@@ -140,7 +144,7 @@ paths:
                 type: string
                 description: confirmed
         "404":
-          description: Unknown key
+          description: Unknown key `unknown-key`
           schema:
             $ref: "#/definitions/Error"
         default:
@@ -156,11 +160,11 @@ paths:
         "200":
           description: Key exists
         "404":
-          description: Unknown key
+          description: Unknown key `unknown-key`
           schema:
             $ref: "#/definitions/Error"
         "410":
-          description: Key is revoked
+          description: Key is revoked `revoked-key`
           schema:
             $ref: "#/definitions/Error"
         default:
@@ -187,11 +191,11 @@ paths:
                 type: string
                 description: confirmed
         "404":
-          description: Unknown key
+          description: Unknown key `unknown-key`
           schema:
             $ref: "#/definitions/Error"
         "409":
-          description: Already bound to another key
+          description: Already bound to another key `duplicate-hash`
           schema:
             $ref: "#/definitions/Error"
         default:
@@ -220,11 +224,11 @@ paths:
                 type: string
                 description: done
         "401":
-          description: Key not found / wrong code
+          description: Key not found / wrong code `auth-error`
           schema:
             $ref: "#/definitions/Error"
         "404":
-          description: Unknown key
+          description: Unknown key `unknown-key`
           schema:
             $ref: "#/definitions/Error"
         default:
@@ -256,7 +260,7 @@ paths:
                 type: string
                 description: sent
         "401":
-          description: Unauthorized for this callback (aud)
+          description: Unauthorized for this callback audience `aud-error` or JWT should be self-signed `auth-error`
           schema:
             $ref: "#/definitions/Error"
         default:
@@ -290,6 +294,10 @@ paths:
               status:
                 type: string
                 description: waiting
+        "429":
+          description: Too Many Requests on same address / number `rate-limit`
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
   "/scope/{job}":
@@ -314,11 +322,11 @@ paths:
                 type: string
                 description: confirmed
         "401":
-          description: Confirmation error
+          description: Confirmation error `auth-error`
           schema:
             $ref: "#/definitions/Error"
         "404":
-          description: Job not found
+          description: Job not found `unknown-job`
           schema:
             $ref: "#/definitions/Error"
         default:
@@ -347,11 +355,11 @@ paths:
                 type: string
                 description: result is JWT or JSON??
         "404":
-          description: Job not found
+          description: Job not found `unknown-job`
           schema:
             $ref: "#/definitions/Error"
         "409":
-          description: Job not confirmed yet
+          description: Job not confirmed yet `confirm-first`
           schema:
             $ref: "#/definitions/Error"
         default:
@@ -383,7 +391,7 @@ paths:
         "204":
           description: Confirmed, waiting for signing
         "404":
-          description: Job not found
+          description: Job not found `unknown-job`
           schema:
             $ref: "#/definitions/Error"
         default:
@@ -403,7 +411,7 @@ paths:
         "204":
           description: Confirmed, waiting for signing
         "404":
-          description: Job not found
+          description: Job not found `unknown-job`
           schema:
             $ref: "#/definitions/Error"
         default:
@@ -427,7 +435,7 @@ paths:
                 type: string
                 description: done
         "404":
-          description: Job not found
+          description: Job not found `unknown-job`
           schema:
             $ref: "#/definitions/Error"
         default:
