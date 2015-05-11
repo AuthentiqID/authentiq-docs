@@ -343,6 +343,10 @@ paths:
           description: Job not found `unknown-job`
           schema:
             $ref: "#/definitions/Error"
+        "405":
+          description: JWT POSTed to scope `not-supported`
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
     put:
