@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   title: Authentiq API
-  version: "4"
+  version: "5"
   contact:
     name: Authentiq team
     url: "http://authentiq.io/support"
@@ -21,6 +21,7 @@ paths:
       operationId: key_register
       tags:
         - key
+        - post
       parameters:
         - $ref: "#/parameters/AuthentiqID"
       consumes:
@@ -39,6 +40,10 @@ paths:
               secret:
                 type: string
                 description: revoke key
+        "409":
+          description: Key already registered `duplicate-key`
+          schema:
+            $ref: "#/definitions/Error"
         default:
           $ref: "#/responses/ErrorResponse"
     delete:
@@ -46,6 +51,7 @@ paths:
       operationId: key_revoke_nosecret
       tags:
         - key
+        - delete
       parameters:
         - name: email
           in: query
@@ -93,6 +99,7 @@ paths:
       operationId: key_retrieve
       tags:
         - key
+        - get
       parameters:
         - $ref: "#/parameters/PK"
       produces:
@@ -112,12 +119,16 @@ paths:
               since:
                 type: string
                 format: date-time
-        "410":
-          description: Key is revoked `revoked-key`
+        "403":
+          description: Key is revoked (forbidden) `revoked-key`
           schema:
             $ref: "#/definitions/Error"
         "404":
           description: Unknown key `unknown-key`
+          schema:
+            $ref: "#/definitions/Error"
+        "410":
+          description: Key is revoked (gone). Similar to 403. `revoked-key`
           schema:
             $ref: "#/definitions/Error"
         default:
@@ -127,6 +138,7 @@ paths:
       operationId: key_update
       tags:
         - key
+        - post
       parameters:
         - $ref: "#/parameters/PK"
         - $ref: "#/parameters/AuthentiqID"
@@ -154,6 +166,7 @@ paths:
       operationId: key_retrieve
       tags:
         - key
+        - head
       parameters:
         - $ref: "#/parameters/PK"
       responses:
@@ -174,6 +187,7 @@ paths:
       operationId: key_bind
       tags:
         - key
+        - put
       parameters:
         - $ref: "#/parameters/PK"
         - $ref: "#/parameters/AuthentiqID"
@@ -205,6 +219,7 @@ paths:
       operationId: key_revoke
       tags:
         - key
+        - delete
       parameters:
         - $ref: "#/parameters/PK"
         - name: secret
@@ -239,6 +254,7 @@ paths:
       operationId: push_login_request
       tags:
         - login
+        - post
       parameters:
         - $ref: "#/parameters/PushToken"
         - name: callback
@@ -271,6 +287,7 @@ paths:
       operationId: sign_request
       tags:
         - scope
+        - post
       parameters:
         - $ref: "#/parameters/Scope"
         - name: test
@@ -306,6 +323,7 @@ paths:
       operationId: sign_confirm
       tags:
         - scope
+        - post
       parameters:
         - $ref: "#/parameters/JobID"
       consumes:
@@ -336,6 +354,7 @@ paths:
       operationId: sign_update
       tags:
         - scope
+        - put
       parameters:
         - $ref: "#/parameters/JobID"
       consumes:
@@ -369,6 +388,7 @@ paths:
       operationId: sign_retrieve
       tags:
         - scope
+        - get
       parameters:
         - $ref: "#/parameters/JobID"
       produces:
@@ -401,6 +421,7 @@ paths:
       operationId: sign_retrieve_head
       tags:
         - scope
+        - head
       parameters:
         - $ref: "#/parameters/JobID"
       produces:
@@ -421,6 +442,7 @@ paths:
       operationId: sign_delete
       tags:
         - scope
+        - delete
       parameters:
         - $ref: "#/parameters/JobID"
       produces:
