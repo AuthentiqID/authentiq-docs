@@ -119,16 +119,12 @@ paths:
               since:
                 type: string
                 format: date-time
-        "403":
-          description: Key is revoked (forbidden) `revoked-key`
-          schema:
-            $ref: "#/definitions/Error"
         "404":
           description: Unknown key `unknown-key`
           schema:
             $ref: "#/definitions/Error"
         "410":
-          description: Key is revoked (gone). Similar to 403. `revoked-key`
+          description: Key is revoked (gone). `revoked-key`
           schema:
             $ref: "#/definitions/Error"
         default:
