@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   title: Authentiq API
-  version: "5"
+  version: "6"
   contact:
     name: Authentiq team
     url: "http://authentiq.io/support"
@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
   termsOfService: "http://authentiq.com/terms/"
-host: 4-dot-authentiqio.appspot.com
+host: 6-dot-authentiqio.appspot.com
 basePath: /
 schemes:
   - https
