@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="The Authentiq Team">
+        
+        <link rel="shortcut icon" href="../img/favicon.png">
+        
+
+	<title>Installation - Authentiq Connect</title>
+
+        <link href="../css/bootstrap-3.0.3.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+        <link href="../css/bootstrap-theme.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">Authentiq Connect</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">Overview</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../gettingstarted/">Getting started</a>
+                </li>
+            
+            
+            
+                <li class="active">
+                    <a href="./">Installation</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../reference/">API Reference</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../faq/">FAQ</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li >
+                    <a rel="next" href="../gettingstarted/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../reference/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#introduction">Introduction</a></li>
+        
+    
+        <li class="main "><a href="#installation">Installation</a></li>
+        
+            <li><a href="#from-pre-built-packages">From pre-built packages</a></li>
+        
+            <li><a href="#from-pipy">From PiPy</a></li>
+        
+            <li><a href="#from-source">From source</a></li>
+        
+    
+        <li class="main "><a href="#configuration">Configuration</a></li>
+        
+    
+        <li class="main "><a href="#deployment">Deployment</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="introduction">Introduction</h1>
+<p>There is nothing to install when running Authentiq as a Service. Just register your client application at our hosted authentication service and head over to <a href="../gettingstarted/">Getting started</a>. This page describes how to install Authentiq Connect locally on your own system, in case you prefer that.</p>
+<blockquote>
+<p>Please see our licensing options if you want to follow this path to make sure it matches with your situation.</p>
+</blockquote>
+<h1 id="installation">Installation</h1>
+<h2 id="from-pre-built-packages">From pre-built packages</h2>
+<p>Pre-built packages are available at the moment for Debian 7.0, 8.0 and Ubuntu 15.04.</p>
+<h3 id="debian-ubuntu">Debian &amp; Ubuntu</h3>
+<p>Add our repository to your APT sources, as root:</p>
+<div class="codehilite"><pre>apt-add-repository
+apt-get update
+apt-get install authentiq-connect
+</pre></div>
+
+
+<p>Edit the configuration file, see <a href="#configuration">below</a> for details about the available configuration options:</p>
+<div class="codehilite"><pre>vim /etc/authentiq/authentiqd.conf
+</pre></div>
+
+
+<p>(Re)start the service:</p>
+<div class="codehilite"><pre>/etc/init.d/authentiqd restart
+</pre></div>
+
+
+<h2 id="from-pipy">From PiPy</h2>
+<p>You can also install <code>authentiqd</code> using PyPi. We recommend you use a virtual Python environment in this case to not clutter up your system with dependencies.</p>
+<div class="codehilite"><pre>pip install authentiq-connect
+</pre></div>
+
+
+<p>Edit the configuration file, see <a href="#configuration">below</a> for details about the available configuration options:</p>
+<div class="codehilite"><pre>vim ./etc/authentiqd.conf
+</pre></div>
+
+
+<p>Be sure to check out available command line options for the daemon:</p>
+<div class="codehilite"><pre>./bin/authentiq-provider --help
+usage: authentiq-provider <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-v<span class="o">]</span> <span class="o">[</span>-D<span class="o">]</span> <span class="o">[</span>--log LOG<span class="o">]</span> <span class="o">[</span>--bind BIND<span class="o">]</span> <span class="o">[</span>--port PORT<span class="o">]</span>
+                       <span class="o">[</span>--insecure<span class="o">]</span> <span class="o">[</span>--schema<span class="o">]</span> <span class="o">[</span>--gunicorn<span class="o">]</span>
+                       <span class="o">[</span>--workers WORKERS<span class="o">]</span> <span class="o">[</span>--name NAME<span class="o">]</span>
+                       <span class="o">[</span>--disable-websockets<span class="o">]</span>
+
+Authentiq Connect Provider
+
+optional arguments:
+  -h, --help            show this <span class="nb">help </span>message and <span class="nb">exit</span>
+  -v, --verbose         increase verbosity <span class="o">(</span>default: 0<span class="o">)</span>
+  -D, --debug           <span class="nb">enable </span>Flask debugging <span class="o">(</span>default: False<span class="o">)</span>
+  --log LOG             write logs to <span class="o">(</span>rotated<span class="o">)</span> file <span class="o">(</span>default: None<span class="o">)</span>
+  --bind BIND           ip to <span class="nb">bind </span>to <span class="o">(</span>default: localhost<span class="o">)</span>
+  --port PORT           port to <span class="nb">bind </span>to <span class="o">(</span>default: 5000<span class="o">)</span>
+  --insecure            disable JWT signature verification <span class="o">(</span>default: False<span class="o">)</span>
+  --schema              create schema <span class="k">for</span> database <span class="o">(</span>default: False<span class="o">)</span>
+  --gunicorn            run under gunicorn <span class="o">(</span>default: False<span class="o">)</span>
+  --workers WORKERS     start this many worker processes <span class="o">(</span>gunicorn only<span class="o">)</span>
+                        <span class="o">(</span>default: 1<span class="o">)</span>
+  --name NAME           process name to use <span class="o">(</span>gunicorn only<span class="o">)</span> <span class="o">(</span>default: aq-
+                        provider<span class="o">)</span>
+  --disable-websockets  run server without WebSocket support <span class="o">(</span>default: False<span class="o">)</span>
+</pre></div>
+
+
+<p>Then start the daemon:</p>
+<div class="codehilite"><pre>./bin/authentiq-provider
+</pre></div>
+
+
+<h2 id="from-source">From source</h2>
+<p>Fork and/or clone the Github repository,</p>
+<div class="codehilite"><pre>git clone github...
+</pre></div>
+
+
+<p>and run:</p>
+<div class="codehilite"><pre>python setup.py
+</pre></div>
+
+
+<p>or install from source using PiPy:</p>
+<div class="codehilite"><pre>pip install -e github...
+</pre></div>
+
+
+<h1 id="configuration">Configuration</h1>
+<blockquote>
+<p>Describe configuration file here. </p>
+</blockquote>
+<h1 id="deployment">Deployment</h1>
+<p>The daemon binds to localhost by default on purpose, you should really deploy <code>authentiqd</code> behind a caching webserver. We describe how to configure Nginx here, but the configuration can easily be translated to other servers.</p>
+<p>n## Nginx</p>
+<blockquote>
+<p>Describe nginx configuration details.</p>
+</blockquote></div>
+        </div>
+
+	<footer class="col-md-12">
+		<hr>
+		
+		<p>Copyright &copy; 2015, Authentiq.com</p>
+		
+		<p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+	</footer>
+
+        
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script src="../js/base.js"></script>
+    </body>
+</html>
