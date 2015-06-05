@@ -4,19 +4,18 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Documentation the Authentiq Connect OAuth 2.0 and OpenID Connect Provider.">
-        <meta name="author" content="The Authentiq Team">
+        <meta name="description" content="Documentation for the Authentiq OAuth 2.0 and OpenID Connect Provider.">
+        <meta name="author" content="The Authentiq team">
         
         <link rel="shortcut icon" href="img/favicon.png">
         
 
 	<title>Authentiq Connect</title>
 
-        <link href="./css/bootstrap-3.0.3.min.css" rel="stylesheet">
+        <link href="./css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
         <link rel="stylesheet" href="./css/highlight.css">
         <link href="./css/base.css" rel="stylesheet">
-        <link href="./css/bootstrap-theme.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -77,6 +76,12 @@
             
             
                 <li >
+                    <a href="clients/">Your clients</a>
+                </li>
+            
+            
+            
+                <li >
                     <a href="faq/">FAQ</a>
                 </li>
             
@@ -108,8 +113,15 @@
     
         <li class="main active"><a href="#introduction">Introduction</a></li>
         
+            <li><a href="#why-authentiq">Why Authentiq?</a></li>
+        
     
-        <li class="main "><a href="#naming">Naming</a></li>
+        <li class="main "><a href="#general-information">General information</a></li>
+        
+            <li><a href="#scopes">Scopes</a></li>
+        
+    
+        <li class="main "><a href="#terminology">Terminology</a></li>
         
     
         <li class="main "><a href="#support">Support</a></li>
@@ -118,7 +130,7 @@
         
             <li><a href="#chat">Chat</a></li>
         
-            <li><a href="#issues-and-features">Issues and features</a></li>
+            <li><a href="#issues">Issues</a></li>
         
     
     </ul>
@@ -126,33 +138,115 @@
             <div class="col-md-9" role="main">
 
 <h1 id="introduction">Introduction</h1>
-<p>Hey, if you&rsquo;re reading this, then you are probably curious how to get 
-started with implementing Authentiq on your website. </p>
-<p>We already run Authentiq Connect as a service for you, hence there is no need to install or run anything locally. You can simply get started by including our JavaScript snippet on your page. Dive right in by heading over to the <a href="gettingstarted/">Getting started</a> page.</p>
-<p>Of course if you prefer you can install the Authentiq Connect daemon locally as well, now or later. At the moment we have pre-built packages for Debian 7.0, 8.0 and Ubuntu 15.04. You can also install <code>authentiqd</code> from PiPy or build it from <a href="https://github.com/skion/authentiq-provider">source</a>.</p>
-<h1 id="naming">Naming</h1>
+<p>Hey, if you&rsquo;re reading this, then you are probably curious how to get started with implementing Authentiq on your website. </p>
+<p>Luckily, as we run Authentiq Connect as a service, there is no need to install or run anything locally. Simply include our JavaScript snippet on your page or point your favourite OAuth 2.0 client library at our hosted instance. Dive right in by heading over to the <a href="gettingstarted/">Getting started</a> page.</p>
+<p>Of course if you prefer to <a href="installation/">install the Authentiq Connect daemon locally</a>, now or later, then we will have pre-built packages for Debian 7.0, 8.0 and Ubuntu 15.04 soon. You will also be able to install the Authentiq Connect Provider from PyPI or build it from <a href="https://github.com/skion/authentiq-provider">source</a>.</p>
+<blockquote>
+<p>Please see our licensing options before installing Authentiq Connect locally to make sure it matches your situation.</p>
+</blockquote>
+<h2 id="why-authentiq">Why Authentiq?</h2>
+<p>Why should I do this and what&rsquo;s so cool about the Authentiq technology again?</p>
+<ul>
+<li>Authentiq provides super secure multi-factor authentication.</li>
+<li>Authentiq provides you with fresh contact details every time a user signs in.</li>
+<li>Authentiq lets your end-users control their identity from their phone.</li>
+<li>Authentiq aims to avoid being a single point of failure for your product.</li>
+<li>Authentiq aims to avoid being another point of trust for your users.</li>
+<li>Authentiq aims to be reasonably priced, or free.</li>
+</ul>
+<h1 id="general-information">General information</h1>
+<h2 id="scopes">Scopes</h2>
+<p>Authentiq Connect leverages OAuth 2.0 <em>scopes</em> to indicate which sections of a user&rsquo;s profile to request. We copy scopes from OIDC where possible, and prefix non-standard scopes with <code>aq:</code>.</p>
+<h3 id="identity-scopes">Identity scopes</h3>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Description</th>
+<th>Claims</th>
+<th>Can be required?</th>
+<th>Can be signed?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>email</code></td>
+<td>A user&rsquo;s (verified) email address.</td>
+<td><code>email</code>, <code>email_verified</code></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>phone</code></td>
+<td>A user&rsquo;s (verified) phone number.</td>
+<td><code>phone_number</code>, <code>phone_number_verified</code></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>address</code></td>
+<td>A user&rsquo;s home address.</td>
+<td><code>address</code></td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>aq:name</code></td>
+<td>A user&rsquo;s full name.</td>
+<td><code>name</code>, <code>given_name</code>, <code>family_name</code>, <code>middle_name</code>, <code>nickname</code></td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>aq:location</code></td>
+<td>A user&rsquo;s current location</td>
+<td><code>aq:location</code></td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>As per OIDC, requested scopes are optional by default, and if the user consents only to a subset of the requested scopes it is up to the client application to decide what happens. However, Authentiq Connect allows a developer to mark certain scopes as required and/or requiring a signature from a trusted issuer. </p>
+<h4 id="required-scopes">Required scopes</h4>
+<p>Identity scopes can be marked as being <em>required</em> by appending <code>~r</code>, for instance <code>email~r</code> or <code>aq:name~r</code>. Doing so will prevent a user from opting out of the section when signing in from the Authentiq ID app. We recommend to use this flag with care and instead let your users remain in control of the information they share with you.  </p>
+<h4 id="signed-scopes">Signed scopes</h4>
+<p>Scopes can also be marked to require a signature from an externally trusted party. Authentiq is acting as a signature provider for the email and phone scopes, handling the confirmation of email addresses and phone number using a one-time verification code sent by email or text message.</p>
+<h3 id="functional-scopes">Functional scopes</h3>
+<p>Authentiq Connect also uses scopes to indicate functional preferences. </p>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>aq:push</code></td>
+<td>Whether or not to offer <em>One click sign-in</em> to the user.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="terminology">Terminology</h1>
+<p>Let&rsquo;s get over some terminology used in the developer documentation.</p>
 <dl>
 <dt>Authentiq Connect</dt>
-<dd>The entire set of the authentication protocol defined by Authentiq, together with the hosted (or installable) server component and the client side JavaScript.</dd>
-<dt>Authentiq Provider</dt>
-<dd>The actual daemon that serves the Authentiq Connect protocol and acts as a bridge between website and app. The provider is also packaged as <code>authentiqd</code> in the context of SysV style init scripts.</dd>
+<dd>The authentication protocol defined by Authentiq.</dd>
+<dt>Authentiq Connect Provider</dt>
+<dd>The actual daemon that serves the Authentiq Connect protocol, acting as a bridge between website and app. The provider is packaged as <code>authentiqd</code> in the context of SysV-style init scripts.</dd>
+<dt>Authentiq Connect SDK</dt>
+<dd>The combination of the hosted (or installable) Authentiq Connect Provider and client side JavaScript snippet.</dd>
+<dt>Client or Relying Party</dt>
+<dd>The client website or application that end-users authenticate to. Both Client and Relying Party are used interchangeably in the OpenID Connect specifications.</dd>
 </dl>
 <h1 id="support">Support</h1>
 <h2 id="email">Email</h2>
 <p>Contact us via email at <a href="mailto:support@authentiq.io">support@authentiq.io</a>.</p>
 <h2 id="chat">Chat</h2>
-<p>Join the Authentiq team on IRC at <a href="irc://freenode.net/#authentiq"><code>#authentiq</code> at freenode.net</a>.</p>
-<h2 id="issues-and-features">Issues and features</h2>
-<p>Discuss issues and feature requests on our <a href="https://github.com/skion/authentiq-provider/issues">GitHub project page</a>.</p></div>
+<p>Join the Authentiq team on IRC at <a href="irc://freenode.net/#authentiq">#authentiq@freenode.net</a>.</p>
+<h2 id="issues">Issues</h2>
+<p>Discuss bugs, issues and feature requests on our <a href="https://github.com/skion/authentiq-provider/issues">GitHub project page</a>.</p></div>
         </div>
-
-	<footer class="col-md-12">
-		<hr>
-		
-		<p>Copyright &copy; 2015, Authentiq.com</p>
-		
-		<p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
-	</footer>
 
         
 

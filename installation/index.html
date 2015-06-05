@@ -5,18 +5,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <meta name="author" content="The Authentiq Team">
+        <meta name="author" content="The Authentiq team">
         
         <link rel="shortcut icon" href="../img/favicon.png">
         
 
 	<title>Installation - Authentiq Connect</title>
 
-        <link href="../css/bootstrap-3.0.3.min.css" rel="stylesheet">
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/highlight.css">
         <link href="../css/base.css" rel="stylesheet">
-        <link href="../css/bootstrap-theme.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -77,6 +76,12 @@
             
             
                 <li >
+                    <a href="../clients/">Your clients</a>
+                </li>
+            
+            
+            
+                <li >
                     <a href="../faq/">FAQ</a>
                 </li>
             
@@ -113,7 +118,7 @@
         
             <li><a href="#from-pre-built-packages">From pre-built packages</a></li>
         
-            <li><a href="#from-pipy">From PiPy</a></li>
+            <li><a href="#from-pypi">From PyPI</a></li>
         
             <li><a href="#from-source">From source</a></li>
         
@@ -122,6 +127,8 @@
         
     
         <li class="main "><a href="#deployment">Deployment</a></li>
+        
+            <li><a href="#nginx">Nginx</a></li>
         
     
     </ul>
@@ -154,7 +161,7 @@ apt-get install authentiq-connect
 </pre></div>
 
 
-<h2 id="from-pipy">From PiPy</h2>
+<h2 id="from-pypi">From PyPI</h2>
 <p>You can also install <code>authentiqd</code> using PyPi. We recommend you use a virtual Python environment in this case to not clutter up your system with dependencies.</p>
 <div class="codehilite"><pre>pip install authentiq-connect
 </pre></div>
@@ -167,6 +174,7 @@ apt-get install authentiq-connect
 
 <p>Be sure to check out available command line options for the daemon:</p>
 <div class="codehilite"><pre>./bin/authentiq-provider --help
+
 usage: authentiq-provider <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-v<span class="o">]</span> <span class="o">[</span>-D<span class="o">]</span> <span class="o">[</span>--log LOG<span class="o">]</span> <span class="o">[</span>--bind BIND<span class="o">]</span> <span class="o">[</span>--port PORT<span class="o">]</span>
                        <span class="o">[</span>--insecure<span class="o">]</span> <span class="o">[</span>--schema<span class="o">]</span> <span class="o">[</span>--gunicorn<span class="o">]</span>
                        <span class="o">[</span>--workers WORKERS<span class="o">]</span> <span class="o">[</span>--name NAME<span class="o">]</span>
@@ -208,7 +216,7 @@ optional arguments:
 </pre></div>
 
 
-<p>or install from source using PiPy:</p>
+<p>or install from source using PyPI:</p>
 <div class="codehilite"><pre>pip install -e github...
 </pre></div>
 
@@ -219,19 +227,11 @@ optional arguments:
 </blockquote>
 <h1 id="deployment">Deployment</h1>
 <p>The daemon binds to localhost by default on purpose, you should really deploy <code>authentiqd</code> behind a caching webserver. We describe how to configure Nginx here, but the configuration can easily be translated to other servers.</p>
-<p>n## Nginx</p>
+<h2 id="nginx">Nginx</h2>
 <blockquote>
-<p>Describe nginx configuration details.</p>
+<p>Describe nginx configuration details with well-commented snippet..</p>
 </blockquote></div>
         </div>
-
-	<footer class="col-md-12">
-		<hr>
-		
-		<p>Copyright &copy; 2015, Authentiq.com</p>
-		
-		<p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
-	</footer>
 
         
 

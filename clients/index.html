@@ -10,7 +10,7 @@
         <link rel="shortcut icon" href="../img/favicon.png">
         
 
-	<title>FAQ - Authentiq Connect</title>
+	<title>Your clients - Authentiq Connect</title>
 
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -75,14 +75,14 @@
             
             
             
-                <li >
-                    <a href="../clients/">Your clients</a>
+                <li class="active">
+                    <a href="./">Your clients</a>
                 </li>
             
             
             
-                <li class="active">
-                    <a href="./">FAQ</a>
+                <li >
+                    <a href="../faq/">FAQ</a>
                 </li>
             
             
@@ -92,12 +92,12 @@
             <ul class="nav navbar-nav navbar-right">
                 
                 <li >
-                    <a rel="next" href="../clients/">
+                    <a rel="next" href="../reference/">
                         <i class="fa fa-arrow-left"></i> Previous
                     </a>
                 </li>
-                <li class="disabled">
-                    <a rel="prev" >
+                <li >
+                    <a rel="prev" href="../faq/">
                         Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -111,26 +111,25 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
-        
-            <li><a href="#what-is-authentiq-id">What is Authentiq ID?</a></li>
-        
-            <li><a href="#what-is-authentiq-connect">What is Authentiq Connect?</a></li>
-        
-            <li><a href="#what-is-openid-connect">What is OpenID Connect?</a></li>
+        <li class="main active"><a href="#client-management">Client management</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="frequently-asked-questions">Frequently Asked Questions</h1>
-<h3 id="what-is-authentiq-id">What is Authentiq ID?</h3>
-<p>When you download our app and create a profile, that is your very own Authentiq ID. Use it to sign into websites, or share your details in other ways.</p>
-<h3 id="what-is-authentiq-connect">What is Authentiq Connect?</h3>
-<p>Authentiq Connect is the SDK you can use to let your users sign in to your stuff. On the server side it implements both OAuth 2.0 and OpenID Connect protocols, giving developers the most flexible integration options. The client JavaScript component exploits these  </p>
-<h3 id="what-is-openid-connect">What is OpenID Connect?</h3>
-<p>OpenID Connect 1.0 is a set of extensions to OAuth 2.0, focusing on authentication as opposed to authorization. Many global players are backing OpenID Connect to authenticate users.</p></div>
+<h1 id="client-management">Client management</h1>
+<p>To allow people to sign in using Authentiq ID, you need to register your application as a client with the Provider.</p>
+<p>Visit the <a href="../console">Provider Console</a> to manage your &ldquo;clients&rdquo;.</p>
+<div class="container">
+<div class="row">
+  <div class="col-sm-12 col-xs-10 col-xs-offset-1 col-sm-offset-0">
+    <div ui-view>aaa</div> <!-- This is where our views will load -->
+  </div>
+</div>
+</div>
+
+<script src="../app.9dffead12e9c13bdfc39.js"></script></div>
         </div>
 
         
