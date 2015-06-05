@@ -116,9 +116,11 @@
             <li><a href="#why-authentiq">Why Authentiq?</a></li>
         
     
-        <li class="main "><a href="#general-information">General information</a></li>
+        <li class="main "><a href="#concepts">Concepts</a></li>
         
             <li><a href="#scopes">Scopes</a></li>
+        
+            <li><a href="#errors">Errors</a></li>
         
     
         <li class="main "><a href="#terminology">Terminology</a></li>
@@ -138,9 +140,9 @@
             <div class="col-md-9" role="main">
 
 <h1 id="introduction">Introduction</h1>
-<p>Hey, if you&rsquo;re reading this, then you are probably curious how to get started with implementing Authentiq on your website. </p>
-<p>Luckily, as we run Authentiq Connect as a service, there is no need to install or run anything locally. Simply include our JavaScript snippet on your page or point your favourite OAuth 2.0 client library at our hosted instance. Dive right in by heading over to the <a href="gettingstarted/">Getting started</a> page.</p>
-<p>Of course if you prefer to <a href="installation/">install the Authentiq Connect daemon locally</a>, now or later, then we will have pre-built packages for Debian 7.0, 8.0 and Ubuntu 15.04 soon. You will also be able to install the Authentiq Connect Provider from PyPI or build it from <a href="https://github.com/skion/authentiq-provider">source</a>.</p>
+<p>Hey, if you&rsquo;re reading this, then you are probably curious how to get started with implementing <a href="http://authentiq.com/">Authentiq</a> on your website. </p>
+<p>Fortunately, as we run Authentiq Connect as a service, there is no need to install or run anything locally. Simply include our JavaScript snippet on your page or point your favourite OAuth 2.0 client library at our hosted instance. Dive right in by heading over to the <a href="gettingstarted/">Getting started</a> page.</p>
+<p>Of course if you prefer to <a href="installation/">install the Authentiq Connect daemon locally</a>, then we will have pre-built packages for Debian 7.0, 8.0 and Ubuntu 15.04 soon. You will also be able to install the Authentiq Connect Provider from PyPI or build it from <a href="https://github.com/skion/authentiq-provider">source</a>.</p>
 <blockquote>
 <p>Please see our licensing options before installing Authentiq Connect locally to make sure it matches your situation.</p>
 </blockquote>
@@ -154,17 +156,19 @@
 <li>Authentiq aims to avoid being another point of trust for your users.</li>
 <li>Authentiq aims to be reasonably priced, or free.</li>
 </ul>
-<h1 id="general-information">General information</h1>
+<h1 id="concepts">Concepts</h1>
+<p>This section attempts to explain general concepts relating to Authentiq Connect.</p>
 <h2 id="scopes">Scopes</h2>
-<p>Authentiq Connect leverages OAuth 2.0 <em>scopes</em> to indicate which sections of a user&rsquo;s profile to request. We copy scopes from OIDC where possible, and prefix non-standard scopes with <code>aq:</code>.</p>
+<p>Authentiq Connect leverages OAuth 2.0 <em>scopes</em> to specify what sections of a user&rsquo;s profile are being requested. We mimic the <a href="http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims">scopes from OIDC</a> as much as possible, and prefix additional scopes with a <code>aq:</code>.</p>
 <h3 id="identity-scopes">Identity scopes</h3>
+<p>Using scopes, a client application can request the following user details from a user.  </p>
 <table>
 <thead>
 <tr>
 <th>Label</th>
 <th>Description</th>
 <th>Claims</th>
-<th>Can be required?</th>
+<th>Can be marked required?</th>
 <th>Can be signed?</th>
 </tr>
 </thead>
@@ -186,7 +190,7 @@
 <tr>
 <td><code>address</code></td>
 <td>A user&rsquo;s home address.</td>
-<td><code>address</code></td>
+<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#AddressClaim"><code>address</code></a></td>
 <td>Yes</td>
 <td>No</td>
 </tr>
@@ -199,18 +203,18 @@
 </tr>
 <tr>
 <td><code>aq:location</code></td>
-<td>A user&rsquo;s current location</td>
+<td>A user&rsquo;s current location.</td>
 <td><code>aq:location</code></td>
 <td>Yes</td>
 <td>No</td>
 </tr>
 </tbody>
 </table>
-<p>As per OIDC, requested scopes are optional by default, and if the user consents only to a subset of the requested scopes it is up to the client application to decide what happens. However, Authentiq Connect allows a developer to mark certain scopes as required and/or requiring a signature from a trusted issuer. </p>
+<p>Following OIDC, requested scopes are optional by default, meaning that a user will be able to opt out of a requested scope on the Authentiq ID user consent screen. In this case it is up to the client application to decide how to deal with the missing information. Alternatively, Authentiq allows a developer to mark certain scopes as required and/or requiring a signature from a trusted issuer. </p>
 <h4 id="required-scopes">Required scopes</h4>
 <p>Identity scopes can be marked as being <em>required</em> by appending <code>~r</code>, for instance <code>email~r</code> or <code>aq:name~r</code>. Doing so will prevent a user from opting out of the section when signing in from the Authentiq ID app. We recommend to use this flag with care and instead let your users remain in control of the information they share with you.  </p>
 <h4 id="signed-scopes">Signed scopes</h4>
-<p>Scopes can also be marked to require a signature from an externally trusted party. Authentiq is acting as a signature provider for the email and phone scopes, handling the confirmation of email addresses and phone number using a one-time verification code sent by email or text message.</p>
+<p>Scopes can also be marked to <em>require a signature</em> from an externally trusted party. In fact, Authentiq is acting as a signature provider for the email and phone scopes, handling the confirmation of email addresses and phone number using a one-time verification code sent by email or text message.</p>
 <h3 id="functional-scopes">Functional scopes</h3>
 <p>Authentiq Connect also uses scopes to indicate functional preferences. </p>
 <table>
@@ -227,8 +231,35 @@
 </tr>
 </tbody>
 </table>
+<h2 id="errors">Errors</h2>
+<p>When something goes wrong, Authentiq Connect tries to direct back to the client application as stipulated by OAuth 2.0, so that the error can be handled in the domain and using the UX of the client application.</p>
+<p>The native SDK handles all errors for you, however here is a list of things that may go wrong for reference.</p>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Origin</th>
+<th>Grants</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>invalid_XYZ</code></td>
+<td>OAuth 2.0</td>
+<td>Authorization code</td>
+<td></td>
+</tr>
+<tr>
+<td><code>consent_required</code></td>
+<td>OIDC</td>
+<td>Authorization code</td>
+<td>The user did not The user did not The user did not The user did not</td>
+</tr>
+</tbody>
+</table>
 <h1 id="terminology">Terminology</h1>
-<p>Let&rsquo;s get over some terminology used in the developer documentation.</p>
+<p>Let&rsquo;s get over some terminology used in this documentation.</p>
 <dl>
 <dt>Authentiq Connect</dt>
 <dd>The authentication protocol defined by Authentiq.</dd>
@@ -238,6 +269,10 @@
 <dd>The combination of the hosted (or installable) Authentiq Connect Provider and client side JavaScript snippet.</dd>
 <dt>Client or Relying Party</dt>
 <dd>The client website or application that end-users authenticate to. Both Client and Relying Party are used interchangeably in the OpenID Connect specifications.</dd>
+<dt>Certificate Authority List</dt>
+<dd>A public list of signature authorities that allows a Relying Party to verify that a certain identity claim was signed by an active trusted party.</dd>
+<dt>Certificate Revocation List</dt>
+<dd>A public list of unique end-user and (hashed) device identifiers that can be used by a Relying Party to verify that a user is still active and their device hasn&rsquo;t been revoked. </dd>
 </dl>
 <h1 id="support">Support</h1>
 <h2 id="email">Email</h2>

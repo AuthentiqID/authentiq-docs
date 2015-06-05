@@ -115,7 +115,7 @@
         
             <li><a href="#integration-comparison">Integration comparison</a></li>
         
-            <li><a href="#client-id">Client ID</a></li>
+            <li><a href="#obtaining-a-client-id">Obtaining a Client ID</a></li>
         
     
         <li class="main "><a href="#native-sdk">Native SDK</a></li>
@@ -224,7 +224,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="client-id">Client ID</h2>
+<h2 id="obtaining-a-client-id">Obtaining a Client ID</h2>
 <p>Whether or not your integration is going to be native or third-party, you will need to <a href="../clients/">register your application</a> with an Authentiq Connect Provider and obtain a unique client identifier. Use the <code>client_id</code> in your preferred OAuth 2.0 client library, or when customizing your native Authentiq Connect snippet below. </p>
 <h1 id="native-sdk">Native SDK</h1>
 <p>In terms of end-user experience, the smoothest integration option is to simply include our Authentiq Connect snippet on your page. Use the snippet configurator to easily generate cusomtized snippet code for your situation, or copy paste and adjust the example snippet below.</p>
@@ -242,6 +242,7 @@
 
 
 <h2 id="options">Options</h2>
+<p>The following <code>data-*</code> options are available.</p>
 <table>
 <thead>
 <tr>
@@ -267,6 +268,11 @@
 <td><code>id_token</code></td>
 </tr>
 <tr>
+<td>response_mode</td>
+<td>OIDC response mode. Valid options are <code>query</code>, <code>fragment</code>.</td>
+<td>Depends on response type.</td>
+</tr>
+<tr>
 <td>redirect_uri</td>
 <td>OAuth 2.0 redirect URL.</td>
 <td>The current page, from <em>window.href.location</em>.</td>
@@ -283,7 +289,7 @@
 </tr>
 <tr>
 <td>prompt</td>
-<td>Preferred prompt method in Authentiq ID. Valid choices are <code>login</code> or <code>consent</code>. Providing <code>consent</code> disallows <em>One click sign-in</em> and prompts user for (re-)consent.</td>
+<td>Preferred prompt method in Authentiq ID. Valid choices are <code>login</code>, <code>consent</code>. Providing <code>consent</code> overrides <em>One click sign-in</em> and prompts user for (re-)consent.</td>
 <td><code>login</code></td>
 </tr>
 <tr>
@@ -296,26 +302,75 @@
 <td>Client application state.</td>
 <td>32 bytes from <em>crypto.getRandomValues()</em></td>
 </tr>
+<tr>
+<td>client_response_uri</td>
+<td>URL to POST the received authorization response to for server side validation or processing. Method should return 200 or 400. This parameter is only used when <code>response_mode=fragment</code>, since otherwise .</td>
+<td>None</td>
+</tr>
 </tbody>
 </table>
-<h1 id="third-party-integrations">Third-party integrations</h1>
-<p>Please add relevant solutions to this list if they are missing.</p>
+<h3 id="server-side-processing">Server side processing</h3>
+<p>If the response mode is set to <code>fragment</code> (recommended), then <code>client_response_uri</code> can be used to still proxy the authorization response to your backend servers, as if you had specified <code>query</code> response mode. The backend server may do one or more of the following tasks:  </p>
+<ul>
+<li>Validate the ID Token, if present, using cryptographic functions available on the server and return a 400 response in case of a validation error.</li>
+<li>Consume the authorization code, if present, and exchange it for an access and/or refresh token at the Authentiq Connect token endpoint.</li>
+</ul>
+<p>The endpoint should return one of the following status codes. </p>
 <table>
 <thead>
 <tr>
-<th>Configuration option</th>
-<th>OpenID Connect</th>
-<th>OAuth 2.0</th>
+<th>HTTP status code</th>
+<th>Action</th>
 </tr>
 </thead>
-<tbody></tbody>
+<tbody>
+<tr>
+<td>200</td>
+<td>Token validated; the success callback will be called.</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Token error; a message will be displayed and the error callback invoked.</td>
+</tr>
+</tbody>
 </table>
-<p>client_id, app_id | 
-authorize_uri | https://connect.authentiq.io/authorize
-token_uri | https://connect.authentiq.io/token
-userinfo_uri | https://connect.authentiq.io/userinfo</p>
+<h1 id="third-party-integrations">Third-party integrations</h1>
+<table>
+<thead>
+<tr>
+<th>Typical option</th>
+<th>What to fill in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>client_id</code></td>
+<td>The client_id you obtained above.</td>
+</tr>
+<tr>
+<td><code>scope</code></td>
+<td>Space delimited list of <a href="..#scopes">Authentiq Connect scopes</a>.</td>
+</tr>
+<tr>
+<td><code>redirect_uri</code></td>
+<td>The URL in <em>your</em> application that the Provider should redirect to after authenticating a user.</td>
+</tr>
+<tr>
+<td><code>authorize_uri</code></td>
+<td><code>https://connect.authentiq.io/authorize</code></td>
+</tr>
+<tr>
+<td><code>token_uri</code></td>
+<td><code>https://connect.authentiq.io/token</code></td>
+</tr>
+<tr>
+<td><code>userinfo_uri</code></td>
+<td><code>https://connect.authentiq.io/userinfo</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="client-side-frameworks">Client-side frameworks</h2>
-<p>A list of client libraries using OAuth&rsquo;s <em>implicit</em> grant type. </p>
+<p>A list of client libraries using OAuth&rsquo;s <em>implicit</em> grant type. Please add relevant solutions to this list if they are missing.</p>
 <h3 id="hellojs">Hello.js</h3>
 <p>There is a <a href="https://github.com/skion/hello.js">fork of HelloJS</a> that includes an <a href="https://github.com/skion/hello.js/blob/master/src/modules/authentiq.js">Authentiq Connect plugin</a>. HelloJS abstracts away the implementation differences between a large number of standard OAuth 2.0 identity providers. We&rsquo;ll aim to get Authentiq Connect included as a supported provider soon.</p>
 <h3 id="angular-js">Angular JS</h3>
@@ -325,7 +380,7 @@ userinfo_uri | https://connect.authentiq.io/userinfo</p>
 <li><a href="https://github.com/seegno/angular-oauth2">Angular-OAuth</a></li>
 </ul>
 <h2 id="server-side-frameworks">Server-side frameworks</h2>
-<p>A list of libraries to be used with server applications, supporting (at least) OAuth&rsquo;s <em>authorization_code</em> grant type. </p>
+<p>A list of libraries to be used with server applications, supporting (at least) OAuth&rsquo;s <em>authorization_code</em> grant type. Please add relevant solutions to this list if they are missing.</p>
 <h3 id="flask">Flask</h3>
 <p>There are several authentication extensions for Flask&hellip; [TBD]</p>
 <h1 id="other-integrations">Other integrations</h1>
