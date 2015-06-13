@@ -7,7 +7,7 @@
         
         <meta name="author" content="The Authentiq team">
         
-        <link rel="shortcut icon" href="../img/favicon.png">
+        <link rel="shortcut icon" href="../images/app-icon-hexagon.png">
         
 
 	<title>Installation - Authentiq Connect</title>
@@ -86,11 +86,23 @@
                 </li>
             
             
+
+                <li style="background-color:#895fc0;">
+                    <a class="authentiq-oauth-button"
+                        data-response-type="id_token token"
+                        data-redirect-uri="http://127.0.0.1:8000/clients/"
+                        data-client-id="fe1303fc-9b59-4661-b156-daa98da968b8"
+                        data-scope="email~rs aq:name aq:push openid"
+                        data-sign-in-text="Sign in with Authentiq"
+                        data-sign-out-text="Sign out">
+
+                        Sign in with Authentiq
+                    </a>
+                </li>
             </ul>
 
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
-                
                 <li >
                     <a rel="next" href="../gettingstarted/">
                         <i class="fa fa-arrow-left"></i> Previous
@@ -106,7 +118,6 @@
         </div>
     </div>
 </div>
-
         <div class="container">
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
@@ -145,80 +156,70 @@
 <p>Pre-built packages are available at the moment for Debian 7.0, 8.0 and Ubuntu 15.04.</p>
 <h3 id="debian-ubuntu">Debian &amp; Ubuntu</h3>
 <p>Add our repository to your APT sources, as root:</p>
-<div class="codehilite"><pre>apt-add-repository
+<pre class="codehilite"><code class="language-bash">apt-add-repository
 apt-get update
-apt-get install authentiq-connect
-</pre></div>
+apt-get install authentiq-connect</code></pre>
 
 
 <p>Edit the configuration file, see <a href="#configuration">below</a> for details about the available configuration options:</p>
-<div class="codehilite"><pre>vim /etc/authentiq/authentiqd.conf
-</pre></div>
+<pre class="codehilite"><code>vim /etc/authentiq/authentiqd.conf</code></pre>
 
 
 <p>(Re)start the service:</p>
-<div class="codehilite"><pre>/etc/init.d/authentiqd restart
-</pre></div>
+<pre class="codehilite"><code class="language-bash">/etc/init.d/authentiqd restart</code></pre>
 
 
 <h2 id="from-pypi">From PyPI</h2>
 <p>You can also install <code>authentiqd</code> using PyPi. We recommend you use a virtual Python environment in this case to not clutter up your system with dependencies.</p>
-<div class="codehilite"><pre>pip install authentiq-connect
-</pre></div>
+<pre class="codehilite"><code class="language-bash">pip install authentiq-connect</code></pre>
 
 
 <p>Edit the configuration file, see <a href="#configuration">below</a> for details about the available configuration options:</p>
-<div class="codehilite"><pre>vim ./etc/authentiqd.conf
-</pre></div>
+<pre class="codehilite"><code class="language-bash">vim ./etc/authentiqd.conf</code></pre>
 
 
 <p>Be sure to check out available command line options for the daemon:</p>
-<div class="codehilite"><pre>./bin/authentiq-provider --help
+<pre class="codehilite"><code class="language-bash">./bin/authentiq-provider --help
 
-usage: authentiq-provider <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-v<span class="o">]</span> <span class="o">[</span>-D<span class="o">]</span> <span class="o">[</span>--log LOG<span class="o">]</span> <span class="o">[</span>--bind BIND<span class="o">]</span> <span class="o">[</span>--port PORT<span class="o">]</span>
-                       <span class="o">[</span>--insecure<span class="o">]</span> <span class="o">[</span>--schema<span class="o">]</span> <span class="o">[</span>--gunicorn<span class="o">]</span>
-                       <span class="o">[</span>--workers WORKERS<span class="o">]</span> <span class="o">[</span>--name NAME<span class="o">]</span>
-                       <span class="o">[</span>--disable-websockets<span class="o">]</span>
+usage: authentiq-provider [-h] [-v] [-D] [--log LOG] [--bind BIND] [--port PORT]
+                       [--insecure] [--schema] [--gunicorn]
+                       [--workers WORKERS] [--name NAME]
+                       [--disable-websockets]
 
 Authentiq Connect Provider
 
 optional arguments:
-  -h, --help            show this <span class="nb">help </span>message and <span class="nb">exit</span>
-  -v, --verbose         increase verbosity <span class="o">(</span>default: 0<span class="o">)</span>
-  -D, --debug           <span class="nb">enable </span>Flask debugging <span class="o">(</span>default: False<span class="o">)</span>
-  --log LOG             write logs to <span class="o">(</span>rotated<span class="o">)</span> file <span class="o">(</span>default: None<span class="o">)</span>
-  --bind BIND           ip to <span class="nb">bind </span>to <span class="o">(</span>default: localhost<span class="o">)</span>
-  --port PORT           port to <span class="nb">bind </span>to <span class="o">(</span>default: 5000<span class="o">)</span>
-  --insecure            disable JWT signature verification <span class="o">(</span>default: False<span class="o">)</span>
-  --schema              create schema <span class="k">for</span> database <span class="o">(</span>default: False<span class="o">)</span>
-  --gunicorn            run under gunicorn <span class="o">(</span>default: False<span class="o">)</span>
-  --workers WORKERS     start this many worker processes <span class="o">(</span>gunicorn only<span class="o">)</span>
-                        <span class="o">(</span>default: 1<span class="o">)</span>
-  --name NAME           process name to use <span class="o">(</span>gunicorn only<span class="o">)</span> <span class="o">(</span>default: aq-
-                        provider<span class="o">)</span>
-  --disable-websockets  run server without WebSocket support <span class="o">(</span>default: False<span class="o">)</span>
-</pre></div>
+  -h, --help            show this help message and exit
+  -v, --verbose         increase verbosity (default: 0)
+  -D, --debug           enable Flask debugging (default: False)
+  --log LOG             write logs to (rotated) file (default: None)
+  --bind BIND           ip to bind to (default: localhost)
+  --port PORT           port to bind to (default: 5000)
+  --insecure            disable JWT signature verification (default: False)
+  --schema              create schema for database (default: False)
+  --gunicorn            run under gunicorn (default: False)
+  --workers WORKERS     start this many worker processes (gunicorn only)
+                        (default: 1)
+  --name NAME           process name to use (gunicorn only) (default: aq-
+                        provider)
+  --disable-websockets  run server without WebSocket support (default: False)</code></pre>
 
 
 <p>Then start the daemon:</p>
-<div class="codehilite"><pre>./bin/authentiq-provider
-</pre></div>
+<pre class="codehilite"><code class="language-bash">./bin/authentiq-provider</code></pre>
 
 
 <h2 id="from-source">From source</h2>
 <p>Fork and/or clone the Github repository,</p>
-<div class="codehilite"><pre>git clone github...
-</pre></div>
+<pre class="codehilite"><code>git clone github...</code></pre>
 
 
 <p>and run:</p>
-<div class="codehilite"><pre>python setup.py
-</pre></div>
+<pre class="codehilite"><code>python setup.py</code></pre>
 
 
 <p>or install from source using PyPI:</p>
-<div class="codehilite"><pre>pip install -e github...
-</pre></div>
+<pre class="codehilite"><code>pip install -e github...</code></pre>
 
 
 <h1 id="configuration">Configuration</h1>
@@ -233,11 +234,19 @@ optional arguments:
 </blockquote></div>
         </div>
 
-        
+        <footer class="col-md-12">
+            <hr>
+            
+                <center>Copyright &copy; 2015, Authentiq.com</center>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
 
         <script src="../js/jquery-1.10.2.min.js"></script>
         <script src="../js/bootstrap-3.0.3.min.js"></script>
         <script src="../js/highlight.pack.js"></script>
         <script src="../js/base.js"></script>
+        <script src="../js/authentiq-oauth.js"></script>
+            <script src="../clients/js/app.js"></script>
     </body>
 </html>

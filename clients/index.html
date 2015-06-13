@@ -7,7 +7,7 @@
         
         <meta name="author" content="The Authentiq team">
         
-        <link rel="shortcut icon" href="../img/favicon.png">
+        <link rel="shortcut icon" href="../images/app-icon-hexagon.png">
         
 
 	<title>Your clients - Authentiq Connect</title>
@@ -86,11 +86,23 @@
                 </li>
             
             
+
+                <li style="background-color:#895fc0;">
+                    <a class="authentiq-oauth-button"
+                        data-response-type="id_token token"
+                        data-redirect-uri="http://127.0.0.1:8000/clients/"
+                        data-client-id="fe1303fc-9b59-4661-b156-daa98da968b8"
+                        data-scope="email~rs aq:name aq:push openid"
+                        data-sign-in-text="Sign in with Authentiq"
+                        data-sign-out-text="Sign out">
+
+                        Sign in with Authentiq
+                    </a>
+                </li>
             </ul>
 
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
-                
                 <li >
                     <a rel="next" href="../reference/">
                         <i class="fa fa-arrow-left"></i> Previous
@@ -106,7 +118,6 @@
         </div>
     </div>
 </div>
-
         <div class="container">
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
@@ -121,22 +132,28 @@
 <h1 id="client-management">Client management</h1>
 <p>To allow people to sign in using Authentiq ID, you need to register your application as a client with the Provider.</p>
 <p>Visit the <a href="../console">Provider Console</a> to manage your &ldquo;clients&rdquo;.</p>
-<div class="container">
-<div class="row">
-  <div class="col-sm-12 col-xs-10 col-xs-offset-1 col-sm-offset-0">
-    <div ui-view>aaa</div> <!-- This is where our views will load -->
-  </div>
-</div>
-</div>
-
-<script src="../app.9dffead12e9c13bdfc39.js"></script></div>
+<div class="container" ng-app="AQProviderConsole">
+    <div class="row">
+        <div class="col-sm-12 col-xs-10 col-xs-offset-1 col-sm-offset-0">
+            <div ui-view></div> <!-- This is where our views will load -->
+        </div>
+    </div>
+</div></div>
         </div>
 
-        
+        <footer class="col-md-12">
+            <hr>
+            
+                <center>Copyright &copy; 2015, Authentiq.com</center>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
 
         <script src="../js/jquery-1.10.2.min.js"></script>
         <script src="../js/bootstrap-3.0.3.min.js"></script>
         <script src="../js/highlight.pack.js"></script>
         <script src="../js/base.js"></script>
+        <script src="../js/authentiq-oauth.js"></script>
+            <script src="../clients/js/app.js"></script>
     </body>
 </html>
