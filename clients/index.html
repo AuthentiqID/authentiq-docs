@@ -93,10 +93,10 @@
                         data-redirect-uri="http://authentiqid.github.io/authentiq-docs/clients/"
                         data-client-id="fe1303fc-9b59-4661-b156-daa98da968b8"
                         data-scope="email~rs aq:name aq:push openid"
-                        data-sign-in-text="Sign in with Authentiq"
+                        data-sign-in-text="Sign in"
                         data-sign-out-text="Sign out">
 
-                        Sign in with Authentiq
+                        Authentiq...
                     </a>
                 </li>
             </ul>
@@ -132,9 +132,9 @@
 <h1 id="client-management">Client management</h1>
 <p>To allow people to sign in using Authentiq ID, you need to register your application as a client with the Provider.</p>
 <p>Visit the <a href="../console">Provider Console</a> to manage your &ldquo;clients&rdquo;.</p>
-<div class="container" ng-app="AQProviderConsole">
+<div ng-app="AQProviderConsole">
     <div class="row">
-        <div class="col-sm-12 col-xs-10 col-xs-offset-1 col-sm-offset-0">
+        <div class="col-md-12">
             <div ui-view></div> <!-- This is where our views will load -->
         </div>
     </div>
