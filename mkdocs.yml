@@ -1,13 +1,14 @@
 site_name: Authentiq Connect
 site_description: Documentation for the Authentiq OAuth 2.0 and OpenID Connect Provider.
 site_author: The Authentiq team
-site_favicon: img/favicon.png
-include_search: false
-use_absolute_urls: true
+site_favicon: images/app-icon-hexagon.png
+# include_search: false
+# use_absolute_urls: true
 use_directory_urls: true
 copyright: Copyright &copy; 2015, Authentiq.com
 # google_analytics: ['UA-6096819-11', 'docker.io']
-theme: united
+theme_dir: 'docs_theme'
+# theme: united
 #extra_css:
 #  - css/app.1512eea5d5df02a9286a.css
 #  - css/bootstrap-theme.css
@@ -16,11 +17,11 @@ markdown_extensions:
   - markdown.extensions.def_list
   - markdown.extensions.smarty
 pages:
-  - [index.md, Overview]
-  - [gettingstarted.md, Getting started]
-  - [installation.md, Installation]
-  - [reference.md, API Reference]
-  - [clients.md, Your clients]
-  - [faq.md, FAQ]
+  - 'Overview' : 'index.md'
+  - 'Getting started' : 'gettingstarted.md'
+  - 'Installation' : 'installation.md'
+  - 'API Reference' : 'reference.md'
+  - 'Your clients' : 'clients.md'
+  - 'FAQ' : 'faq.md'
 extra:
   foo: BARBAR
