@@ -10,7 +10,7 @@
         <link rel="shortcut icon" href="../images/app-icon-hexagon.png">
         
 
-	<title>FAQ - Authentiq Connect</title>
+	<title>Connect - Authentiq Connect</title>
 
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -69,12 +69,12 @@
             
             
             
-                <li class="dropdown">
+                <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">API Reference <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
-                        <li >
-                            <a href="../api-provider/">Connect</a>
+                        <li class="active">
+                            <a href="./">Connect</a>
                         </li>
                     
                         <li >
@@ -92,8 +92,8 @@
             
             
             
-                <li class="active">
-                    <a href="./">FAQ</a>
+                <li >
+                    <a href="../faq/">FAQ</a>
                 </li>
             
             
@@ -123,26 +123,101 @@
             <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
-        
-            <li><a href="#what-is-authentiq-id">What is Authentiq ID?</a></li>
-        
-            <li><a href="#what-is-authentiq-connect">What is Authentiq Connect?</a></li>
-        
-            <li><a href="#what-is-openid-connect">What is OpenID Connect?</a></li>
+        <li class="main active"><a href="#provider-api-documentation">Provider API documentation</a></li>
         
     
     </ul>
 </div></div>
             <div class="col-md-9" role="main">
 
-<h1 id="frequently-asked-questions">Frequently Asked Questions</h1>
-<h3 id="what-is-authentiq-id">What is Authentiq ID?</h3>
-<p>When you download our app and create a profile, that is your very own Authentiq ID. Use it to sign into websites, or share your details in other ways.</p>
-<h3 id="what-is-authentiq-connect">What is Authentiq Connect?</h3>
-<p>Authentiq Connect is the SDK you can use to let your users sign in to your stuff. On the server side it implements both OAuth 2.0 and OpenID Connect protocols, giving developers the most flexible integration options. The client JavaScript component exploits these  </p>
-<h3 id="what-is-openid-connect">What is OpenID Connect?</h3>
-<p>OpenID Connect 1.0 is a set of extensions to OAuth 2.0, focusing on authentication as opposed to authorization. Many global players are backing OpenID Connect to authenticate users.</p></div>
+<h1 id="provider-api-documentation">Provider API documentation</h1>
+<div class="swagger-section">
+  <div id='header'>
+    <div class="swagger-ui-wrap">
+      <a id="logo" href="http://swagger.io">swagger</a>
+      <form id='api_selector'>
+        <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
+        <div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
+        <div class='input'><a id="explore" href="#">Explore</a></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="message-bar" class="swagger-ui-wrap">&nbsp;</div>
+  <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
+</div>
+
+<p><link href='css/typography.css' media='screen' rel='stylesheet' type='text/css'/>
+<link href='css/reset.css' media='screen' rel='stylesheet' type='text/css'/>
+<link href='css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
+<!-- <link href='css/reset.css' media='print' rel='stylesheet' type='text/css'/>
+<link href='css/print.css' media='print' rel='stylesheet' type='text/css'/> -->
+<script src='lib/jquery-1.8.0.min.js' type='text/javascript'></script>
+<script src='lib/jquery.slideto.min.js' type='text/javascript'></script>
+<script src='lib/jquery.wiggle.min.js' type='text/javascript'></script>
+<script src='lib/jquery.ba-bbq.min.js' type='text/javascript'></script>
+<script src='lib/handlebars-2.0.0.js' type='text/javascript'></script>
+<script src='lib/underscore-min.js' type='text/javascript'></script>
+<script src='lib/backbone-min.js' type='text/javascript'></script>
+<script src='swagger-ui.js' type='text/javascript'></script>
+<script src='lib/highlight.7.3.pack.js' type='text/javascript'></script>
+<script src='lib/marked.js' type='text/javascript'></script>
+<script src='lib/swagger-oauth.js' type='text/javascript'></script></p>
+<script type="text/javascript">
+  $(function () {
+    window.swaggerUi = new SwaggerUi({
+      url: "provider.yaml",
+      dom_id: "swagger-ui-container",
+      supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
+      onComplete: function(swaggerApi, swaggerUi){
+        if(typeof initOAuth == "function") {
+          initOAuth({
+            clientId: "your-client-id",
+            realm: "your-realms",
+            appName: "your-app-name"
+          });
+        }
+
+        $('pre code').each(function(i, e) {
+          hljs.highlightBlock(e)
+        });
+
+        addApiKeyAuthorization();
+      },
+      onFailure: function(data) {
+        log("Unable to Load SwaggerUI");
+      },
+      docExpansion: "none",
+      apisSorter: "alpha",
+      showRequestHeaders: false
+    });
+
+    function addApiKeyAuthorization(){
+      var key = encodeURIComponent($('#input_apiKey')[0].value);
+      if(key && key.trim() != "") {
+          var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("api_key", key, "query");
+          window.swaggerUi.api.clientAuthorizations.add("api_key", apiKeyAuth);
+          log("added key " + key);
+      }
+    }
+
+    $('#input_apiKey').change(addApiKeyAuthorization);
+
+    // if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
+    /*
+      var apiKey = "myApiKeyXXXX123456789";
+      $('#input_apiKey').val(apiKey);
+    */
+
+    window.swaggerUi.load();
+
+    function log() {
+      if ('console' in window) {
+        console.log.apply(console, arguments);
+      }
+    }
+});
+</script></div>
         </div>
 
         <footer class="col-md-12">
