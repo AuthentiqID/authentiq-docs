@@ -33,9 +33,9 @@ paths:
 
         See also:
           - [OAuth 2.0 Authorization Endpoint](http://tools.ietf.org/html/rfc6749#section-3.1)
-          - [OIDC Authorization Endpoint](http://openid.net/specs/openid-connect-core-1_0.html#AuthRequest)
-          - [Successful response parameters](http://openid.net/specs/openid-connect-core-1_0.html#AuthResponse)
-          - [Erroneous response parameters](http://openid.net/specs/openid-connect-core-1_0.html#AuthError)
+          - [OIDC Authentication request](http://openid.net/specs/openid-connect-core-1_0.html#AuthRequest)
+          - [OIDC Successful Authentication response](http://openid.net/specs/openid-connect-core-1_0.html#AuthResponse)
+          - [OIDC Error Authentication response](http://openid.net/specs/openid-connect-core-1_0.html#AuthError)
 
       tags:
         - Authentication
@@ -138,31 +138,56 @@ paths:
   /token:
     post:
       summary: OpenID Connect token endpoint.
-      description: >
-        To obtain an Access Token, an ID Token, and optionally a 
-        Refresh Token, the RP (Client) sends a Token Request to the 
-        Token Endpoint to obtain a Token Response, as described in 
-        Section 3.2 of OAuth 2.0 [RFC6749], when using the 
-        Authorization Code Flow.
+      description: |
+        A standard OpenID Connect token endpoint, used to communicate tokens to confidential
+        clients, usually by means of an intermediate authorization code grant.
+
+        Example:
+        ```
+        POST https://connect.authentiq.io/token?client_id=<your-client-id>&client_secret=<client-secret>
+            &grant_type=authorization_code&code=<code>&redirect_uri=<redirect-uri>
+        ```
+
+        See also:
+          - [OAuth 2.0 Token Endpoint](http://tools.ietf.org/html/rfc6749#section-3.2)
+          - [OIDC Token request](http://openid.net/specs/openid-connect-core-1_0.html#TokenRequest)
+          - [OIDC Successful Token response](http://openid.net/specs/openid-connect-core-1_0.html#TokenResponse)
+          - [OIDC Token Error response](http://openid.net/specs/openid-connect-core-1_0.html#TokenErrorResponse)
+
       tags:
         - Authentication
       consumes:
         - application/x-www-form-urlencoded
       parameters:
+        - name: client_id
+          in: header
+          description: >
+            The registered client ID.
+          required: true
+          type: string
+        - name: client_secret
+          in: header
+          description: >
+            The registered client ID secret.
+          required: true
+          type: string
         - name: grant_type
           in: formData
-          description: "value: authorization_code"
+          description: >
+            The authorization grant type, must be `authorization_code`.
           required: true
           type: string
         - name: code
           in: formData
-          description: ""
+          description: >
+            The authorization code previously obtained from the Authentication endpoint.
           required: true
           type: string
         - name: redirect_uri
           in: formData
-          description: ""
-          required: false
+          description: >
+            The redirect URL that was used previously with the Authentication endpoint.
+          required: true
           type: string
       produces:
         - application/json
@@ -172,10 +197,8 @@ paths:
           schema:
             type: object
             required:
-            - id_token
-            - access_token
-            - token_type
-            - expires_in
+              - token_type
+              - expires_in
             properties:
               id_token:
                 type: string
@@ -188,6 +211,8 @@ paths:
                 format: int32
                 minimum: 0
               refresh_token:
+                type: string
+              session_state:
                 type: string
           headers:
             "Cache-Control":
@@ -452,8 +477,8 @@ securityDefinitions:
 
 definitions:
   Error:
-    description: "Error Response defined as in Section 5.2 
-      of OAuth 2.0 [RFC6749] ; 
+    description: "Error Response defined as in Section 5.2
+      of OAuth 2.0 [RFC6749] ;
       status, type, title, detail are application specific
       "
     required:
