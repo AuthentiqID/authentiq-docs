@@ -340,6 +340,41 @@ paths:
         default:
           $ref: '#/responses/ErrorResponse'
 
+  /userinfo:
+    get:
+      summary: OpenID Connect UserInfo endpoint.
+      tags:
+        - Authentication
+      description: |
+         A standard OpenID Connect UserInfo endpoint.
+
+         Example:
+         ```
+         GET /userinfo
+         ```
+
+         This endpoint can return a UserInfo structure as JSON, or as a JWT signed by the end-user with an Ed25519 signature.
+
+         See also:
+         - [OIDC UserInfo endpoint](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo)
+
+      operationId: userInfo
+      produces:
+        - application/json
+        - application/jwt
+      responses:
+        "200":
+          description: Successful UserInfo response.
+          schema:
+            $ref: "#/definitions/UserInfo"
+        "401":
+          description: UserInfo error response.
+        default:
+          $ref: '#/responses/ErrorResponse'
+      security:
+        - oauth_code: [oidc, email, phone, address, aq:location, aq:name, aq:push]
+        - oauth_implicit: [oidc, email, phone, address, aq:location, aq:name, aq:push]
+
   /client:
     get:
       summary: Get a list of Clients the current Account has access to
@@ -639,8 +674,55 @@ definitions:
         items:
           type: string
 
+  UserInfo:
+    description: OIDC UserInfo structure
+    required:
+      - sub
+    properties:
+      sub:
+        type: string
+      name:
+        type: string
+      given_name:
+        type: string
+      family_name:
+        type: string
+      email:
+        type: string
+      email_verified:
+        type: boolean
+      phone_number:
+        type: string
+      phone_number_verified:
+        type: boolean
+      address:
+        $ref: "#/definitions/Address"
+      aq:location:
+        description: Geolocation structure
+        properties:
+          latitude:
+            type: float
+          longitude:
+            type: float
+          address:
+            $ref: "#/definitions/Address"
+
+  Address:
+    description: OIDC Address structure
+    properties:
+      street_address:
+        type: string
+      locality:
+        type: string
+      region:
+        type: string
+      postal_code:
+        type: string
+      country:
+        type: string
+
   Client:
-    description: "Client object"
+    description: Client object
     required:
       - client_name
       - client_uri
