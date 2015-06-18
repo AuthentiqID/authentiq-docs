@@ -29,7 +29,7 @@ This section attempts to explain general concepts relating to Authentiq Connect.
 
 Authentiq Connect leverages OAuth 2.0 *scopes* to specify what sections of a user's profile are being requested. We mimic the [scopes from OIDC](http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims) as much as possible, and prefix additional scopes with a `aq:`.
 
-### Identity scopes
+### Identity claims
 
 Using scopes, a client application can request the following user details from a user.  
 
@@ -43,11 +43,11 @@ Label | Description | Claims | Can be marked required? | Can be signed?
 
 Following OIDC, requested scopes are optional by default, meaning that a user will be able to opt out of a requested scope on the Authentiq ID user consent screen. In this case it is up to the client application to decide how to deal with the missing information. Alternatively, Authentiq allows a developer to mark certain scopes as required and/or requiring a signature from a trusted issuer. 
 
-#### Required scopes
+#### Required claims
 
 Identity scopes can be marked as being *required* by appending `~r`, for instance `email~r` or `aq:name~r`. Doing so will prevent a user from opting out of the section when signing in from the Authentiq ID app. We recommend to use this flag with care and instead let your users remain in control of the information they share with you.  
 
-#### Signed scopes
+#### Signed claims
 
 Scopes can also be marked to *require a signature* from an externally trusted party. In fact, Authentiq is acting as a signature provider for the email and phone scopes, handling the confirmation of email addresses and phone number using a one-time verification code sent by email or text message.
 
