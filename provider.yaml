@@ -242,6 +242,9 @@ paths:
             $ref: "#/definitions/Session"
         default:
           $ref: '#/responses/ErrorResponse'
+      security:
+        - client_secret: []
+        - user_jwt: []
 
   /session/{sessionId}:
     post:
@@ -288,6 +291,9 @@ paths:
             $ref: "#/definitions/Session"
         default:
           $ref: '#/responses/ErrorResponse'
+      security:
+        - client_secret: []
+        - user_jwt: []
 
   /client/{clientId}/session:
     post:
@@ -308,6 +314,9 @@ paths:
             $ref: "#/definitions/Session"
         default:
           $ref: '#/responses/ErrorResponse'
+      security:
+        - client_secret: []
+        - user_jwt: []
 
   /authorize/logout:
     get:
@@ -351,8 +360,10 @@ paths:
           $ref: '#/responses/ErrorResponse'
 
       security:
-        - aq_auth:
-          - oidc
+        - client_registration_token: []
+        - oauth_code: [oidc]
+        - oauth_implicit: [oidc]
+
 
     post:
       summary: create a new Client in the current Account
@@ -378,8 +389,10 @@ paths:
               description: "location of new Client object: /client/{clientId}"
               type: string
       security:
-        - aq_auth:
-          - oidc
+        - client_registration_token: []
+        - oauth_code: [oidc]
+        - oauth_implicit: [oidc]
+
 
   /client/{clientId}:
     get:
@@ -408,8 +421,10 @@ paths:
         default:
           $ref: '#/responses/ErrorResponse'
       security:
-        - aq_auth:
-          - oidc
+        - client_registration_token: []
+        - oauth_code: [oidc]
+        - oauth_implicit: [oidc]
+
 
     put:
       summary: Update an existing client
@@ -444,8 +459,11 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       security:
-        - aq_auth:
-          - oidc
+        - client_registration_token: []
+        - oauth_code: [oidc]
+        - oauth_implicit: [oidc]
+
+
 
     delete:
       summary: Delete a Client object
@@ -463,17 +481,63 @@ paths:
         "404":
           description: Client ID does not exist
       security:
-        - aq_auth:
-          - oidc
+        - client_registration_token: []
+        - oauth_code: [oidc]
+        - oauth_implicit: [oidc]
+
 
 securityDefinitions:
-  aq_auth:
+
+  client_secret:
+    description: Session management by confidential clients.
+    type: oauth2
+    flow: password
+    tokenUrl: https://connect.authentiq.io/token
+    scopes:
+      clients: Enables client management
+
+  client_registration_token:
+    description: Client management via registration token.
+    type: apiKey
+    name: Authorization
+    in: header
+
+  user_jwt:
+    description: Session management by Authentiq ID.
+    type: oauth2
+    flow: application
+    tokenUrl: https://connect.authentiq.io/token
+    scopes:
+      session: Enables session management
+
+  oauth_code:
+    description: End-user authentication.
     type: oauth2
     flow: accessCode
     authorizationUrl: https://connect.authentiq.io/authorize
     tokenUrl: https://connect.authentiq.io/token
     scopes:
-      oidc: default iodc stuff
+      oidc: Enables OIDC flow
+      email: The user's email address
+      phone: The user's phone number
+      address: The user's postal address
+      aq:location: The user's current location
+      aq:name: The user's full name
+      aq:push: Enable *One click sign-in*
+
+  oauth_implicit:
+    description: End-user authentication.
+    type: oauth2
+    flow: implicit
+    authorizationUrl: https://connect.authentiq.io/authorize
+    scopes:
+      oidc: Enables OIDC flow
+      email: The user's email address
+      phone: The user's phone number
+      address: The user's postal address
+      aq:location: The user's current location
+      aq:name: The user's full name
+      aq:push: Enable *One click sign-in*
 
 definitions:
   Error:
