@@ -171,6 +171,7 @@ paths:
             The registered client ID secret.
           required: true
           type: string
+          format: password
         - name: grant_type
           in: formData
           description: >
@@ -243,22 +244,23 @@ paths:
         default:
           $ref: '#/responses/ErrorResponse'
       security:
-        - client_secret: []
-        - user_jwt: []
+        - client_secret: [clients]
+        - user_jwt: [session]
 
-  /session/{sessionId}:
+  /session/{session_id}:
     post:
-      summary: add authentication tokens
-      description: "(websocket)"
+      summary: Add identity tokens to pending authentication session.
+      description: |
+        This method is used by Authentiq ID app to post signed identity claims after end-user consent.
       consumes:
         - application/jwt
         - application/x-www-form-urlencoded
         - multipart/form-data
       parameters:
         - in: path
-          name: sessionId
+          name: session_id
           type: string
-          description: "when application/jwt"
+          description: The authentication session ID.
         - in: query
           name: token
           type: string
@@ -286,7 +288,7 @@ paths:
           required: false
       responses:
         200:
-          description: Success
+          description: Successful token upload.
           schema:
             $ref: "#/definitions/Session"
         default:
@@ -295,7 +297,7 @@ paths:
         - client_secret: []
         - user_jwt: []
 
-  /client/{clientId}/session:
+  /client/{client_id}/session:
     post:
       summary: create a session for this client
       tags:
@@ -320,12 +322,44 @@ paths:
 
   /authorize/logout:
     get:
-      summary: provider logout
+      summary: OpenID Connect RP logout endpoint.
+      description: |
+        A standard OpenID Connect Session Management logout endpoint.
+
+        This endpoint will sign out any session for which an `id_token_hint` is provided. If no hint is provided, the end-user is asked to confirm the session to sign out off.
+
+        It is possible to activate this method by means of a browser redirect, or from within an iframe. Usually you would want to pass `post_logout_redirect_uri` and `state` parameters in the former, but not the latter case.
+
+        Any `post_logout_redirect_uri` needs to be pre-registered with the client.
+
+        See also:
+        - [OIDC RP-Initiated Logout](http://openid.net/specs/openid-connect-session-1_0.html#RPLogout)
+
       tags:
         - Session Management
+
+      parameters:
+        - in: query
+          name: id_token_hint
+          type: string
+          description: A previously obtained ID Token.
+          required: false
+        - in: query
+          name: post_logout_redirect_uri
+          type: string
+          description: A previously registered URI to redirect to after successful sign-out.
+          required: false
+        - in: query
+          name: state
+          type: string
+          description: An opaque string appended to the redirect URI.
+          required: false
+
       responses:
-        200:
-          description: Success
+        204:
+          description: Signed out successfully
+        302:
+          description: Signed out successfully
         default:
           $ref: '#/responses/ErrorResponse'
 
@@ -333,12 +367,23 @@ paths:
     get:
       tags:
         - Session Management
-      summary: provider iframe
+      summary: OpenID Connect Session Management iframe.
+      description: |
+        A standard OpenID Connect Session Management iframe implementing the suggested [postMessage interface](http://openid.net/specs/openid-connect-session-1_0.html#ChangeNotification).
+
+        See also:
+        - [OIDC OP iframe](http://openid.net/specs/openid-connect-session-1_0.html#OPiframe)
+
       responses:
         200:
           description: Success
+          headers:
+            "Cache-Control":
+              description: public, max-age=7200
+              type: string
         default:
           $ref: '#/responses/ErrorResponse'
+
 
   /userinfo:
     get:
@@ -396,8 +441,8 @@ paths:
 
       security:
         - client_registration_token: []
-        - oauth_code: [oidc]
-        - oauth_implicit: [oidc]
+        - oauth_code: []
+        - oauth_implicit: []
 
 
     post:
@@ -421,15 +466,15 @@ paths:
           description: Success
           headers:
             "Location":
-              description: "location of new Client object: /client/{clientId}"
+              description: "location of new Client object: /client/{client_id}"
               type: string
       security:
         - client_registration_token: []
-        - oauth_code: [oidc]
-        - oauth_implicit: [oidc]
+        - oauth_code: []
+        - oauth_implicit: []
 
 
-  /client/{clientId}:
+  /client/{client_id}:
     get:
       summary: Get details of a Client object
       tags:
@@ -457,8 +502,8 @@ paths:
           $ref: '#/responses/ErrorResponse'
       security:
         - client_registration_token: []
-        - oauth_code: [oidc]
-        - oauth_implicit: [oidc]
+        - oauth_code: []
+        - oauth_implicit: []
 
 
     put:
@@ -495,8 +540,8 @@ paths:
             $ref: '#/definitions/Error'
       security:
         - client_registration_token: []
-        - oauth_code: [oidc]
-        - oauth_implicit: [oidc]
+        - oauth_code: []
+        - oauth_implicit: []
 
 
 
@@ -517,8 +562,8 @@ paths:
           description: Client ID does not exist
       security:
         - client_registration_token: []
-        - oauth_code: [oidc]
-        - oauth_implicit: [oidc]
+        - oauth_code: []
+        - oauth_implicit: []
 
 
 securityDefinitions:
@@ -529,7 +574,7 @@ securityDefinitions:
     flow: password
     tokenUrl: https://connect.authentiq.io/token
     scopes:
-      clients: Enables client management
+      clients: Enable client management
 
   client_registration_token:
     description: Client management via registration token.
@@ -543,7 +588,7 @@ securityDefinitions:
     flow: application
     tokenUrl: https://connect.authentiq.io/token
     scopes:
-      session: Enables session management
+      session: Enable session management
 
   oauth_code:
     description: End-user authentication.
@@ -552,7 +597,7 @@ securityDefinitions:
     authorizationUrl: https://connect.authentiq.io/authorize
     tokenUrl: https://connect.authentiq.io/token
     scopes:
-      oidc: Enables OIDC flow
+      oidc: Enable OIDC flow
       email: The user's email address
       phone: The user's phone number
       address: The user's postal address
@@ -566,7 +611,7 @@ securityDefinitions:
     flow: implicit
     authorizationUrl: https://connect.authentiq.io/authorize
     scopes:
-      oidc: Enables OIDC flow
+      oidc: Enable OIDC flow
       email: The user's email address
       phone: The user's phone number
       address: The user's postal address
@@ -701,9 +746,11 @@ definitions:
         description: Geolocation structure
         properties:
           latitude:
-            type: float
+            type: number
+            format: float
           longitude:
-            type: float
+            type: number
+            format: float
           address:
             $ref: "#/definitions/Address"
 
@@ -771,9 +818,9 @@ definitions:
 
 parameters:
   clientParam:
-    name: clientId
+    name: client_id
     in: path
-    description: "ID of client"
+    description: Client identifier
     required: true
     type: string
 
