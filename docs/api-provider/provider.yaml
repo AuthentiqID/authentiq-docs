@@ -10,7 +10,7 @@ info:
   termsOfService: http://authentiq.com/terms/
   contact:
     name: the Authentiq team
-    url: http://authentiq.io/support
+    url: http://authentiq.com/support
     email: hello@authentiq.com
   license:
     name: Apache 2.0
@@ -19,6 +19,7 @@ host: connect.authentiq.io
 basePath: /
 schemes:
   - https
+  - wss
 paths:
   /authorize:
     get:
@@ -28,8 +29,10 @@ paths:
 
         Example:
         ```
-        GET/POST https://connect.authentiq.io/authorize?client_id=<your-client-id>&response_type=code id_token
+        GET https://connect.authentiq.io/authorize?client_id=<your-client-id>&response_type=code id_token
         ```
+
+        This endpoint also supports the POST method.
 
         See also:
           - [OAuth 2.0 Authorization Endpoint](http://tools.ietf.org/html/rfc6749#section-3.1)
@@ -223,11 +226,11 @@ paths:
               description: no-cache
               type: string
         default:
-          $ref: '#/responses/ErrorResponse'
+          $ref: '#/responses/TokenErrorResponse'
 
   /session:
     post:
-      summary: create an anonymous session
+      summary: Create an anonymous authentication session.
       tags:
         - Sessions
       parameters:
@@ -238,16 +241,16 @@ paths:
           required: true
       responses:
         201:
-          description: Success
+          description: A new authentication session.
           schema:
             $ref: "#/definitions/Session"
         default:
-          $ref: '#/responses/ErrorResponse'
+          $ref: '#/responses/OAuth2ErrorResponse'
       security:
         - client_secret: [clients]
         - user_jwt: [session]
 
-  /session/{session_id}:
+  /session/<session_id>:
     post:
       summary: Add identity tokens to pending authentication session.
       description: |
@@ -292,14 +295,14 @@ paths:
           schema:
             $ref: "#/definitions/Session"
         default:
-          $ref: '#/responses/ErrorResponse'
+          $ref: '#/responses/OAuth2ErrorResponse'
       security:
         - client_secret: []
         - user_jwt: []
 
-  /client/{client_id}/session:
+  /client/<client_id>/session:
     post:
-      summary: create a session for this client
+      summary: Create a new authentication session for a client.
       tags:
         - Sessions
       parameters:
@@ -311,11 +314,11 @@ paths:
           required: false
       responses:
         201:
-          description: Success
+          description: A new authentication session.
           schema:
             $ref: "#/definitions/Session"
         default:
-          $ref: '#/responses/ErrorResponse'
+          $ref: '#/responses/OAuth2ErrorResponse'
       security:
         - client_secret: []
         - user_jwt: []
@@ -361,7 +364,7 @@ paths:
         302:
           description: Signed out successfully
         default:
-          $ref: '#/responses/ErrorResponse'
+          $ref: '#/responses/OAuth2ErrorResponse'
 
   /authorize/iframe:
     get:
@@ -382,7 +385,7 @@ paths:
               description: public, max-age=7200
               type: string
         default:
-          $ref: '#/responses/ErrorResponse'
+          $ref: '#/responses/OAuth2ErrorResponse'
 
 
   /userinfo:
@@ -409,23 +412,26 @@ paths:
         - application/jwt
       responses:
         "200":
-          description: Successful UserInfo response.
+          description: Successful UserInfo response
           schema:
             $ref: "#/definitions/UserInfo"
         "401":
-          description: UserInfo error response.
+          description: UserInfo error response
+          $ref: '#/responses/TokenErrorResponse'
         default:
-          $ref: '#/responses/ErrorResponse'
+          $ref: '#/responses/OAuth2ErrorResponse'
       security:
         - oauth_code: [oidc, email, phone, address, aq:location, aq:name, aq:push]
         - oauth_implicit: [oidc, email, phone, address, aq:location, aq:name, aq:push]
 
   /client:
     get:
-      summary: Get a list of Clients the current Account has access to
+      summary: List account clients.
       tags:
         - Client Management
-      description: "scope, ui_locales, claims_locales"
+      description: |
+        An endpoint to retrieve a list of available clients.
+
       operationId: getClientList
       produces:
         - application/json
@@ -437,7 +443,7 @@ paths:
             items:
               $ref: "#/definitions/Client"
         default:
-          $ref: '#/responses/ErrorResponse'
+          $ref: '#/responses/OAuth2ErrorResponse'
 
       security:
         - client_registration_token: []
@@ -446,10 +452,16 @@ paths:
 
 
     post:
-      summary: create a new Client in the current Account
+      summary: Client Registration Endpoint.
       tags:
         - Client Management
-      description: ""
+      description: |
+        An OIDC Client Registration Endpoint.
+
+        See also:
+        - [OpenID Connect Dynamic Client Registration](http://openid.net/specs/openid-connect-registration-1_0.html)
+        - [Client Registration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientRegistration)
+
       operationId: createClient
       consumes:
         - application/json
@@ -466,7 +478,7 @@ paths:
           description: Success
           headers:
             "Location":
-              description: "location of new Client object: /client/{client_id}"
+              description: "Location of new client resource."
               type: string
       security:
         - client_registration_token: []
@@ -474,12 +486,17 @@ paths:
         - oauth_implicit: []
 
 
-  /client/{client_id}:
+  /client/<client_id>:
     get:
-      summary: Get details of a Client object
+      summary: Client Configuration Read Endpoint.
       tags:
         - Client Management
-      description: ""
+      description: |
+        An OIDC Client Configuration Endpoint.
+
+        See also:
+        - [Client Configuration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint)
+
       operationId: getClient
       produces:
         - application/json
@@ -499,7 +516,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
         default:
-          $ref: '#/responses/ErrorResponse'
+          $ref: '#/responses/OAuth2ErrorResponse'
       security:
         - client_registration_token: []
         - oauth_code: []
@@ -507,10 +524,15 @@ paths:
 
 
     put:
-      summary: Update an existing client
+      summary: Client Configuration Update Endpoint.
       tags:
         - Client Management
-      description: ""
+      description: |
+        An OIDC Client Configuration Endpoint.
+
+        See also:
+        - [Client Configuration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint)
+
       operationId: updateClient
       consumes:
         - application/json
@@ -535,7 +557,7 @@ paths:
         "404":
           description: Client ID not found
         default:
-          description: Unexpected error (all 4xx and 5xx errors)
+          description: Error response
           schema:
             $ref: '#/definitions/Error'
       security:
@@ -546,7 +568,7 @@ paths:
 
 
     delete:
-      summary: Delete a Client object
+      summary: Delete a client.
       tags:
         - Client Management
       description: ""
@@ -620,11 +642,9 @@ securityDefinitions:
       aq:push: Enable *One click sign-in*
 
 definitions:
-  Error:
-    description: "Error Response defined as in Section 5.2
-      of OAuth 2.0 [RFC6749] ;
-      status, type, title, detail are application specific
-      "
+  OAuth2Error:
+    description: >
+      Error Response defined as in Section 5.2 of OAuth 2.0 [RFC6749].
     required:
     - error
     properties:
@@ -634,6 +654,14 @@ definitions:
         type: string
       state:
         type: integer
+
+  ProblemReport:
+    description: >
+      HTTP problem report
+    required:
+      - type
+      - status
+    properties:
       status:
         type: integer
       type:
@@ -825,9 +853,20 @@ parameters:
     type: string
 
 responses:
-  ErrorResponse:
-    description: Unexpected error
+  OAuth2ErrorResponse:
+    description: OAuth 2.0 error response
     schema:
-      $ref: '#/definitions/Error'
+      $ref: '#/definitions/OAuth2Error'
 
+  ProblemReportResponse:
+    description: HTTP problem report
+    schema:
+      $ref: '#/definitions/ProblemReport'
+
+  TokenErrorResponse:
+    description: Token error response
+    headers:
+      WWW-Authenticate:
+        description: ""
+        type: string
 # END
