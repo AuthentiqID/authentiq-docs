@@ -16,6 +16,8 @@
         <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
         <link rel="stylesheet" href="./css/highlight.css">
         <link href="./css/base.css" rel="stylesheet">
+            <!-- <link href="./api-provider/css/bootstrap.min.css" rel="stylesheet"> -->
+            <!-- <link href="./api-provider/css/custom.css" rel="stylesheet"> -->
             <!-- <link href="./api-provider/css/print.css" rel="stylesheet"> -->
             <!-- <link href="./api-provider/css/reset.css" rel="stylesheet"> -->
             <!-- <link href="./api-provider/css/screen.css" rel="stylesheet"> -->
@@ -177,7 +179,7 @@
 <p>This section attempts to explain general concepts relating to Authentiq Connect.</p>
 <h2 id="scopes">Scopes</h2>
 <p>Authentiq Connect leverages OAuth 2.0 <em>scopes</em> to specify what sections of a user&rsquo;s profile are being requested. We mimic the <a href="http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims">scopes from OIDC</a> as much as possible, and prefix additional scopes with a <code>aq:</code>.</p>
-<h3 id="identity-scopes">Identity scopes</h3>
+<h3 id="identity-claims">Identity claims</h3>
 <p>Using scopes, a client application can request the following user details from a user.  </p>
 <table>
 <thead>
@@ -228,9 +230,9 @@
 </tbody>
 </table>
 <p>Following OIDC, requested scopes are optional by default, meaning that a user will be able to opt out of a requested scope on the Authentiq ID user consent screen. In this case it is up to the client application to decide how to deal with the missing information. Alternatively, Authentiq allows a developer to mark certain scopes as required and/or requiring a signature from a trusted issuer. </p>
-<h4 id="required-scopes">Required scopes</h4>
+<h4 id="required-claims">Required claims</h4>
 <p>Identity scopes can be marked as being <em>required</em> by appending <code>~r</code>, for instance <code>email~r</code> or <code>aq:name~r</code>. Doing so will prevent a user from opting out of the section when signing in from the Authentiq ID app. We recommend to use this flag with care and instead let your users remain in control of the information they share with you.  </p>
-<h4 id="signed-scopes">Signed scopes</h4>
+<h4 id="signed-claims">Signed claims</h4>
 <p>Scopes can also be marked to <em>require a signature</em> from an externally trusted party. In fact, Authentiq is acting as a signature provider for the email and phone scopes, handling the confirmation of email addresses and phone number using a one-time verification code sent by email or text message.</p>
 <h3 id="functional-scopes">Functional scopes</h3>
 <p>Authentiq Connect also uses scopes to indicate functional preferences. </p>
