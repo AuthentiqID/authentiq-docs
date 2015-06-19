@@ -20,7 +20,9 @@ pages:
   - 'Overview' : 'index.md'
   - 'Getting started' : 'gettingstarted.md'
   - 'Installation' : 'installation.md'
-  - 'API Reference' : 'reference.md'
+  - 'API Reference' :
+    - 'Connect' : 'api-provider.md'
+    - 'Issuer' : 'api-issuer.md'
   - 'Your clients' : 'clients.md'
   - 'FAQ' : 'faq.md'
 extra:

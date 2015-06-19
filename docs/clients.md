@@ -12,3 +12,5 @@ Visit the [Provider Console](/console) to manage your "clients".
         </div>
     </div>
 </div>
+
+<script src='js/app.js' type='text/javascript'></script>

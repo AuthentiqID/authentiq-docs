@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
     <div class="container">
 
         <!-- Collapsed navigation -->
@@ -22,7 +22,7 @@
             {% for nav_item in nav %}
             {% if nav_item.children %}
                 <li class="dropdown{% if nav_item.active %} active{% endif %}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ nav_item.title }} <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ nav_item.title }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     {% for nav_item in nav_item.children %}
                         <li {% if nav_item.active %}class="active"{% endif %}>
@@ -37,7 +37,10 @@
                 </li>
             {% endif %}
             {% endfor %}
+            </ul>
 
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
                 <li style="background-color:#895fc0;">
                     <a class="authentiq-oauth-button"
                         data-response-type="id_token token"
@@ -49,20 +52,6 @@
                         data-sign-out-text="Sign out">
 
                         Authentiq...
-                    </a>
-                </li>
-            </ul>
-
-            <!-- Search, Navigation and Repo links -->
-            <ul class="nav navbar-nav navbar-right">
-                <li {% if not previous_page %}class="disabled"{% endif %}>
-                    <a rel="next" {% if previous_page %}href="{{ previous_page.url }}"{% endif %}>
-                        <i class="fa fa-arrow-left"></i> Previous
-                    </a>
-                </li>
-                <li {% if not next_page %}class="disabled"{% endif %}>
-                    <a rel="prev" {% if next_page %}href="{{ next_page.url }}"{% endif %}>
-                        Next <i class="fa fa-arrow-right"></i>
                     </a>
                 </li>
                 {% if repo_url %}

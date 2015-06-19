@@ -12,12 +12,12 @@
 
 	<title>{% if page_title %}{{ page_title }} - {% endif %}{{ site_name }}</title>
 
-        <link href="{{ base_url }}/css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="{{ base_url }}/css/bootstrap.min.css" rel="stylesheet">
         <link href="{{ base_url }}/css/font-awesome-4.0.3.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ base_url }}/css/highlight.css">
         <link href="{{ base_url }}/css/base.css" rel="stylesheet">
         {%- for path in extra_css %}
-        <link href="{{ path }}" rel="stylesheet">
+            <!-- <link href="{{ path }}" rel="stylesheet"> -->
         {%- endfor %}
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -56,13 +56,13 @@
         </footer>
 
         <script src="{{ base_url }}/js/jquery-1.10.2.min.js"></script>
-        <script src="{{ base_url }}/js/bootstrap-3.0.3.min.js"></script>
+        <script src="{{ base_url }}/js/bootstrap.min.js"></script>
         <script src="{{ base_url }}/js/highlight.pack.js"></script>
         <script src="{{ base_url }}/js/base.js"></script>
         <script src="{{ base_url }}/js/authentiq-oauth.js"></script>
 
         {%- for path in extra_javascript %}
-            <script src="{{ path }}"></script>
+            <!-- // <script src="{{ path }}"></script> -->
         {%- endfor %}
     </body>
 </html>
