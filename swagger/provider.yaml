@@ -15,7 +15,7 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-host: connect.authentiq.io
+host: test.connect.authentiq.io
 basePath: /
 schemes:
   - https
