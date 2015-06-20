@@ -16,13 +16,13 @@
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/highlight.css">
         <link href="../css/base.css" rel="stylesheet">
-            <!-- <link href="../api-provider/css/bootstrap.min.css" rel="stylesheet"> -->
-            <!-- <link href="../api-provider/css/custom.css" rel="stylesheet"> -->
-            <!-- <link href="../api-provider/css/print.css" rel="stylesheet"> -->
-            <!-- <link href="../api-provider/css/reset.css" rel="stylesheet"> -->
-            <!-- <link href="../api-provider/css/screen.css" rel="stylesheet"> -->
-            <!-- <link href="../api-provider/css/style.css" rel="stylesheet"> -->
-            <!-- <link href="../api-provider/css/typography.css" rel="stylesheet"> -->
+            <!-- <link href="../swagger/css/bootstrap.min.css" rel="stylesheet"> -->
+            <!-- <link href="../swagger/css/custom.css" rel="stylesheet"> -->
+            <!-- <link href="../swagger/css/print.css" rel="stylesheet"> -->
+            <!-- <link href="../swagger/css/reset.css" rel="stylesheet"> -->
+            <!-- <link href="../swagger/css/screen.css" rel="stylesheet"> -->
+            <!-- <link href="../swagger/css/style.css" rel="stylesheet"> -->
+            <!-- <link href="../swagger/css/typography.css" rel="stylesheet"> -->
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -165,6 +165,8 @@
 </div></div>
                 <div id="main" class="col-md-9" role="main">
 
+<div class="hidden">
+
 <h1 id="authentication">Authentication</h1>
 <h2 id="authorize">/authorize</h2>
 <h2 id="token">/token</h2>
@@ -178,6 +180,8 @@
 <h1 id="sessions">Sessions</h1>
 <h2 id="session">/session</h2>
 <h2 id="client1234session">/client/1234/session</h2>
+</div>
+
 <div class="row">
   <div class="swagger-section col-md-12">
     <div id="header" class="hidden">
@@ -192,7 +196,7 @@
     </div>
 
     <div id="message-bar" class="swagger-ui-wrap">&nbsp;</div>
-    <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
+    <div id="swagger-ui-container" class="swagger-ui-wrap" style="min-height: 250px;"></div>
   </div>
 
 </div>
@@ -231,16 +235,16 @@
   $(function () {
     window.swaggerUi = new SwaggerUi({
       url: "provider.yaml",
-      dom_id: "main",
+      dom_id: "swagger-ui-container",
       supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
       onComplete: function(swaggerApi, swaggerUi){
-        if(typeof initOAuth == "function") {
-          initOAuth({
-            clientId: "your-client-id",
-            realm: "your-realms",
-            appName: "your-app-name"
-          });
-        }
+        // if(typeof initOAuth == "function") {
+        //   initOAuth({
+        //     clientId: "your-client-id",
+        //     realm: "your-realms",
+        //     appName: "your-app-name"
+        //   });
+        // }
 
         $('pre code').each(function(i, e) {
           hljs.highlightBlock(e)
@@ -257,15 +261,19 @@
     });
 
     function addApiKeyAuthorization(){
-      var key = encodeURIComponent($('#input_apiKey')[0].value);
+      var key;
+      if ('authentiq' in window) {
+        key = window.authentiq.Token.getAuthorizationHeader();
+      }
+      // var key = encodeURIComponent($('#input_apiKey')[0].value);
       if(key && key.trim() != "") {
-          var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("api_key", key, "query");
-          window.swaggerUi.api.clientAuthorizations.add("api_key", apiKeyAuth);
+          var token = new SwaggerClient.ApiKeyAuthorization("Authorization", key, "header");
+          window.swaggerUi.api.clientAuthorizations.add("access_token", token);
           log("added key " + key);
       }
     }
 
-    $('#input_apiKey').change(addApiKeyAuthorization);
+    // $('#input_apiKey').change(addApiKeyAuthorization);
 
     // if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
     /*
@@ -280,7 +288,7 @@
         console.log.apply(console, arguments);
       }
     }
-});
+  });
 </script></div>
                
         </div>
@@ -310,19 +318,19 @@
         <script src="../js/highlight.pack.js"></script>
         <script src="../js/base.js"></script>
         <script src="../js/authentiq-oauth.js"></script>
-            <!-- // <script src="../api-provider/swagger-ui.js"></script> -->
-            <!-- // <script src="../api-provider/swagger-ui.min.js"></script> -->
-            <!-- // <script src="../api-provider/lib/backbone-min.js"></script> -->
-            <!-- // <script src="../api-provider/lib/handlebars-2.0.0.js"></script> -->
-            <!-- // <script src="../api-provider/lib/highlight.7.3.pack.js"></script> -->
-            <!-- // <script src="../api-provider/lib/jquery-1.8.0.min.js"></script> -->
-            <!-- // <script src="../api-provider/lib/jquery.ba-bbq.min.js"></script> -->
-            <!-- // <script src="../api-provider/lib/jquery.slideto.min.js"></script> -->
-            <!-- // <script src="../api-provider/lib/jquery.wiggle.min.js"></script> -->
-            <!-- // <script src="../api-provider/lib/marked.js"></script> -->
-            <!-- // <script src="../api-provider/lib/swagger-oauth.js"></script> -->
-            <!-- // <script src="../api-provider/lib/underscore-min.js"></script> -->
             <!-- // <script src="../clients/js/app.js"></script> -->
+            <!-- // <script src="../swagger/swagger-ui.js"></script> -->
+            <!-- // <script src="../swagger/swagger-ui.min.js"></script> -->
+            <!-- // <script src="../swagger/lib/backbone-min.js"></script> -->
+            <!-- // <script src="../swagger/lib/handlebars-2.0.0.js"></script> -->
+            <!-- // <script src="../swagger/lib/highlight.7.3.pack.js"></script> -->
+            <!-- // <script src="../swagger/lib/jquery-1.8.0.min.js"></script> -->
+            <!-- // <script src="../swagger/lib/jquery.ba-bbq.min.js"></script> -->
+            <!-- // <script src="../swagger/lib/jquery.slideto.min.js"></script> -->
+            <!-- // <script src="../swagger/lib/jquery.wiggle.min.js"></script> -->
+            <!-- // <script src="../swagger/lib/marked.js"></script> -->
+            <!-- // <script src="../swagger/lib/swagger-oauth.js"></script> -->
+            <!-- // <script src="../swagger/lib/underscore-min.js"></script> -->
 
         <script>
             window.twttr = (function (d,s,id) {
