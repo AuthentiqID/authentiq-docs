@@ -10,7 +10,7 @@
         <link rel="shortcut icon" href="images/app-icon-hexagon.png">
         
 
-	<title>Authentiq Connect</title>
+        <title>Authentiq Connect</title>
 
         <link href="./css/bootstrap.min.css" rel="stylesheet">
         <link href="./css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -127,7 +127,8 @@
     </div>
 </div>
         <div class="container">
-            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+            
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
         <li class="main active"><a href="#introduction">Introduction</a></li>
@@ -156,7 +157,7 @@
     
     </ul>
 </div></div>
-            <div class="col-md-9" role="main">
+                <div id="main" class="col-md-9" role="main">
 
 <h1 id="introduction">Introduction</h1>
 <p>Hey, if you&rsquo;re reading this, then you are probably curious how to get started with implementing <a href="http://authentiq.com/">Authentiq</a> on your website. </p>
@@ -300,10 +301,23 @@
 <p>Join the Authentiq team on IRC at <a href="irc://freenode.net/#authentiq">#authentiq@freenode.net</a>.</p>
 <h2 id="issues">Issues</h2>
 <p>Discuss bugs, issues and feature requests on our <a href="https://github.com/skion/authentiq-provider/issues">GitHub project page</a>.</p></div>
+               
         </div>
 
+        <hr>
         <footer class="col-md-12">
-            <hr>
+            <ul class="text-center list-inline">
+                <li>
+                  <iframe src="https://ghbtns.com/github-btn.html?user=AuthentiqID&amp;repo=bootstrap&amp;type=watch&amp;count=true" width="100" height="20" title="Star on GitHub" style="overflow: hidden; border: 0;"></iframe>
+                </li>
+                <li>
+                  <a href="https://twitter.com/AuthentiqID" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @AuthentiqID</a>
+                </li>
+                <li>
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://developer.authentiq.io/" data-count="horizontal" data-via="AuthentiqID">Tweet</a>
+                </li>
+            </ul>
+
             
                 <center>Copyright &copy; 2015, Authentiq.com</center>
             
@@ -328,5 +342,14 @@
             <!-- // <script src="./api-provider/lib/swagger-oauth.js"></script> -->
             <!-- // <script src="./api-provider/lib/underscore-min.js"></script> -->
             <!-- // <script src="./clients/js/app.js"></script> -->
+
+        <script>
+            window.twttr = (function (d,s,id) {
+                var t, js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return; js=d.createElement(s); js.id=id; js.async=1;
+                js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+                return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+            }(document, "script", "twitter-wjs"));
+        </script>
     </body>
 </html>

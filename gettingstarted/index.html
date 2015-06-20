@@ -10,7 +10,7 @@
         <link rel="shortcut icon" href="../images/app-icon-hexagon.png">
         
 
-	<title>Getting started - Authentiq Connect</title>
+        <title>Getting started - Authentiq Connect</title>
 
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -127,7 +127,8 @@
     </div>
 </div>
         <div class="container">
-            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+            
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
         <li class="main active"><a href="#introduction">Introduction</a></li>
@@ -164,7 +165,7 @@
     
     </ul>
 </div></div>
-            <div class="col-md-9" role="main">
+                <div id="main" class="col-md-9" role="main">
 
 <h1 id="introduction">Introduction</h1>
 <p>This page describes how to allow your users to sign in with Authentiq ID on your website in minutes.</p>
@@ -409,10 +410,23 @@
 <p>Amazon allows mobile app developers to configure <a href="http://aws.amazon.com/cognito/">Cognito</a> with external OpenID Connect identity providers, enabling an app to authenticate users from social networks and a variety of sources. We&rsquo;re planning to supporting this integration at a later stage so that mobile app developers will be able to register and authenticate users by their Authentiq ID. </p>
 <h2 id="salesforce">SalesForce</h2>
 <p><a href="http://salesforce.com/">SalesForce</a> allows an administrator configure up an external OpenID Connect identity provider as a source for company employees. We&rsquo;re planning to supporting this integration at a later stage so that companies will be able to let their employees sign into SalesForce using their Authentiq ID.</p></div>
+               
         </div>
 
+        <hr>
         <footer class="col-md-12">
-            <hr>
+            <ul class="text-center list-inline">
+                <li>
+                  <iframe src="https://ghbtns.com/github-btn.html?user=AuthentiqID&amp;repo=bootstrap&amp;type=watch&amp;count=true" width="100" height="20" title="Star on GitHub" style="overflow: hidden; border: 0;"></iframe>
+                </li>
+                <li>
+                  <a href="https://twitter.com/AuthentiqID" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @AuthentiqID</a>
+                </li>
+                <li>
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://developer.authentiq.io/" data-count="horizontal" data-via="AuthentiqID">Tweet</a>
+                </li>
+            </ul>
+
             
                 <center>Copyright &copy; 2015, Authentiq.com</center>
             
@@ -437,5 +451,14 @@
             <!-- // <script src="../api-provider/lib/swagger-oauth.js"></script> -->
             <!-- // <script src="../api-provider/lib/underscore-min.js"></script> -->
             <!-- // <script src="../clients/js/app.js"></script> -->
+
+        <script>
+            window.twttr = (function (d,s,id) {
+                var t, js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return; js=d.createElement(s); js.id=id; js.async=1;
+                js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+                return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+            }(document, "script", "twitter-wjs"));
+        </script>
     </body>
 </html>

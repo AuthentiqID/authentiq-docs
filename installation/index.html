@@ -10,7 +10,7 @@
         <link rel="shortcut icon" href="../images/app-icon-hexagon.png">
         
 
-	<title>Installation - Authentiq Connect</title>
+        <title>Installation - Authentiq Connect</title>
 
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -127,7 +127,8 @@
     </div>
 </div>
         <div class="container">
-            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+            
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
         <li class="main active"><a href="#introduction">Introduction</a></li>
@@ -152,7 +153,7 @@
     
     </ul>
 </div></div>
-            <div class="col-md-9" role="main">
+                <div id="main" class="col-md-9" role="main">
 
 <h1 id="introduction">Introduction</h1>
 <p>There is nothing to install when running Authentiq as a Service. Just register your client application at our hosted authentication service and head over to <a href="../gettingstarted/">Getting started</a>. This page describes how to install Authentiq Connect locally on your own system, in case you prefer that.</p>
@@ -240,10 +241,23 @@ optional arguments:
 <blockquote>
 <p>Describe nginx configuration details with well-commented snippet..</p>
 </blockquote></div>
+               
         </div>
 
+        <hr>
         <footer class="col-md-12">
-            <hr>
+            <ul class="text-center list-inline">
+                <li>
+                  <iframe src="https://ghbtns.com/github-btn.html?user=AuthentiqID&amp;repo=bootstrap&amp;type=watch&amp;count=true" width="100" height="20" title="Star on GitHub" style="overflow: hidden; border: 0;"></iframe>
+                </li>
+                <li>
+                  <a href="https://twitter.com/AuthentiqID" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @AuthentiqID</a>
+                </li>
+                <li>
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://developer.authentiq.io/" data-count="horizontal" data-via="AuthentiqID">Tweet</a>
+                </li>
+            </ul>
+
             
                 <center>Copyright &copy; 2015, Authentiq.com</center>
             
@@ -268,5 +282,14 @@ optional arguments:
             <!-- // <script src="../api-provider/lib/swagger-oauth.js"></script> -->
             <!-- // <script src="../api-provider/lib/underscore-min.js"></script> -->
             <!-- // <script src="../clients/js/app.js"></script> -->
+
+        <script>
+            window.twttr = (function (d,s,id) {
+                var t, js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return; js=d.createElement(s); js.id=id; js.async=1;
+                js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+                return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+            }(document, "script", "twitter-wjs"));
+        </script>
     </body>
 </html>
