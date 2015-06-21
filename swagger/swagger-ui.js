@@ -652,7 +652,7 @@ this["Handlebars"]["templates"]["main"] = Handlebars.template({"1":function(dept
   var stack1, buffer = "<div class='info' id='api_info'>\n";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.info : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "</div>\n<div id='resources_container'>\n  <ul id='resources' class='list-group'></ul>\n</div>\n";
+  return buffer + "</div>\n<div id='resources_container'>\n  <ul id='resources' class='list-unstyled'></ul>\n</div>\n";
 },"useData":true});
 this["Handlebars"]["templates"]["operation"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
   return "";
@@ -1033,7 +1033,7 @@ this["Handlebars"]["templates"]["resource"] = Handlebars.template({"1":function(
   if (stack1 != null) { buffer += stack1; }
   return buffer + "\n  </h2>\n</div>\n<ul class='endpoints list-unstyled' id='"
     + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
-    + "_endpoint_list'>\n\n</ul>\n";
+    + "_endpoint_list'>\n\n</ul>\n<hr />";
 },"useData":true});
 this["Handlebars"]["templates"]["response_content_type"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
   var stack1, buffer = "";
@@ -31079,7 +31079,7 @@ SwaggerUi.Views.MainView = Backbone.View.extend({
       router: this.router,
       tagName: 'li',
       id: 'resource_' + resource.id,
-      className: 'resource list-group-item',
+      className: 'resource',
       auths: auths,
       swaggerOptions: this.options.swaggerOptions
     });
