@@ -1,3 +1,5 @@
+content_javascript: js/app.js
+
 # Client management
 
 To allow people to sign in using Authentiq ID, you need to register your application as a client with the Provider.
@@ -12,5 +14,3 @@ Visit the [Provider Console](/console) to manage your "clients".
         </div>
     </div>
 </div>
-
-<script src='js/app.js' type='text/javascript'></script>

@@ -42,6 +42,7 @@ paths:
 
       tags:
         - Authentication
+      operationId: authorize
       parameters:
         - in: query
           name: client_id
@@ -159,6 +160,7 @@ paths:
 
       tags:
         - Authentication
+      operationId: token
       consumes:
         - application/x-www-form-urlencoded
       parameters:
@@ -233,6 +235,7 @@ paths:
       summary: Create an anonymous authentication session.
       tags:
         - Sessions
+      operationId: session
       parameters:
         - in: formData
           name: scope
@@ -255,6 +258,7 @@ paths:
       summary: Add identity tokens to pending authentication session.
       description: |
         This method is used by Authentiq ID app to post signed identity claims after end-user consent.
+      operationId: session1234
       consumes:
         - application/jwt
         - application/x-www-form-urlencoded
@@ -312,6 +316,7 @@ paths:
           type: string
           description: "space sep list of strings"
           required: false
+      operationId: clientclient_idsession
       responses:
         201:
           description: A new authentication session.
@@ -341,6 +346,7 @@ paths:
       tags:
         - Session Management
 
+      operationId: authorizeLogout
       parameters:
         - in: query
           name: id_token_hint
@@ -377,6 +383,7 @@ paths:
         See also:
         - [OIDC OP iframe](http://openid.net/specs/openid-connect-session-1_0.html#OPiframe)
 
+      operationId: authorizeIframe
       responses:
         200:
           description: Success
@@ -411,11 +418,11 @@ paths:
         - application/json
         - application/jwt
       responses:
-        "200":
+        200:
           description: Successful UserInfo response
           schema:
             $ref: "#/definitions/UserInfo"
-        "401":
+        401:
           description: UserInfo error response
           $ref: '#/responses/TokenErrorResponse'
         default:
@@ -432,7 +439,7 @@ paths:
       description: |
         An endpoint to retrieve a list of available clients.
 
-      operationId: getClientList
+      operationId: client
       produces:
         - application/json
       responses:
@@ -572,7 +579,7 @@ paths:
       tags:
         - Client Management
       description: ""
-      operationId: deleteClient
+      operationId: clientClient_id
       parameters:
         - $ref: "#/parameters/clientParam"
       responses:

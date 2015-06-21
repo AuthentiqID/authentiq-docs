@@ -2,6 +2,7 @@ site_name: Authentiq Connect
 site_description: Documentation for the Authentiq OAuth 2.0 and OpenID Connect Provider.
 site_author: The Authentiq team
 site_favicon: images/app-icon-hexagon.png
+# site_url: http://authentiqid.github.io/authentiq-docs/
 # include_search: false
 # use_absolute_urls: true
 use_directory_urls: true
@@ -26,4 +27,4 @@ pages:
   - 'Your clients' : 'clients.md'
   - 'FAQ' : 'faq.md'
 extra:
-  foo: BARBAR
+    version: 0.1.0  # {{ config.extra.version }}
