@@ -418,11 +418,11 @@ paths:
         - application/json
         - application/jwt
       responses:
-        "200":
+        200:
           description: Successful UserInfo response
           schema:
             $ref: "#/definitions/UserInfo"
-        "401":
+        401:
           description: UserInfo error response
           $ref: '#/responses/TokenErrorResponse'
         default:
