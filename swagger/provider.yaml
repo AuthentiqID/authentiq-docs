@@ -316,7 +316,7 @@ paths:
           type: string
           description: "space sep list of strings"
           required: false
-      operationId: client1234session
+      operationId: clientclient_idsession
       responses:
         201:
           description: A new authentication session.
@@ -504,7 +504,7 @@ paths:
         See also:
         - [Client Configuration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint)
 
-      operationId: client1234
+      operationId: getClient
       produces:
         - application/json
       parameters:
@@ -579,7 +579,7 @@ paths:
       tags:
         - Client Management
       description: ""
-      operationId: deleteClient
+      operationId: clientClient_id
       parameters:
         - $ref: "#/parameters/clientParam"
       responses:

@@ -31330,7 +31330,6 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       statusCode = ref5[q];
       this.addStatusCode(statusCode);
     }
-
     return this;
   },
 
@@ -31969,7 +31968,7 @@ SwaggerUi.Views.ResourceView = Backbone.View.extend({
 
       operation.nickname = id;
       operation.parentId = this.model.id;
-      operation.anchorId = id.toLowerCase().replace('_', '-');
+      operation.anchorId = id.toLowerCase();
       this.addOperation(operation);
     }
 

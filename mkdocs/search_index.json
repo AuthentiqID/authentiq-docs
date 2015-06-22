@@ -177,7 +177,7 @@
         }, 
         {
             "location": "/api-provider/", 
-            "text": "Authentication\n\n\n/authorize\n\n\n/token\n\n\n/userinfo\n\n\nClient Management\n\n\n/client\n\n\n/client/1234\n\n\nSession Management\n\n\n/authorize/logout\n\n\n/authorize/iframe\n\n\nSessions\n\n\n/session\n\n\n/client/1234/session\n\n\n\n\n\n\n  \n\n    \n\n    \n\n  \n\n\n\n\n\n\n  $(function () {\n    var url,\n        path = (window.location.host === '127.0.0.1:8000') ? '' : '/authentiq-docs';\n\n    url = window.location.origin + path + '/swagger/provider.yaml';\n\n    window.swaggerUi = new SwaggerUi({\n      url: url,\n      dom_id: \"swagger-ui-container\",\n      supportedSubmitMethods: [],\n      // supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],\n      onComplete: function(swaggerApi, swaggerUi){\n\n        $('#temp-anchor-links').remove();\n\n        $('body').scrollspy('refresh');\n\n        $('pre code').each(function(i, e) {\n          hljs.highlightBlock(e)\n        });\n\n        addApiKeyAuthorization();\n      },\n      onFailure: function(data) {\n        log(\"Unable to Load SwaggerUI\");\n      },\n      docExpansion: \"none\",\n      apisSorter: \"alpha\",\n      showRequestHeaders: false\n    });\n\n    function addApiKeyAuthorization(){\n      var key;\n      if ('authentiq' in window) {\n        key = window.authentiq.Token.getAuthorizationHeader();\n      }\n\n      if(key && key.trim() != \"\") {\n          var token = new SwaggerClient.ApiKeyAuthorization(\"authorization\", key, \"header\");\n          window.swaggerUi.api.clientAuthorizations.add(\"Authorization\", token);\n          log(\"added key \" + key);\n      }\n    }\n\n    window.swaggerUi.load();\n\n    function log() {\n      if ('console' in window) {\n        console.log.apply(console, arguments);\n      }\n    }\n  });", 
+            "text": "Authentication\n\n\n/authorize\n\n\n/token\n\n\n/userinfo\n\n\nClient Management\n\n\n/client\n\n\n/client/\nclient_id\n\n\nSession Management\n\n\n/authorize/logout\n\n\n/authorize/iframe\n\n\nSessions\n\n\n/session\n\n\n/client/\nclient_id\n/session\n\n\n\n\n\n\n  \n\n    \n\n    \n\n  \n\n\n\n\n\n\n  $(function () {\n    var url,\n        path = (window.location.host === '127.0.0.1:8000') ? '' : '/authentiq-docs';\n\n    url = window.location.origin + path + '/swagger/provider.yaml';\n\n    window.swaggerUi = new SwaggerUi({\n      url: url,\n      dom_id: \"swagger-ui-container\",\n      supportedSubmitMethods: [],\n      // supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],\n      onComplete: function(swaggerApi, swaggerUi){\n\n        $('#temp-anchor-links').remove();\n\n        $('body').scrollspy('refresh');\n\n        $('pre code').each(function(i, e) {\n          hljs.highlightBlock(e)\n        });\n\n        addApiKeyAuthorization();\n      },\n      onFailure: function(data) {\n        log(\"Unable to Load SwaggerUI\");\n      },\n      docExpansion: \"none\",\n      apisSorter: \"alpha\",\n      showRequestHeaders: false\n    });\n\n    function addApiKeyAuthorization(){\n      var key;\n      if ('authentiq' in window) {\n        key = window.authentiq.Token.getAuthorizationHeader();\n      }\n\n      if(key && key.trim() != \"\") {\n          var token = new SwaggerClient.ApiKeyAuthorization(\"authorization\", key, \"header\");\n          window.swaggerUi.api.clientAuthorizations.add(\"Authorization\", token);\n          log(\"added key \" + key);\n      }\n    }\n\n    window.swaggerUi.load();\n\n    function log() {\n      if ('console' in window) {\n        console.log.apply(console, arguments);\n      }\n    }\n  });", 
             "title": "Connect"
         }, 
         {
@@ -211,9 +211,9 @@
             "title": "/client"
         }, 
         {
-            "location": "/api-provider/#client1234", 
+            "location": "/api-provider/#clientclient_id", 
             "text": "", 
-            "title": "/client/1234"
+            "title": "/client/&lt;client_id&gt;"
         }, 
         {
             "location": "/api-provider/#session-management", 
@@ -241,9 +241,9 @@
             "title": "/session"
         }, 
         {
-            "location": "/api-provider/#client1234session", 
+            "location": "/api-provider/#clientclient_idsession", 
             "text": "$(function () {\n    var url,\n        path = (window.location.host === '127.0.0.1:8000') ? '' : '/authentiq-docs';\n\n    url = window.location.origin + path + '/swagger/provider.yaml';\n\n    window.swaggerUi = new SwaggerUi({\n      url: url,\n      dom_id: \"swagger-ui-container\",\n      supportedSubmitMethods: [],\n      // supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],\n      onComplete: function(swaggerApi, swaggerUi){\n\n        $('#temp-anchor-links').remove();\n\n        $('body').scrollspy('refresh');\n\n        $('pre code').each(function(i, e) {\n          hljs.highlightBlock(e)\n        });\n\n        addApiKeyAuthorization();\n      },\n      onFailure: function(data) {\n        log(\"Unable to Load SwaggerUI\");\n      },\n      docExpansion: \"none\",\n      apisSorter: \"alpha\",\n      showRequestHeaders: false\n    });\n\n    function addApiKeyAuthorization(){\n      var key;\n      if ('authentiq' in window) {\n        key = window.authentiq.Token.getAuthorizationHeader();\n      }\n\n      if(key && key.trim() != \"\") {\n          var token = new SwaggerClient.ApiKeyAuthorization(\"authorization\", key, \"header\");\n          window.swaggerUi.api.clientAuthorizations.add(\"Authorization\", token);\n          log(\"added key \" + key);\n      }\n    }\n\n    window.swaggerUi.load();\n\n    function log() {\n      if ('console' in window) {\n        console.log.apply(console, arguments);\n      }\n    }\n  });", 
-            "title": "/client/1234/session"
+            "title": "/client/&lt;client_id&gt;/session"
         }, 
         {
             "location": "/api-issuer/", 
