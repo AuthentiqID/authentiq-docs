@@ -1,17 +1,8 @@
-Title: Installation
-Date: 2010-12-03 10:20
-Modified: 2010-12-05 19:30
-Category: Python
-Tags: pelican, publishing
-Slug: installation
-Authors: Alexis Metaireau, Conan Doyle
-Summary: Installing Authentiq Connect
-
 # Introduction
 
 There is nothing to install when running Authentiq as a Service. Just register your client application at our hosted authentication service and head over to [Getting started](gettingstarted.md). This page describes how to install Authentiq Connect locally on your own system, in case you prefer that.
 
-> Please see our licensing options if you want to follow this path to make sure it matches with your situation.
+> We're working hard on making Authentiq Connect installable and hence, this page gives a *preview* of a local installation but isn't supported just yet. 
 
 # Installation
 

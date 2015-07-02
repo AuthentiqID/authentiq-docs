@@ -19,7 +19,7 @@ markdown_extensions:
   - markdown.extensions.smarty
 pages:
   - 'Overview' : 'index.md'
-  - 'Getting started' : 'gettingstarted.md'
+  - 'Integration' : 'integration.md'
   - 'Installation' : 'installation.md'
   - 'API Reference' :
     - 'Connect' : 'api-provider.md'
