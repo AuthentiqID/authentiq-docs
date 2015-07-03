@@ -161,9 +161,7 @@
 <p>If you are reading this you&rsquo;re probably curious how to implement <a href="http://authentiq.com/">Authentiq</a> on your website. </p>
 <p>The easiest way to get started is by including our <a href="integration/#native-sdk">JavaScript snippet</a> on your page. Alternatively you can <a href="integration/#third-party">point</a> your favourite OAuth 2.0 or OpenID Connect client library at Authentiq.</p>
 <p>As we run Authentiq Connect as a Service, there is no need to install or run anything locally.</p>
-<blockquote>
-<p>Soon you will also be able to <a href="installation/">install the Authentiq Connect daemon locally</a>, from source, or using pre-built packages for Debian 7.0, 8.0 and Ubuntu 15.04.</p>
-</blockquote>
+<p class="alert alert-success" role="alert">Soon you will also be able to <a class="alert-link" href="installation/">install the Authentiq Connect daemon locally</a>, from source, or using pre-built packages for Debian 7.0, 8.0 and Ubuntu 15.04.</p>
 <h2 id="why-authentiq">Why Authentiq?</h2>
 <p>Why should I do this and what&rsquo;s so cool about the Authentiq technology again? In short,</p>
 <ul>
@@ -236,9 +234,7 @@
 <p>Identity scopes can be marked as being <em>required</em> by appending <code>~r</code> to the scope label, for instance <code>email~r</code> or <code>aq:name~r</code>. Doing so will prevent a user from opting out of the section when signing in from the Authentiq ID mobile app. We recommend using this flag sparingly and instead letting users opt-in to the information they share with you.  </p>
 <h4 id="signed-claims">Signed claims</h4>
 <p>Scopes can also be marked to <em>require a signature</em> from an externally trusted party. In fact, Authentiq is acting as a signature provider for the email and phone scopes, handling the confirmation of email addresses and phone number using a one-time verification code sent by email or text message.</p>
-<blockquote>
-<p>Developers will be able to register their own signature providers soon. </p>
-</blockquote>
+<p class="alert alert-success" role="alert">Developers will be able to register their own signature providers soon. </p>
 <h3 id="functional-scopes">Functional scopes</h3>
 <p>Authentiq Connect also uses scopes to indicate functional preferences. </p>
 <table>
@@ -360,7 +356,7 @@
 <tr>
 <td><code>temporarily_unavailable</code></td>
 <td><a href="https://tools.ietf.org/html/rfc6749#section-5.2">OAuth2</a></td>
-<td>Token</td>
+<td>Authorize, Token</td>
 <td>The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.</td>
 </tr>
 <tr>

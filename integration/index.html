@@ -172,9 +172,7 @@
 <p>Alternatively, our <a href="#native-sdk">native Authentiq Connect SDK</a> allows you to implement a rich authentication experience in minutes. We recommend this option if you are looking to enhance your registration and sign-in flows, or want to add strong passwordless two-factor authentication to your website.</p>
 <p>There are a few important differences to consider when evaluating integration options.</p>
 <p>Our native Authentiq Connect SDK is easy to use and leverages features of OpenID Connect to obtain a rich authentication experience. But our protocol also works with many of the great third-party OAuth 2.0 client libraries out there already. Deciding what works best for you depends heavily on your situation. In practice, generic OAuth 2.0 libraries tend to work well, but will be less optimized in terms of performance and user experience.</p>
-<blockquote>
-<p>OpenID Connect is an extention to OAuth 2.0 that standardizes user authentication and forms the basis of Authentiq Connect. </p>
-</blockquote>
+<p class="alert alert-success" role="alert">OpenID Connect is an extention to OAuth 2.0 that standardizes user authentication and forms the basis of Authentiq Connect. </p>
 <h2 id="obtaining-a-client-id">Obtaining a Client ID</h2>
 <p>Whether or not your integration is going to be native or third-party, you will need to <a href="../clients/">register your application</a> with an Authentiq Connect Provider and obtain a unique client identifier. Use the <code>client_id</code> in your preferred OAuth 2.0 client library, or when customizing your native Authentiq Connect snippet below. </p>
 <h2 id="integration-comparison">Integration comparison</h2>
