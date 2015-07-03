@@ -2,7 +2,9 @@
 
 There is nothing to install when running Authentiq as a Service. Just register your client application at our hosted authentication service and head over to [Getting started](gettingstarted.md). This page describes how to install Authentiq Connect locally on your own system, in case you prefer that.
 
-> We're working hard on making Authentiq Connect installable and hence, this page gives a *preview* of a local installation but isn't supported just yet. 
+We're working hard on making Authentiq Connect installable and hence, this page gives a *preview* of a local installation but isn't supported just yet. 
+{: class="alert alert-warning" role="alert" }
+
 
 # Installation
 

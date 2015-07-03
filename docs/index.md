@@ -7,7 +7,8 @@ The easiest way to get started is by including our [JavaScript snippet](integrat
 
 As we run Authentiq Connect as a Service, there is no need to install or run anything locally.
 
-> Soon you will also be able to [install the Authentiq Connect daemon locally](installation.md), from source, or using pre-built packages for Debian 7.0, 8.0 and Ubuntu 15.04.
+Soon you will also be able to [install the Authentiq Connect daemon locally](installation.md){: .alert-link}, from source, or using pre-built packages for Debian 7.0, 8.0 and Ubuntu 15.04.
+{: class="alert alert-success" role="alert" }
 
 ## Why Authentiq?
 
@@ -23,7 +24,8 @@ Why should I do this and what's so cool about the Authentiq technology again? In
 * Authentiq aims to minimize logging of (meta)data.
 
 
-# Concepts 
+
+# Concepts
 
 This section explains general concepts relating to Authentiq Connect.
 
@@ -55,7 +57,8 @@ Identity scopes can be marked as being *required* by appending `~r` to the scope
 
 Scopes can also be marked to *require a signature* from an externally trusted party. In fact, Authentiq is acting as a signature provider for the email and phone scopes, handling the confirmation of email addresses and phone number using a one-time verification code sent by email or text message.
 
-> Developers will be able to register their own signature providers soon. 
+Developers will be able to register their own signature providers soon. 
+{: class="alert alert-success" role="alert" }
 
 ### Functional scopes
 
@@ -87,7 +90,7 @@ Error | Origin | Resource | Description
 `unsupported_response_type` | [OAuth2](https://tools.ietf.org/html/rfc6749#section-5.2) | Authorize, Token | The authorization server does not support obtaining an authorization code using this method.
 `invalid_scope` | [OAuth2](https://tools.ietf.org/html/rfc6749#section-5.2) | Authorize, Token | The requested scope is invalid, unknown, or malformed. 
 `server_error` | [OAuth2](https://tools.ietf.org/html/rfc6749#section-5.2) | Authorize, Token | The authorization server encountered an unexpected condition that prevented it from fulfilling the request.
-`temporarily_unavailable` | [OAuth2](https://tools.ietf.org/html/rfc6749#section-5.2) | Token | The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.
+`temporarily_unavailable` | [OAuth2](https://tools.ietf.org/html/rfc6749#section-5.2) | Authorize, Token | The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.
 `invalid_request` | [Bearer](http://tools.ietf.org/html/rfc6750#section-3.1) | UserInfo | The request is missing a required parameter, includes an unsupported parameter or parameter value, repeats the same parameter, uses more than one method for including an access token, or is otherwise malformed.  The resource server SHOULD respond with the HTTP 400 (Bad Request) status code.
 `invalid_token` | [Bearer](http://tools.ietf.org/html/rfc6750#section-3.1) | UserInfo | The access token provided is expired, revoked, malformed, or invalid for other reasons.  The resource SHOULD respond with the HTTP 401 (Unauthorized) status code.  The client MAY request a new access token and retry the protected resource request.
 `insufficient_scope` | [Bearer](http://tools.ietf.org/html/rfc6750#section-3.1) | UserInfo | The request requires higher privileges than provided by the access token.  The resource server SHOULD respond with the HTTP 403 (Forbidden) status code and MAY include the "scope" attribute with the scope necessary to access the protected resource.
