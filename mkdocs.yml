@@ -1,15 +1,14 @@
 site_name: Authentiq Connect
+site_url: http://developers.authentiq.io/
 site_description: Documentation for the Authentiq OAuth 2.0 and OpenID Connect Provider.
 site_author: The Authentiq team
 site_favicon: images/app-icon-hexagon.png
-# site_url: http://authentiqid.github.io/authentiq-docs/
 # include_search: false
 # use_absolute_urls: true
 use_directory_urls: true
-copyright: Copyright &copy; 2015, Authentiq.com
-# google_analytics: ['UA-6096819-11', 'docker.io']
-theme_dir: 'docs_theme'
-# theme: united
+copyright: "©2015 authentiq.com"
+# google_analytics: ['UA-X-Y', 'authentiq.io']
+theme_dir: 'theme'
 extra_css:
   - "//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro"
 markdown_extensions:
@@ -28,3 +27,4 @@ pages:
   - 'FAQ' : 'faq.md'
 extra:
     version: 0.1.0  # {{ config.extra.version }}
+    enable_tota11y: true
