@@ -10,25 +10,25 @@
         <link rel="shortcut icon" href="../images/app-icon-hexagon.png">
         
 
-	<title>Getting started - Authentiq Connect</title>
+        <title>Integration - Authentiq Connect</title>
 
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/highlight.css">
         <link href="../css/base.css" rel="stylesheet">
-            <!-- <link href="../api-provider/css/bootstrap.min.css" rel="stylesheet"> -->
-            <!-- <link href="../api-provider/css/custom.css" rel="stylesheet"> -->
-            <!-- <link href="../api-provider/css/print.css" rel="stylesheet"> -->
-            <!-- <link href="../api-provider/css/reset.css" rel="stylesheet"> -->
-            <!-- <link href="../api-provider/css/screen.css" rel="stylesheet"> -->
-            <!-- <link href="../api-provider/css/style.css" rel="stylesheet"> -->
-            <!-- <link href="../api-provider/css/typography.css" rel="stylesheet"> -->
+        
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/authentiq-oauth.js"></script>
+
+        
 
         
     </head>
@@ -65,7 +65,7 @@
             
             
                 <li class="active">
-                    <a href="./">Getting started</a>
+                    <a href="./">Integration</a>
                 </li>
             
             
@@ -111,10 +111,9 @@
                 <li style="background-color:#895fc0;">
                     <a class="authentiq-oauth-button"
                         data-response-type="id_token token"
-                        
-                        data-redirect-uri="http://127.0.0.1:8000/clients/"
+                        data-redirect-uri="http://authentiqid.github.io/authentiq-docs/clients/"
                         data-client-id="fe1303fc-9b59-4661-b156-daa98da968b8"
-                        data-scope="email~rs aq:name aq:push openid"
+                        data-scope="email~rs aq:name aq:push userinfo openid"
                         data-sign-in-text="Sign in"
                         data-sign-out-text="Sign out">
 
@@ -127,14 +126,15 @@
     </div>
 </div>
         <div class="container">
-            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+            
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
         <li class="main active"><a href="#introduction">Introduction</a></li>
         
-            <li><a href="#integration-comparison">Integration comparison</a></li>
-        
             <li><a href="#obtaining-a-client-id">Obtaining a Client ID</a></li>
+        
+            <li><a href="#integration-comparison">Integration comparison</a></li>
         
     
         <li class="main "><a href="#native-sdk">Native SDK</a></li>
@@ -164,17 +164,19 @@
     
     </ul>
 </div></div>
-            <div class="col-md-9" role="main">
+                <div id="main" class="col-md-9" role="main">
 
 <h1 id="introduction">Introduction</h1>
 <p>This page describes how to allow your users to sign in with Authentiq ID on your website in minutes.</p>
-<p>Authentiq Connect is compatible with both <a href="http://oauth.net/2/">OAuth 2.0</a> and <a href="http://openid.net/">OpenID Connect 1.0 (OIDC)</a>, and as such it should feel familiar to anyone having implemented OAuth 2.0 authentication before. In case your application already accepts users from other OAuth 2.0 identity providers (such as Google, Facebook, &hellip;), it should be trivial to enable Authentiq ID as another source of verified users using your existing OAuth 2.0 client implementation.</p>
+<p>Authentiq Connect is compatible with both <a href="http://oauth.net/2/">OAuth 2.0</a> and <a href="http://openid.net/">OpenID Connect 1.0 (OIDC)</a>, and as such it should feel familiar to anyone having implemented an OAuth 2.0 authorization flow before. In case your application already accepts users from other OAuth 2.0 identity providers (such as Google, Facebook, …), it should be trivial to enable Authentiq ID as another source of verified users using your existing OAuth 2.0 client implementation.</p>
 <p>Alternatively, our <a href="#native-sdk">native Authentiq Connect SDK</a> allows you to implement a rich authentication experience in minutes. We recommend this option if you are looking to enhance your registration and sign-in flows, or want to add strong passwordless two-factor authentication to your website.</p>
 <p>There are a few important differences to consider when evaluating integration options.</p>
 <p>Our native Authentiq Connect SDK is easy to use and leverages features of OpenID Connect to obtain a rich authentication experience. But our protocol also works with many of the great third-party OAuth 2.0 client libraries out there already. Deciding what works best for you depends heavily on your situation. In practice, generic OAuth 2.0 libraries tend to work well, but will be less optimized in terms of performance and user experience.</p>
 <blockquote>
 <p>OpenID Connect is an extention to OAuth 2.0 that standardizes user authentication and forms the basis of Authentiq Connect. </p>
 </blockquote>
+<h2 id="obtaining-a-client-id">Obtaining a Client ID</h2>
+<p>Whether or not your integration is going to be native or third-party, you will need to <a href="../clients/">register your application</a> with an Authentiq Connect Provider and obtain a unique client identifier. Use the <code>client_id</code> in your preferred OAuth 2.0 client library, or when customizing your native Authentiq Connect snippet below. </p>
 <h2 id="integration-comparison">Integration comparison</h2>
 <p>The following table highlights key differences between the protocol variants.</p>
 <table>
@@ -243,8 +245,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="obtaining-a-client-id">Obtaining a Client ID</h2>
-<p>Whether or not your integration is going to be native or third-party, you will need to <a href="../clients/">register your application</a> with an Authentiq Connect Provider and obtain a unique client identifier. Use the <code>client_id</code> in your preferred OAuth 2.0 client library, or when customizing your native Authentiq Connect snippet below. </p>
 <h1 id="native-sdk">Native SDK</h1>
 <p>In terms of end-user experience, the smoothest integration option is to simply include our Authentiq Connect snippet on your page. Use the snippet configurator to easily generate cusomtized snippet code for your situation, or copy paste and adjust the example snippet below.</p>
 <h2 id="configurator">Configurator</h2>
@@ -409,33 +409,39 @@
 <p>Amazon allows mobile app developers to configure <a href="http://aws.amazon.com/cognito/">Cognito</a> with external OpenID Connect identity providers, enabling an app to authenticate users from social networks and a variety of sources. We&rsquo;re planning to supporting this integration at a later stage so that mobile app developers will be able to register and authenticate users by their Authentiq ID. </p>
 <h2 id="salesforce">SalesForce</h2>
 <p><a href="http://salesforce.com/">SalesForce</a> allows an administrator configure up an external OpenID Connect identity provider as a source for company employees. We&rsquo;re planning to supporting this integration at a later stage so that companies will be able to let their employees sign into SalesForce using their Authentiq ID.</p></div>
+               
         </div>
 
+        <hr>
         <footer class="col-md-12">
-            <hr>
+            <ul class="text-center list-inline">
+                <li>
+                  <iframe src="https://ghbtns.com/github-btn.html?user=AuthentiqID&amp;repo=bootstrap&amp;type=watch&amp;count=true" width="100" height="20" title="Star on GitHub" style="overflow: hidden; border: 0;"></iframe>
+                </li>
+                <li>
+                  <a href="https://twitter.com/AuthentiqID" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @AuthentiqID</a>
+                </li>
+                <li>
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://developer.authentiq.io/" data-count="horizontal" data-via="AuthentiqID">Tweet</a>
+                </li>
+            </ul>
+
             
                 <center>Copyright &copy; 2015, Authentiq.com</center>
             
             <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
         </footer>
 
-        <script src="../js/jquery-1.10.2.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
         <script src="../js/highlight.pack.js"></script>
         <script src="../js/base.js"></script>
-        <script src="../js/authentiq-oauth.js"></script>
-            <!-- // <script src="../clients/js/app.js"></script> -->
-            <!-- // <script src="../api-provider/swagger-ui.js"></script> -->
-            <!-- // <script src="../api-provider/swagger-ui.min.js"></script> -->
-            <!-- // <script src="../api-provider/lib/backbone-min.js"></script> -->
-            <!-- // <script src="../api-provider/lib/handlebars-2.0.0.js"></script> -->
-            <!-- // <script src="../api-provider/lib/highlight.7.3.pack.js"></script> -->
-            <!-- // <script src="../api-provider/lib/jquery-1.8.0.min.js"></script> -->
-            <!-- // <script src="../api-provider/lib/jquery.ba-bbq.min.js"></script> -->
-            <!-- // <script src="../api-provider/lib/jquery.slideto.min.js"></script> -->
-            <!-- // <script src="../api-provider/lib/jquery.wiggle.min.js"></script> -->
-            <!-- // <script src="../api-provider/lib/marked.js"></script> -->
-            <!-- // <script src="../api-provider/lib/swagger-oauth.js"></script> -->
-            <!-- // <script src="../api-provider/lib/underscore-min.js"></script> -->
+
+        <script>
+            window.twttr = (function (d,s,id) {
+                var t, js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return; js=d.createElement(s); js.id=id; js.async=1;
+                js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+                return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+            }(document, "script", "twitter-wjs"));
+        </script>
     </body>
 </html>

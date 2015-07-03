@@ -42,7 +42,6 @@ paths:
 
       tags:
         - Authentication
-      operationId: authorize
       parameters:
         - in: query
           name: client_id
@@ -160,7 +159,6 @@ paths:
 
       tags:
         - Authentication
-      operationId: token
       consumes:
         - application/x-www-form-urlencoded
       parameters:
@@ -235,7 +233,6 @@ paths:
       summary: Create an anonymous authentication session.
       tags:
         - Sessions
-      operationId: session
       parameters:
         - in: formData
           name: scope
@@ -258,7 +255,6 @@ paths:
       summary: Add identity tokens to pending authentication session.
       description: |
         This method is used by Authentiq ID app to post signed identity claims after end-user consent.
-      operationId: session1234
       consumes:
         - application/jwt
         - application/x-www-form-urlencoded
@@ -316,7 +312,6 @@ paths:
           type: string
           description: "space sep list of strings"
           required: false
-      operationId: client1234session
       responses:
         201:
           description: A new authentication session.
@@ -346,7 +341,6 @@ paths:
       tags:
         - Session Management
 
-      operationId: authorizeLogout
       parameters:
         - in: query
           name: id_token_hint
@@ -383,7 +377,6 @@ paths:
         See also:
         - [OIDC OP iframe](http://openid.net/specs/openid-connect-session-1_0.html#OPiframe)
 
-      operationId: authorizeIframe
       responses:
         200:
           description: Success
@@ -439,7 +432,7 @@ paths:
       description: |
         An endpoint to retrieve a list of available clients.
 
-      operationId: client
+      operationId: getClientList
       produces:
         - application/json
       responses:
@@ -504,7 +497,7 @@ paths:
         See also:
         - [Client Configuration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint)
 
-      operationId: client1234
+      operationId: getClient
       produces:
         - application/json
       parameters:
