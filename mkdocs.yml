@@ -10,10 +10,10 @@ copyright: Copyright &copy; 2015, Authentiq.com
 # google_analytics: ['UA-6096819-11', 'docker.io']
 theme_dir: 'docs_theme'
 # theme: united
-#extra_css:
-#  - css/app.1512eea5d5df02a9286a.css
-#  - css/bootstrap-theme.css
+extra_css:
+  - "//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro"
 markdown_extensions:
+  - markdown.extensions.attr_list
   - markdown.extensions.codehilite
   - markdown.extensions.def_list
   - markdown.extensions.smarty
