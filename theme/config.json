@@ -399,7 +399,7 @@
     "forms.less",
     "buttons.less",
     "responsive-utilities.less",
-    "glyphicons.less",
+    "material-design-icons.less",
     "button-groups.less",
     "input-groups.less",
     "navs.less",
@@ -440,5 +440,5 @@
     "scrollspy.js",
     "transition.js"
   ],
-  "customizerUrl": "<none>"
+  "customizerUrl": "http://theme.authentiq.io/customize/?id=f92d34e29fd27298aaaa"
 }
