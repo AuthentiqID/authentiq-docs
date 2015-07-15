@@ -1061,10 +1061,10 @@ this["Handlebars"]["templates"]["response_content_type"] = Handlebars.template({
   return buffer + "</select>\n";
 },"useData":true});
 this["Handlebars"]["templates"]["signature"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div>\n<ul class=\"signature-nav nav nav-tabs\" role=\"tablist\">\n  <li><a class=\"description-link\" href=\"#\">Model</a></li>\n  <li class=\"active\"><a class=\"snippet-link\" href=\"#\">Model Schema</a></li>\n</ul>\n<div>\n<br />\n<div class=\"signature-container\">\n  <div class=\"description\">\n    <pre><code>";
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div>\n<ul class=\"signature-nav nav nav-tabs\" role=\"tablist\">\n  <li><a class=\"description-link\" href=\"#\">Model</a></li>\n  <li class=\"active\"><a class=\"snippet-link\" href=\"#\">Model Schema</a></li>\n</ul>\n<div>\n<br />\n<div class=\"signature-container\">\n  <div class=\"description\">\n    ";
   stack1 = ((helper = (helper = helpers.signature || (depth0 != null ? depth0.signature : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"signature","hash":{},"data":data}) : helper));
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "</code></pre>\n  </div>\n\n  <div class=\"snippet\">\n    <pre><code>"
+  return buffer + "\n  </div>\n\n  <div class=\"snippet\">\n    <pre><code>"
     + escapeExpression(((helper = (helper = helpers.sampleJSON || (depth0 != null ? depth0.sampleJSON : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"sampleJSON","hash":{},"data":data}) : helper)))
     + "</code></pre>\n    <small class=\"notice\"></small>\n  </div>\n</div>\n\n";
 },"useData":true});

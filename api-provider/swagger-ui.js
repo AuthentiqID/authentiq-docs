@@ -713,7 +713,9 @@ this["Handlebars"]["templates"]["operation"] = Handlebars.template({"1":function
     + "' class=\"toggleOperation\">";
   stack1 = ((helper = (helper = helpers.summary || (depth0 != null ? depth0.summary : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"summary","hash":{},"data":data}) : helper));
   if (stack1 != null) { buffer += stack1; }
-  buffer += "</a>\n          </li>\n        </ul>\n        <h3 class='panel-title'>\n          <strong>\n            <a href='#!/"
+  buffer += "</a>\n          </li>\n        </ul>\n        <h3 id=\""
+    + escapeExpression(((helper = (helper = helpers.anchorId || (depth0 != null ? depth0.anchorId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"anchorId","hash":{},"data":data}) : helper)))
+    + "\" class='panel-title'>\n          <strong>\n            <a href='#!/"
     + escapeExpression(((helper = (helper = helpers.encodedParentId || (depth0 != null ? depth0.encodedParentId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"encodedParentId","hash":{},"data":data}) : helper)))
     + "/"
     + escapeExpression(((helper = (helper = helpers.nickname || (depth0 != null ? depth0.nickname : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"nickname","hash":{},"data":data}) : helper)))
@@ -1062,7 +1064,9 @@ this["Handlebars"]["templates"]["parameter_content_type"] = Handlebars.template(
 this["Handlebars"]["templates"]["resource"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
   return " : ";
   },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, helper, options, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, blockHelperMissing=helpers.blockHelperMissing, buffer = "<div class='heading'>\n  <h2>\n    <span class='text-primary'>"
+  var stack1, helper, options, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, blockHelperMissing=helpers.blockHelperMissing, buffer = "<div class='heading'>\n  <h2 id=\""
+    + escapeExpression(((helper = (helper = helpers.anchorId || (depth0 != null ? depth0.anchorId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"anchorId","hash":{},"data":data}) : helper)))
+    + "\">\n    <span class='text-primary'>"
     + escapeExpression(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"name","hash":{},"data":data}) : helper)))
     + "</span> ";
   stack1 = ((helper = (helper = helpers.summary || (depth0 != null ? depth0.summary : depth0)) != null ? helper : helperMissing),(options={"name":"summary","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data}),(typeof helper === functionType ? helper.call(depth0, options) : helper));
@@ -1448,7 +1452,7 @@ SwaggerClient.prototype.build = function (mock) {
 
   var self = this;
 
-  this.progress('Reading API specification from ' + this.url);
+  this.progress('fetching resource list: ' + this.url);
 
   var obj = {
     useJQuery: this.useJQuery,
@@ -31369,6 +31373,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       statusCode = ref5[q];
       this.addStatusCode(statusCode);
     }
+
     return this;
   },
 
@@ -31988,6 +31993,7 @@ SwaggerUi.Views.ResourceView = Backbone.View.extend({
   render: function(){
     var methods = {};
 
+    this.model.anchorId = this.model.id.toLowerCase().replace('_', '-');
 
     $(this.el).html(Handlebars.templates.resource(this.model));
 
@@ -32006,6 +32012,7 @@ SwaggerUi.Views.ResourceView = Backbone.View.extend({
 
       operation.nickname = id;
       operation.parentId = this.model.id;
+      operation.anchorId = id.toLowerCase().replace('_', '-');
       this.addOperation(operation);
     }
 

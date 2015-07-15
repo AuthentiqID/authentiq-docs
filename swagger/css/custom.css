@@ -1,3 +1,13 @@
-/*.resource.active {
-  background-color: transparent !important;
-}*/
+.swagger-section .swagger-ui-wrap .model-signature .propName {
+  margin-left: 18px;
+  font-weight: bold;
+}
+.swagger-section .swagger-ui-wrap .model-signature .propType {
+  color: #895FC0;
+}
+.swagger-section .swagger-ui-wrap .model-signature .propOpt {
+  color: #DDD;
+}
+.swagger-section .swagger-ui-wrap .model-signature .propOptKey {
+  font-style: italic;
+}
