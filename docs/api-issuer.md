@@ -1,3 +1,4 @@
+content_css:        ../swagger/css/custom.css
 content_javascript: ../swagger/lib/jquery.slideto.min.js
                     ../swagger/lib/jquery.wiggle.min.js
                     ../swagger/lib/jquery.ba-bbq.min.js

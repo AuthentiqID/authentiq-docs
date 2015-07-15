@@ -1,4 +1,4 @@
-content_javascript: js/app.js
+content_javascript: js/app.1e852cec8301d7d35fa6.js
 
 # Client management
 
@@ -7,6 +7,7 @@ To allow people to sign in using Authentiq ID, you need to register your applica
 Visit the [Provider Console](/console) to manage your "clients".
 
 
+<hr />
 <div ng-app="AQProviderConsole">
     <div class="row">
         <div class="col-md-12">
