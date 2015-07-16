@@ -302,12 +302,12 @@
         }, 
         {
             "location": "/clients/", 
-            "text": "Client management\n\n\nTo allow people to sign in using Authentiq ID, you need to register your application as a client with the Provider.\n\n\nVisit the \nProvider Console\n to manage your \nclients\n.", 
+            "text": "Client management\n\n\nTo allow people to sign in using Authentiq ID, you need to register your application as a client with the Provider.\n\n\nVisit the \nProvider Console\n to manage your \nclients\n.\n\n\n\n\n\n    \n\n        \n\n            \n \n\n        \n\n    \n\n\n\n\n\n    authentiq.subscribe('authorized:access_token', function(token) {\n      if(typeof token.expires_in !== 'undefined') {\n        var expires_at = new Date();\n\n        // 60 seconds less to secure browser and response latency\n        expires_at.setSeconds(expires_at.getSeconds() + parseInt(token.expires_in) - 60);\n\n        token.expires_at = expires_at;//.toGMTString();\n      }\n\n      localStorage['authentiq.access_token'] = token;\n    });", 
             "title": "Your clients"
         }, 
         {
             "location": "/clients/#client-management", 
-            "text": "To allow people to sign in using Authentiq ID, you need to register your application as a client with the Provider.  Visit the  Provider Console  to manage your  clients .", 
+            "text": "To allow people to sign in using Authentiq ID, you need to register your application as a client with the Provider.  Visit the  Provider Console  to manage your  clients .   \n     \n         \n               \n         \n       \n    authentiq.subscribe('authorized:access_token', function(token) {\n      if(typeof token.expires_in !== 'undefined') {\n        var expires_at = new Date();\n\n        // 60 seconds less to secure browser and response latency\n        expires_at.setSeconds(expires_at.getSeconds() + parseInt(token.expires_in) - 60);\n\n        token.expires_at = expires_at;//.toGMTString();\n      }\n\n      localStorage['authentiq.access_token'] = token;\n    });", 
             "title": "Client management"
         }, 
         {
