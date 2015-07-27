@@ -1,4 +1,4 @@
-content_javascript: js/app.1e2f5878f1a2af7653fc.js
+content_javascript: ../static/js/authentiq-console.js
 
 # Client management
 

@@ -1,4 +1,4 @@
-content_javascript: ../clients/js/app.1e2f5878f1a2af7653fc.js
+content_javascript: ../static/js/authentiq-console.js
 
 # Introduction
 
@@ -257,6 +257,14 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
 
 [SalesForce](http://salesforce.com/) allows an administrator configure up an external OpenID Connect identity provider as a source for company employees. We're planning to supporting this integration at a later stage so that companies will be able to let their employees sign into SalesForce using their Authentiq ID.
 
+<style>
+  .progress-bar-anim {
+    -webkit-transition: width 2.6s ease;
+         -o-transition: width 2.6s ease;
+            transition: width 2.6s ease;
+  }
+</style>
+
 <script>
   (function(aq, $){
     // Whole-script strict mode syntax
@@ -286,10 +294,9 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
       button = new authentiq.Button($button[0], opts);
     }
 
-    authentiq.subscribe('profile', function(token) {
+    function fetch_clients(callback) {
       var select = $('#existing-client-id');
       select.prop('disabled', false);
-      $('#add-client-button').removeClass('disabled');
 
       var token = JSON.parse(localStorage['ngStorage-authentiq.access_token']) || {};
       if (typeof token.access_token !== 'undefined' && !!token.expires_at && new Date(token.expires_at) > new Date()) {
@@ -311,20 +318,30 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
                             .attr('value', client.client_id)
                             .text(client.client_name));
           });
+
+          if (typeof callback !== 'undefined') {
+            callback();
+          }
         })
         .fail(function() {
           console.info('Clients can\'t be loaded');
         });
       }
+    }
+
+    authentiq.subscribe('profile', function(profile) {
+      $('#add-client-button').removeClass('disabled');
+
+      fetch_clients();
     });
 
-    authentiq.subscribe('concluded', function(token) {
+    authentiq.subscribe('concluded', function() {
       $('#existing-client-id').prop('disabled', true);
       $('#add-client-button').addClass('disabled');
     });
 
     $(function() {
-      if (!authentiq.Provider.isAuthenticated()) {
+      if (!authentiq.Provider.isSignedIn()) {
         $('#existing-client-id').prop('disabled', true);
       }
 
@@ -338,8 +355,34 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
       generate_button();
 
       $('#add-client').on('show.bs.modal', function(e) {
+        var self = $(this);
+
         window.location.hash = '/clients/add';
-        // $(this).find('iframe').attr('src', $('#add-client').attr('href'));
+        
+        $('.page-header').hide();
+
+        self.find('#save-button').on('click', function(){
+          self.find('.modal-body')
+              .children().hide()
+              .parent().append('<div class="progress"><div class="progress-bar progress-bar-success progress-bar-striped progress-bar-anim" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>');
+              self.find('.progress-bar').width('100%');
+
+          // wait a bit for
+          setTimeout(function() {
+            self.modal('hide');
+
+            self.find('.progress').remove()
+            self.find('.modal-body').children().show();
+
+            fetch_clients(function(){
+              $('#existing-client-id option:last-child').attr('selected', 'selected');
+            });
+          }, 3000);
+        });
+        
+        self.find('#cancel-button').on('click', function(){
+          self.modal('hide');
+        });
       });
       
       $('#get-code-modal').on('show.bs.modal', function(e) {
