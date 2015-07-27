@@ -1,3 +1,5 @@
+content_javascript: ../clients/js/app.1e2f5878f1a2af7653fc.js
+
 # Introduction
 
 This page describes how to allow your users to sign in with Authentiq ID on your website in minutes.
@@ -42,6 +44,118 @@ In terms of end-user experience, the smoothest integration option is to simply i
 ## Configurator
 
 Create your own Authentiq button with the Button Configurator.
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">1. Pick an Authentiq client <small>[Sign in first]</small></h3>
+  </div>
+  <div class="panel-body">
+    <form class="form-inline">
+      <div class="form-group col-md-6">
+        <label class="sr-only" for="existing-client-id">Select existing client ID</label>
+        <select class="form-control" id="existing-client-id" disabled data-authentiq-key="client-id" data-script-opt="1">
+          <option value="PLACEHOLDER_CLIENT_ID">Select an existing client ID</option>
+        </select>
+      </div>
+      <a href="#/clients/add" id="add-client-button" class="btn btn-primary disabled" data-toggle="modal" data-target="#add-client">Create new client</a>
+    </form>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">2. Button options</h3>
+  </div>
+  <div class="panel-body">
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="opts-display" class="col-sm-2 control-label">Display</label>
+        <div class="col-md-4">
+          <select class="form-control" id="opts-display" data-authentiq-key="display">
+            <option value="">Modal</option>
+            <option value="page">Page</option>
+            <option value="popup">Popup</option>
+          </select>
+        </div>
+        <label for="opts-theme" class="col-sm-2 control-label">Theme</label>
+        <div class="col-md-4">
+          <select class="form-control" id="opts-theme" data-authentiq-key="theme">
+            <option value="">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="opts-sign-in-text" class="col-sm-2 control-label">Sign in text</label>
+        <div class="col-md-4">
+          <input type="text" id="opts-sign-in-text" class="form-control" placeholder="Sign in" data-authentiq-key="sign_in_text">
+        </div>
+        <label for="opts-sign-out-text" class="col-sm-2 control-label">Sign out text</label>
+        <div class="col-md-4">
+          <input type="text" id="opts-sign-out-text" class="form-control" placeholder="Sign out" data-authentiq-key="sign_out_text">
+        </div>
+      </div>
+      <hr />
+      <div class="checkbox">
+        <label class="control-label">
+          <input type="checkbox" value="1" data-authentiq-key="direct_events" data-script-opt="1">
+          Direct events, will fire any events even before DOM is ready
+        </label>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="well text-center">
+  <button id="authentiq" class="authentiq-button">
+    Sign in
+  </button>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" id="get-code-button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#get-code-modal">Get code!</button>
+
+
+<!-- Modal -->
+<div class="modal fade" id="get-code-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Get the code</h4>
+      </div>
+      <div class="modal-body">
+        <p class="lead">1. Copy the script tag in your site <code>&lt;head&gt;</code>.</p>
+        <div class="alert alert-info" role="alert">You might have to replace the <code>PLACEHOLDER_CLIENT_ID</code> with your apps' client ID</div>
+        <textarea id="script-snippet" class="form-control" rows="2" style="resize: none;" disabled></textarea>
+        <hr />
+        <p class="lead">2. Copy the button in the position you want it to be displayed.</p>
+        <textarea id="button-snippet" class="form-control" rows="3" style="resize: none;" disabled></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="add-client" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create a new client</h4>
+      </div>
+      <div class="modal-body">
+        <!-- <iframe src="/clients/#/clients/add"></iframe> -->
+        <div ng-app="AQProviderConsole">
+          <div class="row">
+            <div class="col-md-offset-1 col-md-10">
+              <div ui-view></div> <!-- This is where our views will load -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 ## Example
 
@@ -142,3 +256,130 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
 ## SalesForce
 
 [SalesForce](http://salesforce.com/) allows an administrator configure up an external OpenID Connect identity provider as a source for company employees. We're planning to supporting this integration at a later stage so that companies will be able to let their employees sign into SalesForce using their Authentiq ID.
+
+<script>
+  (function(aq, $){
+    // Whole-script strict mode syntax
+    'use strict';
+
+    function generate_button() {
+      var $button = $('#authentiq'),
+          opts = {},
+          button, key, val, text;
+
+      text = $('[data-authentiq-key="sign_in_text"]').val() || 'Sign in';
+
+      $button.replaceWith('<button id="authentiq" class="authentiq-button">' + text + '</button>');
+      $button = $('#authentiq');
+
+      // $button.removeData('authentiq-button');
+
+      $('[data-authentiq-key]').each(function(index){
+        key = $(this).data('authentiq-key');
+        val = $(this).val();
+      
+        if (val != '') {
+          opts[key] = val;
+        }
+      });
+
+      button = new authentiq.Button($button[0], opts);
+    }
+
+    authentiq.subscribe('profile', function(token) {
+      var select = $('#existing-client-id');
+      select.prop('disabled', false);
+      $('#add-client-button').removeClass('disabled');
+
+      var token = JSON.parse(localStorage['ngStorage-authentiq.access_token']) || {};
+      if (typeof token.access_token !== 'undefined' && !!token.expires_at && new Date(token.expires_at) > new Date()) {
+
+        $.ajax({
+          url: 'https://test.connect.authentiq.io/client',
+          headers: {
+            'Authorization': token.token_type + ' ' + token.access_token
+          },
+          dataType: 'json'
+        })
+        .done(function(data) {
+          // clear old entries
+          select.html('');
+
+          $.each(data, function(key, client) {
+            select.append(
+                          $('<option></option>')
+                            .attr('value', client.client_id)
+                            .text(client.client_name));
+          });
+        })
+        .fail(function() {
+          console.info('Clients can\'t be loaded');
+        });
+      }
+    });
+
+    authentiq.subscribe('concluded', function(token) {
+      $('#existing-client-id').prop('disabled', true);
+      $('#add-client-button').addClass('disabled');
+    });
+
+    $(function() {
+      if (!authentiq.Provider.isAuthenticated()) {
+        $('#existing-client-id').prop('disabled', true);
+      }
+
+      $('[data-authentiq-key]').on('change', function(){
+        // console.log($(this).data('authentiq-key'));
+        // console.log($(this).val());
+
+        generate_button();
+      });
+
+      generate_button();
+
+      $('#add-client').on('show.bs.modal', function(e) {
+        window.location.hash = '/clients/add';
+        // $(this).find('iframe').attr('src', $('#add-client').attr('href'));
+      });
+      
+      $('#get-code-modal').on('show.bs.modal', function(e) {
+        var button_opts = {}, script_opts = {},
+          key, val, opt, code = '', button_text;
+
+        $('[data-authentiq-key]').each(function(index){
+          key = $(this).data('authentiq-key');
+          val = $(this).val();
+
+          if (val != '') {
+            if ($(this).attr('data-script-opt')) {
+              script_opts[key] = val;
+            } else {
+              button_opts[key] = val;
+            }
+          };
+        });
+
+        for (opt in script_opts) {
+          code += ' data-' + opt.split('_').join('-') + '="' + script_opts[opt] + '"';
+        }
+
+        $('#script-snippet').html('&lt;script src="authentiq-js/authentiq.js"' + code +
+          '&gt;&lt;/script&gt;');
+
+        code = '';
+        for (opt in button_opts) {
+          code += ' data-' + opt.split('_').join('-') + '="' + button_opts[opt] + '"';
+        }
+
+        button_text = $('[data-authentiq-key="sign_in_text"]').val() || 'Sign in';
+
+        $('#button-snippet').html('&lt;button' + code +
+          '&gt;' + button_text + '&lt;/button&gt;');
+
+        // $(this).find('.modal-content #script-snippet').html('ds');
+      });
+
+      // $('#get-code-button').trigger('click');
+    });
+  })(window.authentiq = window.authentiq || {}, jQuery);
+</script>
