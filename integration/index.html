@@ -31,7 +31,7 @@
                 data-client-id="test-js-snippet"></script>
 
         
-        <script src="../clients/js/app.1e2f5878f1a2af7653fc.js"></script>
+        <script src="../static/js/authentiq-console.js"></script>
 
         
     </head>
@@ -249,17 +249,14 @@
 <p>Create your own Authentiq button with the Button Configurator.</p>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">1. Pick an Authentiq client</h3>
+    <h3 class="panel-title">1. Pick an Authentiq client <small>[Sign in first]</small></h3>
   </div>
   <div class="panel-body">
     <form class="form-inline">
       <div class="form-group col-md-6">
         <label class="sr-only" for="existing-client-id">Select existing client ID</label>
         <select class="form-control" id="existing-client-id" disabled data-authentiq-key="client-id" data-script-opt="1">
-          <option value="">Select existing client ID</option>
-          <option value="Site">Site</option>
-          <option value="Test">Test</option>
-          <option value="Factory">Factory</option>
+          <option value="PLACEHOLDER_CLIENT_ID">Select an existing client ID</option>
         </select>
       </div>
       <a href="#/clients/add" id="add-client-button" class="btn btn-primary disabled" data-toggle="modal" data-target="#add-client">Create new client</a>
@@ -300,6 +297,13 @@
           <input type="text" id="opts-sign-out-text" class="form-control" placeholder="Sign out" data-authentiq-key="sign_out_text">
         </div>
       </div>
+      <hr />
+      <div class="checkbox">
+        <label class="control-label">
+          <input type="checkbox" value="1" data-authentiq-key="direct_events" data-script-opt="1">
+          Direct events, will fire any events even before DOM is ready
+        </label>
+      </div>
     </form>
   </div>
 </div>
@@ -323,10 +327,12 @@
         <h4 class="modal-title" id="myModalLabel">Get the code</h4>
       </div>
       <div class="modal-body">
-        <p>1. Copy the script tag in your site <code>&lt;head&gt;</code>.</p>
-        <textarea id="script-snippet" disabled></textarea>
-        <p>2. Copy the button in the position you want it to be displayed.</p>
-        <pre id="button-snippet"><code></code></pre>
+        <p class="lead">1. Copy the script tag in your site <code>&lt;head&gt;</code>.</p>
+        <div class="alert alert-info" role="alert">You might have to replace the <code>PLACEHOLDER_CLIENT_ID</code> with your apps' client ID</div>
+        <textarea id="script-snippet" class="form-control" rows="2" style="resize: none;" disabled></textarea>
+        <hr />
+        <p class="lead">2. Copy the button in the position you want it to be displayed.</p>
+        <textarea id="button-snippet" class="form-control" rows="3" style="resize: none;" disabled></textarea>
       </div>
     </div>
   </div>
@@ -513,6 +519,14 @@
 <p>Amazon allows mobile app developers to configure <a href="http://aws.amazon.com/cognito/">Cognito</a> with external OpenID Connect identity providers, enabling an app to authenticate users from social networks and a variety of sources. We&rsquo;re planning to supporting this integration at a later stage so that mobile app developers will be able to register and authenticate users by their Authentiq ID. </p>
 <h2 id="salesforce">SalesForce</h2>
 <p><a href="http://salesforce.com/">SalesForce</a> allows an administrator configure up an external OpenID Connect identity provider as a source for company employees. We&rsquo;re planning to supporting this integration at a later stage so that companies will be able to let their employees sign into SalesForce using their Authentiq ID.</p>
+<style>
+  .progress-bar-anim {
+    -webkit-transition: width 2.6s ease;
+         -o-transition: width 2.6s ease;
+            transition: width 2.6s ease;
+  }
+</style>
+
 <script>
   (function(aq, $){
     // Whole-script strict mode syntax
@@ -542,10 +556,9 @@
       button = new authentiq.Button($button[0], opts);
     }
 
-    authentiq.subscribe('profile', function(token) {
+    function fetch_clients(callback) {
       var select = $('#existing-client-id');
       select.prop('disabled', false);
-      $('#add-client-button').removeClass('disabled');
 
       var token = JSON.parse(localStorage['ngStorage-authentiq.access_token']) || {};
       if (typeof token.access_token !== 'undefined' && !!token.expires_at && new Date(token.expires_at) > new Date()) {
@@ -567,20 +580,30 @@
                             .attr('value', client.client_id)
                             .text(client.client_name));
           });
+
+          if (typeof callback !== 'undefined') {
+            callback();
+          }
         })
         .fail(function() {
           console.info('Clients can\'t be loaded');
         });
       }
+    }
+
+    authentiq.subscribe('profile', function(profile) {
+      $('#add-client-button').removeClass('disabled');
+
+      fetch_clients();
     });
 
-    authentiq.subscribe('concluded', function(token) {
+    authentiq.subscribe('concluded', function() {
       $('#existing-client-id').prop('disabled', true);
       $('#add-client-button').addClass('disabled');
     });
 
     $(function() {
-      if (!authentiq.Provider.isAuthenticated()) {
+      if (!authentiq.Provider.isSignedIn()) {
         $('#existing-client-id').prop('disabled', true);
       }
 
@@ -594,8 +617,34 @@
       generate_button();
 
       $('#add-client').on('show.bs.modal', function(e) {
+        var self = $(this);
+
         window.location.hash = '/clients/add';
-        // $(this).find('iframe').attr('src', $('#add-client').attr('href'));
+
+        $('.page-header').hide();
+
+        self.find('#save-button').on('click', function(){
+          self.find('.modal-body')
+              .children().hide()
+              .parent().append('<div class="progress"><div class="progress-bar progress-bar-success progress-bar-striped progress-bar-anim" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>');
+              self.find('.progress-bar').width('100%');
+
+          // wait a bit for
+          setTimeout(function() {
+            self.modal('hide');
+
+            self.find('.progress').remove()
+            self.find('.modal-body').children().show();
+
+            fetch_clients(function(){
+              $('#existing-client-id option:last-child').attr('selected', 'selected');
+            });
+          }, 3000);
+        });
+
+        self.find('#cancel-button').on('click', function(){
+          self.modal('hide');
+        });
       });
 
       $('#get-code-modal').on('show.bs.modal', function(e) {
@@ -616,26 +665,21 @@
         });
 
         for (opt in script_opts) {
-          code += '        data-' + opt + '="' + script_opts[opt] + '"\n';
+          code += ' data-' + opt.split('_').join('-') + '="' + script_opts[opt] + '"';
         }
 
-        $('#script-snippet').html('&lt;script src="authentiq-js/authentiq.js"\n' +
-          code +
-          '&gt;\n' +
-          '&lt;/script&gt;');
+        $('#script-snippet').html('&lt;script src="authentiq-js/authentiq.js"' + code +
+          '&gt;&lt;/script&gt;');
 
         code = '';
         for (opt in button_opts) {
-          code += '        data-' + opt + '="' + button_opts[opt] + '"\n';
+          code += ' data-' + opt.split('_').join('-') + '="' + button_opts[opt] + '"';
         }
 
         button_text = $('[data-authentiq-key="sign_in_text"]').val() || 'Sign in';
 
-        $('#button-snippet').html('&lt;button\n' +
-          code +
-          '&gt;\n' +
-          '   ' + button_text + '\n' +
-          '&lt;/button&gt;');
+        $('#button-snippet').html('&lt;button' + code +
+          '&gt;' + button_text + '&lt;/button&gt;');
 
         // $(this).find('.modal-content #script-snippet').html('ds');
       });

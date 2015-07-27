@@ -31,7 +31,7 @@
                 data-client-id="test-js-snippet"></script>
 
         
-        <script src="js/app.1e2f5878f1a2af7653fc.js"></script>
+        <script src="../static/js/authentiq-console.js"></script>
 
         
     </head>
@@ -147,28 +147,7 @@
             <div ui-view></div> <!-- This is where our views will load -->
         </div>
     </div>
-</div></p>
-<script>
-    // authentiq.subscribe('authorized:access_token', function(token) {
-    //   if(typeof token.expires_in !== 'undefined') {
-    //     var expires_at = new Date();
-
-    //     // 60 seconds less to secure browser and response latency
-    //     expires_at.setSeconds(expires_at.getSeconds() + parseInt(token.expires_in) - 60);
-
-    //     token.expires_at = expires_at;
-    //   }
-
-    //   // store the access_token in localStorage
-    //   // prepend the ngStorage key, so as angular can read it
-    //   localStorage['ngStorage-authentiq.access_token'] = token;
-    // });
-
-    // authentiq.subscribe('concluded', function(token) {
-    //   // delete the access token
-    //   delete localStorage['authentiq.access_token'];
-    // });
-</script></div>
+</div></p></div>
                
         </div>
 
