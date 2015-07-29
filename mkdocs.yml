@@ -28,3 +28,7 @@ pages:
 extra:
     version: 0.1.0  # {{ config.extra.version }}
     enable_tota11y: true
+    snippet:
+      client_id: test-js-snippet
+      redirect_uri: /clients/
+      scope: email~rs aq:name aq:push userinfo openid

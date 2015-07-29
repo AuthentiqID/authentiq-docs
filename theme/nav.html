@@ -44,8 +44,8 @@
                 <li>
                     <button class="btn btn-primary navbar-btn authentiq-button"
                         data-response-type="id_token token"
-                        data-redirect-uri="/clients/"
-                        data-scope="email~rs aq:name aq:push userinfo openid"
+                        data-redirect-uri="{{ config.extra.snippet.redirect_uri }}"
+                        data-scope="{{ config.extra.snippet.scope }}"
                         data-sign-out-claim="given_name">
                         Sign in
                     </button>
