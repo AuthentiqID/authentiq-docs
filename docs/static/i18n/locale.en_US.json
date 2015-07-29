@@ -2,7 +2,8 @@
     "pageTitle": "Authentiq Provider Console",
     "pageContent": "Authentiq Provider Console",
     
-    "home.introText": "Sign in to manage your clients.",
+    "home.title": "Client management",
+    "home.introText": "To allow people to sign in using Authentiq ID, you need to register your application as a client with the Provider.",
     
     "documentation.introText": "Documentation placeholder",
 

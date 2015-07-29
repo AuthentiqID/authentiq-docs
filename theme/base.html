@@ -36,6 +36,23 @@
                 class="authentiq-snippet"
                 data-client-id="test-js-snippet"></script>
 
+        <script>
+            // handle access_token which is needed in `integration` and `client` pages
+            authentiq.subscribe('authorized:access_token', function(token) {
+                if(typeof token.expires_in !== 'undefined') {
+                    var expires_at = new Date();
+
+                    // 60 seconds less to secure browser and response latency
+                    expires_at.setSeconds(expires_at.getSeconds() + parseInt(token.expires_in) - 60);
+                    
+                    token.expires_at = expires_at;
+                }
+
+                // store the access_token in localStorage
+                localStorage['ngStorage-authentiq.access_token'] = JSON.stringify(token);
+            });
+        </script>
+
         {# {%- for path in extra_javascript %}
         <!-- // <script src="{{ path }}"></script> -->
         {%- endfor %} #}

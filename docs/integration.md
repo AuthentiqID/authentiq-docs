@@ -98,7 +98,7 @@ Create your own Authentiq button with the Button Configurator.
       <hr />
       <div class="checkbox">
         <label class="control-label">
-          <input type="checkbox" value="1" data-authentiq-key="direct_events" data-script-opt="1">
+          <input type="checkbox" value="" data-authentiq-key="direct_events" data-script-opt="1">
           Direct events, will fire any events even before DOM is ready
         </label>
       </div>
@@ -295,29 +295,39 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
     }
 
     function fetch_clients(callback) {
-      var select = $('#existing-client-id');
-      select.prop('disabled', false);
-
-      var token = JSON.parse(localStorage['ngStorage-authentiq.access_token']) || {};
+      var token = JSON.parse(localStorage['ngStorage-authentiq.access_token'] || '{}');
       if (typeof token.access_token !== 'undefined' && !!token.expires_at && new Date(token.expires_at) > new Date()) {
 
+        var base_url = authentiq._defaults.provider.base_url || 'https://connect.authentiq.io';
+
         $.ajax({
-          url: 'https://test.connect.authentiq.io/client',
+          url: base_url + '/client',
           headers: {
             'Authorization': token.token_type + ' ' + token.access_token
           },
           dataType: 'json'
         })
         .done(function(data) {
+          var select = $('#existing-client-id');
+
           // clear old entries
           select.html('');
 
-          $.each(data, function(key, client) {
+          if (data.length > 0) {
+            $.each(data, function(key, client) {
+              select.append(
+                            $('<option></option>')
+                              .attr('value', client.client_id)
+                              .text(client.client_name));
+            });
+
+            select.prop('disabled', false);
+          } else {
             select.append(
-                          $('<option></option>')
-                            .attr('value', client.client_id)
-                            .text(client.client_name));
-          });
+                            $('<option></option>')
+                              .attr('value', 'PLACEHOLDER_CLIENT_ID')
+                              .text('No clients found'));
+          }
 
           if (typeof callback !== 'undefined') {
             callback();
@@ -346,8 +356,10 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
       }
 
       $('[data-authentiq-key]').on('change', function(){
-        // console.log($(this).data('authentiq-key'));
-        // console.log($(this).val());
+        // handle checkbox options
+        if ($(this).is(':checkbox')) {
+          $(this).val($(this).is(':checked') ? '1' : '');
+        }
 
         generate_button();
       });
