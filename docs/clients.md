@@ -1,3 +1,4 @@
+content_css:        ../static/css/authentiq-console.css
 content_javascript: ../static/js/authentiq-console.js
 hide_toc: true
 
