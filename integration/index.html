@@ -147,12 +147,12 @@
     
         <li class="main active"><a href="#introduction">Introduction</a></li>
         
-            <li><a href="#obtaining-a-client-id">Obtaining a Client ID</a></li>
+            <li><a href="#client-registration">Client registration</a></li>
         
             <li><a href="#integration-comparison">Integration comparison</a></li>
         
     
-        <li class="main "><a href="#authentiq-js">Authentiq JS</a></li>
+        <li class="main "><a href="#authentiqjs">AuthentiqJS</a></li>
         
             <li><a href="#configurator">Configurator</a></li>
         
@@ -184,15 +184,18 @@
                 <div id="main" class="col-md-9" role="main">
 
 <h1 id="introduction">Introduction</h1>
-<p>This page describes how to allow your users to sign in with Authentiq ID on your website in minutes.</p>
-<p>Authentiq Connect is compatible with both <a href="http://oauth.net/2/">OAuth 2.0</a> and <a href="http://openid.net/">OpenID Connect 1.0 (OIDC)</a>, and as such it should feel familiar to anyone having implemented an OAuth 2.0 authorization flow before. In case your application already accepts users from other OAuth 2.0 identity providers (such as Google, Facebook, …), it should be trivial to enable Authentiq ID as another source of verified users using your existing OAuth 2.0 client implementation.</p>
+<p>[TBD]</p>
+<p>This page explains how to allow your users to sign in with Authentiq ID on your website in minutes. It shows how to <a href="#authentiqjs">use AuthentiqJS with both client and server side applications</a>, but also covers how to <a href="#third-party-frameworks">use third-party OAuth 2.0 frameworks with Authentiq Connect</a>.</p>
+<p>Authentiq Connect is compatible with both <a href="http://oauth.net/2/">OAuth 2.0</a> and <a href="http://openid.net/">OpenID Connect 1.0 (OIDC)</a>, and as such it should feel familiar to anyone having implemented an OAuth 2.0 authorization flow before. In case your application already accepts users from other OAuth 2.0 identity providers (such as Google, Facebook, &hellip;), it should be easy to enable Authentiq ID as another source of verified users using your existing OAuth 2.0 client implementation.</p>
 <p>Alternatively, our <a href="#native-sdk">native Authentiq Connect SDK</a> allows you to implement a rich authentication experience in minutes. We recommend this option if you are looking to enhance your registration and sign-in flows, or want to add strong passwordless two-factor authentication to your website.</p>
 <p>There are a few important differences to consider when evaluating integration options.</p>
 <p>Our native Authentiq Connect SDK is easy to use and leverages features of OpenID Connect to obtain a rich authentication experience. But our protocol also works with many of the great third-party OAuth 2.0 client libraries out there already. Deciding what works best for you depends heavily on your situation. In practice, generic OAuth 2.0 libraries tend to work well, but will be less optimized in terms of performance and user experience.</p>
 <p class="alert alert-success" role="alert">OpenID Connect is an extention to OAuth 2.0 that standardizes user authentication and forms the basis of Authentiq Connect. </p>
-<h2 id="obtaining-a-client-id">Obtaining a Client ID</h2>
+<h2 id="client-registration">Client registration</h2>
+<p>[TBD]</p>
 <p>Whether or not your integration is going to be native or third-party, you will need to <a href="clients.md">register your application</a> with an Authentiq Connect Provider and obtain a unique client identifier. Use the <code>client_id</code> in your preferred OAuth 2.0 client library, or when customizing your native Authentiq Connect snippet below. </p>
 <h2 id="integration-comparison">Integration comparison</h2>
+<p>[Move to Overview]</p>
 <p>The following table highlights key differences between the protocol variants.</p>
 <table>
 <thead>
@@ -260,10 +263,10 @@
 </tr>
 </tbody>
 </table>
-<h1 id="authentiq-js">Authentiq JS</h1>
-<p>In terms of end-user experience, the smoothest integration option is to simply include our Authentiq Connect snippet on your page. Use the snippet configurator to easily generate cusomtized snippet code for your situation, or copy paste and adjust the example snippet below.</p>
+<h1 id="authentiqjs">AuthentiqJS</h1>
+<p>In terms of user experience, the smoothest integration option is to simply include our AuthentiqJS snippet on your page. You can use the snippet configurator to easily generate cusomtized snippet code for your application, or copy and adjust the example snippet below.</p>
 <h2 id="configurator">Configurator</h2>
-<p>Create your own Authentiq button with the Button Configurator.</p>
+<p>Create your own Authentiq button with the configurator</p>
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">1. Pick an Authentiq client <small>[Sign in first]</small></h3>
