@@ -2,7 +2,7 @@
 
 If you are reading this you're probably curious how to integrate [Authentiq](http://authentiq.com/) on your website. 
 
-The easiest to get started is to include the [AuthentiqJS snippet](#show-me-the-code) on your page as described below. Alternatively you can point your [favourite OAuth 2.0 or OpenID Connect client library](integration.md#/#third-party-integrations) at Authentiq.
+The easiest to get started is to include the [AuthentiqJS snippet](#show-me-the-code) on your page as described below. Alternatively you can point your [favourite OAuth 2.0 or OpenID Connect client library](integration.md#third-party-integrations) at Authentiq.
 
 As we run Authentiq Connect as a Service, there is no need to install or run anything locally.
 
@@ -14,11 +14,11 @@ Soon you will also be able to [install the Authentiq Connect daemon locally](ins
 
 [Register an app](integration.md#configurator) and paste the following code into an HTML page at the point where you want render a Sign in button. Replace the placeholder with the Client ID of your new application.
 
-      <script src="https://developers.authentiq.io/js/authentiq.js"
-              class="authentiq-snippet"
-              data-client-id="<YOUR-CLIENT-ID>"
-              data-button="yes">
-      </script>
+    <script src="https://developers.authentiq.io/js/authentiq.js"
+            class="authentiq-snippet"
+            data-client-id="<YOUR-CLIENT-ID>"
+            data-button="yes">
+    </script>
 
 You can view a [live demo](/examples/basic.html) of the above code wrapped in some basic HTML.
 
@@ -131,7 +131,7 @@ Some terminology used in this documentation.
 Authentiq ID
 : The name of the Authentiq mobile app that manages the mobile cryptographic identity of the end-user. Authentiq ID is currently available on iOS, but will also be ported to Android.
 
-Authentiq JS
+AuthentiqJS
 : The name of the Authentiq native JavaScript snippet.
 
 Authentiq Connect
@@ -141,7 +141,7 @@ Authentiq Connect Provider
 : The daemon that serves the Authentiq Connect protocol, acting as a bridge between website and app. The provider is packaged as `authentiqd` in the context of SysV-style init scripts.
 
 Authentiq Connect SDK
-: The combination of the hosted (or installable) Authentiq Connect Provider and Authentiq JS.
+: The combination of the hosted (or installable) Authentiq Connect Provider and AuthentiqJS.
 
 Third-party Integration
 : The combination of the hosted (or installable) Authentiq Connect Provider and a third-party OAuth 2.0 or OIDC client library.

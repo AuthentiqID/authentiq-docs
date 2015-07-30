@@ -1,8 +1,10 @@
 # Introduction
 
-This page describes how to allow your users to sign in with Authentiq ID on your website in minutes.
+[TBD]
 
-Authentiq Connect is compatible with both [OAuth 2.0](http://oauth.net/2/) and [OpenID Connect 1.0 (OIDC)](http://openid.net/), and as such it should feel familiar to anyone having implemented an OAuth 2.0 authorization flow before. In case your application already accepts users from other OAuth 2.0 identity providers (such as Google, Facebook, …), it should be trivial to enable Authentiq ID as another source of verified users using your existing OAuth 2.0 client implementation.
+This page explains how to allow your users to sign in with Authentiq ID on your website in minutes. It shows how to [use AuthentiqJS with both client and server side applications](#authentiqjs), but also covers how to [use third-party OAuth 2.0 frameworks with Authentiq Connect](#third-party-frameworks).
+
+Authentiq Connect is compatible with both [OAuth 2.0](http://oauth.net/2/) and [OpenID Connect 1.0 (OIDC)](http://openid.net/), and as such it should feel familiar to anyone having implemented an OAuth 2.0 authorization flow before. In case your application already accepts users from other OAuth 2.0 identity providers (such as Google, Facebook, ...), it should be easy to enable Authentiq ID as another source of verified users using your existing OAuth 2.0 client implementation.
 
 Alternatively, our [native Authentiq Connect SDK](#native-sdk) allows you to implement a rich authentication experience in minutes. We recommend this option if you are looking to enhance your registration and sign-in flows, or want to add strong passwordless two-factor authentication to your website.
 
@@ -13,13 +15,17 @@ Our native Authentiq Connect SDK is easy to use and leverages features of OpenID
 OpenID Connect is an extention to OAuth 2.0 that standardizes user authentication and forms the basis of Authentiq Connect. 
 {: class="alert alert-success" role="alert" }
 
-## Obtaining a Client ID
+## Client registration
+
+[TBD]
 
 Whether or not your integration is going to be native or third-party, you will need to [register your application](clients.md) with an Authentiq Connect Provider and obtain a unique client identifier. Use the `client_id` in your preferred OAuth 2.0 client library, or when customizing your native Authentiq Connect snippet below. 
 
 
+
 ## Integration comparison
 
+[Move to Overview]
 
 The following table highlights key differences between the protocol variants.
 
@@ -35,13 +41,14 @@ End-to-end encryption of user information | Soon | No | No
 Authentiq Connect Provider needs to be trusted by client | No | Yes | Yes
 Authentiq Connect Provider needs to persist user information | No | Depends | Yes
 
-# Authentiq JS
 
-In terms of end-user experience, the smoothest integration option is to simply include our Authentiq Connect snippet on your page. Use the snippet configurator to easily generate cusomtized snippet code for your situation, or copy paste and adjust the example snippet below.
+# AuthentiqJS
+
+In terms of user experience, the smoothest integration option is to simply include our AuthentiqJS snippet on your page. You can use the snippet configurator to easily generate cusomtized snippet code for your application, or copy and adjust the example snippet below.
 
 ## Configurator
 
-Create your own Authentiq button with the Button Configurator.
+Create your own Authentiq button with the configurator
 
 <div class="panel panel-default">
   <div class="panel-heading">
