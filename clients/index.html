@@ -6,18 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <meta name="author" content="The Authentiq team">
-        <link rel="canonical" href="http://developers.authentiq.io/api-provider/">
+        <link rel="canonical" href="http://developers.authentiq.io/clients/">
         <link rel="shortcut icon" href="../images/favicon.png">
         
 
-        <title>Connect - Authentiq Connect</title>
+        <title>Your clients - Authentiq Connect</title>
 
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <!-- <link href="../css/font-awesome-4.0.3.css" rel="stylesheet"> -->
         <link rel="stylesheet" href="../css/highlight.css">
         <link href="../css/base.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro" rel="stylesheet" type="text/css">
-        <link href="../swagger/css/custom.css" rel="stylesheet">
+        <link href="../static/css/authentiq-console.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -49,21 +49,12 @@
         </script>
 
         
-        <script src="../swagger/lib/jquery.slideto.min.js"></script>
-        <script src="../swagger/lib/jquery.wiggle.min.js"></script>
-        <script src="../swagger/lib/jquery.ba-bbq.min.js"></script>
-        <script src="../swagger/lib/handlebars-2.0.0.js"></script>
-        <script src="../swagger/lib/underscore-min.js"></script>
-        <script src="../swagger/lib/backbone-min.js"></script>
-        <script src="../swagger/swagger-ui.js"></script>
-        <script src="../swagger/lib/highlight.7.3.pack.js"></script>
-        <script src="../swagger/lib/marked.js"></script>
-        <script src="../swagger/lib/swagger-oauth.js"></script>
+        <script src="../static/js/authentiq-console.js"></script>
 
         
     </head>
 
-    <body>
+    <body data-angular="1">
         <div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
     <div class="container">
 
@@ -105,12 +96,12 @@
             
             
             
-                <li class="dropdown active">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">API Reference <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
-                        <li class="active">
-                            <a href="./">Connect</a>
+                        <li >
+                            <a href="../api-provider/">Connect</a>
                         </li>
                     
                         <li >
@@ -122,14 +113,14 @@
             
             
             
-                <li >
-                    <a href="../yourapps/">Your Apps</a>
+                <li class="active">
+                    <a href="./">Your clients</a>
                 </li>
             
             
             
                 <li >
-                    <a href="../faq/">FAQs</a>
+                    <a href="../faq/">FAQ</a>
                 </li>
             
             
@@ -140,8 +131,8 @@
                 <li>
                     <button class="btn btn-primary navbar-btn authentiq-button"
                         data-response-type="id_token token"
-                        data-redirect-uri="/redirect.html"
-                        data-scope="openid email~rs aq:name aq:push"
+                        data-redirect-uri="/clients/"
+                        data-scope="email~rs aq:name aq:push userinfo openid"
                         data-sign-out-claim="given_name">
                         Sign in
                     </button>
@@ -153,121 +144,15 @@
 </div>
         <div class="container">
             
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-    
-        <li class="main active"><a href="#authentication">Authentication</a></li>
-        
-            <li><a href="#authorize">/authorize</a></li>
-        
-            <li><a href="#token">/token</a></li>
-        
-            <li><a href="#userinfo">/userinfo</a></li>
-        
-    
-        <li class="main "><a href="#client-management">Client Management</a></li>
-        
-            <li><a href="#client">/client</a></li>
-        
-            <li><a href="#clientclient_id">/client/&lt;client_id&gt;</a></li>
-        
-    
-        <li class="main "><a href="#session-management">Session Management</a></li>
-        
-            <li><a href="#authorizelogout">/authorize/logout</a></li>
-        
-            <li><a href="#authorizeiframe">/authorize/iframe</a></li>
-        
-    
-        <li class="main "><a href="#sessions">Sessions</a></li>
-        
-            <li><a href="#session">/session</a></li>
-        
-            <li><a href="#clientclient_idsession">/client/&lt;client_id&gt;/session</a></li>
-        
-    
-    </ul>
+                <div id="main" class="col-md-12" role="main">
+
+<div ng-app="AQProviderConsole">
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            <div ui-view></div> <!-- This is where our views will load -->
+        </div>
+    </div>
 </div></div>
-                <div id="main" class="col-md-9" role="main">
-
-<div id="temp-anchor-links" class="hidden">
-
-<h1 id="authentication">Authentication</h1>
-<h2 id="authorize">/authorize</h2>
-<h2 id="token">/token</h2>
-<h2 id="userinfo">/userinfo</h2>
-<h1 id="client-management">Client Management</h1>
-<h2 id="client">/client</h2>
-<h2 id="clientclient_id">/client/&lt;client_id&gt;</h2>
-<h1 id="session-management">Session Management</h1>
-<h2 id="authorizelogout">/authorize/logout</h2>
-<h2 id="authorizeiframe">/authorize/iframe</h2>
-<h1 id="sessions">Sessions</h1>
-<h2 id="session">/session</h2>
-<h2 id="clientclient_idsession">/client/&lt;client_id&gt;/session</h2>
-</div>
-
-<div class="row">
-  <div class="swagger-section col-md-12">
-    <div id="message-bar" class="swagger-ui-wrap">&nbsp;</div>
-    <div id="swagger-ui-container" class="swagger-ui-wrap" style="min-height: 250px;"></div>
-  </div>
-</div>
-
-<script type="text/javascript">
-  $(function () {
-    var url,
-        path = (window.location.host === '127.0.0.1:8000') ? '' : '/authentiq-docs';
-
-    url = window.location.origin + path + '/swagger/provider.yaml';
-
-    window.swaggerUi = new SwaggerUi({
-      url: url,
-      dom_id: "swagger-ui-container",
-      supportedSubmitMethods: [],
-      // supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
-      onComplete: function(swaggerApi, swaggerUi){
-
-        $('#temp-anchor-links').remove();
-
-        $('body').scrollspy('refresh');
-
-        $('pre code').each(function(i, e) {
-          hljs.highlightBlock(e)
-        });
-
-        addApiKeyAuthorization();
-      },
-      onFailure: function(data) {
-        log("Unable to Load SwaggerUI");
-      },
-      docExpansion: "none",
-      apisSorter: "alpha",
-      showRequestHeaders: false
-    });
-
-    function addApiKeyAuthorization(){
-      var key;
-      if ('authentiq' in window) {
-        key = window.authentiq.Token.getAuthorizationHeader();
-      }
-
-      if(key && key.trim() != "") {
-          var token = new SwaggerClient.ApiKeyAuthorization("authorization", key, "header");
-          window.swaggerUi.api.clientAuthorizations.add("Authorization", token);
-          log("added key " + key);
-      }
-    }
-
-    window.swaggerUi.load();
-
-    function log() {
-      if ('console' in window) {
-        console.log.apply(console, arguments);
-      }
-    }
-  });
-</script></div>
                
         </div>
 

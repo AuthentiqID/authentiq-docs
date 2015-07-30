@@ -1,0 +1,54 @@
+{
+    "pageTitle": "Authentiq Provider Console",
+    "pageContent": "Authentiq Provider Console",
+    
+    "home.introText": "Sign in to manage your clients.",
+    
+    "documentation.introText": "Documentation placeholder",
+
+    "menu.client": "My clients",
+    "menu.documentation": "Documentation",
+
+    "cmd.add": "Add",
+    "cmd.refresh": "Refresh",
+    "cmd.view": "View",
+    "cmd.edit": "Edit",
+    "cmd.delete": "Delete", 
+    "cmd.confirmDeletion": "Delete",
+    "cmd.create": "Create", 
+    "cmd.modify": "Modify", 
+    "cmd.update": "Update", 
+    "cmd.cancel": "Cancel", 
+    "cmd.save": "Save", 
+    "cmd.back": "Back", 
+    "cmd.done": "Done", 
+
+    "label.client.singular": "Client",
+    "label.client.plural": "Clients",
+    "label.client.select": "Select Client",
+    "label.client.edit": "Edit Client",
+    "label.client.create": "Create Client",
+    "label.client.delete": "Delete Client",
+
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "aq:name": "Name",
+    "aq:location": "Location",
+    "aq:push": "One click sign-in",
+    "aq:dev": "Device token staple",
+    
+    "email.tooltip": "A user's email address",
+    "phone.tooltip": "A user's phone number",
+    "address.tooltip": "A user's street address",
+    "aq:name.tooltip": "A user's full name",
+    "aq:location.tooltip": "A user's current location",
+    "aq:push.tooltip": "One click sign-in",
+    "aq:dev.tooltip": "Device token staple",
+
+    "dialog.confirm.delete.title": "Confirm deletion",
+    "dialog.confirm.delete.message.selected": "Please confirm you want to delete <strong>all the selected items</strong> (total: {{count}}).<br/>Note: Deletions are final. There is no Undo for this operation.",
+    "dialog.confirm.delete.message.filtered": "Please confirm you want to delete <strong>all the filtered items</strong> (total: {{count}}).<br/>Note: Deletions are final. There is no Undo for this operation.",
+    "dialog.confirm.delete.cmd.delete": "Delete",
+    "dialog.confirm.delete.cmd.cancel": "Cancel"
+}
