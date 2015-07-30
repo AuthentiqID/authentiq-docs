@@ -1,4 +1,5 @@
 content_javascript: ../static/js/authentiq-console.js
+toc_with_angular: true
 
 # Introduction
 
@@ -57,7 +58,7 @@ Create your own Authentiq button with the Button Configurator.
           <option value="PLACEHOLDER_CLIENT_ID">Select an existing client ID</option>
         </select>
       </div>
-      <a href="#/clients/add" id="add-client-button" class="btn btn-primary disabled" data-toggle="modal" data-target="#add-client">Create new client</a>
+      <a href="#/clients/add" id="add-client-button" class="btn btn-primary disabled" data-toggle="modal" data-angular-link data-target="#add-client">Create new client</a>
     </form>
   </div>
 </div>
@@ -366,36 +367,38 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
 
       generate_button();
 
-      $('#add-client').on('show.bs.modal', function(e) {
-        var self = $(this);
-
-        window.location.hash = '/clients/add';
+      $('#add-client')
+        .on('show.bs.modal', function(e) {
+          window.location.hash = '/clients/add';
+        })  
         
-        $('.page-header').hide();
+        .on('shown.bs.modal', function(e) {
+          var self = $(this);
+          $('.page-header').hide();
 
-        self.find('#save-button').on('click', function(){
-          self.find('.modal-body')
-              .children().hide()
-              .parent().append('<div class="progress"><div class="progress-bar progress-bar-success progress-bar-striped progress-bar-anim" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>');
-              self.find('.progress-bar').width('100%');
+          self.find('#save-button').on('click', function(){
+            self.find('.modal-body')
+                .children().hide()
+                .parent().append('<div class="progress"><div class="progress-bar progress-bar-success progress-bar-striped progress-bar-anim" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>');
+                self.find('.progress-bar').width('100%');
 
-          // wait a bit for
-          setTimeout(function() {
+            // wait a bit for
+            setTimeout(function() {
+              self.modal('hide');
+
+              self.find('.progress').remove()
+              self.find('.modal-body').children().show();
+
+              fetch_clients(function(){
+                $('#existing-client-id option:last-child').attr('selected', 'selected');
+              });
+            }, 3000);
+          });
+          
+          self.find('#cancel-button').on('click', function(){
             self.modal('hide');
-
-            self.find('.progress').remove()
-            self.find('.modal-body').children().show();
-
-            fetch_clients(function(){
-              $('#existing-client-id option:last-child').attr('selected', 'selected');
-            });
-          }, 3000);
+          });
         });
-        
-        self.find('#cancel-button').on('click', function(){
-          self.modal('hide');
-        });
-      });
       
       $('#get-code-modal').on('show.bs.modal', function(e) {
         var button_opts = {}, script_opts = {},

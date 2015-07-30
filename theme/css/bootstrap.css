@@ -5,8 +5,8 @@
  */
 
 /*!
- * Generated using the Bootstrap Customizer (http://127.0.0.1:9001/customize/?id=88781de4225ef4b08db1)
- * Config saved to config.json and https://gist.github.com/88781de4225ef4b08db1
+ * Generated using the Bootstrap Customizer (<none>)
+ * Config saved to config.json and <none>
  */
 /*!
  * Bootstrap v3.3.4 (http://getbootstrap.com)
@@ -8559,9 +8559,9 @@ button.close {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
 .btn {
-  -webkit-transition: all 0.2s;
-  -o-transition: all 0.2s;
-  transition: all 0.2s;
+  -webkit-transition: background 0.2s;
+  -o-transition: background 0.2s;
+  transition: background 0.2s;
 }
 .btn.disabled,
 .btn[disabled],

@@ -74,8 +74,7 @@
         {% endif %}
     </head>
 
-    <body>
-
+    <body {% if meta.toc_with_angular %}data-angular="1"{% endif %}>
         {% include "nav.html" %}
         <div class="container">
             {% if meta.hide_toc %}
