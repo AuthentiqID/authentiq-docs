@@ -1,6 +1,3 @@
-content_javascript: ../static/js/authentiq-console.js
-toc_with_angular: true
-
 # Introduction
 
 This page describes how to allow your users to sign in with Authentiq ID on your website in minutes.
@@ -145,14 +142,7 @@ Create your own Authentiq button with the Button Configurator.
         <h4 class="modal-title" id="myModalLabel">Create a new client</h4>
       </div>
       <div class="modal-body">
-        <!-- <iframe src="/clients/#/clients/add"></iframe> -->
-        <div ng-app="AQProviderConsole">
-          <div class="row">
-            <div class="col-md-offset-1 col-md-10">
-              <div ui-view></div> <!-- This is where our views will load -->
-            </div>
-          </div>
-        </div>
+        <iframe src="/console.html/#/clients/add" frameborder="0" width="100%" height="100%"></iframe>
       </div>
     </div>
   </div>
@@ -330,8 +320,47 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
       }
     }
 
+    function console_iframe_loaded() {
+      
+      var self = $('#add-client');
+      var iframe = self.find('iframe').contents();
+      var app = iframe.find('#app');
+      self.find('iframe').css('height', app.height());
+
+      app.find('.page-header').hide();
+
+      iframe.find('.progress').hide().find('.progress-bar').width('0%');
+      app.show();
+      
+      app.on('click', '#save-button', function(){
+        app.hide();
+        iframe.find('.progress').show().find('.progress-bar').addClass('progress-bar-anim').width('100%');
+        self.find('iframe').css('height', '50px');
+
+        // wait a bit for
+        setTimeout(function() {
+          self.modal('hide');
+
+          self.find('.progress').remove();
+          self.find('.modal-body').children().show();
+
+          fetch_clients(function(){
+            $('#existing-client-id option:last-child').attr('selected', 'selected');
+          });
+        }, 3000);
+      });
+      
+      app.on('click', '#cancel-button', function(){
+        self.modal('hide');
+      });
+    };
+    aq.console_iframe_loaded = console_iframe_loaded;
+
     authentiq.subscribe('profile', function(profile) {
       $('#add-client-button').removeClass('disabled');
+
+      // redirect iframe to add view
+      $('#add-client iframe')[0].contentWindow.location.hash = '/clients/add';
 
       fetch_clients();
     });
@@ -357,37 +386,14 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
 
       generate_button();
 
+
       $('#add-client')
         .on('show.bs.modal', function(e) {
-          window.location.hash = '/clients/add';
+          console_iframe_loaded();
         })  
         
-        .on('shown.bs.modal', function(e) {
-          var self = $(this);
-          $('.page-header').hide();
-
-          self.find('#save-button').on('click', function(){
-            self.find('.modal-body')
-                .children().hide()
-                .parent().append('<div class="progress"><div class="progress-bar progress-bar-success progress-bar-striped progress-bar-anim" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>');
-                self.find('.progress-bar').width('100%');
-
-            // wait a bit for
-            setTimeout(function() {
-              self.modal('hide');
-
-              self.find('.progress').remove()
-              self.find('.modal-body').children().show();
-
-              fetch_clients(function(){
-                $('#existing-client-id option:last-child').attr('selected', 'selected');
-              });
-            }, 3000);
-          });
-          
-          self.find('#cancel-button').on('click', function(){
-            self.modal('hide');
-          });
+        .on('hidden.bs.modal', function(e) {
+          $(this).find('iframe')[0].contentWindow.location.hash = '/clients/add';
         });
       
       $('#get-code-modal').on('show.bs.modal', function(e) {
@@ -427,7 +433,7 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
         // $(this).find('.modal-content #script-snippet').html('ds');
       });
 
-      // $('#get-code-button').trigger('click');
+      // $('#add-client-button').trigger('click');
     });
   })(window.authentiq = window.authentiq || {}, jQuery);
 </script>

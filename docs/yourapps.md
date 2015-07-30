@@ -1,6 +1,5 @@
 content_css:        ../static/css/authentiq-console.css
 content_javascript: ../static/js/authentiq-console.js
-toc_with_angular: true
 hide_toc: true
 
 <div ng-app="AQProviderConsole">
