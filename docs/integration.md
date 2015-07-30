@@ -38,7 +38,7 @@ End-to-end encryption of user information | Soon | No | No
 Authentiq Connect Provider needs to be trusted by client | No | Yes | Yes
 Authentiq Connect Provider needs to persist user information | No | Depends | Yes
 
-# Native SDK
+# Authentiq JS
 
 In terms of end-user experience, the smoothest integration option is to simply include our Authentiq Connect snippet on your page. Use the snippet configurator to easily generate cusomtized snippet code for your situation, or copy paste and adjust the example snippet below.
 
@@ -205,7 +205,7 @@ HTTP status code | Action
 
 # Third-party integrations
 
-
+TBD
 
 Typical option | What to fill in
 -------------- | ---------------
@@ -216,29 +216,19 @@ Typical option | What to fill in
 `token_uri` | `https://connect.authentiq.io/token`
 `userinfo_uri` | `https://connect.authentiq.io/userinfo`
 
-## Client-side frameworks
 
-A list of client libraries using OAuth's *implicit* grant type. Please add relevant solutions to this list if they are missing.
-
-
-### Hello.js
+## HelloJS
 
 There is a [fork of HelloJS](https://github.com/skion/hello.js) that includes an [Authentiq Connect plugin](https://github.com/skion/hello.js/blob/master/src/modules/authentiq.js). HelloJS abstracts away the implementation differences between a large number of standard OAuth 2.0 identity providers. We'll aim to get Authentiq Connect included as a supported provider soon.
 
-### Angular JS
+## AngularJS
 
 At least two OAuth 2.0 modules exist for AngularJS, both of which have been tested to work with Authentiq Connect.
 
 - [OAuth-ng](https://github.com/andreareginato/oauth-ng/blob/master/README.md) 
 - [Angular-OAuth](https://github.com/seegno/angular-oauth2)
 
-
-## Server-side frameworks
-
-A list of libraries to be used with server applications, supporting (at least) OAuth's *authorization_code* grant type. Please add relevant solutions to this list if they are missing.
-
-
-### Flask
+## Flask
 
 There are several authentication extensions for Flask... [TBD]
 

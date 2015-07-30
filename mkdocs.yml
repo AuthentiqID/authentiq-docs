@@ -11,24 +11,26 @@ copyright: '<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc
 theme_dir: 'theme'
 extra_css:
   - "//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro"
+extra_templates:
+  - examples/basic.html
 markdown_extensions:
   - markdown.extensions.attr_list
   - markdown.extensions.codehilite
   - markdown.extensions.def_list
   - markdown.extensions.smarty
 pages:
-  - 'Overview' : 'index.md'
-  - 'Integration' : 'integration.md'
-  - 'Installation' : 'installation.md'
-  - 'API Reference' :
-    - 'Connect' : 'api-provider.md'
-    - 'Issuer' : 'api-issuer.md'
-  - 'Your clients' : 'clients.md'
-  - 'FAQ' : 'faq.md'
+  - 'Overview': 'index.md'
+  - 'Integration': 'integration.md'
+  - 'Installation': 'installation.md'
+  - 'API Reference':
+    - 'Connect': 'api-provider.md'
+    - 'Issuer': 'api-issuer.md'
+  - 'Your Apps': 'yourapps.md'
+  - 'FAQs': 'faq.md'
 extra:
     version: 0.1.0  # {{ config.extra.version }}
     enable_tota11y: true
     snippet:
       client_id: test-js-snippet
       redirect_uri: /clients/
-      scope: email~rs aq:name aq:push userinfo openid
+      scope: openid email~rs aq:name aq:push
