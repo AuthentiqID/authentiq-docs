@@ -113,13 +113,13 @@
             
             
                 <li >
-                    <a href="../clients/">Your clients</a>
+                    <a href="../yourapps/">Your Apps</a>
                 </li>
             
             
             
                 <li >
-                    <a href="../faq/">FAQ</a>
+                    <a href="../faq/">FAQs</a>
                 </li>
             
             
@@ -131,7 +131,7 @@
                     <button class="btn btn-primary navbar-btn authentiq-button"
                         data-response-type="id_token token"
                         data-redirect-uri="/clients/"
-                        data-scope="email~rs aq:name aq:push userinfo openid"
+                        data-scope="openid email~rs aq:name aq:push"
                         data-sign-out-claim="given_name">
                         Sign in
                     </button>
@@ -153,7 +153,7 @@
             <li><a href="#integration-comparison">Integration comparison</a></li>
         
     
-        <li class="main "><a href="#native-sdk">Native SDK</a></li>
+        <li class="main "><a href="#authentiq-js">Authentiq JS</a></li>
         
             <li><a href="#configurator">Configurator</a></li>
         
@@ -164,9 +164,11 @@
     
         <li class="main "><a href="#third-party-integrations">Third-party integrations</a></li>
         
-            <li><a href="#client-side-frameworks">Client-side frameworks</a></li>
+            <li><a href="#hellojs">HelloJS</a></li>
         
-            <li><a href="#server-side-frameworks">Server-side frameworks</a></li>
+            <li><a href="#angularjs">AngularJS</a></li>
+        
+            <li><a href="#flask">Flask</a></li>
         
     
         <li class="main "><a href="#other-integrations">Other integrations</a></li>
@@ -190,7 +192,7 @@
 <p>Our native Authentiq Connect SDK is easy to use and leverages features of OpenID Connect to obtain a rich authentication experience. But our protocol also works with many of the great third-party OAuth 2.0 client libraries out there already. Deciding what works best for you depends heavily on your situation. In practice, generic OAuth 2.0 libraries tend to work well, but will be less optimized in terms of performance and user experience.</p>
 <p class="alert alert-success" role="alert">OpenID Connect is an extention to OAuth 2.0 that standardizes user authentication and forms the basis of Authentiq Connect. </p>
 <h2 id="obtaining-a-client-id">Obtaining a Client ID</h2>
-<p>Whether or not your integration is going to be native or third-party, you will need to <a href="../clients/">register your application</a> with an Authentiq Connect Provider and obtain a unique client identifier. Use the <code>client_id</code> in your preferred OAuth 2.0 client library, or when customizing your native Authentiq Connect snippet below. </p>
+<p>Whether or not your integration is going to be native or third-party, you will need to <a href="clients.md">register your application</a> with an Authentiq Connect Provider and obtain a unique client identifier. Use the <code>client_id</code> in your preferred OAuth 2.0 client library, or when customizing your native Authentiq Connect snippet below. </p>
 <h2 id="integration-comparison">Integration comparison</h2>
 <p>The following table highlights key differences between the protocol variants.</p>
 <table>
@@ -259,7 +261,7 @@
 </tr>
 </tbody>
 </table>
-<h1 id="native-sdk">Native SDK</h1>
+<h1 id="authentiq-js">Authentiq JS</h1>
 <p>In terms of end-user experience, the smoothest integration option is to simply include our Authentiq Connect snippet on your page. Use the snippet configurator to easily generate cusomtized snippet code for your situation, or copy paste and adjust the example snippet below.</p>
 <h2 id="configurator">Configurator</h2>
 <p>Create your own Authentiq button with the Button Configurator.</p>
@@ -399,7 +401,7 @@
 <tr>
 <td>client_id</td>
 <td>Your registered application ID.</td>
-<td>None, obtain a unique ID from the <a href="../clients/">Client Console</a>.</td>
+<td>None, obtain a unique ID from the <a href="clients.md">Client Console</a>.</td>
 </tr>
 <tr>
 <td>provider_uri</td>
@@ -479,6 +481,7 @@
 </tbody>
 </table>
 <h1 id="third-party-integrations">Third-party integrations</h1>
+<p>TBD</p>
 <table>
 <thead>
 <tr>
@@ -513,19 +516,15 @@
 </tr>
 </tbody>
 </table>
-<h2 id="client-side-frameworks">Client-side frameworks</h2>
-<p>A list of client libraries using OAuth&rsquo;s <em>implicit</em> grant type. Please add relevant solutions to this list if they are missing.</p>
-<h3 id="hellojs">Hello.js</h3>
+<h2 id="hellojs">HelloJS</h2>
 <p>There is a <a href="https://github.com/skion/hello.js">fork of HelloJS</a> that includes an <a href="https://github.com/skion/hello.js/blob/master/src/modules/authentiq.js">Authentiq Connect plugin</a>. HelloJS abstracts away the implementation differences between a large number of standard OAuth 2.0 identity providers. We&rsquo;ll aim to get Authentiq Connect included as a supported provider soon.</p>
-<h3 id="angular-js">Angular JS</h3>
+<h2 id="angularjs">AngularJS</h2>
 <p>At least two OAuth 2.0 modules exist for AngularJS, both of which have been tested to work with Authentiq Connect.</p>
 <ul>
 <li><a href="https://github.com/andreareginato/oauth-ng/blob/master/README.md">OAuth-ng</a> </li>
 <li><a href="https://github.com/seegno/angular-oauth2">Angular-OAuth</a></li>
 </ul>
-<h2 id="server-side-frameworks">Server-side frameworks</h2>
-<p>A list of libraries to be used with server applications, supporting (at least) OAuth&rsquo;s <em>authorization_code</em> grant type. Please add relevant solutions to this list if they are missing.</p>
-<h3 id="flask">Flask</h3>
+<h2 id="flask">Flask</h2>
 <p>There are several authentication extensions for Flask&hellip; [TBD]</p>
 <h1 id="other-integrations">Other integrations</h1>
 <p>As support for OpenID Connect increases, we expect to see more and more sites that will allow administrators to configure external OIDC identity provider for user authentication, vastly improving the ecosystem for Authentiq ID integrations as well. We already see companies like Amazon and SalesForce making this possible.   </p>
