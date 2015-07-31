@@ -4,7 +4,7 @@ Some answers to questions people have asked. Do you have a different question? P
 
 ## General
 
-### What is Authentiq ID?
+### What is an Authentiq ID?
 
 When you download our app and create a profile, that is your very own Authentiq ID. Use it to sign into websites, or share your details in other ways.
 
@@ -16,11 +16,20 @@ Authentiq Connect is the SDK you can use to let your users sign in to your stuff
 
 [OpenID Connect 1.0](http://openid.net/connect/) is a set of extensions to OAuth 2.0, focusing on authentication as opposed to authorization. Many global players are backing OpenID Connect to authenticate users. OpenID Connect is technically very different from the older OpenID.
 
+### Who signs the Authentiq ID claims?
+
+At the moment we verify and sign the email and phone number claims when a user registers their Authentiq ID, so that you don't have to time and money doing your own email and SMS verification. At some point in the future we will open up our signing APIs to allow external signature providers to issue and sign additional claims, for instance an employee number, or a car registration.
+
+### How does *One-click sign in* work?
+
+*One-click sign in* allows end-users, on repeated visits, to sign in to your site by simply tapping a push notification instead of scanning a QR code. It works by setting a cookie that links the user's browser and their phone. 
+
+
 ## Technical
 
 ### Can I use AuthentiqJS with a server application?
 
-Yes, the AuthentiqJS snippet supports the authorization code flow in two ways. First, you can let AuthentiqJS catch the authorization code via a fragment redirect and then POST it to a server side resource. This method is great for *hybrid* apps where both the user agent and the server must be authenticated. Alternatively, you can point the redirect URL directly to to a server-side resource, bypassing the snippet entirely after authentication and following the traditional OAuth 2.0 flow.
+Yes, even though the AuthentiqJS snippet is running in the user agent it supports the authorization code flow in two ways. First, you can let AuthentiqJS catch the authorization code from the Authentiq Provider via a fragment redirect and then POST it to your own server side resource. This method is great for *hybrid* apps where both the user agent and the server must be authenticated. Alternatively, you can point the redirect URL directly to a server-side resource, bypassing the snippet entirely upon authentication and following the traditional OAuth 2.0 code flow.
 
 ### Can I use Authentiq Connect with Framework X?
 
@@ -30,7 +39,7 @@ If your framework includes a decent OAuth 2.0 or OIDC client library, then most 
 
 ### How does Authentiq encrypt my data on my phone?
 
-On iOS, your Authentiq ID is automatically encrypted by the OS when the phone is locked, and decrypted when the phone is unlocked.
+On iOS, your Authentiq ID is automatically encrypted by the OS when the phone is locked, and decrypted when the phone is unlocked. For this reason it is important that the device has a passcode set, even though the Authentiq ID app itself can be protected with a PIN.
 
 ### How does Authentiq encrypt my data in transit?
 
