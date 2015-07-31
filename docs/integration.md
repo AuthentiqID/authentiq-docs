@@ -19,27 +19,7 @@ OpenID Connect is an extention to OAuth 2.0 that standardizes user authenticatio
 
 [TBD]
 
-Whether or not your integration is going to be native or third-party, you will need to [register your application](clients.md) with an Authentiq Connect Provider and obtain a unique client identifier. Use the `client_id` in your preferred OAuth 2.0 client library, or when customizing your native Authentiq Connect snippet below. 
-
-
-
-## Integration comparison
-
-[Move to Overview]
-
-The following table highlights key differences between the protocol variants.
-
-Feature | Authentiq Connect | OpenID Connect | OAuth 2.0
-------- | ----------------- | -------------- | ---------
-[Authorization code grant](https://tools.ietf.org/html/rfc6749#section-1.3.1) | Yes | Yes | Yes
-[Implicit grant](https://tools.ietf.org/html/rfc6749#section-1.3.2) | Yes | Yes | Yes
-[ID Token](http://openid.net/specs/openid-connect-core-1_0.html#IDToken) support | Yes | Yes | No
-Rich authentication UX | Standard | With some effort | Less
-Need to fetch user information with separate HTTP request | No | No | Yes
-End-to-end verification of user information | Yes | No | No 
-End-to-end encryption of user information | Soon | No | No 
-Authentiq Connect Provider needs to be trusted by client | No | Yes | Yes
-Authentiq Connect Provider needs to persist user information | No | Depends | Yes
+Whether or not your integration is going to be native or third-party, you will need to [register your application](clients.md) with an Authentiq Connect Provider and obtain a unique client identifier. Use the `client_id` in your preferred OAuth 2.0 client library, or when customizing your AuthentiqJS snippet below. 
 
 
 # AuthentiqJS
