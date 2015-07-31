@@ -20,7 +20,7 @@ Soon you will also be able to [install the Authentiq Connect daemon locally](ins
             data-button="yes">
     </script>
 
-You can view a [live demo](/examples/basic.html) of the above code wrapped in some basic HTML.
+You can view a [live demo](/examples/signin.html) of the above code wrapped in some basic HTML.
 
 Make sure to register the app as a [client-side or hybrid](#application-types) application, and to paste the exact URL your example is loaded on (e.g. `http://localhost:8000/authentiq.html`) in the `Redirect URI` field. This is an essential security measure for the Authentiq Connect server. An easy way to serve local files is by executing `python3 -m http.server` in the same directory.
 {: class="alert alert-info" role="alert" }

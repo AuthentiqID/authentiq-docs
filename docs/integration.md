@@ -15,7 +15,7 @@ Our native Authentiq Connect SDK is easy to use and leverages features of OpenID
 OpenID Connect is an extention to OAuth 2.0 that standardizes user authentication and forms the basis of Authentiq Connect. 
 {: class="alert alert-success" role="alert" }
 
-## Client registration
+## Register a client
 
 [TBD]
 
@@ -26,9 +26,7 @@ Whether or not your integration is going to be native or third-party, you will n
 
 In terms of user experience, the smoothest integration option is to simply include our AuthentiqJS snippet on your page. You can use the snippet configurator to easily generate cusomtized snippet code for your application, or copy and adjust the example snippet below.
 
-## Configurator
-
-Create your own Authentiq button with the configurator
+## Button
 
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -149,23 +147,79 @@ Create your own Authentiq button with the configurator
 
 ## Options
 
-The following `data-*` options are available.
+The following `data-*` attributes are available for the AuthentiqJS `<script>` and `<button>` tags.
 
-Name | Description | Default 
----- | ----------- | -------
-client_id | Your registered application ID. | None, obtain a unique ID from the [Client Console](clients.md).
-provider_uri | Provider Authorization URL. | `https://connect.authentiq.io/authorize`
-response_type | OIDC response type. Valid options are `code`, `code id_token`, `id_token`. | `id_token`
-response_mode | OIDC response mode. Valid options are `query`, `fragment`. | Depends on response type.
-redirect_uri | OAuth 2.0 redirect URL. | The current page, from *window.href.location*.
-scope | Profile scopes to request from user, as a space-separated list. Valid scopes are `email`, `phone`, `aq:name`, `aq:address`, `aq:location` and `aq:push`. Append `~r` to indicate that a scope is required and/or `~s` to indicate the scope should have a valid signature from a trusted Authentiq Issuer. | The default scopes registered for the client application.
-display | Authorization display mode. Valid choices are `page`, `popup` or `modal`. | `page`
-prompt | Preferred prompt method in Authentiq ID. Valid choices are `login`, `consent`. Providing `consent` overrides *One click sign-in* and prompts user for (re-)consent. | `login`
-ui_locales | Preferred laguage to display the authorization page in, represented as a space-separated list of BCP47 [RFC5646] language tag values, ordered by preference. Currently only `en` is supported. | `en`
-state | Client application state. | 32 bytes from *crypto.getRandomValues()*
-client_response_uri | URL to POST the received authorization response to for server side validation or processing. Method should return 200 or 400. This parameter is only used when `response_mode=fragment`, since otherwise . | None 
+Attribute | Description | Default value 
+--------- | ----------- | -------------
+client-id | Your registered application ID. | None, obtain a unique ID from the [Client Console](clients.md).
+provider-uri | Provider Authorization URL. Change this for [self-hosted installs](installation.md). | `https://connect.authentiq.io/authorize`
+scope | [Scopes](index.md#scopes) to request from user, as a space-separated list. Append `~r` to indicate that a scope is required and/or `~s` to indicate the scope should have a valid signature from a trusted Authentiq Issuer. | The scopes registered as defaults for the application.
+display | Authorization display mode. Valid choices are `page` (full page redirect), `popup` (popup window) and `modal` (modal iframe). | `modal`
+prompt | Preferred prompt method in Authentiq ID. Valid choices are `login` and `consent`. Providing `consent` essentially overrides *One click sign-in* and always prompts user for consent. | `login`
+response-type | OIDC response type. Valid options are `id_token`, `code` and `code id_token`. You will want to use `id_token` for client-side apps and `code id_token` for server-side or hybrid applications. Please make sure that your app is registered with the correct application type. | `id_token`
+response-mode | OIDC response mode. Valid options are `query` and `fragment`. Can usually be left alone, unless you need need to bypass AuthentiqJS and redirect directly to a server endpoint; in that case manually select `query`. | Usually `fragment`.
+redirect-uri | OAuth 2.0 redirect URL. Unless you need to redirect to a server side endpoint you can leave this alone and let AuthentiqJS use the URL of the current page. | The current page, from *window.href.location*.
+state | Client application state to prevent [cross site request forgeries (XSRF)](http://en.wikipedia.org/wiki/Cross-site_request_forgery). To support [older browsers](http://caniuse.com/#feat=getrandomvalues) it is possible to pass in a server generated nonce. | 32 bytes from *crypto.getRandomValues()*.
+client-response-uri | URL to POST the received authorization response to for server side validation or processing. Method should return 200 or 400. This parameter is only used when `response_mode=fragment`, since otherwise . | None 
 
-### Server side processing
+## Events
+
+AuthentiqJS allows you to subscribe to a number of events during the authentication flow.
+
+Event name | Description | Callback parameters
+---------- | ----------- | -------------------
+`authorized` | Emitted after successful authentication. | An object containing the URL fragments the provider sent upon successful authentication, e.g. one or more of `code`, `id_token`, `access_token`, `expires_in`, `expires_at` and `state`.
+`authorized:code` | Emitted after successful authentication when the response included an authorization code as is the case with response type `code` or `code id_token`. | The authorization `code` received from the provider.
+`authorized:access_token` | Emitted after successful authentication when the response included an access token as is the case with response type `token` or `token id_token`. | The `access_token` and `expires_in` values returned by the provider.
+`authorized:id_token` | Emitted after successful authentication when the response included an ID Token as is the case with response type `id_token` or `code id_token`. | The un-decoded `id_token` as a JWT. 
+`profile` | Emitted after successful authentication when the response included an ID Token the token was validated and decoded successfully. | The decoded `id_token` object.
+`concluded` | Emitted when the authentication session was concluded by the user signing out on the website, or terminating the session from the Authentiq ID mobile app. | N/A
+`error` | Emitted when an error occurs. Possible errors are liste. Note that depending on the [`show_errors` option](#ss) the error may have already been shown to the user by the provider. In this case, you may still find this event useful to silently gather error statistics. | The `error` code and `error_description` as defined by the OAuth 2.0, OIDC or Bearer Token RFCs.
+
+### Example
+
+To subscribe to an event, use a pattern like the following.
+
+Q: Is there no way to run this normally (i.e. not after DOMContentLoaded)?   
+{: class="alert alert-danger" role="alert" }
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    
+        authentiq.subscribe('profile', function(profile) {
+        
+          // Profile
+          // {
+          //   "scope": "email aq:name",
+          //   "name": "George Orwell",
+          //   "given_name": "George",
+          //   "family_name": "Orwell",
+          //   "email": "george@1984.net",
+          //   "email_verified": false
+          // }
+
+        });
+    
+        authentiq.subscribe('error', function(error) {
+        
+          // Error
+          // {
+          //   "error": "client_error",
+          //   "error_description": "Invalid state parameter"
+          // }
+
+        });
+    
+      }, false);
+    </script>
+   
+You can see how events work in another [live example](examples/events.html).
+
+The code that subscribes to the events must be placed before the AuthentiqJS script tag itself.
+{: class="alert alert-info" role="alert" }
+
+
+## Server side processing
 
 If the response mode is set to `fragment` (recommended), then `client_response_uri` can be used to still proxy the authorization response to your backend servers, as if you had specified `query` response mode. The backend server may do one or more of the following tasks:  
 
