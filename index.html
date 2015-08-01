@@ -161,6 +161,8 @@
         
             <li><a href="#application-types">Application types</a></li>
         
+            <li><a href="#integration-types">Integration types</a></li>
+        
             <li><a href="#scopes">Scopes</a></li>
         
             <li><a href="#errors">Errors</a></li>
@@ -201,7 +203,7 @@
 &lt;/script&gt;</code></pre>
 
 
-<p>You can view a <a href="./examples/basic.html">live demo</a> of the above code wrapped in some basic HTML.</p>
+<p>You can view a <a href="./examples/signin.html">live demo</a> of the above code wrapped in some basic HTML.</p>
 <p class="alert alert-info" role="alert">Make sure to register the app as a <a href="#application-types">client-side or hybrid</a> application, and to paste the exact URL your example is loaded on (e.g. <code>http://localhost:8000/authentiq.html</code>) in the <code>Redirect URI</code> field. This is an essential security measure for the Authentiq Connect server. An easy way to serve local files is by executing <code>python3 -m http.server</code> in the same directory.</p>
 <h2 id="next-steps">Next steps</h2>
 <p>Great, let&rsquo;s dive a bit deeper. Some suggestions:</p>
@@ -225,6 +227,74 @@
 <p>The Authentiq mobile app (currently on iOS) is the key to the end-user&rsquo;s privacy. The app creates and maintains a mobile identity&mdash;Authentiq ID&mdash;that can be used to authenticate. An Authentiq ID can be seen as a secure cryptographic passport that can hold various bits of profile information. Some of the information, like phone number and email address, are verified by Authentiq so that the website doesn&rsquo;t have to. The user still decides what to share and with whom.</p>
 <h2 id="application-types">Application types</h2>
 <p>TBD</p>
+<h2 id="integration-types">Integration types</h2>
+<p>The following table highlights key differences between the protocol variants.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Authentiq Connect</th>
+<th>OpenID Connect</th>
+<th>OAuth 2.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://tools.ietf.org/html/rfc6749#section-1.3.1">Authorization code grant</a></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="https://tools.ietf.org/html/rfc6749#section-1.3.2">Implicit grant</a></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">ID Token</a> support</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Rich authentication UX</td>
+<td>Standard</td>
+<td>With some effort</td>
+<td>Less</td>
+</tr>
+<tr>
+<td>Need to fetch user information with separate HTTP request</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>End-to-end verification of user information</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>End-to-end encryption of user information</td>
+<td>Soon</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Authentiq Connect Provider needs to be trusted by client</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Authentiq Connect Provider needs to persist user information</td>
+<td>No</td>
+<td>Depends</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
 <h2 id="scopes">Scopes</h2>
 <p>Authentiq Connect leverages OAuth 2.0 scopes to specify what sections of a user&rsquo;s profile are being requested, inheriting <a href="http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims">scopes from OIDC</a> where possible.</p>
 <h3 id="identity-claims">Identity claims</h3>

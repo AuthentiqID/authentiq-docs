@@ -147,18 +147,20 @@
     
         <li class="main active"><a href="#introduction">Introduction</a></li>
         
-            <li><a href="#client-registration">Client registration</a></li>
-        
-            <li><a href="#integration-comparison">Integration comparison</a></li>
+            <li><a href="#register-a-client">Register a client</a></li>
         
     
         <li class="main "><a href="#authentiqjs">AuthentiqJS</a></li>
         
-            <li><a href="#configurator">Configurator</a></li>
+            <li><a href="#button">Button</a></li>
         
             <li><a href="#example">Example</a></li>
         
             <li><a href="#options">Options</a></li>
+        
+            <li><a href="#events">Events</a></li>
+        
+            <li><a href="#server-side-processing">Server side processing</a></li>
         
     
         <li class="main "><a href="#third-party-integrations">Third-party integrations</a></li>
@@ -191,82 +193,12 @@
 <p>There are a few important differences to consider when evaluating integration options.</p>
 <p>Our native Authentiq Connect SDK is easy to use and leverages features of OpenID Connect to obtain a rich authentication experience. But our protocol also works with many of the great third-party OAuth 2.0 client libraries out there already. Deciding what works best for you depends heavily on your situation. In practice, generic OAuth 2.0 libraries tend to work well, but will be less optimized in terms of performance and user experience.</p>
 <p class="alert alert-success" role="alert">OpenID Connect is an extention to OAuth 2.0 that standardizes user authentication and forms the basis of Authentiq Connect. </p>
-<h2 id="client-registration">Client registration</h2>
+<h2 id="register-a-client">Register a client</h2>
 <p>[TBD]</p>
-<p>Whether or not your integration is going to be native or third-party, you will need to <a href="clients.md">register your application</a> with an Authentiq Connect Provider and obtain a unique client identifier. Use the <code>client_id</code> in your preferred OAuth 2.0 client library, or when customizing your native Authentiq Connect snippet below. </p>
-<h2 id="integration-comparison">Integration comparison</h2>
-<p>[Move to Overview]</p>
-<p>The following table highlights key differences between the protocol variants.</p>
-<table>
-<thead>
-<tr>
-<th>Feature</th>
-<th>Authentiq Connect</th>
-<th>OpenID Connect</th>
-<th>OAuth 2.0</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://tools.ietf.org/html/rfc6749#section-1.3.1">Authorization code grant</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td><a href="https://tools.ietf.org/html/rfc6749#section-1.3.2">Implicit grant</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">ID Token</a> support</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Rich authentication UX</td>
-<td>Standard</td>
-<td>With some effort</td>
-<td>Less</td>
-</tr>
-<tr>
-<td>Need to fetch user information with separate HTTP request</td>
-<td>No</td>
-<td>No</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>End-to-end verification of user information</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-</tr>
-<tr>
-<td>End-to-end encryption of user information</td>
-<td>Soon</td>
-<td>No</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Authentiq Connect Provider needs to be trusted by client</td>
-<td>No</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Authentiq Connect Provider needs to persist user information</td>
-<td>No</td>
-<td>Depends</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
+<p>Whether or not your integration is going to be native or third-party, you will need to <a href="clients.md">register your application</a> with an Authentiq Connect Provider and obtain a unique client identifier. Use the <code>client_id</code> in your preferred OAuth 2.0 client library, or when customizing your AuthentiqJS snippet below. </p>
 <h1 id="authentiqjs">AuthentiqJS</h1>
 <p>In terms of user experience, the smoothest integration option is to simply include our AuthentiqJS snippet on your page. You can use the snippet configurator to easily generate cusomtized snippet code for your application, or copy and adjust the example snippet below.</p>
-<h2 id="configurator">Configurator</h2>
-<p>Create your own Authentiq button with the configurator</p>
+<h2 id="button">Button</h2>
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">1. Pick an Authentiq client <small>[Sign in first]</small></h3>
@@ -383,74 +315,153 @@
 
 
 <h2 id="options">Options</h2>
-<p>The following <code>data-*</code> options are available.</p>
+<p>The following <code>data-*</code> attributes are available for the AuthentiqJS <code>&lt;script&gt;</code> and <code>&lt;button&gt;</code> tags.</p>
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Attribute</th>
 <th>Description</th>
-<th>Default</th>
+<th>Default value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>client_id</td>
+<td>client-id</td>
 <td>Your registered application ID.</td>
 <td>None, obtain a unique ID from the <a href="clients.md">Client Console</a>.</td>
 </tr>
 <tr>
-<td>provider_uri</td>
-<td>Provider Authorization URL.</td>
+<td>provider-uri</td>
+<td>Provider Authorization URL. Change this for <a href="../installation/">self-hosted installs</a>.</td>
 <td><code>https://connect.authentiq.io/authorize</code></td>
 </tr>
 <tr>
-<td>response_type</td>
-<td>OIDC response type. Valid options are <code>code</code>, <code>code id_token</code>, <code>id_token</code>.</td>
-<td><code>id_token</code></td>
-</tr>
-<tr>
-<td>response_mode</td>
-<td>OIDC response mode. Valid options are <code>query</code>, <code>fragment</code>.</td>
-<td>Depends on response type.</td>
-</tr>
-<tr>
-<td>redirect_uri</td>
-<td>OAuth 2.0 redirect URL.</td>
-<td>The current page, from <em>window.href.location</em>.</td>
-</tr>
-<tr>
 <td>scope</td>
-<td>Profile scopes to request from user, as a space-separated list. Valid scopes are <code>email</code>, <code>phone</code>, <code>aq:name</code>, <code>aq:address</code>, <code>aq:location</code> and <code>aq:push</code>. Append <code>~r</code> to indicate that a scope is required and/or <code>~s</code> to indicate the scope should have a valid signature from a trusted Authentiq Issuer.</td>
-<td>The default scopes registered for the client application.</td>
+<td><a href="..#scopes">Scopes</a> to request from user, as a space-separated list. Append <code>~r</code> to indicate that a scope is required and/or <code>~s</code> to indicate the scope should have a valid signature from a trusted Authentiq Issuer.</td>
+<td>The scopes registered as defaults for the application.</td>
 </tr>
 <tr>
 <td>display</td>
-<td>Authorization display mode. Valid choices are <code>page</code>, <code>popup</code> or <code>modal</code>.</td>
-<td><code>page</code></td>
+<td>Authorization display mode. Valid choices are <code>page</code> (full page redirect), <code>popup</code> (popup window) and <code>modal</code> (modal iframe).</td>
+<td><code>modal</code></td>
 </tr>
 <tr>
 <td>prompt</td>
-<td>Preferred prompt method in Authentiq ID. Valid choices are <code>login</code>, <code>consent</code>. Providing <code>consent</code> overrides <em>One click sign-in</em> and prompts user for (re-)consent.</td>
+<td>Preferred prompt method in Authentiq ID. Valid choices are <code>login</code> and <code>consent</code>. Providing <code>consent</code> essentially overrides <em>One click sign-in</em> and always prompts user for consent.</td>
 <td><code>login</code></td>
 </tr>
 <tr>
-<td>ui_locales</td>
-<td>Preferred laguage to display the authorization page in, represented as a space-separated list of BCP47 [RFC5646] language tag values, ordered by preference. Currently only <code>en</code> is supported.</td>
-<td><code>en</code></td>
+<td>response-type</td>
+<td>OIDC response type. Valid options are <code>id_token</code>, <code>code</code> and <code>code id_token</code>. You will want to use <code>id_token</code> for client-side apps and <code>code id_token</code> for server-side or hybrid applications. Please make sure that your app is registered with the correct application type.</td>
+<td><code>id_token</code></td>
+</tr>
+<tr>
+<td>response-mode</td>
+<td>OIDC response mode. Valid options are <code>query</code> and <code>fragment</code>. Can usually be left alone, unless you need need to bypass AuthentiqJS and redirect directly to a server endpoint; in that case manually select <code>query</code>.</td>
+<td>Usually <code>fragment</code>.</td>
+</tr>
+<tr>
+<td>redirect-uri</td>
+<td>OAuth 2.0 redirect URL. Unless you need to redirect to a server side endpoint you can leave this alone and let AuthentiqJS use the URL of the current page.</td>
+<td>The current page, from <em>window.href.location</em>.</td>
 </tr>
 <tr>
 <td>state</td>
-<td>Client application state.</td>
-<td>32 bytes from <em>crypto.getRandomValues()</em></td>
+<td>Client application state to prevent <a href="http://en.wikipedia.org/wiki/Cross-site_request_forgery">cross site request forgeries (XSRF)</a>. To support <a href="http://caniuse.com/#feat=getrandomvalues">older browsers</a> it is possible to pass in a server generated nonce.</td>
+<td>32 bytes from <em>crypto.getRandomValues()</em>.</td>
 </tr>
 <tr>
-<td>client_response_uri</td>
+<td>client-response-uri</td>
 <td>URL to POST the received authorization response to for server side validation or processing. Method should return 200 or 400. This parameter is only used when <code>response_mode=fragment</code>, since otherwise .</td>
 <td>None</td>
 </tr>
 </tbody>
 </table>
-<h3 id="server-side-processing">Server side processing</h3>
+<h2 id="events">Events</h2>
+<p>AuthentiqJS allows you to subscribe to a number of events during the authentication flow.</p>
+<table>
+<thead>
+<tr>
+<th>Event name</th>
+<th>Description</th>
+<th>Callback parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>authorized</code></td>
+<td>Emitted after successful authentication.</td>
+<td>An object containing the URL fragments the provider sent upon successful authentication, e.g. one or more of <code>code</code>, <code>id_token</code>, <code>access_token</code>, <code>expires_in</code>, <code>expires_at</code> and <code>state</code>.</td>
+</tr>
+<tr>
+<td><code>authorized:code</code></td>
+<td>Emitted after successful authentication when the response included an authorization code as is the case with response type <code>code</code> or <code>code id_token</code>.</td>
+<td>The authorization <code>code</code> received from the provider.</td>
+</tr>
+<tr>
+<td><code>authorized:access_token</code></td>
+<td>Emitted after successful authentication when the response included an access token as is the case with response type <code>token</code> or <code>token id_token</code>.</td>
+<td>The <code>access_token</code> and <code>expires_in</code> values returned by the provider.</td>
+</tr>
+<tr>
+<td><code>authorized:id_token</code></td>
+<td>Emitted after successful authentication when the response included an ID Token as is the case with response type <code>id_token</code> or <code>code id_token</code>.</td>
+<td>The un-decoded <code>id_token</code> as a JWT.</td>
+</tr>
+<tr>
+<td><code>profile</code></td>
+<td>Emitted after successful authentication when the response included an ID Token the token was validated and decoded successfully.</td>
+<td>The decoded <code>id_token</code> object.</td>
+</tr>
+<tr>
+<td><code>concluded</code></td>
+<td>Emitted when the authentication session was concluded by the user signing out on the website, or terminating the session from the Authentiq ID mobile app.</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>Emitted when an error occurs. Possible errors are liste. Note that depending on the <a href="#ss"><code>show_errors</code> option</a> the error may have already been shown to the user by the provider. In this case, you may still find this event useful to silently gather error statistics.</td>
+<td>The <code>error</code> code and <code>error_description</code> as defined by the OAuth 2.0, OIDC or Bearer Token RFCs.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example_1">Example</h3>
+<p>To subscribe to an event, use a pattern like the following.</p>
+<p class="alert alert-danger" role="alert">Q: Is there no way to run this normally (i.e. not after DOMContentLoaded)? <br /></p>
+<pre class="codehilite"><code>&lt;script&gt;
+  document.addEventListener('DOMContentLoaded', function() {
+
+    authentiq.subscribe('profile', function(profile) {
+
+      // Profile
+      // {
+      //   &quot;scope&quot;: &quot;email aq:name&quot;,
+      //   &quot;name&quot;: &quot;George Orwell&quot;,
+      //   &quot;given_name&quot;: &quot;George&quot;,
+      //   &quot;family_name&quot;: &quot;Orwell&quot;,
+      //   &quot;email&quot;: &quot;george@1984.net&quot;,
+      //   &quot;email_verified&quot;: false
+      // }
+
+    });
+
+    authentiq.subscribe('error', function(error) {
+
+      // Error
+      // {
+      //   &quot;error&quot;: &quot;client_error&quot;,
+      //   &quot;error_description&quot;: &quot;Invalid state parameter&quot;
+      // }
+
+    });
+
+  }, false);
+&lt;/script&gt;</code></pre>
+
+
+<p>You can see how events work in another <a href="../examples/events.html">live example</a>.</p>
+<p class="alert alert-info" role="alert">The code that subscribes to the events must be placed before the AuthentiqJS script tag itself.</p>
+<h2 id="server-side-processing">Server side processing</h2>
 <p>If the response mode is set to <code>fragment</code> (recommended), then <code>client_response_uri</code> can be used to still proxy the authorization response to your backend servers, as if you had specified <code>query</code> response mode. The backend server may do one or more of the following tasks:  </p>
 <ul>
 <li>Validate the ID Token, if present, using cryptographic functions available on the server and return a 400 response in case of a validation error.</li>
@@ -570,10 +581,10 @@
       var token = JSON.parse(localStorage['ngStorage-authentiq.access_token'] || '{}');
       if (typeof token.access_token !== 'undefined' && !!token.expires_at && new Date(token.expires_at) > new Date()) {
 
-        var base_url = authentiq._defaults.provider.base_url || 'https://connect.authentiq.io';
+        var provider_uri = authentiq._defaults.provider.provider_uri || 'https://connect.authentiq.io';
 
         $.ajax({
-          url: base_url + '/client',
+          url: provider_uri + '/client',
           headers: {
             'Authorization': token.token_type + ' ' + token.access_token
           },

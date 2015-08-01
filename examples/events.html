@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Authentiq example</title>
+</head>
+<body>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var div = document.getElementById('authentiq-profile');
+
+      authentiq.subscribe('profile', function(profile) {
+        div.innerHTML = "<pre>" + JSON.stringify(profile, null, "\t") + "</pre>";
+      });
+
+      authentiq.subscribe('concluded', function() {
+        div.innerHTML = "You were signed out, it was nice meeting you!";
+      });
+
+      authentiq.subscribe('error', function(error, error_description) {
+        div.innerHTML = "Something went wrong: " + error.error + "; " + error.error_description;
+      });
+    }, false);
+  </script>
+
+  <script src="http://127.0.0.1:8001/dist/authentiq.js"
+          class="authentiq-snippet"
+          data-button="yes"
+          data-provider-uri="http://192.168.0.10:5000/"
+          data-sign-out-claim="given_name"
+          data-display="page"
+          data-scope="email~r aq:name aq:push"
+          data-client-id="example-docs-implicit">
+  </script>
+
+  <div id="authentiq-profile"></div>
+
+</body>
+</html>
