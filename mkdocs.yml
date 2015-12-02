@@ -35,4 +35,5 @@ extra:
 extra_templates:
   - redirect.html
   - console.html
-  - examples/basic.html
+  - examples/signin.html
+  - examples/events.html

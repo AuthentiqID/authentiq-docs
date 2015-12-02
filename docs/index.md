@@ -2,7 +2,7 @@
 
 If you are reading this you're probably curious how to integrate [Authentiq](http://authentiq.com/) on your website. 
 
-The easiest to get started is to include the [AuthentiqJS snippet](#show-me-the-code) on your page as described below. Alternatively you can point your [favourite OAuth 2.0 or OpenID Connect client library](integration.md#/#third-party-integrations) at Authentiq.
+The easiest to get started is to include the [AuthentiqJS snippet](#show-me-the-code) on your page as described below. Alternatively you can point your [favourite OAuth 2.0 or OpenID Connect client library](integration.md#third-party-integrations) at Authentiq.
 
 As we run Authentiq Connect as a Service, there is no need to install or run anything locally.
 
@@ -14,13 +14,13 @@ Soon you will also be able to [install the Authentiq Connect daemon locally](ins
 
 [Register an app](integration.md#configurator) and paste the following code into an HTML page at the point where you want render a Sign in button. Replace the placeholder with the Client ID of your new application.
 
-      <script src="https://developers.authentiq.io/js/authentiq.js"
-              class="authentiq-snippet"
-              data-client-id="<YOUR-CLIENT-ID>"
-              data-button="yes">
-      </script>
+    <script src="https://developers.authentiq.io/js/authentiq.js"
+            class="authentiq-snippet"
+            data-client-id="<YOUR-CLIENT-ID>"
+            data-button="yes">
+    </script>
 
-You can view a [live demo](/examples/basic.html) of the above code wrapped in some basic HTML.
+You can view a [live demo](/examples/signin.html) of the above code wrapped in some basic HTML.
 
 Make sure to register the app as a [client-side or hybrid](#application-types) application, and to paste the exact URL your example is loaded on (e.g. `http://localhost:8000/authentiq.html`) in the `Redirect URI` field. This is an essential security measure for the Authentiq Connect server. An easy way to serve local files is by executing `python3 -m http.server` in the same directory.
 {: class="alert alert-info" role="alert" }
@@ -55,6 +55,23 @@ The Authentiq mobile app (currently on iOS) is the key to the end-user's privacy
 ## Application types
 
 TBD
+
+## Integration types
+
+The following table highlights key differences between the protocol variants.
+
+Feature | Authentiq Connect | OpenID Connect | OAuth 2.0
+------- | ----------------- | -------------- | ---------
+[Authorization code grant](https://tools.ietf.org/html/rfc6749#section-1.3.1) | Yes | Yes | Yes
+[Implicit grant](https://tools.ietf.org/html/rfc6749#section-1.3.2) | Yes | Yes | Yes
+[ID Token](http://openid.net/specs/openid-connect-core-1_0.html#IDToken) support | Yes | Yes | No
+Rich authentication UX | Standard | With some effort | Less
+Need to fetch user information with separate HTTP request | No | No | Yes
+End-to-end verification of user information | Yes | No | No 
+End-to-end encryption of user information | Soon | No | No 
+Authentiq Connect Provider needs to be trusted by client | No | Yes | Yes
+Authentiq Connect Provider needs to persist user information | No | Depends | Yes
+
 
 ## Scopes
 
@@ -131,7 +148,7 @@ Some terminology used in this documentation.
 Authentiq ID
 : The name of the Authentiq mobile app that manages the mobile cryptographic identity of the end-user. Authentiq ID is currently available on iOS, but will also be ported to Android.
 
-Authentiq JS
+AuthentiqJS
 : The name of the Authentiq native JavaScript snippet.
 
 Authentiq Connect
@@ -141,7 +158,7 @@ Authentiq Connect Provider
 : The daemon that serves the Authentiq Connect protocol, acting as a bridge between website and app. The provider is packaged as `authentiqd` in the context of SysV-style init scripts.
 
 Authentiq Connect SDK
-: The combination of the hosted (or installable) Authentiq Connect Provider and Authentiq JS.
+: The combination of the hosted (or installable) Authentiq Connect Provider and AuthentiqJS.
 
 Third-party Integration
 : The combination of the hosted (or installable) Authentiq Connect Provider and a third-party OAuth 2.0 or OIDC client library.
