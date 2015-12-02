@@ -6,20 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <meta name="author" content="The Authentiq team">
-        <link rel="canonical" href="http://developers.authentiq.io/api-issuer/">
+        <link rel="canonical" href="http://developers.authentiq.io/clients/">
         <link rel="shortcut icon" href="../images/favicon.png">
         
 
-        <title>Issuer - Authentiq Connect</title>
+        <title>Your clients - Authentiq Connect</title>
 
-        <link href="//cdn.rawgit.com/AuthentiqID/bootstrap/gh-pages/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
         <!-- <link href="../css/font-awesome-4.0.3.css" rel="stylesheet"> -->
         <link rel="stylesheet" href="../css/highlight.css">
         <link href="../css/base.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro" rel="stylesheet" type="text/css">
-        <link href="../swagger/css/custom.css" rel="stylesheet">
-
-        <link href="//fonts.googleapis.com/css?family=Montserrat:400,700|Noto+Serif:400|Material+Icons" rel="stylesheet" type="text/css">
+        <link href="../static/css/authentiq-console.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -51,21 +49,12 @@
         </script>
 
         
-        <script src="../swagger/lib/jquery.slideto.min.js"></script>
-        <script src="../swagger/lib/jquery.wiggle.min.js"></script>
-        <script src="../swagger/lib/jquery.ba-bbq.min.js"></script>
-        <script src="../swagger/lib/handlebars-2.0.0.js"></script>
-        <script src="../swagger/lib/underscore-min.js"></script>
-        <script src="../swagger/lib/backbone-min.js"></script>
-        <script src="../swagger/swagger-ui.js"></script>
-        <script src="../swagger/lib/highlight.7.3.pack.js"></script>
-        <script src="../swagger/lib/marked.js"></script>
-        <script src="../swagger/lib/swagger-oauth.js"></script>
+        <script src="../static/js/authentiq-console.js"></script>
 
         
     </head>
 
-    <body>
+    <body data-angular="1">
         <div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
     <div class="container">
 
@@ -107,7 +96,7 @@
             
             
             
-                <li class="dropdown active">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">API Reference <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
@@ -115,8 +104,8 @@
                             <a href="../api-provider/">Connect</a>
                         </li>
                     
-                        <li class="active">
-                            <a href="./">Issuer</a>
+                        <li >
+                            <a href="../api-issuer/">Issuer</a>
                         </li>
                     
                     </ul>
@@ -124,14 +113,14 @@
             
             
             
-                <li >
-                    <a href="../yourapps/">Your Apps</a>
+                <li class="active">
+                    <a href="./">Your clients</a>
                 </li>
             
             
             
                 <li >
-                    <a href="../faq/">FAQs</a>
+                    <a href="../faq/">FAQ</a>
                 </li>
             
             
@@ -142,8 +131,8 @@
                 <li>
                     <button class="btn btn-primary navbar-btn authentiq-button"
                         data-response-type="id_token token"
-                        data-redirect-uri="/redirect.html"
-                        data-scope="openid email~rs aq:name aq:push"
+                        data-redirect-uri="/clients/"
+                        data-scope="email~rs aq:name aq:push userinfo openid"
                         data-sign-out-claim="given_name">
                         Sign in
                     </button>
@@ -155,114 +144,15 @@
 </div>
         <div class="container">
             
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-    
-        <li class="main active"><a href="#delete">Delete</a></li>
-        
-    
-        <li class="main "><a href="#get">Get</a></li>
-        
-    
-        <li class="main "><a href="#head">Head</a></li>
-        
-    
-        <li class="main "><a href="#key">Key</a></li>
-        
-            <li><a href="#key_1">/key</a></li>
-        
-            <li><a href="#key1234">/key/1234</a></li>
-        
-    
-        <li class="main "><a href="#login">Login</a></li>
-        
-    
-        <li class="main "><a href="#post">Post</a></li>
-        
-    
-        <li class="main "><a href="#put">Put</a></li>
-        
-    
-        <li class="main "><a href="#scope">Scope</a></li>
-        
-    
-    </ul>
+                <div id="main" class="col-md-12" role="main">
+
+<div ng-app="AQProviderConsole">
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            <div ui-view></div> <!-- This is where our views will load -->
+        </div>
+    </div>
 </div></div>
-                <div id="main" class="col-md-9" role="main">
-
-<div id="temp-anchor-links" class="hidden">
-
-<h1 id="delete">Delete</h1>
-<h1 id="get">Get</h1>
-<h1 id="head">Head</h1>
-<h1 id="key">Key</h1>
-<h2 id="key_1">/key</h2>
-<h2 id="key1234">/key/1234</h2>
-<h1 id="login">Login</h1>
-<h1 id="post">Post</h1>
-<h1 id="put">Put</h1>
-<h1 id="scope">Scope</h1>
-</div>
-
-<div class="row">
-  <div class="swagger-section col-md-12">
-    <div id="message-bar" class="swagger-ui-wrap">&nbsp;</div>
-    <div id="swagger-ui-container" class="swagger-ui-wrap" style="min-height: 250px;"></div>
-  </div>
-</div>
-
-<script type="text/javascript">
-  $(function () {
-    var url,
-        path = (window.location.host === '127.0.0.1:8000') ? '' : '/authentiq-docs';
-
-    url = window.location.origin + path + '/swagger/issuer.yaml';
-
-    window.swaggerUi = new SwaggerUi({
-      url: url,
-      dom_id: "swagger-ui-container",
-      supportedSubmitMethods: [],
-      onComplete: function(swaggerApi, swaggerUi){
-        $('#temp-anchor-links').remove();
-
-        $('body').scrollspy('refresh');
-
-        $('pre code').each(function(i, e) {
-          hljs.highlightBlock(e)
-        });
-
-        addApiKeyAuthorization();
-      },
-      onFailure: function(data) {
-        log("Unable to Load SwaggerUI");
-      },
-      docExpansion: "none",
-      apisSorter: "alpha",
-      showRequestHeaders: false
-    });
-
-    function addApiKeyAuthorization(){
-      var key;
-      if ('authentiq' in window) {
-        key = window.authentiq.Token.getAuthorizationHeader();
-      }
-      // var key = encodeURIComponent($('#input_apiKey')[0].value);
-      if(key && key.trim() != "") {
-          var token = new SwaggerClient.ApiKeyAuthorization("Authorization", key, "header");
-          window.swaggerUi.api.clientAuthorizations.add("access_token", token);
-          log("added key " + key);
-      }
-    }
-
-    window.swaggerUi.load();
-
-    function log() {
-      if ('console' in window) {
-        console.log.apply(console, arguments);
-      }
-    }
-  });
-</script></div>
                
         </div>
 
