@@ -13,8 +13,7 @@
         <title>FAQs - Authentiq Connect</title>
 
         <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <!-- <link href="//cdn.rawgit.com/AuthentiqID/bootstrap/gh-pages/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-        <!-- <link href="../css/font-awesome-4.0.3.css" rel="stylesheet"> -->
+
         <link rel="stylesheet" href="../css/highlight.css">
         <link href="../css/base.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro" rel="stylesheet" type="text/css">
@@ -150,11 +149,11 @@
     
         <li class="main active"><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
         
-            <li><a href="#what-is-authentiq-id">What is Authentiq ID?</a></li>
+            <li><a href="#general">General</a></li>
         
-            <li><a href="#what-is-authentiq-connect">What is Authentiq Connect?</a></li>
+            <li><a href="#technical">Technical</a></li>
         
-            <li><a href="#what-is-openid-connect">What is OpenID Connect?</a></li>
+            <li><a href="#security">Security</a></li>
         
     
     </ul>
@@ -162,12 +161,30 @@
                 <div id="main" class="col-md-9" role="main">
 
 <h1 id="frequently-asked-questions">Frequently Asked Questions</h1>
-<h3 id="what-is-authentiq-id">What is Authentiq ID?</h3>
+<p>Some answers to questions people have asked. Do you have a different question? Please <a href="..#support">get in touch with us</a>.</p>
+<h2 id="general">General</h2>
+<h3 id="what-is-an-authentiq-id">What is an Authentiq ID?</h3>
 <p>When you download our app and create a profile, that is your very own Authentiq ID. Use it to sign into websites, or share your details in other ways.</p>
 <h3 id="what-is-authentiq-connect">What is Authentiq Connect?</h3>
-<p>Authentiq Connect is the SDK you can use to let your users sign in to your stuff. On the server side it implements both OAuth 2.0 and OpenID Connect protocols, giving developers the most flexible integration options. The client JavaScript component exploits these  </p>
+<p>Authentiq Connect is the SDK you can use to let your users sign in to your stuff. On the server side it implements both the OAuth 2.0 and OpenID Connect protocols, giving developers the most flexible integration options. The AuthentiqJS snippet is basically an OIDC client, but specifically built for Authentiq.</p>
 <h3 id="what-is-openid-connect">What is OpenID Connect?</h3>
-<p>OpenID Connect 1.0 is a set of extensions to OAuth 2.0, focusing on authentication as opposed to authorization. Many global players are backing OpenID Connect to authenticate users.</p></div>
+<p><a href="http://openid.net/connect/">OpenID Connect 1.0</a> is a set of extensions to OAuth 2.0, focusing on authentication as opposed to authorization. Many global players are backing OpenID Connect to authenticate users. OpenID Connect is technically very different from the older OpenID.</p>
+<h3 id="who-signs-the-authentiq-id-claims">Who signs the Authentiq ID claims?</h3>
+<p>At the moment we verify and sign the email and phone number claims when a user registers their Authentiq ID, so that you don&rsquo;t have to time and money doing your own email and SMS verification. At some point in the future we will open up our signing APIs to allow external signature providers to issue and sign additional claims, for instance an employee number, or a car registration.</p>
+<h3 id="how-does-one-click-sign-in-work">How does <em>One-click sign in</em> work?</h3>
+<p><em>One-click sign in</em> allows end-users, on repeated visits, to sign in to your site by simply tapping a push notification instead of scanning a QR code. It works by setting a cookie that links the user&rsquo;s browser and their phone. </p>
+<h2 id="technical">Technical</h2>
+<h3 id="can-i-use-authentiqjs-with-a-server-application">Can I use AuthentiqJS with a server application?</h3>
+<p>Yes, even though the AuthentiqJS snippet is running in the user agent it supports the authorization code flow in two ways. First, you can let AuthentiqJS catch the authorization code from the Authentiq Provider via a fragment redirect and then POST it to your own server side resource. This method is great for <em>hybrid</em> apps where both the user agent and the server must be authenticated. Alternatively, you can point the redirect URL directly to a server-side resource, bypassing the snippet entirely upon authentication and following the traditional OAuth 2.0 code flow.</p>
+<h3 id="can-i-use-authentiq-connect-with-framework-x">Can I use Authentiq Connect with Framework X?</h3>
+<p>If your framework includes a decent OAuth 2.0 or OIDC client library, then most likely yes, out of the box (we&rsquo;d be super grateful if you can <a href="https://github.com/AuthentiqID/authentiq-examples/">contribute an example</a> in this case!). If not, then you can use the AuthentiqJS snippet to initiate the <em>OAuth dance</em> and catch the user&rsquo;s profile via an <a href="../integration#events">event listener</a> in JavaScript. For server side applications you will need to code a HTTP endpoint that can validate the ID Token sent.</p>
+<h2 id="security">Security</h2>
+<h3 id="how-does-authentiq-encrypt-my-data-on-my-phone">How does Authentiq encrypt my data on my phone?</h3>
+<p>On iOS, your Authentiq ID is automatically encrypted by the OS when the phone is locked, and decrypted when the phone is unlocked. For this reason it is important that the device has a passcode set, even though the Authentiq ID app itself can be protected with a PIN.</p>
+<h3 id="how-does-authentiq-encrypt-my-data-in-transit">How does Authentiq encrypt my data in transit?</h3>
+<p>At registration time, your email and phone number are transmitted over TLS for verification purposes, but not persisted afterwards. When signing in to a website, your profile is transmitted over an TLS connection to the Authentiq Connect Provider, which in turn will send the profile data to the client, also using TLS. Our hosted provider currently has an A+ rating on <a href="https://www.ssllabs.com/ssltest/">SSL Labs</a>.</p>
+<h3 id="what-data-does-the-authentiq-connect-provider-persist">What data does the Authentiq Connect Provider persist?</h3>
+<p>As little as possible, although we <em>are</em> still working on the details at the moment. We are very privacy-aware ourselves and our goal is to avoid persisting any data when not needed, including metadata. Pretty soon we will offer a mode that supports end-to-end encryption between the phone and the client application. When used, the Authentiq Connect Provider will be unable to decrypt the ID Token that is transmitted and is merely acting as a gateway. When it&rsquo;s finalized, we&rsquo;ll properly document it too.</p></div>
                
         </div>
 

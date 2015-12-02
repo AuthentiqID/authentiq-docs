@@ -13,8 +13,7 @@
         <title>Authentiq Connect</title>
 
         <link href="./css/bootstrap.min.css" rel="stylesheet">
-        <!-- <link href="//cdn.rawgit.com/AuthentiqID/bootstrap/gh-pages/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-        <!-- <link href="./css/font-awesome-4.0.3.css" rel="stylesheet"> -->
+
         <link rel="stylesheet" href="./css/highlight.css">
         <link href="./css/base.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro" rel="stylesheet" type="text/css">
@@ -164,6 +163,8 @@
         
             <li><a href="#application-types">Application types</a></li>
         
+            <li><a href="#integration-types">Integration types</a></li>
+        
             <li><a href="#scopes">Scopes</a></li>
         
             <li><a href="#errors">Errors</a></li>
@@ -192,19 +193,19 @@
 
 <h1 id="introduction">Introduction</h1>
 <p>If you are reading this you&rsquo;re probably curious how to integrate <a href="http://authentiq.com/">Authentiq</a> on your website. </p>
-<p>The easiest to get started is to include the <a href="#show-me-the-code">AuthentiqJS snippet</a> on your page as described below. Alternatively you can point your <a href="integration/#/#third-party-integrations">favourite OAuth 2.0 or OpenID Connect client library</a> at Authentiq.</p>
+<p>The easiest to get started is to include the <a href="#show-me-the-code">AuthentiqJS snippet</a> on your page as described below. Alternatively you can point your <a href="integration/#third-party-integrations">favourite OAuth 2.0 or OpenID Connect client library</a> at Authentiq.</p>
 <p>As we run Authentiq Connect as a Service, there is no need to install or run anything locally.</p>
 <p class="alert alert-success" role="alert">Soon you will also be able to <a class="alert-link" href="installation/">install the Authentiq Connect daemon locally</a>, from source, or using pre-built packages for Debian 7.0, 8.0 and Ubuntu 15.04.</p>
 <h2 id="show-me-the-code">Show me the code!</h2>
 <p><a href="integration/#configurator">Register an app</a> and paste the following code into an HTML page at the point where you want render a Sign in button. Replace the placeholder with the Client ID of your new application.</p>
-<pre class="codehilite"><code>  &lt;script src=&quot;https://developers.authentiq.io/js/authentiq.js&quot;
-          class=&quot;authentiq-snippet&quot;
-          data-client-id=&quot;&lt;YOUR-CLIENT-ID&gt;&quot;
-          data-button=&quot;yes&quot;&gt;
-  &lt;/script&gt;</code></pre>
+<pre class="codehilite"><code>&lt;script src=&quot;https://developers.authentiq.io/js/authentiq.js&quot;
+        class=&quot;authentiq-snippet&quot;
+        data-client-id=&quot;&lt;YOUR-CLIENT-ID&gt;&quot;
+        data-button=&quot;yes&quot;&gt;
+&lt;/script&gt;</code></pre>
 
 
-<p>You can view a <a href="./examples/basic.html">live demo</a> of the above code wrapped in some basic HTML.</p>
+<p>You can view a <a href="./examples/signin.html">live demo</a> of the above code wrapped in some basic HTML.</p>
 <p class="alert alert-info" role="alert">Make sure to register the app as a <a href="#application-types">client-side or hybrid</a> application, and to paste the exact URL your example is loaded on (e.g. <code>http://localhost:8000/authentiq.html</code>) in the <code>Redirect URI</code> field. This is an essential security measure for the Authentiq Connect server. An easy way to serve local files is by executing <code>python3 -m http.server</code> in the same directory.</p>
 <h2 id="next-steps">Next steps</h2>
 <p>Great, let&rsquo;s dive a bit deeper. Some suggestions:</p>
@@ -228,6 +229,74 @@
 <p>The Authentiq mobile app (currently on iOS) is the key to the end-user&rsquo;s privacy. The app creates and maintains a mobile identity&mdash;Authentiq ID&mdash;that can be used to authenticate. An Authentiq ID can be seen as a secure cryptographic passport that can hold various bits of profile information. Some of the information, like phone number and email address, are verified by Authentiq so that the website doesn&rsquo;t have to. The user still decides what to share and with whom.</p>
 <h2 id="application-types">Application types</h2>
 <p>TBD</p>
+<h2 id="integration-types">Integration types</h2>
+<p>The following table highlights key differences between the protocol variants.</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Authentiq Connect</th>
+<th>OpenID Connect</th>
+<th>OAuth 2.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://tools.ietf.org/html/rfc6749#section-1.3.1">Authorization code grant</a></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="https://tools.ietf.org/html/rfc6749#section-1.3.2">Implicit grant</a></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">ID Token</a> support</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Rich authentication UX</td>
+<td>Standard</td>
+<td>With some effort</td>
+<td>Less</td>
+</tr>
+<tr>
+<td>Need to fetch user information with separate HTTP request</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>End-to-end verification of user information</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>End-to-end encryption of user information</td>
+<td>Soon</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Authentiq Connect Provider needs to be trusted by client</td>
+<td>No</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Authentiq Connect Provider needs to persist user information</td>
+<td>No</td>
+<td>Depends</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
 <h2 id="scopes">Scopes</h2>
 <p>Authentiq Connect leverages OAuth 2.0 scopes to specify what sections of a user&rsquo;s profile are being requested, inheriting <a href="http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims">scopes from OIDC</a> where possible.</p>
 <h3 id="identity-claims">Identity claims</h3>
@@ -436,14 +505,14 @@
 <dl>
 <dt>Authentiq ID</dt>
 <dd>The name of the Authentiq mobile app that manages the mobile cryptographic identity of the end-user. Authentiq ID is currently available on iOS, but will also be ported to Android.</dd>
-<dt>Authentiq JS</dt>
+<dt>AuthentiqJS</dt>
 <dd>The name of the Authentiq native JavaScript snippet.</dd>
 <dt>Authentiq Connect</dt>
 <dd>The authentication protocol defined by Authentiq.</dd>
 <dt>Authentiq Connect Provider</dt>
 <dd>The daemon that serves the Authentiq Connect protocol, acting as a bridge between website and app. The provider is packaged as <code>authentiqd</code> in the context of SysV-style init scripts.</dd>
 <dt>Authentiq Connect SDK</dt>
-<dd>The combination of the hosted (or installable) Authentiq Connect Provider and Authentiq JS.</dd>
+<dd>The combination of the hosted (or installable) Authentiq Connect Provider and AuthentiqJS.</dd>
 <dt>Third-party Integration</dt>
 <dd>The combination of the hosted (or installable) Authentiq Connect Provider and a third-party OAuth 2.0 or OIDC client library.</dd>
 <dt>App, Client, or Relying Party</dt>
