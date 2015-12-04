@@ -63,8 +63,10 @@ In terms of user experience, the smoothest integration option is to simply inclu
         <label for="opts-theme" class="col-sm-2 control-label">Theme</label>
         <div class="col-md-4">
           <select class="form-control" id="opts-theme" data-authentiq-key="theme">
-            <option value="">Light</option>
-            <option value="dark">Dark</option>
+            <option value="">Basic</option>
+            <option value="orange">Orange</option>
+            <option value="grey">Grey</option>
+            <option value="white">White</option>
           </select>
         </div>
       </div>
@@ -90,7 +92,7 @@ In terms of user experience, the smoothest integration option is to simply inclu
 </div>
 
 <div class="well text-center">
-  <button id="authentiq" class="authentiq-button">
+  <button id="authentiq" class="btn authentiq-button">
     Sign in
   </button>
 </div>
@@ -284,6 +286,10 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
     -webkit-transition: width 2.6s ease;
          -o-transition: width 2.6s ease;
             transition: width 2.6s ease;
+  }
+
+  #authentiq.authentiq-button {
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
   }
 </style>
 
