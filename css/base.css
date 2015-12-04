@@ -27,6 +27,9 @@ div.source-links {
 
 button.authentiq-button {
     font-family: inherit;
+}
+
+button.authentiq-button.white-theme {
     background-color: #fff;
 }
 
