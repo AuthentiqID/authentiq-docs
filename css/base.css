@@ -25,6 +25,11 @@ div.source-links {
     float: right;
 }
 
+button.authentiq-button {
+    font-family: inherit;
+    background-color: #fff;
+}
+
 /*
  * Side navigation
  *
