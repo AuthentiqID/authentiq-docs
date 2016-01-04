@@ -30,7 +30,8 @@
         <script src="./js/bootstrap.min.js"></script>
         <script src="./js/authentiq.js" 
                 class="authentiq-snippet"
-                data-client-id="test-js-snippet"></script>
+                data-provider-uri="http://localhost:5000/"
+                data-client-id="authentiq-connect-docs-dev"></script>
 
         <script>
             // handle access_token which is needed in `integration` and `client` pages
@@ -199,11 +200,12 @@
 <p class="alert alert-success" role="alert">Soon you will also be able to <a class="alert-link" href="installation/">install the Authentiq Connect daemon locally</a>, from source, or using pre-built packages for Debian 7.0, 8.0 and Ubuntu 15.04.</p>
 <h2 id="show-me-the-code">Show me the code!</h2>
 <p><a href="integration/#configurator">Register an app</a> and paste the following code into an HTML page at the point where you want render a Sign in button. Replace the placeholder with the Client ID of your new application.</p>
-<pre class="codehilite"><code>&lt;script src=&quot;https://developers.authentiq.io/js/authentiq.js&quot;
-        class=&quot;authentiq-snippet&quot;
-        data-client-id=&quot;&lt;YOUR-CLIENT-ID&gt;&quot;
-        data-button=&quot;yes&quot;&gt;
-&lt;/script&gt;</code></pre>
+<div class="codehilite"><pre><span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;https://developers.authentiq.io/js/authentiq.js&quot;</span>
+        <span class="na">class=</span><span class="s">&quot;authentiq-snippet&quot;</span>
+        <span class="na">data-client-id=</span><span class="s">&quot;&lt;YOUR-CLIENT-ID&gt;&quot;</span>
+        <span class="na">data-button=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
 
 
 <p>You can view a <a href="./examples/signin.html">live demo</a> of the above code wrapped in some basic HTML.</p>
@@ -316,28 +318,28 @@
 <tr>
 <td><code>name</code></td>
 <td>A user&rsquo;s full name.</td>
-<td><code>name</code>, <code>given_name</code>, <code>family_name</code>, <code>middle_name</code>, <code>nickname</code></td>
+<td><code>name</code> <code>given_name</code> <code>family_name</code> <code>middle_name</code> <code>nickname</code></td>
 <td>Yes</td>
 <td>No</td>
 </tr>
 <tr>
 <td><code>email</code></td>
 <td>A user&rsquo;s (verified) email address</td>
-<td><code>email</code>, <code>email_verified</code></td>
+<td><code>email</code> <code>email_verified</code></td>
 <td>Yes</td>
 <td>Yes</td>
 </tr>
 <tr>
 <td><code>phone</code></td>
 <td>A user&rsquo;s (verified) phone number</td>
-<td><code>phone_number</code>, <code>phone_number_verified</code></td>
+<td><code>phone_number</code> <code>phone_number_verified</code></td>
 <td>Yes</td>
 <td>Yes</td>
 </tr>
 <tr>
 <td><code>address</code></td>
 <td>A user&rsquo;s home address</td>
-<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#AddressClaim"><code>address</code></a></td>
+<td>[<code>address</code>(http://openid.net/specs/openid-connect-core-1_0.html#AddressClaim)</td>
 <td>Yes</td>
 <td>No</td>
 </tr>

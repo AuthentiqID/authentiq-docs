@@ -30,7 +30,8 @@
         <script src="../js/bootstrap.min.js"></script>
         <script src="../js/authentiq.js" 
                 class="authentiq-snippet"
-                data-client-id="test-js-snippet"></script>
+                data-provider-uri="http://localhost:5000/"
+                data-client-id="authentiq-connect-docs-dev"></script>
 
         <script>
             // handle access_token which is needed in `integration` and `client` pages
@@ -310,13 +311,14 @@
 </div>
 
 <h2 id="example">Example</h2>
-<pre class="codehilite"><code class="language-html5">    &lt;script src=&quot;//cdn.authentiq.io/authentiq.io/1.0/authentiq.js&quot;&gt;&lt;/script&gt;
-    &lt;button class=&quot;authentiq-button&quot;
-            data-client-id=&quot;62a90b31-db29-4510-adf4-3d4d7d932d14&quot;
-            data-provider-uri=&quot;https://connect.authentiq.io/authorize&quot;
-            data-scopes=&quot;email~rs aq:name aq:push&quot;&gt;
+<div class="codehilite"><pre>    <span class="nt">&lt;script</span> <span class="na">src=</span><span class="s">&quot;//cdn.authentiq.io/authentiq.io/1.0/authentiq.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;authentiq-button&quot;</span>
+            <span class="na">data-client-id=</span><span class="s">&quot;62a90b31-db29-4510-adf4-3d4d7d932d14&quot;</span>
+            <span class="na">data-provider-uri=</span><span class="s">&quot;https://connect.authentiq.io/authorize&quot;</span>
+            <span class="na">data-scopes=</span><span class="s">&quot;email~rs aq:name aq:push&quot;</span><span class="nt">&gt;</span>
       Sign in with Authentiq ID
-    &lt;/button&gt;</code></pre>
+    <span class="nt">&lt;/button&gt;</span>
+</pre></div>
 
 
 <h2 id="options">Options</h2>
@@ -342,28 +344,28 @@
 </tr>
 <tr>
 <td>scope</td>
-<td><a href="..#scopes">Scopes</a> to request from user, as a space-separated list. Append <code>~r</code> to indicate that a scope is required and/or <code>~s</code> to indicate the scope should have a valid signature from a trusted Authentiq Issuer.</td>
+<td><a href="..#scopes">Scopes</a> to request from user, as a space-separated list. Append <code>~r</code>to indicate that a scope is required and/or <code>~s</code>to indicate the scope should have a valid signature from a trusted Authentiq Issuer.</td>
 <td>The scopes registered as defaults for the application.</td>
 </tr>
 <tr>
 <td>display</td>
-<td>Authorization display mode. Valid choices are <code>page</code> (full page redirect), <code>popup</code> (popup window) and <code>modal</code> (modal iframe).</td>
+<td>Authorization display mode. Valid choices are <code>page</code>(full page redirect), <code>popup</code>(popup window) and <code>modal</code>(modal iframe).</td>
 <td><code>modal</code></td>
 </tr>
 <tr>
 <td>prompt</td>
-<td>Preferred prompt method in Authentiq ID. Valid choices are <code>login</code> and <code>consent</code>. Providing <code>consent</code> essentially overrides <em>One click sign-in</em> and always prompts user for consent.</td>
+<td>Preferred prompt method in Authentiq ID. Valid choices are <code>login</code>and <code>consent</code> Providing <code>consent</code>essentially overrides <em>One click sign-in</em> and always prompts user for consent.</td>
 <td><code>login</code></td>
 </tr>
 <tr>
 <td>response-type</td>
-<td>OIDC response type. Valid options are <code>id_token</code>, <code>code</code> and <code>code id_token</code>. You will want to use <code>id_token</code> for client-side apps and <code>code id_token</code> for server-side or hybrid applications. Please make sure that your app is registered with the correct application type.</td>
+<td>OIDC response type. Valid options are <code>id_token</code> <code>code</code>and <code>code id_token</code> You will want to use <code>id_token</code>for client-side apps and <code>code id_token</code>for server-side or hybrid applications. Please make sure that your app is registered with the correct application type.</td>
 <td><code>id_token</code></td>
 </tr>
 <tr>
 <td>response-mode</td>
-<td>OIDC response mode. Valid options are <code>query</code> and <code>fragment</code>. Can usually be left alone, unless you need need to bypass AuthentiqJS and redirect directly to a server endpoint; in that case manually select <code>query</code>.</td>
-<td>Usually <code>fragment</code>.</td>
+<td>OIDC response mode. Valid options are <code>query</code>and <code>fragment</code> Can usually be left alone, unless you need need to bypass AuthentiqJS and redirect directly to a server endpoint; in that case manually select <code>query</code></td>
+<td>Usually <code>fragment</code></td>
 </tr>
 <tr>
 <td>redirect-uri</td>
@@ -377,7 +379,7 @@
 </tr>
 <tr>
 <td>client-response-uri</td>
-<td>URL to POST the received authorization response to for server side validation or processing. Method should return 200 or 400. This parameter is only used when <code>response_mode=fragment</code>, since otherwise .</td>
+<td>URL to POST the received authorization response to for server side validation or processing. Method should return 200 or 400. This parameter is only used when <code>response_mode=fragment</code> since otherwise .</td>
 <td>None</td>
 </tr>
 </tbody>
@@ -396,27 +398,27 @@
 <tr>
 <td><code>authorized</code></td>
 <td>Emitted after successful authentication.</td>
-<td>An object containing the URL fragments the provider sent upon successful authentication, e.g. one or more of <code>code</code>, <code>id_token</code>, <code>access_token</code>, <code>expires_in</code>, <code>expires_at</code> and <code>state</code>.</td>
+<td>An object containing the URL fragments the provider sent upon successful authentication, e.g. one or more of <code>code</code> <code>id_token</code> <code>access_token</code> <code>expires_in</code> <code>expires_at</code>and <code>state</code></td>
 </tr>
 <tr>
 <td><code>authorized:code</code></td>
-<td>Emitted after successful authentication when the response included an authorization code as is the case with response type <code>code</code> or <code>code id_token</code>.</td>
-<td>The authorization <code>code</code> received from the provider.</td>
+<td>Emitted after successful authentication when the response included an authorization code as is the case with response type <code>code</code>or <code>code id_token</code></td>
+<td>The authorization <code>code</code>received from the provider.</td>
 </tr>
 <tr>
 <td><code>authorized:access_token</code></td>
-<td>Emitted after successful authentication when the response included an access token as is the case with response type <code>token</code> or <code>token id_token</code>.</td>
-<td>The <code>access_token</code> and <code>expires_in</code> values returned by the provider.</td>
+<td>Emitted after successful authentication when the response included an access token as is the case with response type <code>token</code>or <code>token id_token</code></td>
+<td>The <code>access_token</code>and <code>expires_in</code>values returned by the provider.</td>
 </tr>
 <tr>
 <td><code>authorized:id_token</code></td>
-<td>Emitted after successful authentication when the response included an ID Token as is the case with response type <code>id_token</code> or <code>code id_token</code>.</td>
-<td>The un-decoded <code>id_token</code> as a JWT.</td>
+<td>Emitted after successful authentication when the response included an ID Token as is the case with response type <code>id_token</code>or <code>code id_token</code></td>
+<td>The un-decoded <code>id_token</code>as a JWT.</td>
 </tr>
 <tr>
 <td><code>profile</code></td>
 <td>Emitted after successful authentication when the response included an ID Token the token was validated and decoded successfully.</td>
-<td>The decoded <code>id_token</code> object.</td>
+<td>The decoded <code>id_token</code>object.</td>
 </tr>
 <tr>
 <td><code>concluded</code></td>
@@ -425,43 +427,44 @@
 </tr>
 <tr>
 <td><code>error</code></td>
-<td>Emitted when an error occurs. Possible errors are liste. Note that depending on the <a href="#ss"><code>show_errors</code> option</a> the error may have already been shown to the user by the provider. In this case, you may still find this event useful to silently gather error statistics.</td>
-<td>The <code>error</code> code and <code>error_description</code> as defined by the OAuth 2.0, OIDC or Bearer Token RFCs.</td>
+<td>Emitted when an error occurs. Possible errors are liste. Note that depending on the <a href="#ss"><code>show_errors</code>option</a> the error may have already been shown to the user by the provider. In this case, you may still find this event useful to silently gather error statistics.</td>
+<td>The <code>error</code>code and <code>error_description</code>as defined by the OAuth 2.0, OIDC or Bearer Token RFCs.</td>
 </tr>
 </tbody>
 </table>
 <h3 id="example_1">Example</h3>
 <p>To subscribe to an event, use a pattern like the following.</p>
 <p class="alert alert-danger" role="alert">Q: Is there no way to run this normally (i.e. not after DOMContentLoaded)? <br /></p>
-<pre class="codehilite"><code>&lt;script&gt;
-  document.addEventListener('DOMContentLoaded', function() {
+<div class="codehilite"><pre><span class="o">&lt;</span><span class="n">script</span><span class="o">&gt;</span>
+  <span class="n">document</span><span class="p">.</span><span class="n">addEventListener</span><span class="p">(</span><span class="err">&#39;</span><span class="n">DOMContentLoaded</span><span class="err">&#39;</span><span class="p">,</span> <span class="n">function</span><span class="p">()</span> <span class="p">{</span>
 
-    authentiq.subscribe('profile', function(profile) {
+    <span class="n">authentiq</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="err">&#39;</span><span class="n">profile</span><span class="err">&#39;</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span> <span class="p">{</span>
 
-      // Profile
-      // {
-      //   &quot;scope&quot;: &quot;email aq:name&quot;,
-      //   &quot;name&quot;: &quot;George Orwell&quot;,
-      //   &quot;given_name&quot;: &quot;George&quot;,
-      //   &quot;family_name&quot;: &quot;Orwell&quot;,
-      //   &quot;email&quot;: &quot;george@1984.net&quot;,
-      //   &quot;email_verified&quot;: false
-      // }
+      <span class="c1">// Profile</span>
+      <span class="c1">// {</span>
+      <span class="c1">//   &quot;scope&quot;: &quot;email aq:name&quot;,</span>
+      <span class="c1">//   &quot;name&quot;: &quot;George Orwell&quot;,</span>
+      <span class="c1">//   &quot;given_name&quot;: &quot;George&quot;,</span>
+      <span class="c1">//   &quot;family_name&quot;: &quot;Orwell&quot;,</span>
+      <span class="c1">//   &quot;email&quot;: &quot;george@1984.net&quot;,</span>
+      <span class="c1">//   &quot;email_verified&quot;: false</span>
+      <span class="c1">// }</span>
 
-    });
+    <span class="p">});</span>
 
-    authentiq.subscribe('error', function(error) {
+    <span class="n">authentiq</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="err">&#39;</span><span class="n">error</span><span class="err">&#39;</span><span class="p">,</span> <span class="n">function</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
 
-      // Error
-      // {
-      //   &quot;error&quot;: &quot;client_error&quot;,
-      //   &quot;error_description&quot;: &quot;Invalid state parameter&quot;
-      // }
+      <span class="c1">// Error</span>
+      <span class="c1">// {</span>
+      <span class="c1">//   &quot;error&quot;: &quot;client_error&quot;,</span>
+      <span class="c1">//   &quot;error_description&quot;: &quot;Invalid state parameter&quot;</span>
+      <span class="c1">// }</span>
 
-    });
+    <span class="p">});</span>
 
-  }, false);
-&lt;/script&gt;</code></pre>
+  <span class="p">},</span> <span class="nb">false</span><span class="p">);</span>
+<span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span>
+</pre></div>
 
 
 <p>You can see how events work in another <a href="../examples/events.html">live example</a>.</p>
