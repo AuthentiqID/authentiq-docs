@@ -35,9 +35,7 @@ content_javascript: ../swagger/lib/jquery.slideto.min.js
 
 <script type="text/javascript">
   $(function () {
-    var url;
-    
-    url = '../swagger/provider.yaml';
+    var url = '/swagger/provider.yaml';
 
     window.swaggerUi = new SwaggerUi({
       url: url,

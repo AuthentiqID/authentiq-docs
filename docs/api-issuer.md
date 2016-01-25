@@ -32,10 +32,7 @@ content_javascript: ../swagger/lib/jquery.slideto.min.js
 
 <script type="text/javascript">
   $(function () {
-  	var url,
-        path = (window.location.host === '127.0.0.1:8000') ? '' : '/authentiq-docs';
-    
-    url = window.location.origin + path + '/swagger/issuer.yaml';
+  	var url = '/swagger/issuer.yaml';
 
     window.swaggerUi = new SwaggerUi({
       url: url,
