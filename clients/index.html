@@ -6,19 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <meta name="author" content="The Authentiq team">
-        <link rel="canonical" href="http://developers.authentiq.io/installation/">
+        <link rel="canonical" href="http://developers.authentiq.io/clients/">
         <link rel="shortcut icon" href="../images/favicon.png">
         
 
-        <title>Installation - Authentiq Connect</title>
+        <title>Your clients - Authentiq Connect</title>
 
         <link href="../css/bootstrap.min.css" rel="stylesheet">
-
+        <!-- <link href="../css/font-awesome-4.0.3.css" rel="stylesheet"> -->
+        <link rel="stylesheet" href="../css/highlight.css">
         <link href="../css/base.css" rel="stylesheet">
-        <link href="../css/highlight.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro" rel="stylesheet" type="text/css">
-
-        <link href="//fonts.googleapis.com/css?family=Montserrat:400,700|Noto+Serif:400|Material+Icons" rel="stylesheet" type="text/css">
+        <link href="../static/css/authentiq-console.css" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -30,8 +29,7 @@
         <script src="../js/bootstrap.min.js"></script>
         <script src="../js/authentiq.js" 
                 class="authentiq-snippet"
-                data-provider-uri="https://test.connect.authentiq.io/"
-                data-client-id="authentiq-connect-docs-test"></script>
+                data-client-id="test-js-snippet"></script>
 
         <script>
             // handle access_token which is needed in `integration` and `client` pages
@@ -51,11 +49,12 @@
         </script>
 
         
+        <script src="../static/js/authentiq-console.js"></script>
 
         
     </head>
 
-    <body>
+    <body data-angular="1">
         <div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
     <div class="container">
 
@@ -91,8 +90,8 @@
             
             
             
-                <li class="active">
-                    <a href="./">Installation</a>
+                <li >
+                    <a href="../installation/">Installation</a>
                 </li>
             
             
@@ -114,14 +113,14 @@
             
             
             
-                <li >
-                    <a href="../yourapps/">Your Apps</a>
+                <li class="active">
+                    <a href="./">Your clients</a>
                 </li>
             
             
             
                 <li >
-                    <a href="../faq/">FAQs</a>
+                    <a href="../faq/">FAQ</a>
                 </li>
             
             
@@ -130,12 +129,11 @@
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <button class="btn navbar-btn authentiq-button"
+                    <button class="btn btn-primary navbar-btn authentiq-button"
                         data-response-type="id_token token"
-                        data-redirect-uri="/redirect.html"
-                        data-scope="openid email~rs aq:name aq:push"
-                        data-sign-out-claim="given_name"
-                        data-theme="white">
+                        data-redirect-uri="/clients/"
+                        data-scope="email~rs aq:name aq:push userinfo openid"
+                        data-sign-out-claim="given_name">
                         Sign in
                     </button>
                 </li>
@@ -146,117 +144,15 @@
 </div>
         <div class="container">
             
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
-    
-        <li class="main active"><a href="#introduction">Introduction</a></li>
-        
-    
-        <li class="main "><a href="#installation">Installation</a></li>
-        
-            <li><a href="#from-pre-built-packages">From pre-built packages</a></li>
-        
-            <li><a href="#from-pypi">From PyPI</a></li>
-        
-            <li><a href="#from-source">From source</a></li>
-        
-    
-        <li class="main "><a href="#configuration">Configuration</a></li>
-        
-    
-        <li class="main "><a href="#deployment">Deployment</a></li>
-        
-            <li><a href="#nginx">Nginx</a></li>
-        
-    
-    </ul>
+                <div id="main" class="col-md-12" role="main">
+
+<div ng-app="AQProviderConsole">
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            <div ui-view></div> <!-- This is where our views will load -->
+        </div>
+    </div>
 </div></div>
-                <div id="main" class="col-md-9" role="main">
-
-<h1 id="introduction">Introduction</h1>
-<p>There is nothing to install when running Authentiq as a Service. Just register your client application at our hosted authentication service and head over to <a href="gettingstarted.md">Getting started</a>. This page describes how to install Authentiq Connect locally on your own system, in case you prefer that.</p>
-<p class="alert alert-warning" role="alert">We&rsquo;re working hard on making Authentiq Connect installable and hence, this page gives a <em>preview</em> of a local installation but isn&rsquo;t supported just yet. </p>
-<h1 id="installation">Installation</h1>
-<h2 id="from-pre-built-packages">From pre-built packages</h2>
-<p>Pre-built packages are available at the moment for Debian 7.0, 8.0 and Ubuntu 15.04.</p>
-<h3 id="debian-ubuntu">Debian &amp; Ubuntu</h3>
-<p>Add our repository to your APT sources, as root:</p>
-<pre class="codehilite"><code class="language-bash">apt-add-repository
-apt-get update
-apt-get install authentiq-connect</code></pre>
-
-
-<p>Edit the configuration file, see <a href="#configuration">below</a> for details about the available configuration options:</p>
-<pre class="codehilite"><code>vim /etc/authentiq/authentiqd.conf</code></pre>
-
-
-<p>(Re)start the service:</p>
-<pre class="codehilite"><code class="language-bash">/etc/init.d/authentiqd restart</code></pre>
-
-
-<h2 id="from-pypi">From PyPI</h2>
-<p>You can also install <code>authentiqd</code> using PyPi. We recommend you use a virtual Python environment in this case to not clutter up your system with dependencies.</p>
-<pre class="codehilite"><code class="language-bash">pip install authentiq-connect</code></pre>
-
-
-<p>Edit the configuration file, see <a href="#configuration">below</a> for details about the available configuration options:</p>
-<pre class="codehilite"><code class="language-bash">vim ./etc/authentiqd.conf</code></pre>
-
-
-<p>Be sure to check out available command line options for the daemon:</p>
-<pre class="codehilite"><code class="language-bash">./bin/authentiq-provider --help
-
-usage: authentiq-provider [-h] [-v] [-D] [--log LOG] [--bind BIND] [--port PORT]
-                       [--insecure] [--schema] [--gunicorn]
-                       [--workers WORKERS] [--name NAME]
-                       [--disable-websockets]
-
-Authentiq Connect Provider
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -v, --verbose         increase verbosity (default: 0)
-  -D, --debug           enable Flask debugging (default: False)
-  --log LOG             write logs to (rotated) file (default: None)
-  --bind BIND           ip to bind to (default: localhost)
-  --port PORT           port to bind to (default: 5000)
-  --insecure            disable JWT signature verification (default: False)
-  --schema              create schema for database (default: False)
-  --gunicorn            run under gunicorn (default: False)
-  --workers WORKERS     start this many worker processes (gunicorn only)
-                        (default: 1)
-  --name NAME           process name to use (gunicorn only) (default: aq-
-                        provider)
-  --disable-websockets  run server without WebSocket support (default: False)</code></pre>
-
-
-<p>Then start the daemon:</p>
-<pre class="codehilite"><code class="language-bash">./bin/authentiq-provider</code></pre>
-
-
-<h2 id="from-source">From source</h2>
-<p>Fork and/or clone the Github repository,</p>
-<pre class="codehilite"><code>git clone github...</code></pre>
-
-
-<p>and run:</p>
-<pre class="codehilite"><code>python setup.py</code></pre>
-
-
-<p>or install from source using PyPI:</p>
-<pre class="codehilite"><code>pip install -e github...</code></pre>
-
-
-<h1 id="configuration">Configuration</h1>
-<blockquote>
-<p>Describe configuration file here. </p>
-</blockquote>
-<h1 id="deployment">Deployment</h1>
-<p>The daemon binds to localhost by default on purpose, you should really deploy <code>authentiqd</code> behind a caching webserver. We describe how to configure Nginx here, but the configuration can easily be translated to other servers.</p>
-<h2 id="nginx">Nginx</h2>
-<blockquote>
-<p>Describe nginx configuration details with well-commented snippet..</p>
-</blockquote></div>
                
         </div>
 
