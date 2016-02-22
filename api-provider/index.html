@@ -29,27 +29,8 @@
 
         <script src="../js/jquery-1.10.2.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/authentiq.js" 
-                class="authentiq-snippet"
-                data-provider-uri="https://test.connect.authentiq.io/"
-                data-client-id="authentiq-connect-docs-test"></script>
 
-        <script>
-            // handle access_token which is needed in `integration` and `client` pages
-            authentiq.subscribe('authorized:access_token', function(token) {
-                if(typeof token.expires_in !== 'undefined') {
-                    var expires_at = new Date();
-
-                    // 60 seconds less to secure browser and response latency
-                    expires_at.setSeconds(expires_at.getSeconds() + parseInt(token.expires_in) - 60);
-                    
-                    token.expires_at = expires_at;
-                }
-
-                // store the access_token in localStorage
-                localStorage['ngStorage-authentiq.access_token'] = JSON.stringify(token);
-            });
-        </script>
+        
 
         
         <script src="../swagger/lib/jquery.slideto.min.js"></script>
@@ -126,12 +107,6 @@
             
             
                 <li >
-                    <a href="../yourapps/">Your Apps</a>
-                </li>
-            
-            
-            
-                <li >
                     <a href="../faq/">FAQs</a>
                 </li>
             
@@ -140,16 +115,8 @@
 
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <button class="btn navbar-btn authentiq-button"
-                        data-response-type="id_token token"
-                        data-redirect-uri="/redirect.html"
-                        data-scope="openid email~rs aq:name aq:push"
-                        data-sign-out-claim="given_name"
-                        data-theme="white">
-                        Sign in
-                    </button>
-                </li>
+                
+
                 
             </ul>
         </div>
@@ -269,7 +236,7 @@
     }
   });
 </script></div>
-               
+            
         </div>
 
         <hr>

@@ -28,27 +28,8 @@
 
         <script src="../js/jquery-1.10.2.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/authentiq.js" 
-                class="authentiq-snippet"
-                data-provider-uri="https://test.connect.authentiq.io/"
-                data-client-id="authentiq-connect-docs-test"></script>
 
-        <script>
-            // handle access_token which is needed in `integration` and `client` pages
-            authentiq.subscribe('authorized:access_token', function(token) {
-                if(typeof token.expires_in !== 'undefined') {
-                    var expires_at = new Date();
-
-                    // 60 seconds less to secure browser and response latency
-                    expires_at.setSeconds(expires_at.getSeconds() + parseInt(token.expires_in) - 60);
-                    
-                    token.expires_at = expires_at;
-                }
-
-                // store the access_token in localStorage
-                localStorage['ngStorage-authentiq.access_token'] = JSON.stringify(token);
-            });
-        </script>
+        
 
         
 
@@ -114,12 +95,6 @@
             
             
             
-                <li >
-                    <a href="../yourapps/">Your Apps</a>
-                </li>
-            
-            
-            
                 <li class="active">
                     <a href="./">FAQs</a>
                 </li>
@@ -129,16 +104,8 @@
 
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <button class="btn navbar-btn authentiq-button"
-                        data-response-type="id_token token"
-                        data-redirect-uri="/redirect.html"
-                        data-scope="openid email~rs aq:name aq:push"
-                        data-sign-out-claim="given_name"
-                        data-theme="white">
-                        Sign in
-                    </button>
-                </li>
+                
+
                 
             </ul>
         </div>
@@ -187,7 +154,7 @@
 <p>At registration time, your email and phone number are transmitted over TLS for verification purposes, but not persisted afterwards. When signing in to a website, your profile is transmitted over an TLS connection to the Authentiq Connect Provider, which in turn will send the profile data to the client, also using TLS. Our hosted provider currently has an A+ rating on <a href="https://www.ssllabs.com/ssltest/">SSL Labs</a>.</p>
 <h3 id="what-data-does-the-authentiq-connect-provider-persist">What data does the Authentiq Connect Provider persist?</h3>
 <p>As little as possible, although we <em>are</em> still working on the details at the moment. We are very privacy-aware ourselves and our goal is to avoid persisting any data when not needed, including metadata. Pretty soon we will offer a mode that supports end-to-end encryption between the phone and the client application. When used, the Authentiq Connect Provider will be unable to decrypt the ID Token that is transmitted and is merely acting as a gateway. When it&rsquo;s finalized, we&rsquo;ll properly document it too.</p></div>
-               
+            
         </div>
 
         <hr>
