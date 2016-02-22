@@ -41,6 +41,7 @@
 
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
+                {# Remove for inital Pilot version
                 <li>
                     <button class="btn navbar-btn authentiq-button"
                         data-response-type="id_token token"
@@ -51,6 +52,8 @@
                         Sign in
                     </button>
                 </li>
+                #}
+
                 {% if repo_url %}
                 <li>
                     <a href="{{ repo_url }}">

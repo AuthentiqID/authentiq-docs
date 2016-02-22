@@ -23,7 +23,7 @@ pages:
   - 'API Reference':
     - 'Connect': 'api-provider.md'
     - 'Issuer': 'api-issuer.md'
-  - 'Your Apps': 'yourapps.md'
+  # - 'Your Apps': 'yourapps.md'
   - 'FAQs': 'faq.md'
 extra:
     version: 0.1.0  # {{ config.extra.version }}
