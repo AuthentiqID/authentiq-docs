@@ -825,10 +825,6 @@ definitions:
           type: string
       application_type:
         type: string
-      application_type:
-        type: string
-      application_type:
-        type: string
       contacts:
         type: array
         items:
