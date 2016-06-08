@@ -1,3 +1,7 @@
+code {
+  color: inherit;
+}
+
 .swagger-section .swagger-ui-wrap .model-signature .propName {
   margin-left: 18px;
   font-weight: bold;
