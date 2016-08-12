@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
     <div class="container">
 
         <!-- Collapsed navigation -->
@@ -12,13 +12,13 @@
             </button>
 
             <!-- Main title -->
-            <a class="navbar-brand" href="{{ homepage_url }}">{{ site_name }}</a>
+            <a class="navbar-brand" href="{{ homepage_url }}" title="{{ site_name }}"><img src="{{ base_url }}/img/logo.svg" /></a>
         </div>
 
         <!-- Expanded navigation -->
         <div class="navbar-collapse collapse">
             <!-- Main navigation -->
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav top-nav">
             {% for nav_item in nav %}
             {% if nav_item.children %}
                 <li class="dropdown{% if nav_item.active %} active{% endif %}">

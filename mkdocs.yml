@@ -29,6 +29,7 @@ extra:
     version: 0.1.0  # {{ config.extra.version }}
     enable_tota11y: true
     snippet:
+      url: https://cdn.authentiq.io/authentiqjs/0.1.0/authentiq.js
 #      provider_uri: http://localhost:5000/
 #      client_id: authentiq-connect-docs-dev
       provider_uri: https://test.connect.authentiq.io/
