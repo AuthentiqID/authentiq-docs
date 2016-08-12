@@ -32,8 +32,8 @@ extra:
       url: https://cdn.authentiq.io/authentiqjs/0.1.0/authentiq.js
 #      provider_uri: http://localhost:5000/
 #      client_id: authentiq-connect-docs-dev
-      provider_uri: https://test.connect.authentiq.io/
-      client_id: authentiq-connect-docs-test
+      provider_uri: https://connect.authentiq.io/
+      client_id: authentiq-connect-docs
       redirect_uri: /redirect.html
       scope: openid email~rs aq:name aq:push
 extra_templates:

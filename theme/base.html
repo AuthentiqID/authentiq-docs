@@ -35,12 +35,12 @@
         <script src="{{ base_url }}/js/jquery-1.10.2.min.js"></script>
         <script src="{{ base_url }}/js/bootstrap.min.js"></script>
 
-        {# Remove for inital Pilot version
         <script src="{{ config.extra.snippet.url }}"
                 class="authentiq-snippet"
                 data-provider-uri="{{ config.extra.snippet.provider_uri }}"
                 data-client-id="{{ config.extra.snippet.client_id }}"></script>
 
+        {# Remove for inital Pilot version
         <script>
             // handle access_token which is needed in `integration` and `client` pages
             authentiq.subscribe('authorized:access_token', function(token) {
