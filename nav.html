@@ -1,0 +1,72 @@
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="{{ homepage_url }}" title="{{ site_name }}"><img src="{{ base_url }}/img/logo.svg" /></a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav top-nav">
+            {% for nav_item in nav %}
+            {% if nav_item.children %}
+                <li class="dropdown{% if nav_item.active %} active{% endif %}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ nav_item.title }} <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    {% for nav_item in nav_item.children %}
+                        <li {% if nav_item.active %}class="active"{% endif %}>
+                            <a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </li>
+            {% else %}
+                <li {% if nav_item.active %}class="active"{% endif %}>
+                    <a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
+                </li>
+            {% endif %}
+            {% endfor %}
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                {# Remove for inital Pilot version
+                <li>
+                    <button class="btn navbar-btn authentiq-button"
+                        data-response-type="id_token token"
+                        data-redirect-uri="{{ config.extra.snippet.redirect_uri }}"
+                        data-scope="{{ config.extra.snippet.scope }}"
+                        data-sign-out-claim="given_name"
+                        data-theme="white">
+                        Sign in
+                    </button>
+                </li>
+                #}
+
+                {% if repo_url %}
+                <li>
+                    <a href="{{ repo_url }}">
+                        {% if repo_name == 'GitHub' %}
+                            <i class="fa fa-github"></i>
+                        {% elif repo_name == 'Bitbucket' %}
+                            <i class="fa fa-bitbucket"></i>
+                        {% endif %}
+                        {{ repo_name }}
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>

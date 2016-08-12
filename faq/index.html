@@ -12,10 +12,10 @@
 
         <title>FAQs - Authentiq Connect</title>
 
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/dashboard-theme.min.css" rel="stylesheet">
+        <!-- <link href="http://0.0.0.0:9001/dist/css/dashboard-theme.css" rel="stylesheet"> -->
 
         <link href="../css/base.css" rel="stylesheet">
-        <link href="../css/highlight.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro" rel="stylesheet" type="text/css">
 
         <link href="//fonts.googleapis.com/css?family=Montserrat:400,700|Noto+Serif:400|Material+Icons" rel="stylesheet" type="text/css">
@@ -29,6 +29,11 @@
         <script src="../js/jquery-1.10.2.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
 
+        <script src="https://cdn.authentiq.io/authentiqjs/0.1.0/authentiq.js"
+                class="authentiq-snippet"
+                data-provider-uri="https://connect.authentiq.io/"
+                data-client-id="authentiq-connect-docs"></script>
+
         
 
         
@@ -36,8 +41,8 @@
         
     </head>
 
-    <body>
-        <div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <body class="full-bg" data-spy="scroll" data-target=".toc" data-offset="145">
+        <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
     <div class="container">
 
         <!-- Collapsed navigation -->
@@ -51,13 +56,13 @@
             </button>
 
             <!-- Main title -->
-            <a class="navbar-brand" href="..">Authentiq Connect</a>
+            <a class="navbar-brand" href=".." title="Authentiq Connect"><img src="../img/logo.svg" /></a>
         </div>
 
         <!-- Expanded navigation -->
         <div class="navbar-collapse collapse">
             <!-- Main navigation -->
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav top-nav">
             
             
                 <li >
@@ -113,8 +118,9 @@
 </div>
         <div class="container">
             
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
+                <div class="row row-sidebar row-sidebar-left">
+                  <div class="col-xs-6 col-sm-4 col-md-3 sidebar"><div class="toc hidden-print" role="complementary">
+    <ul class="nav" data-spy="affix">
     
         <li class="main active"><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
         
@@ -127,7 +133,7 @@
     
     </ul>
 </div></div>
-                <div id="main" class="col-md-9" role="main">
+                  <div id="main" class="col-xs-12 col-sm-8 col-md-9 content" role="main">
 
 <h1 id="frequently-asked-questions">Frequently Asked Questions</h1>
 <p>Some answers to questions people have asked. Do you have a different question? Please <a href="..#support">get in touch with us</a>.</p>
@@ -153,29 +159,29 @@
 <h3 id="how-does-authentiq-encrypt-my-data-in-transit">How does Authentiq encrypt my data in transit?</h3>
 <p>At registration time, your email and phone number are transmitted over TLS for verification purposes, but not persisted afterwards. When signing in to a website, your profile is transmitted over an TLS connection to the Authentiq Connect Provider, which in turn will send the profile data to the client, also using TLS. Our hosted provider currently has an A+ rating on <a href="https://www.ssllabs.com/ssltest/">SSL Labs</a>.</p>
 <h3 id="what-data-does-the-authentiq-connect-provider-persist">What data does the Authentiq Connect Provider persist?</h3>
-<p>As little as possible, although we <em>are</em> still working on the details at the moment. We are very privacy-aware ourselves and our goal is to avoid persisting any data when not needed, including metadata. Pretty soon we will offer a mode that supports end-to-end encryption between the phone and the client application. When used, the Authentiq Connect Provider will be unable to decrypt the ID Token that is transmitted and is merely acting as a gateway. When it&rsquo;s finalized, we&rsquo;ll properly document it too.</p></div>
+<p>As little as possible, although we <em>are</em> still working on the details at the moment. We are very privacy-aware ourselves and our goal is to avoid persisting any data when not needed, including metadata. Pretty soon we will offer a mode that supports end-to-end encryption between the phone and the client application. When used, the Authentiq Connect Provider will be unable to decrypt the ID Token that is transmitted and is merely acting as a gateway. When it&rsquo;s finalized, we&rsquo;ll properly document it too.</p>
+
+<footer id="footer" class="col-md-12">
+    <ul class="text-center list-inline">
+        <li>
+            <iframe src="https://ghbtns.com/github-btn.html?user=AuthentiqID&amp;repo=authentiq-docs&amp;type=watch&amp;count=true&amp;v=2" width="90" height="20" title="Edit on GitHub" style="overflow: hidden; border: 0;"></iframe>
+        </li>
+        <li>
+            <a href="https://twitter.com/AuthentiqID" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" data-dnt="true">Follow @AuthentiqID</a>
+        </li>
+        <li>
+            <a href="https://twitter.com/intent/tweet?screen_name=AuthentiqID&text=Help%20me%20understand..." class="twitter-mention-button" data-dnt="true">Tweet to @AuthentiqID</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+    </ul>
+
+    
+        <center><small><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type"><a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/AuthentiqID/authentiq-docs" rel="dct:source">Authentiq Connect Developer Documentation</a></span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small></center>
+    
+</footer></div>
+                </div>
             
         </div>
-
-        <hr>
-        <footer class="col-md-12">
-            <ul class="text-center list-inline">
-                <li>
-                    <iframe src="https://ghbtns.com/github-btn.html?user=AuthentiqID&amp;repo=authentiq-docs&amp;type=watch&amp;count=false" width="50" height="20" title="Edit on GitHub" style="overflow: hidden; border: 0;"></iframe>
-                </li>
-                <li>
-                    <a href="https://twitter.com/AuthentiqID" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" data-dnt="true">Follow @AuthentiqID</a>
-                </li>
-                <li>
-                    <a href="https://twitter.com/intent/tweet?screen_name=AuthentiqID&text=Help%20me%20understand..." class="twitter-mention-button" data-dnt="true">Tweet to @AuthentiqID</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                </li>
-            </ul>
-
-            
-                <center><small><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type"><a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/AuthentiqID/authentiq-docs" rel="dct:source">Authentiq Connect Developer Documentation</a></span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small></center>
-            
-        </footer>
 
         <script src="../js/highlight.pack.js"></script>
         <script src="../js/base.js"></script>

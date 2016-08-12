@@ -12,10 +12,10 @@
 
         <title>Issuer - Authentiq Connect</title>
 
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/dashboard-theme.min.css" rel="stylesheet">
+        <!-- <link href="http://0.0.0.0:9001/dist/css/dashboard-theme.css" rel="stylesheet"> -->
 
         <link href="../css/base.css" rel="stylesheet">
-        <link href="../css/highlight.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro" rel="stylesheet" type="text/css">
         <link href="../swagger/css/custom.css" rel="stylesheet">
 
@@ -30,25 +30,34 @@
         <script src="../js/jquery-1.10.2.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
 
+        <script src="https://cdn.authentiq.io/authentiqjs/0.1.0/authentiq.js"
+                class="authentiq-snippet"
+                data-provider-uri="https://connect.authentiq.io/"
+                data-client-id="authentiq-connect-docs"></script>
+
         
 
         
+        <script src="../swagger/lib/object-assign-pollyfill.js"></script>
         <script src="../swagger/lib/jquery.slideto.min.js"></script>
         <script src="../swagger/lib/jquery.wiggle.min.js"></script>
         <script src="../swagger/lib/jquery.ba-bbq.min.js"></script>
         <script src="../swagger/lib/handlebars-2.0.0.js"></script>
-        <script src="../swagger/lib/underscore-min.js"></script>
+        <script src="../swagger/lib/js-yaml.min.js"></script>
+        <script src="../swagger/lib/lodash.min.js"></script>
         <script src="../swagger/lib/backbone-min.js"></script>
-        <script src="../swagger/swagger-ui.js"></script>
-        <script src="../swagger/lib/highlight.7.3.pack.js"></script>
+        <script src="../swagger/swagger-ui.min.js"></script>
+        <script src="../swagger/lib/highlight.9.1.0.pack.js"></script>
+        <script src="../swagger/lib/highlight.9.1.0.pack_extended.js"></script>
+        <script src="../swagger/lib/jsoneditor.min.js"></script>
         <script src="../swagger/lib/marked.js"></script>
         <script src="../swagger/lib/swagger-oauth.js"></script>
 
         
     </head>
 
-    <body>
-        <div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <body class="full-bg" data-spy="scroll" data-target=".toc" data-offset="145">
+        <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
     <div class="container">
 
         <!-- Collapsed navigation -->
@@ -62,13 +71,13 @@
             </button>
 
             <!-- Main title -->
-            <a class="navbar-brand" href="..">Authentiq Connect</a>
+            <a class="navbar-brand" href=".." title="Authentiq Connect"><img src="../img/logo.svg" /></a>
         </div>
 
         <!-- Expanded navigation -->
         <div class="navbar-collapse collapse">
             <!-- Main navigation -->
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav top-nav">
             
             
                 <li >
@@ -124,8 +133,9 @@
 </div>
         <div class="container">
             
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
+                <div class="row row-sidebar row-sidebar-left">
+                  <div class="col-xs-6 col-sm-4 col-md-3 sidebar"><div class="toc hidden-print" role="complementary">
+    <ul class="nav" data-spy="affix">
     
         <li class="main active"><a href="#delete">Delete</a></li>
         
@@ -157,7 +167,7 @@
     
     </ul>
 </div></div>
-                <div id="main" class="col-md-9" role="main">
+                  <div id="main" class="col-xs-12 col-sm-8 col-md-9 content" role="main">
 
 <div id="temp-anchor-links" class="hidden">
 
@@ -198,12 +208,18 @@
         });
 
         addApiKeyAuthorization();
+
+        if(window.SwaggerTranslator) {
+          window.SwaggerTranslator.translate();
+        }
       },
       onFailure: function(data) {
         log("Unable to Load SwaggerUI");
       },
       docExpansion: "none",
       apisSorter: "alpha",
+      jsonEditor: false,
+      defaultModelRendering: 'schema',
       showRequestHeaders: false
     });
 
@@ -228,29 +244,29 @@
       }
     }
   });
-</script></div>
+</script>
+
+<footer id="footer" class="col-md-12">
+    <ul class="text-center list-inline">
+        <li>
+            <iframe src="https://ghbtns.com/github-btn.html?user=AuthentiqID&amp;repo=authentiq-docs&amp;type=watch&amp;count=true&amp;v=2" width="90" height="20" title="Edit on GitHub" style="overflow: hidden; border: 0;"></iframe>
+        </li>
+        <li>
+            <a href="https://twitter.com/AuthentiqID" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" data-dnt="true">Follow @AuthentiqID</a>
+        </li>
+        <li>
+            <a href="https://twitter.com/intent/tweet?screen_name=AuthentiqID&text=Help%20me%20understand..." class="twitter-mention-button" data-dnt="true">Tweet to @AuthentiqID</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+    </ul>
+
+    
+        <center><small><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type"><a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/AuthentiqID/authentiq-docs" rel="dct:source">Authentiq Connect Developer Documentation</a></span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small></center>
+    
+</footer></div>
+                </div>
             
         </div>
-
-        <hr>
-        <footer class="col-md-12">
-            <ul class="text-center list-inline">
-                <li>
-                    <iframe src="https://ghbtns.com/github-btn.html?user=AuthentiqID&amp;repo=authentiq-docs&amp;type=watch&amp;count=false" width="50" height="20" title="Edit on GitHub" style="overflow: hidden; border: 0;"></iframe>
-                </li>
-                <li>
-                    <a href="https://twitter.com/AuthentiqID" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" data-dnt="true">Follow @AuthentiqID</a>
-                </li>
-                <li>
-                    <a href="https://twitter.com/intent/tweet?screen_name=AuthentiqID&text=Help%20me%20understand..." class="twitter-mention-button" data-dnt="true">Tweet to @AuthentiqID</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                </li>
-            </ul>
-
-            
-                <center><small><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type"><a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/AuthentiqID/authentiq-docs" rel="dct:source">Authentiq Connect Developer Documentation</a></span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small></center>
-            
-        </footer>
 
         <script src="../js/highlight.pack.js"></script>
         <script src="../js/base.js"></script>

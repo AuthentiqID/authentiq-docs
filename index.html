@@ -12,10 +12,10 @@
 
         <title>Authentiq Connect</title>
 
-        <link href="./css/bootstrap.min.css" rel="stylesheet">
+        <link href="./css/dashboard-theme.min.css" rel="stylesheet">
+        <!-- <link href="http://0.0.0.0:9001/dist/css/dashboard-theme.css" rel="stylesheet"> -->
 
         <link href="./css/base.css" rel="stylesheet">
-        <link href="./css/highlight.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro" rel="stylesheet" type="text/css">
 
         <link href="//fonts.googleapis.com/css?family=Montserrat:400,700|Noto+Serif:400|Material+Icons" rel="stylesheet" type="text/css">
@@ -29,6 +29,11 @@
         <script src="./js/jquery-1.10.2.min.js"></script>
         <script src="./js/bootstrap.min.js"></script>
 
+        <script src="https://cdn.authentiq.io/authentiqjs/0.1.0/authentiq.js"
+                class="authentiq-snippet"
+                data-provider-uri="https://connect.authentiq.io/"
+                data-client-id="authentiq-connect-docs"></script>
+
         
 
         
@@ -36,8 +41,8 @@
         
     </head>
 
-    <body>
-        <div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <body class="full-bg" data-spy="scroll" data-target=".toc" data-offset="145">
+        <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
     <div class="container">
 
         <!-- Collapsed navigation -->
@@ -51,13 +56,13 @@
             </button>
 
             <!-- Main title -->
-            <a class="navbar-brand" href=".">Authentiq Connect</a>
+            <a class="navbar-brand" href="." title="Authentiq Connect"><img src="./img/logo.svg" /></a>
         </div>
 
         <!-- Expanded navigation -->
         <div class="navbar-collapse collapse">
             <!-- Main navigation -->
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav top-nav">
             
             
                 <li class="active">
@@ -113,8 +118,9 @@
 </div>
         <div class="container">
             
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
+                <div class="row row-sidebar row-sidebar-left">
+                  <div class="col-xs-6 col-sm-4 col-md-3 sidebar"><div class="toc hidden-print" role="complementary">
+    <ul class="nav" data-spy="affix">
     
         <li class="main active"><a href="#introduction">Introduction</a></li>
         
@@ -158,13 +164,13 @@
     
     </ul>
 </div></div>
-                <div id="main" class="col-md-9" role="main">
+                  <div id="main" class="col-xs-12 col-sm-8 col-md-9 content" role="main">
 
 <h1 id="introduction">Introduction</h1>
-<p>If you are reading this you&rsquo;re probably curious how to integrate <a href="http://authentiq.com/">Authentiq</a> on your website. </p>
+<p>If you are reading this you&rsquo;re probably curious how to integrate <a href="http://authentiq.com/">Authentiq</a> on your website.</p>
 <p>The easiest to get started is to include the <a href="#show-me-the-code">AuthentiqJS snippet</a> on your page as described below. Alternatively you can point your <a href="integration/#third-party-integrations">favourite OAuth 2.0 or OpenID Connect client library</a> at Authentiq.</p>
 <p>As we run Authentiq Connect as a Service, there is no need to install or run anything locally.</p>
-<p class="alert alert-success" role="alert">Soon you will also be able to <a class="alert-link" href="installation/">install the Authentiq Connect daemon locally</a>, from source, or using pre-built packages for Debian 7.0, 8.0 and Ubuntu 15.04.</p>
+<p class="alert alert-success mdi-check" role="alert">Soon you will also be able to <a class="alert-link" href="installation/">install the Authentiq Connect daemon locally</a>, from source, or using pre-built packages for Debian 7.0, 8.0 and Ubuntu 15.04.</p>
 <h2 id="show-me-the-code">Show me the code!</h2>
 <p><a href="integration/#configurator">Register an app</a> and paste the following code into an HTML page at the point where you want render a Sign in button. Replace the placeholder with the Client ID of your new application.</p>
 <pre class="codehilite"><code>&lt;script src=&quot;https://developers.authentiq.io/js/authentiq.js&quot;
@@ -175,7 +181,7 @@
 
 
 <p>You can view a <a href="./examples/signin.html">live demo</a> of the above code wrapped in some basic HTML.</p>
-<p class="alert alert-info" role="alert">Make sure to register the app as a <a href="#application-types">client-side or hybrid</a> application, and to paste the exact URL your example is loaded on (e.g. <code>http://localhost:8000/authentiq.html</code>) in the <code>Redirect URI</code> field. This is an essential security measure for the Authentiq Connect server. An easy way to serve local files is by executing <code>python3 -m http.server</code> in the same directory.</p>
+<p class="alert alert-info mdi-info-outline" role="alert">Make sure to register the app as a <a href="#application-types">client-side or hybrid</a> application, and to paste the exact URL your example is loaded on (e.g. <code>http://localhost:8000/authentiq.html</code>) in the <code>Redirect URI</code> field. This is an essential security measure for the Authentiq Connect server. An easy way to serve local files is by executing <code>python3 -m http.server</code> in the same directory.</p>
 <h2 id="next-steps">Next steps</h2>
 <p>Great, let&rsquo;s dive a bit deeper. Some suggestions:</p>
 <ul>
@@ -183,9 +189,9 @@
 <li>Play with some of the other <a href="integration/#authentiqjs-attributes">script tag attributes</a>, such as <code>data-display</code>, <code>data-sign-in-text</code>, <code>data-sign-out-text</code> and <code>data-sign-out-claim</code>.</li>
 <li>Add a &ldquo;profile&rdquo; <a href="integration/#event-handlers">event handler</a> to the example and print the identity claims it receives.</li>
 </ul>
-<p>To develop a more complete application, </p>
+<p>To develop a more complete application,</p>
 <ul>
-<li>Check the <a href="./integration#third-party-integrations">third-party integrations</a> and browse the <a href="https://github.com/AuthentiqID/authentiq-examples/">example code</a>. </li>
+<li>Check the <a href="./integration#third-party-integrations">third-party integrations</a> and browse the <a href="https://github.com/AuthentiqID/authentiq-examples/">example code</a>.</li>
 <li>Understand whether you are building a <a href="#application-type">client-side, server-side or hybrid application</a>.</li>
 <li>Fine tune your application&rsquo;s configuration, attach a title and a logo, in the <a href="yourapps.md">client console</a>.</li>
 <li>Finally, <a href="#support">let us know</a> how it went or <a href="https://github.com/AuthentiqID/authentiq-docs/">help fix a documentation error</a>!</li>
@@ -324,9 +330,9 @@
 <p>Identity scopes can be marked as being <em>required</em> by appending <code>~r</code> to the scope label, for instance <code>email~r</code> or <code>phone~r</code>. Doing so will prevent a user from opting out of the section when signing in from the Authentiq ID mobile app. We recommend using this flag sparingly and instead letting users opt-in to the information they share with you.</p>
 <h4 id="signed-claims">Signed claims</h4>
 <p>Scopes can also be marked to <em>require a signature</em> from an externally trusted party. In fact, Authentiq is acting as a signature provider for the email and phone claims, handling the confirmation of email addresses and phone number using a one-time verification code sent by email or text message.</p>
-<p class="alert alert-success" role="alert">Developers will be able to register their own signature providers soon. </p>
+<p class="alert alert-success mdi-check" role="alert">Developers will be able to register their own signature providers soon.</p>
 <h3 id="functional-scopes">Functional scopes</h3>
-<p>Authentiq Connect also uses scopes to indicate <em>functional</em> preferences. </p>
+<p>Authentiq Connect also uses scopes to indicate <em>functional</em> preferences.</p>
 <table>
 <thead>
 <tr>
@@ -489,7 +495,7 @@
 <dt>Certificate Authority List</dt>
 <dd>A public list of signature authorities that allows a Relying Party to verify that a certain identity claim was signed by an active trusted party.</dd>
 <dt>Certificate Revocation List</dt>
-<dd>A public list of unique end-user and (hashed) device identifiers that can be used by a Relying Party to verify that a user is still active and their device hasn&rsquo;t been revoked. </dd>
+<dd>A public list of unique end-user and (hashed) device identifiers that can be used by a Relying Party to verify that a user is still active and their device hasn&rsquo;t been revoked.</dd>
 </dl>
 <h1 id="support">Support</h1>
 <p>Nothing is perfect right from the start, but we&rsquo;re here to help and we&rsquo;re listening too! These are the best ways to contact us&hellip;</p>
@@ -505,29 +511,29 @@
 <p>Spotted an error in this documentation? Let us know or fork <a href="https://github.com/AuthentiqID/authentiq-docs/">this repository</a> straight away and press Edit.</p>
 <h2 id="security">Security</h2>
 <p>Please report security issues by email <a href="mailto:security@authentiq.com">security@authentiq.com</a>.</p>
-<p class="alert alert-warning" role="alert">We&rsquo;ll set up a GPG key for the security team soon.</p></div>
+<p class="alert alert-warning mdi-warning" role="alert">We&rsquo;ll set up a GPG key for the security team soon.</p>
+
+<footer id="footer" class="col-md-12">
+    <ul class="text-center list-inline">
+        <li>
+            <iframe src="https://ghbtns.com/github-btn.html?user=AuthentiqID&amp;repo=authentiq-docs&amp;type=watch&amp;count=true&amp;v=2" width="90" height="20" title="Edit on GitHub" style="overflow: hidden; border: 0;"></iframe>
+        </li>
+        <li>
+            <a href="https://twitter.com/AuthentiqID" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" data-dnt="true">Follow @AuthentiqID</a>
+        </li>
+        <li>
+            <a href="https://twitter.com/intent/tweet?screen_name=AuthentiqID&text=Help%20me%20understand..." class="twitter-mention-button" data-dnt="true">Tweet to @AuthentiqID</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+    </ul>
+
+    
+        <center><small><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type"><a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/AuthentiqID/authentiq-docs" rel="dct:source">Authentiq Connect Developer Documentation</a></span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small></center>
+    
+</footer></div>
+                </div>
             
         </div>
-
-        <hr>
-        <footer class="col-md-12">
-            <ul class="text-center list-inline">
-                <li>
-                    <iframe src="https://ghbtns.com/github-btn.html?user=AuthentiqID&amp;repo=authentiq-docs&amp;type=watch&amp;count=false" width="50" height="20" title="Edit on GitHub" style="overflow: hidden; border: 0;"></iframe>
-                </li>
-                <li>
-                    <a href="https://twitter.com/AuthentiqID" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" data-dnt="true">Follow @AuthentiqID</a>
-                </li>
-                <li>
-                    <a href="https://twitter.com/intent/tweet?screen_name=AuthentiqID&text=Help%20me%20understand..." class="twitter-mention-button" data-dnt="true">Tweet to @AuthentiqID</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                </li>
-            </ul>
-
-            
-                <center><small><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type"><a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/AuthentiqID/authentiq-docs" rel="dct:source">Authentiq Connect Developer Documentation</a></span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small></center>
-            
-        </footer>
 
         <script src="./js/highlight.pack.js"></script>
         <script src="./js/base.js"></script>
