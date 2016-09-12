@@ -15,3 +15,7 @@ code {
 .swagger-section .swagger-ui-wrap .model-signature .propOptKey {
   font-style: italic;
 }
+
+.endpoints .panel-heading {
+  border-bottom: 0;
+}
