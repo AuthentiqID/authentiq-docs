@@ -19,3 +19,8 @@ code {
 .endpoints .panel-heading {
   border-bottom: 0;
 }
+
+.endpoints .panel-heading + .panel-collapse > .panel-body,
+.endpoints .panel-heading + .panel-collapse > .list-group {
+  border-top: 1px solid #ddd;
+}
