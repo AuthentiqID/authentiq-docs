@@ -1,5 +1,8 @@
 site
 
+.idea
+.venv
+
 # sublime text
 *.sublime-project
 *.sublime-workspace
