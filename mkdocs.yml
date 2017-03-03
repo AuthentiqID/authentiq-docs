@@ -12,6 +12,7 @@ theme_dir: 'theme'
 extra_css:
   - "//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro"
 markdown_extensions:
+  - markdown.extensions.abbr
   - markdown.extensions.attr_list
   - markdown.extensions.codehilite
   - markdown.extensions.def_list
@@ -30,8 +31,6 @@ extra:
     enable_tota11y: true
     snippet:
       url: https://cdn.authentiq.io/authentiqjs/0.1.0/authentiq.js
-#      provider_uri: http://localhost:5000/
-#      client_id: authentiq-connect-docs-dev
       provider_uri: https://connect.authentiq.io/
       client_id: authentiq-connect-docs
       redirect_uri: /redirect.html
