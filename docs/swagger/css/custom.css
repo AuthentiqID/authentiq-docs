@@ -1,17 +1,1 @@
-code {
-  color: inherit;
-}
-
-.swagger-section .swagger-ui-wrap .model-signature .propName {
-  margin-left: 18px;
-  font-weight: bold;
-}
-.swagger-section .swagger-ui-wrap .model-signature .propType {
-  color: #895FC0;
-}
-.swagger-section .swagger-ui-wrap .model-signature .propOpt {
-  color: #DDD;
-}
-.swagger-section .swagger-ui-wrap .model-signature .propOptKey {
-  font-style: italic;
-}
+code{color:inherit}.swagger-section .swagger-ui-wrap .model-signature .propName{margin-left:18px;font-weight:700}.swagger-section .swagger-ui-wrap .model-signature .propType{color:#895fc0}.swagger-section .swagger-ui-wrap .model-signature .propOpt{color:#ddd}.swagger-section .swagger-ui-wrap .model-signature .propOptKey{font-style:italic}.swagger-section .panel-heading .desc p{margin-bottom:0}.swagger-section .panel-heading .path{font-weight:400}.swagger-section .panel-title{font-size:16px}
