@@ -6,3 +6,6 @@ site
 # sublime text
 *.sublime-project
 *.sublime-workspace
+
+# skip PyCharm configuration
+.idea
