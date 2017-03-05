@@ -299,7 +299,7 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
 
       text = $('[data-authentiq-key="sign_in_text"]').val() || 'Sign in';
 
-      $button.replaceWith('<button id="authentiq" class="btn authentiq-button">' + text + '</button>');
+      $button.replaceWith('<button id="authentiq" class="authentiq-button">' + text + '</button>');
       $button = $('#authentiq');
 
       // $button.removeData('authentiq-button');
