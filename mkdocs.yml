@@ -23,12 +23,9 @@ markdown_extensions:
   - markdown.extensions.smarty
 pages:
   - 'Overview': 'index.md'
-  - 'Integration': 'integration.md'
-  - 'Installation': 'installation.md'
-  - 'API Reference':
-    - 'Connect': 'api-provider.md'
-    - 'Issuer': 'api-issuer.md'
-  - 'FAQs': 'faq.md'
+  - 'Get Started': 'gettingstarted.md'
+  - 'API Reference': 'api-provider.md'
+  - 'FAQ': 'faq.md'
 extra:
     version: 0.1.0  # {{ config.extra.version }}
     enable_tota11y: true
