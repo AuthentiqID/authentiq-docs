@@ -1,25 +1,20 @@
 swagger: "2.0"
 info:
   title: Authentiq Connect API
-  version: "0.1.0"
+  version: "1.0"
   description: |
-    Authentiq Connect OAuth 2.0 and OpenID Connect API reference documentation.
+    Authentiq Connect OAuth 2.0 and OpenID Connect API reference.
 
-    [Learn about Authentiq ID](http://authentiq.com) or join our IRC channel [#authentiq on irc.freenode.net](https://webchat.freenode.net/?channels=authentiq).
-
-  termsOfService: http://authentiq.com/terms/
+    [Learn about Authentiq ID](https://www.authentiq.com) or join our IRC channel [#authentiq on irc.freenode.net](https://webchat.freenode.net/?channels=authentiq).
+  termsOfService: https://www.authentiq.com/tos/
   contact:
-    name: the Authentiq team
-    url: http://authentiq.com/support
+    name: Team Authentiq
+    url: https://www.authentiq.com/
     email: hello@authentiq.com
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
 host: connect.authentiq.io
 basePath: /
 schemes:
   - https
-  - wss
 paths:
   /authorize:
     get:
@@ -230,104 +225,6 @@ paths:
         default:
           $ref: '#/responses/TokenErrorResponse'
 
-  /session:
-    post:
-      summary: Create an anonymous authentication session.
-      tags:
-        - Sessions
-      operationId: session
-      parameters:
-        - in: formData
-          name: scope
-          type: string
-          description: "space sep list of strings"
-          required: true
-      responses:
-        201:
-          description: A new authentication session.
-          schema:
-            $ref: "#/definitions/Session"
-        default:
-          $ref: '#/responses/OAuth2ErrorResponse'
-      security:
-        - client_secret: [clients]
-        - user_jwt: [session]
-
-  /session/<session_id>:
-    post:
-      summary: Add identity tokens to pending authentication session.
-      description: |
-        This method is used by Authentiq ID app to post signed identity claims after end-user consent.
-      operationId: session1234
-      consumes:
-        - application/jwt
-        - application/x-www-form-urlencoded
-        - multipart/form-data
-      parameters:
-        - in: path
-          name: session_id
-          type: string
-          description: The authentication session ID.
-        - in: query
-          name: token
-          type: string
-          description: ""
-          required: false
-        - in: formData
-          name: bind_token
-          type: string
-          description: ""
-          required: false
-        - in: formData
-          name: push_token
-          type: string
-          description: ""
-          required: false
-        - in: formData
-          name: id_token
-          type: string
-          description: ""
-          required: false
-        - in: formData
-          name: userinfo
-          type: string
-          description: ""
-          required: false
-      responses:
-        200:
-          description: Successful token upload.
-          schema:
-            $ref: "#/definitions/Session"
-        default:
-          $ref: '#/responses/OAuth2ErrorResponse'
-      security:
-        - client_secret: []
-        - user_jwt: []
-
-  /client/<client_id>/session:
-    post:
-      summary: Create a new authentication session for a client.
-      tags:
-        - Sessions
-      parameters:
-        - $ref: "#/parameters/clientParam"
-        - in: formData
-          name: scope
-          type: string
-          description: "space sep list of strings"
-          required: false
-      operationId: clientclient_idsession
-      responses:
-        201:
-          description: A new authentication session.
-          schema:
-            $ref: "#/definitions/Session"
-        default:
-          $ref: '#/responses/OAuth2ErrorResponse'
-      security:
-        - client_secret: []
-        - user_jwt: []
-
   /authorize/logout:
     get:
       summary: OpenID Connect RP logout endpoint.
@@ -423,7 +320,6 @@ paths:
           schema:
             $ref: "#/definitions/UserInfo"
         401:
-          description: UserInfo error response
           $ref: '#/responses/TokenErrorResponse'
         default:
           $ref: '#/responses/OAuth2ErrorResponse'
@@ -493,7 +389,7 @@ paths:
         - oauth_implicit: []
 
 
-  /client/<client_id>:
+  /client/{client_id}:
     get:
       summary: Client Configuration Read Endpoint.
       tags:
@@ -517,11 +413,11 @@ paths:
         "401":
           description: No access to Client object (incorrect secret)
           schema:
-            $ref: '#/definitions/Error'
+            $ref: '#/definitions/ProblemReport'
         "404":
           description: Client ID not found
           schema:
-            $ref: '#/definitions/Error'
+            $ref: '#/definitions/ProblemReport'
         default:
           $ref: '#/responses/OAuth2ErrorResponse'
       security:
@@ -566,7 +462,7 @@ paths:
         default:
           description: Error response
           schema:
-            $ref: '#/definitions/Error'
+            $ref: '#/definitions/ProblemReport'
       security:
         - client_registration_token: []
         - oauth_code: []
@@ -861,15 +757,9 @@ responses:
     schema:
       $ref: '#/definitions/OAuth2Error'
 
-  ProblemReportResponse:
-    description: HTTP problem report
-    schema:
-      $ref: '#/definitions/ProblemReport'
-
   TokenErrorResponse:
     description: Token error response
     headers:
       WWW-Authenticate:
         description: ""
         type: string
-# END
