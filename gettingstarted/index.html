@@ -6,36 +6,52 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <meta name="author" content="The Authentiq team">
-        
-        <link rel="shortcut icon" href="../images/app-icon-hexagon.png">
-        
+        <link rel="canonical" href="http://developers.authentiq.io/gettingstarted/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
 
-        <title>Getting started - Authentiq Connect</title>
+        <title>Get Started - Authentiq Connect</title>
 
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
-        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="https://cdn.authentiq.io/theme/3.3.7aq1/css/bootstrap-theme.min.css" rel="stylesheet">
+        <!--<link href="http://0.0.0.0:9001/dist/css/bootstrap-theme.css" rel="stylesheet">-->
+
         <link href="../css/base.css" rel="stylesheet">
-        
+        <link href="//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro" rel="stylesheet" type="text/css">
+
+        <link href="//fonts.googleapis.com/css?family=Montserrat:400,700|Noto+Serif:400|Material+Icons" rel="stylesheet" type="text/css">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+            <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
 
         <script src="../js/jquery-1.10.2.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/authentiq-oauth.js"></script>
+
+        <script src="https://cdn.authentiq.io/authentiqjs/0.1.0/authentiq.js"
+                class="authentiq-snippet"
+                data-provider-uri="https://connect.authentiq.io/"
+                data-client-id="authentiq-connect-docs"></script>
 
         
 
+        
+
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-74615018-3', 'auto');
+            ga('send', 'pageview');
+        </script>
         
     </head>
 
-    <body>
-
-        <div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+    <body class="full-bg" data-spy="scroll" data-target=".toc" data-offset="145">
+        <div class="navbar navbar-fixed-top navbar-default" role="navigation">
     <div class="container">
 
         <!-- Collapsed navigation -->
@@ -49,13 +65,13 @@
             </button>
 
             <!-- Main title -->
-            <a class="navbar-brand" href="..">Authentiq Connect</a>
+            <a class="navbar-brand" href=".." title="Authentiq Connect"><img src="../img/logo.svg" /></a>
         </div>
 
         <!-- Expanded navigation -->
         <div class="navbar-collapse collapse">
             <!-- Main navigation -->
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav top-nav">
             
             
                 <li >
@@ -65,36 +81,13 @@
             
             
                 <li class="active">
-                    <a href="./">Getting started</a>
+                    <a href="./">Get Started</a>
                 </li>
             
             
             
                 <li >
-                    <a href="../installation/">Installation</a>
-                </li>
-            
-            
-            
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">API Reference <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                    
-                        <li >
-                            <a href="../api-provider/">Connect</a>
-                        </li>
-                    
-                        <li >
-                            <a href="../api-issuer/">Issuer</a>
-                        </li>
-                    
-                    </ul>
-                </li>
-            
-            
-            
-                <li >
-                    <a href="../clients/">Your clients</a>
+                    <a href="../api-provider/">API Reference</a>
                 </li>
             
             
@@ -108,18 +101,8 @@
 
             <!-- Search, Navigation and Repo links -->
             <ul class="nav navbar-nav navbar-right">
-                <li style="background-color:#895fc0;">
-                    <a class="authentiq-oauth-button"
-                        data-response-type="id_token token"
-                        data-redirect-uri="http://authentiqid.github.io/authentiq-docs/clients/"
-                        data-client-id="fe1303fc-9b59-4661-b156-daa98da968b8"
-                        data-scope="email~rs aq:name aq:push userinfo openid"
-                        data-sign-in-text="Sign in"
-                        data-sign-out-text="Sign out">
+                
 
-                        Authentiq...
-                    </a>
-                </li>
                 
             </ul>
         </div>
@@ -127,321 +110,61 @@
 </div>
         <div class="container">
             
-                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
-    <ul class="nav bs-sidenav">
+                <div class="row row-sidebar row-sidebar-left">
+                  <div class="col-xs-6 col-sm-4 col-md-3 sidebar"><div class="toc hidden-print" role="complementary">
+    <ul class="nav" data-spy="affix">
     
-        <li class="main active"><a href="#introduction">Introduction</a></li>
-        
-            <li><a href="#integration-comparison">Integration comparison</a></li>
-        
-            <li><a href="#obtaining-a-client-id">Obtaining a Client ID</a></li>
+        <li class="main active"><a href="#sign-in-to-dashboard">Sign in to Dashboard</a></li>
         
     
-        <li class="main "><a href="#native-sdk">Native SDK</a></li>
-        
-            <li><a href="#configurator">Configurator</a></li>
-        
-            <li><a href="#example">Example</a></li>
-        
-            <li><a href="#options">Options</a></li>
+        <li class="main "><a href="#register-a-new-client">Register a new client</a></li>
         
     
-        <li class="main "><a href="#third-party-integrations">Third-party integrations</a></li>
-        
-            <li><a href="#client-side-frameworks">Client-side frameworks</a></li>
-        
-            <li><a href="#server-side-frameworks">Server-side frameworks</a></li>
+        <li class="main "><a href="#configure-integration">Configure integration</a></li>
         
     
-        <li class="main "><a href="#other-integrations">Other integrations</a></li>
+        <li class="main "><a href="#configure-authentication-policies">Configure authentication policies</a></li>
         
-            <li><a href="#amazon-aws">Amazon AWS</a></li>
-        
-            <li><a href="#amazon-cognito">Amazon Cognito</a></li>
-        
-            <li><a href="#salesforce">SalesForce</a></li>
+    
+        <li class="main "><a href="#add-webhooks">Add webhooks</a></li>
         
     
     </ul>
 </div></div>
-                <div id="main" class="col-md-9" role="main">
+                  <div id="main" class="col-xs-12 col-sm-8 col-md-9 content" role="main">
 
-<h1 id="introduction">Introduction</h1>
-<p>This page describes how to allow your users to sign in with Authentiq ID on your website in minutes.</p>
-<p>Authentiq Connect is compatible with both <a href="http://oauth.net/2/">OAuth 2.0</a> and <a href="http://openid.net/">OpenID Connect 1.0 (OIDC)</a>, and as such it should feel familiar to anyone having implemented OAuth 2.0 authentication before. In case your application already accepts users from other OAuth 2.0 identity providers (such as Google, Facebook, &hellip;), it should be trivial to enable Authentiq ID as another source of verified users using your existing OAuth 2.0 client implementation.</p>
-<p>Alternatively, our <a href="#native-sdk">native Authentiq Connect SDK</a> allows you to implement a rich authentication experience in minutes. We recommend this option if you are looking to enhance your registration and sign-in flows, or want to add strong passwordless two-factor authentication to your website.</p>
-<p>There are a few important differences to consider when evaluating integration options.</p>
-<p>Our native Authentiq Connect SDK is easy to use and leverages features of OpenID Connect to obtain a rich authentication experience. But our protocol also works with many of the great third-party OAuth 2.0 client libraries out there already. Deciding what works best for you depends heavily on your situation. In practice, generic OAuth 2.0 libraries tend to work well, but will be less optimized in terms of performance and user experience.</p>
-<blockquote>
-<p>OpenID Connect is an extention to OAuth 2.0 that standardizes user authentication and forms the basis of Authentiq Connect. </p>
-</blockquote>
-<h2 id="integration-comparison">Integration comparison</h2>
-<p>The following table highlights key differences between the protocol variants.</p>
-<table>
-<thead>
-<tr>
-<th>Feature</th>
-<th>Authentiq Connect</th>
-<th>OpenID Connect</th>
-<th>OAuth 2.0</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://tools.ietf.org/html/rfc6749#section-1.3.1">Authorization code grant</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td><a href="https://tools.ietf.org/html/rfc6749#section-1.3.2">Implicit grant</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">ID Token</a> support</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Rich authentication UX</td>
-<td>Standard</td>
-<td>With some effort</td>
-<td>Less</td>
-</tr>
-<tr>
-<td>Need to fetch user information with separate HTTP request</td>
-<td>No</td>
-<td>No</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>End-to-end verification of user information</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-</tr>
-<tr>
-<td>End-to-end encryption of user information</td>
-<td>Soon</td>
-<td>No</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Authentiq Connect Provider needs to be trusted by client</td>
-<td>No</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Authentiq Connect Provider needs to persist user information</td>
-<td>No</td>
-<td>Depends</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
-<h2 id="obtaining-a-client-id">Obtaining a Client ID</h2>
-<p>Whether or not your integration is going to be native or third-party, you will need to <a href="../clients/">register your application</a> with an Authentiq Connect Provider and obtain a unique client identifier. Use the <code>client_id</code> in your preferred OAuth 2.0 client library, or when customizing your native Authentiq Connect snippet below. </p>
-<h1 id="native-sdk">Native SDK</h1>
-<p>In terms of end-user experience, the smoothest integration option is to simply include our Authentiq Connect snippet on your page. Use the snippet configurator to easily generate cusomtized snippet code for your situation, or copy paste and adjust the example snippet below.</p>
-<h2 id="configurator">Configurator</h2>
-<p>Create your own Authentiq button with the Button Configurator.</p>
-<h2 id="example">Example</h2>
-<pre class="codehilite"><code class="language-html5">    &lt;script src=&quot;//cdn.authentiq.io/authentiq.io/1.0/authentiq.js&quot;&gt;&lt;/script&gt;
-    &lt;button class=&quot;authentiq-button&quot;
-            data-client-id=&quot;62a90b31-db29-4510-adf4-3d4d7d932d14&quot;
-            data-provider-uri=&quot;https://connect.authentiq.io/authorize&quot;
-            data-scopes=&quot;email~rs aq:name aq:push&quot;&gt;
-      Sign in with Authentiq ID
-    &lt;/button&gt;</code></pre>
+<h1 id="sign-in-to-dashboard">Sign in to Dashboard</h1>
+<h1 id="register-a-new-client">Register a new client</h1>
+<p>It is also possible to register a new client via the <a href="reference.md">OIDC Client Registration Endpoint</a>.</p>
+<h1 id="configure-integration">Configure integration</h1>
+<h1 id="configure-authentication-policies">Configure authentication policies</h1>
+<h1 id="add-webhooks">Add webhooks</h1>
 
+<footer id="footer" class="col-md-12">
+    <ul class="text-center list-inline">
+        <li>
+            <iframe src="https://ghbtns.com/github-btn.html?user=AuthentiqID&amp;repo=authentiq-docs&amp;type=watch&amp;count=true&amp;v=2" width="90" height="20" title="Edit on GitHub" style="overflow: hidden; border: 0;"></iframe>
+        </li>
+        <li>
+            <a href="https://twitter.com/AuthentiqID" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false" data-dnt="true">Follow @AuthentiqID</a>
+        </li>
+        <li>
+            <a href="https://twitter.com/intent/tweet?screen_name=AuthentiqID&text=Help%20me%20understand..." class="twitter-mention-button" data-dnt="true">Tweet to @AuthentiqID</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+    </ul>
 
-<h2 id="options">Options</h2>
-<p>The following <code>data-*</code> options are available.</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>client_id</td>
-<td>Your registered application ID.</td>
-<td>None, obtain a unique ID from the <a href="../clients/">Client Console</a>.</td>
-</tr>
-<tr>
-<td>provider_uri</td>
-<td>Provider Authorization URL.</td>
-<td><code>https://connect.authentiq.io/authorize</code></td>
-</tr>
-<tr>
-<td>response_type</td>
-<td>OIDC response type. Valid options are <code>code</code>, <code>code id_token</code>, <code>id_token</code>.</td>
-<td><code>id_token</code></td>
-</tr>
-<tr>
-<td>response_mode</td>
-<td>OIDC response mode. Valid options are <code>query</code>, <code>fragment</code>.</td>
-<td>Depends on response type.</td>
-</tr>
-<tr>
-<td>redirect_uri</td>
-<td>OAuth 2.0 redirect URL.</td>
-<td>The current page, from <em>window.href.location</em>.</td>
-</tr>
-<tr>
-<td>scope</td>
-<td>Profile scopes to request from user, as a space-separated list. Valid scopes are <code>email</code>, <code>phone</code>, <code>aq:name</code>, <code>aq:address</code>, <code>aq:location</code> and <code>aq:push</code>. Append <code>~r</code> to indicate that a scope is required and/or <code>~s</code> to indicate the scope should have a valid signature from a trusted Authentiq Issuer.</td>
-<td>The default scopes registered for the client application.</td>
-</tr>
-<tr>
-<td>display</td>
-<td>Authorization display mode. Valid choices are <code>page</code>, <code>popup</code> or <code>modal</code>.</td>
-<td><code>page</code></td>
-</tr>
-<tr>
-<td>prompt</td>
-<td>Preferred prompt method in Authentiq ID. Valid choices are <code>login</code>, <code>consent</code>. Providing <code>consent</code> overrides <em>One click sign-in</em> and prompts user for (re-)consent.</td>
-<td><code>login</code></td>
-</tr>
-<tr>
-<td>ui_locales</td>
-<td>Preferred laguage to display the authorization page in, represented as a space-separated list of BCP47 [RFC5646] language tag values, ordered by preference. Currently only <code>en</code> is supported.</td>
-<td><code>en</code></td>
-</tr>
-<tr>
-<td>state</td>
-<td>Client application state.</td>
-<td>32 bytes from <em>crypto.getRandomValues()</em></td>
-</tr>
-<tr>
-<td>client_response_uri</td>
-<td>URL to POST the received authorization response to for server side validation or processing. Method should return 200 or 400. This parameter is only used when <code>response_mode=fragment</code>, since otherwise .</td>
-<td>None</td>
-</tr>
-</tbody>
-</table>
-<h3 id="server-side-processing">Server side processing</h3>
-<p>If the response mode is set to <code>fragment</code> (recommended), then <code>client_response_uri</code> can be used to still proxy the authorization response to your backend servers, as if you had specified <code>query</code> response mode. The backend server may do one or more of the following tasks:  </p>
-<ul>
-<li>Validate the ID Token, if present, using cryptographic functions available on the server and return a 400 response in case of a validation error.</li>
-<li>Consume the authorization code, if present, and exchange it for an access and/or refresh token at the Authentiq Connect token endpoint.</li>
-</ul>
-<p>The endpoint should return one of the following status codes. </p>
-<table>
-<thead>
-<tr>
-<th>HTTP status code</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>200</td>
-<td>Token validated; the success callback will be called.</td>
-</tr>
-<tr>
-<td>400</td>
-<td>Token error; a message will be displayed and the error callback invoked.</td>
-</tr>
-</tbody>
-</table>
-<h1 id="third-party-integrations">Third-party integrations</h1>
-<table>
-<thead>
-<tr>
-<th>Typical option</th>
-<th>What to fill in</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>client_id</code></td>
-<td>The client_id you obtained above.</td>
-</tr>
-<tr>
-<td><code>scope</code></td>
-<td>Space delimited list of <a href="..#scopes">Authentiq Connect scopes</a>.</td>
-</tr>
-<tr>
-<td><code>redirect_uri</code></td>
-<td>The URL in <em>your</em> application that the Provider should redirect to after authenticating a user.</td>
-</tr>
-<tr>
-<td><code>authorize_uri</code></td>
-<td><code>https://connect.authentiq.io/authorize</code></td>
-</tr>
-<tr>
-<td><code>token_uri</code></td>
-<td><code>https://connect.authentiq.io/token</code></td>
-</tr>
-<tr>
-<td><code>userinfo_uri</code></td>
-<td><code>https://connect.authentiq.io/userinfo</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="client-side-frameworks">Client-side frameworks</h2>
-<p>A list of client libraries using OAuth&rsquo;s <em>implicit</em> grant type. Please add relevant solutions to this list if they are missing.</p>
-<h3 id="hellojs">Hello.js</h3>
-<p>There is a <a href="https://github.com/skion/hello.js">fork of HelloJS</a> that includes an <a href="https://github.com/skion/hello.js/blob/master/src/modules/authentiq.js">Authentiq Connect plugin</a>. HelloJS abstracts away the implementation differences between a large number of standard OAuth 2.0 identity providers. We&rsquo;ll aim to get Authentiq Connect included as a supported provider soon.</p>
-<h3 id="angular-js">Angular JS</h3>
-<p>At least two OAuth 2.0 modules exist for AngularJS, both of which have been tested to work with Authentiq Connect.</p>
-<ul>
-<li><a href="https://github.com/andreareginato/oauth-ng/blob/master/README.md">OAuth-ng</a> </li>
-<li><a href="https://github.com/seegno/angular-oauth2">Angular-OAuth</a></li>
-</ul>
-<h2 id="server-side-frameworks">Server-side frameworks</h2>
-<p>A list of libraries to be used with server applications, supporting (at least) OAuth&rsquo;s <em>authorization_code</em> grant type. Please add relevant solutions to this list if they are missing.</p>
-<h3 id="flask">Flask</h3>
-<p>There are several authentication extensions for Flask&hellip; [TBD]</p>
-<h1 id="other-integrations">Other integrations</h1>
-<p>As support for OpenID Connect increases, we expect to see more and more sites that will allow administrators to configure external OIDC identity provider for user authentication, vastly improving the ecosystem for Authentiq ID integrations as well. We already see companies like Amazon and SalesForce making this possible.   </p>
-<h2 id="amazon-aws">Amazon AWS</h2>
-<p>Amazon allows an administrator to configure an external OpenID Connect identity provider as a source for their <a href="http://aws.amazon.com/">AWS</a> console. We&rsquo;re planning to supporting this integration at a later stage so that teams will be able to sign in to AWS using their Authentiq ID. </p>
-<h2 id="amazon-cognito">Amazon Cognito</h2>
-<p>Amazon allows mobile app developers to configure <a href="http://aws.amazon.com/cognito/">Cognito</a> with external OpenID Connect identity providers, enabling an app to authenticate users from social networks and a variety of sources. We&rsquo;re planning to supporting this integration at a later stage so that mobile app developers will be able to register and authenticate users by their Authentiq ID. </p>
-<h2 id="salesforce">SalesForce</h2>
-<p><a href="http://salesforce.com/">SalesForce</a> allows an administrator configure up an external OpenID Connect identity provider as a source for company employees. We&rsquo;re planning to supporting this integration at a later stage so that companies will be able to let their employees sign into SalesForce using their Authentiq ID.</p></div>
-               
+    
+        <center><small><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type"><a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/AuthentiqID/authentiq-docs" rel="dct:source">Authentiq Connect Developer Documentation</a></span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small></center>
+    
+</footer></div>
+                </div>
+            
         </div>
-
-        <hr>
-        <footer class="col-md-12">
-            <ul class="text-center list-inline">
-                <li>
-                  <iframe src="https://ghbtns.com/github-btn.html?user=AuthentiqID&amp;repo=bootstrap&amp;type=watch&amp;count=true" width="100" height="20" title="Star on GitHub" style="overflow: hidden; border: 0;"></iframe>
-                </li>
-                <li>
-                  <a href="https://twitter.com/AuthentiqID" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @AuthentiqID</a>
-                </li>
-                <li>
-                  <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://developer.authentiq.io/" data-count="horizontal" data-via="AuthentiqID">Tweet</a>
-                </li>
-            </ul>
-
-            
-                <center>Copyright &copy; 2015, Authentiq.com</center>
-            
-            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
-        </footer>
 
         <script src="../js/highlight.pack.js"></script>
         <script src="../js/base.js"></script>
-
-        <script>
-            window.twttr = (function (d,s,id) {
-                var t, js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return; js=d.createElement(s); js.id=id; js.async=1;
-                js.src="https://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
-                return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
-            }(document, "script", "twitter-wjs"));
-        </script>
-    </body>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            <script src="../js/tota11y.min.js"></script>
+        </body>
 </html>

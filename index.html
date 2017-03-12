@@ -7,13 +7,12 @@
         <meta name="description" content="Documentation for the Authentiq OAuth 2.0 and OpenID Connect Provider.">
         <meta name="author" content="The Authentiq team">
         <link rel="canonical" href="http://developers.authentiq.io/">
-        <link rel="shortcut icon" href="images/favicon.png">
-        
+        <link rel="shortcut icon" href="./img/favicon.ico">
 
         <title>Authentiq Connect</title>
 
-        <link href="https://cdn.authentiq.io/theme/3.3.4aq1/css/dashboard-theme.min.css" rel="stylesheet">
-        <!-- <link href="http://0.0.0.0:9001/dist/css/dashboard-theme.css" rel="stylesheet"> -->
+        <link href="https://cdn.authentiq.io/theme/3.3.7aq1/css/bootstrap-theme.min.css" rel="stylesheet">
+        <!--<link href="http://0.0.0.0:9001/dist/css/bootstrap-theme.css" rel="stylesheet">-->
 
         <link href="./css/base.css" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro" rel="stylesheet" type="text/css">
@@ -39,10 +38,20 @@
         
 
         
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-74615018-3', 'auto');
+            ga('send', 'pageview');
+        </script>
+        
     </head>
 
     <body class="full-bg" data-spy="scroll" data-target=".toc" data-offset="145">
-        <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="navbar navbar-fixed-top navbar-default" role="navigation">
     <div class="container">
 
         <!-- Collapsed navigation -->
@@ -72,36 +81,19 @@
             
             
                 <li >
-                    <a href="integration/">Integration</a>
+                    <a href="gettingstarted/">Get Started</a>
                 </li>
             
             
             
                 <li >
-                    <a href="installation/">Installation</a>
-                </li>
-            
-            
-            
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">API Reference <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                    
-                        <li >
-                            <a href="api-provider/">Connect</a>
-                        </li>
-                    
-                        <li >
-                            <a href="api-issuer/">Issuer</a>
-                        </li>
-                    
-                    </ul>
+                    <a href="api-provider/">API Reference</a>
                 </li>
             
             
             
                 <li >
-                    <a href="faq/">FAQs</a>
+                    <a href="faq/">FAQ</a>
                 </li>
             
             
@@ -124,42 +116,30 @@
     
         <li class="main active"><a href="#introduction">Introduction</a></li>
         
-            <li><a href="#show-me-the-code">Show me the code!</a></li>
-        
-            <li><a href="#next-steps">Next steps</a></li>
-        
     
-        <li class="main "><a href="#protocol">Protocol</a></li>
+        <li class="main "><a href="#features">Features</a></li>
         
-    
-        <li class="main "><a href="#concepts">Concepts</a></li>
+            <li><a href="#authentication-methods">Authentication Methods</a></li>
         
             <li><a href="#authentiq-id">Authentiq ID</a></li>
         
-            <li><a href="#application-types">Application types</a></li>
+            <li><a href="#remote-sign-out">Remote Sign-Out</a></li>
         
-            <li><a href="#integration-types">Integration types</a></li>
+            <li><a href="#webhooks">Webhooks</a></li>
         
-            <li><a href="#scopes">Scopes</a></li>
+            <li><a href="#single-sign-on">Single Sign-On</a></li>
         
-            <li><a href="#errors">Errors</a></li>
+            <li><a href="#pairwise-uuids">Pairwise UUIDs</a></li>
         
-            <li><a href="#terminology">Terminology</a></li>
+    
+        <li class="main "><a href="#compatibility">Compatibility</a></li>
+        
+            <li><a href="#standards">Standards</a></li>
+        
+            <li><a href="#identity-claims">Identity claims</a></li>
         
     
         <li class="main "><a href="#support">Support</a></li>
-        
-            <li><a href="#chat">Chat</a></li>
-        
-            <li><a href="#email">Email</a></li>
-        
-            <li><a href="#tweet">Tweet</a></li>
-        
-            <li><a href="#hack">Hack</a></li>
-        
-            <li><a href="#write">Write</a></li>
-        
-            <li><a href="#security">Security</a></li>
         
     
     </ul>
@@ -167,351 +147,161 @@
                   <div id="main" class="col-xs-12 col-sm-8 col-md-9 content" role="main">
 
 <h1 id="introduction">Introduction</h1>
-<p>If you are reading this you&rsquo;re probably curious how to integrate <a href="http://authentiq.com/">Authentiq</a> on your website.</p>
-<p>The easiest to get started is to include the <a href="#show-me-the-code">AuthentiqJS snippet</a> on your page as described below. Alternatively you can point your <a href="integration/#third-party-integrations">favourite OAuth 2.0 or OpenID Connect client library</a> at Authentiq.</p>
-<p>As we run Authentiq Connect as a Service, there is no need to install or run anything locally.</p>
-<p class="alert alert-success mdi-check" role="alert">Soon you will also be able to <a class="alert-link" href="installation/">install the Authentiq Connect daemon locally</a>, from source, or using pre-built packages for Debian 7.0, 8.0 and Ubuntu 15.04.</p>
-<h2 id="show-me-the-code">Show me the code!</h2>
-<p><a href="integration/#configurator">Register an app</a> and paste the following code into an HTML page at the point where you want render a Sign in button. Replace the placeholder with the Client ID of your new application.</p>
-<pre class="codehilite"><code>&lt;script src=&quot;https://developers.authentiq.io/js/authentiq.js&quot;
-        class=&quot;authentiq-snippet&quot;
-        data-client-id=&quot;&lt;YOUR-CLIENT-ID&gt;&quot;
-        data-button=&quot;yes&quot;&gt;
-&lt;/script&gt;</code></pre>
-
-
-<p>You can view a <a href="./examples/signin.html">live demo</a> of the above code wrapped in some basic HTML.</p>
-<p class="alert alert-info mdi-info-outline" role="alert">Make sure to register the app as a <a href="#application-types">client-side or hybrid</a> application, and to paste the exact URL your example is loaded on (e.g. <code>http://localhost:8000/authentiq.html</code>) in the <code>Redirect URI</code> field. This is an essential security measure for the Authentiq Connect server. An easy way to serve local files is by executing <code>python3 -m http.server</code> in the same directory.</p>
-<h2 id="next-steps">Next steps</h2>
-<p>Great, let&rsquo;s dive a bit deeper. Some suggestions:</p>
-<ul>
-<li>Check the different <a href="#identity-claims">identity claims</a> you can request from a user, and add them to the example including a <code>data-scope</code> attribute.</li>
-<li>Play with some of the other <a href="integration/#authentiqjs-attributes">script tag attributes</a>, such as <code>data-display</code>, <code>data-sign-in-text</code>, <code>data-sign-out-text</code> and <code>data-sign-out-claim</code>.</li>
-<li>Add a &ldquo;profile&rdquo; <a href="integration/#event-handlers">event handler</a> to the example and print the identity claims it receives.</li>
-</ul>
-<p>To develop a more complete application,</p>
-<ul>
-<li>Check the <a href="./integration#third-party-integrations">third-party integrations</a> and browse the <a href="https://github.com/AuthentiqID/authentiq-examples/">example code</a>.</li>
-<li>Understand whether you are building a <a href="#application-type">client-side, server-side or hybrid application</a>.</li>
-<li>Fine tune your application&rsquo;s configuration, attach a title and a logo, in the <a href="yourapps.md">client console</a>.</li>
-<li>Finally, <a href="#support">let us know</a> how it went or <a href="https://github.com/AuthentiqID/authentiq-docs/">help fix a documentation error</a>!</li>
-</ul>
-<h1 id="protocol">Protocol</h1>
-<p>TBD</p>
-<h1 id="concepts">Concepts</h1>
-<p>This section explains general concepts relating to Authentiq Connect.</p>
-<h2 id="authentiq-id">Authentiq ID</h2>
-<p>The Authentiq mobile app (currently on iOS) is the key to the end-user&rsquo;s privacy. The app creates and maintains a mobile identity&mdash;Authentiq ID&mdash;that can be used to authenticate. An Authentiq ID can be seen as a secure cryptographic passport that can hold various bits of profile information. Some of the information, like phone number and email address, are verified by Authentiq so that the website doesn&rsquo;t have to. The user still decides what to share and with whom.</p>
-<h2 id="application-types">Application types</h2>
-<p>TBD</p>
-<h2 id="integration-types">Integration types</h2>
-<p>The following table highlights key differences between the protocol variants.</p>
+<p>Authentiq Connect is an easy-to-use Identity Provider with a focus on privacy that is built on top of OAuth 2.0 and OpenID Connect.</p>
+<p>We created it to make it easy for websites and apps to move beyond usernames and passwords, while safeguarding the end-user&rsquo;s privacy. Our aim is to make modern authentication easy, flexible, transparent and safe.</p>
+<p>Continue reading to learn more about the service. Or check out a <a href="https://github.com/AuthentiqID/examples-flask" target="_blank">code example</a> or the <a href="https://dashboard.authentiq.com/?utm_source=docs&amp;utm_medium=docs&amp;utm_campaign=index" target="_blank">management dashboard</a> first.</p>
+<p class="alert alert-success mdi-check" role="alert">Authentiq Connect is running as a highly-available cloud service and we are making it ready for on-premises installations as well.</p>
+<h1 id="features">Features</h1>
+<h2 id="authentication-methods">Authentication Methods</h2>
+<p>By enabling Authentiq you make the following authentication methods available to your site&rsquo;s users.</p>
 <table>
 <thead>
 <tr>
-<th>Feature</th>
-<th>Authentiq Connect</th>
-<th>OpenID Connect</th>
-<th>OAuth 2.0</th>
+<th align="left">Authentication Method</th>
+<th align="left">Application</th>
+<th align="left">Type</th>
+<th align="left">Support</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="https://tools.ietf.org/html/rfc6749#section-1.3.1">Authorization code grant</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
+<td align="left"><abbr title="Sign in without a password using your Authentiq ID.">Passwordless</abbr></td>
+<td align="left"><abbr title="Your personal mobile identity wallet.">Authentiq ID</abbr></td>
+<td align="left">QR code, <abbr title="Push Notification">PN</abbr>, Handle</td>
+<td align="left">Supported</td>
 </tr>
 <tr>
-<td><a href="https://tools.ietf.org/html/rfc6749#section-1.3.2">Implicit grant</a></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
+<td align="left"><abbr title="Sign in with two-step verification and an authenticator app.">Virtual 2FA</abbr></td>
+<td align="left"><abbr title="Your personal mobile identity wallet.">Authentiq ID</abbr>, Google Authenticator</td>
+<td align="left"><abbr title="Time-based one-time passwords.">TOTP</abbr></td>
+<td align="left">Supported</td>
 </tr>
 <tr>
-<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#IDToken">ID Token</a> support</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No</td>
+<td align="left"><abbr title="Sign in with two-step verification and a hardware token.">Physical 2FA</abbr></td>
+<td align="left">YubiKey</td>
+<td align="left">USB Token</td>
+<td align="left">Coming soon</td>
 </tr>
 <tr>
-<td>Rich authentication UX</td>
-<td>Standard</td>
-<td>With some effort</td>
-<td>Less</td>
-</tr>
-<tr>
-<td>Need to fetch user information with separate HTTP request</td>
-<td>No</td>
-<td>No</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>End-to-end verification of user information</td>
-<td>Yes</td>
-<td>No</td>
-<td>No</td>
-</tr>
-<tr>
-<td>End-to-end encryption of user information</td>
-<td>Soon</td>
-<td>No</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Authentiq Connect Provider needs to be trusted by client</td>
-<td>No</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr>
-<td>Authentiq Connect Provider needs to persist user information</td>
-<td>No</td>
-<td>Depends</td>
-<td>Yes</td>
+<td align="left"><abbr title="Sign in via a one-time link sent to your email account.">One-time authentication</abbr></td>
+<td align="left">Email</td>
+<td align="left">Magic link</td>
+<td align="left">Coming soon</td>
 </tr>
 </tbody>
 </table>
-<h2 id="scopes">Scopes</h2>
-<p>Authentiq Connect leverages OAuth 2.0 scopes to specify what sections of a user&rsquo;s profile are being requested, inheriting <a href="http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims">scopes from OIDC</a> where possible.</p>
-<h3 id="identity-claims">Identity claims</h3>
-<p>Using scopes, a client application can request the following <a href="http://openid.net/specs/openid-connect-core-1_0.html#StandardClaims">identity claims</a> from a user.</p>
+<p>These methods can work in addition to or conjunction with your existing login system.</p>
+<p>We often see sites that already integrate with social login providers adding passwordless authentication via <abbr title="Your personal mobile identity wallet.">Authentiq ID</abbr>, this way providing their users with a privacy-aware alternative to signing in with Google or Facebook.</p>
+<p>Another common pattern is to use Authentiq Connect to effortlessly add two-step verification on top of usernames and passwords that are kept in-house.</p>
+<h2 id="authentiq-id"><abbr title="Your personal mobile identity wallet.">Authentiq ID</abbr></h2>
+<p>The <abbr title="Your personal mobile identity wallet.">Authentiq ID</abbr> mobile app (available on <a href="https://play.google.com/store/apps/details?id=com.authentiq.authentiqid">Android</a> and <a href="https://itunes.apple.com/us/app/authentiq-id/id964932341">iOS</a>) are the key to your end-user&rsquo;s privacy. It acts as a mobile identity wallet that can be used to identify to websites. A user&rsquo;s <abbr title="Your personal mobile identity wallet.">Authentiq ID</abbr> can be seen as their personal cryptographic passport that holds profile information.</p>
+<p>When signing in, the user decides what information will be shared.
+Phone number and email address will already have been verified by Authentiq so that the website doesn&rsquo;t have to.</p>
+<h2 id="remote-sign-out">Remote Sign-Out</h2>
+<p>When a user signs in with <abbr title="Your personal mobile identity wallet.">Authentiq ID</abbr>, the website session is also visible in the mobile app. Walking away from a computer</p>
+<h2 id="webhooks">Webhooks</h2>
+<p>Create rich integrations by listening to Authentiq&rsquo;s <a href="https://tools.ietf.org/html/draft-ietf-secevent-token">Security Event Token</a> webhooks. Use a webhook, for instance, to add new users to your newsletter easily. Coming soon.</p>
+<h2 id="single-sign-on">Single Sign-On</h2>
+<p>On intranets authentication is often synchronized between applications. You can configure Authentiq Connect for Single Sign-on to support this. Coming soon.</p>
+<h2 id="pairwise-uuids">Pairwise UUIDs</h2>
+<p>The ability to get a different user ID for every site you log in to, protecting your privacy better in case a site is breached. Coming soon.</p>
+<h1 id="compatibility">Compatibility</h1>
+<h2 id="standards">Standards</h2>
+<p>To integrate with modern applications with good user experience, Authentiq Connect supports a growing number of web standards.</p>
 <table>
 <thead>
 <tr>
-<th>Scope name</th>
-<th>Description</th>
-<th>Claims included</th>
-<th>Can be marked required?</th>
-<th>Can be signed?</th>
+<th align="left">Standard</th>
+<th align="left">Support</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>name</code></td>
-<td>A user&rsquo;s full name.</td>
-<td><code>name</code>, <code>given_name</code>, <code>family_name</code>, <code>middle_name</code>, <code>nickname</code></td>
-<td>Yes</td>
-<td>No</td>
+<td align="left">OAuth 2.0 Support</td>
+<td align="left">code, token</td>
 </tr>
 <tr>
-<td><code>email</code></td>
-<td>A user&rsquo;s (verified) email address</td>
-<td><code>email</code>, <code>email_verified</code></td>
-<td>Yes</td>
-<td>Yes</td>
+<td align="left"><abbr title="OpenID Connect">OIDC</abbr> Support</td>
+<td align="left">code, id_token, hybrid</td>
 </tr>
 <tr>
-<td><code>phone</code></td>
-<td>A user&rsquo;s (verified) phone number</td>
-<td><code>phone_number</code>, <code>phone_number_verified</code></td>
-<td>Yes</td>
-<td>Yes</td>
+<td align="left"><abbr title="OpenID Connect">OIDC</abbr> Discovery</td>
+<td align="left">Supported</td>
 </tr>
 <tr>
-<td><code>address</code></td>
-<td>A user&rsquo;s home address</td>
-<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#AddressClaim"><code>address</code></a></td>
-<td>Yes</td>
-<td>No</td>
+<td align="left"><abbr title="OpenID Connect">OIDC</abbr> Client Registration</td>
+<td align="left">Supported</td>
 </tr>
 <tr>
-<td><code>location</code></td>
-<td>A user&rsquo;s current location.</td>
-<td><code>aq:location</code></td>
-<td>Yes</td>
-<td>No</td>
+<td align="left"><abbr title="An extension to OIDC that describes a communications channel between the website and the authentication server to facilitate SSO and enable remote logout.">OIDC Session Management</abbr></td>
+<td align="left">Supported</td>
+</tr>
+<tr>
+<td align="left"><abbr title="An alternative remote logout mechanism using a server-to-server API.">OIDC Back-Channel Logout</abbr></td>
+<td align="left">Supported</td>
+</tr>
+<tr>
+<td align="left"><abbr title="OpenID Connect">OIDC</abbr> Front-Channel Logout</td>
+<td align="left">Coming soon</td>
+</tr>
+<tr>
+<td align="left">OAuth 2.0 Multiple Response Types</td>
+<td align="left">Supported</td>
+</tr>
+<tr>
+<td align="left">OAuth 2.0 Form Post Response Mode</td>
+<td align="left">Supported</td>
+</tr>
+<tr>
+<td align="left">Security Event Tokens</td>
+<td align="left">Coming soon</td>
 </tr>
 </tbody>
 </table>
-<p>Following OIDC, scopes are <em>optional</em> by default, leaving the choice of providing any of the details to the end-user, who will be able to opt out of the requested scopes on the Authentiq ID consent screen. The client application is then responsible to deal with the missing information.</p>
-<p>Alternatively, Authentiq allows you to mark certain scopes as <em>required</em> and/or <em>requiring a signature</em> from a trusted issuer.</p>
-<h4 id="required-claims">Required claims</h4>
-<p>Identity scopes can be marked as being <em>required</em> by appending <code>~r</code> to the scope label, for instance <code>email~r</code> or <code>phone~r</code>. Doing so will prevent a user from opting out of the section when signing in from the Authentiq ID mobile app. We recommend using this flag sparingly and instead letting users opt-in to the information they share with you.</p>
-<h4 id="signed-claims">Signed claims</h4>
-<p>Scopes can also be marked to <em>require a signature</em> from an externally trusted party. In fact, Authentiq is acting as a signature provider for the email and phone claims, handling the confirmation of email addresses and phone number using a one-time verification code sent by email or text message.</p>
-<p class="alert alert-success mdi-check" role="alert">Developers will be able to register their own signature providers soon.</p>
-<h3 id="functional-scopes">Functional scopes</h3>
-<p>Authentiq Connect also uses scopes to indicate <em>functional</em> preferences.</p>
+<h2 id="identity-claims">Identity claims</h2>
+<p>Authentiq Connect leverages <abbr title="OpenID Connect">OIDC</abbr>&lsquo;s scopes to specify what profile information to request from a user.</p>
+<p><a href="http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims">scopes from <abbr title="OpenID Connect">OIDC</abbr></a> where possible.</p>
 <table>
 <thead>
 <tr>
-<th>Label</th>
-<th>Description</th>
+<th align="left"><abbr title="Parameter specifying the scope of the authentication request.">Scope</abbr> name</th>
+<th align="left">Description</th>
+<th align="left">Verified</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>aq:push</code></td>
-<td>Whether or not to offer <em>One click sign-in</em> to the user. With this convenient feature enabled, the end-user will be given the option to skip the QR code for subsequent logins using the same browser.</td>
+<td align="left"><code>email</code></td>
+<td align="left">A user&rsquo;s (verified) email address</td>
+<td align="left">Yes</td>
+</tr>
+<tr>
+<td align="left"><code>phone</code></td>
+<td align="left">A user&rsquo;s (verified) phone number</td>
+<td align="left">Yes</td>
+</tr>
+<tr>
+<td align="left"><code>address</code></td>
+<td align="left">A user&rsquo;s home address</td>
+<td align="left">No</td>
+</tr>
+<tr>
+<td align="left"><code>aq:name</code></td>
+<td align="left">A user&rsquo;s full name</td>
+<td align="left">No</td>
+</tr>
+<tr>
+<td align="left"><code>aq:location</code></td>
+<td align="left">A user&rsquo;s current location</td>
+<td align="left">No</td>
 </tr>
 </tbody>
 </table>
-<h2 id="errors">Errors</h2>
-<p>When something goes wrong, Authentiq Connect redirects back to the client application as stipulated by OAuth 2.0, so that the error can be handled in the domain and using the UX of the client application. The Authentiq Connect SDK emits these errors in turn as an <code>error</code> event. Below is a gathering of all possible error codes and their descriptions.</p>
-<table>
-<thead>
-<tr>
-<th>Error</th>
-<th>Origin</th>
-<th>Resource</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>interaction_required</code></td>
-<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#AuthError">OIDC</a></td>
-<td>Authorize</td>
-<td>The Authorization Server requires End-User interaction of some form to proceed. This error MAY be returned when the prompt parameter value in the Authentication Request is none, but the Authentication Request cannot be completed without displaying a user interface for End-User interaction.</td>
-</tr>
-<tr>
-<td><code>login_required</code></td>
-<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#AuthError">OIDC</a></td>
-<td>Authorize</td>
-<td>The Authorization Server requires End-User authentication. This error MAY be returned when the prompt parameter value in the Authentication Request is none, but the Authentication Request cannot be completed without displaying a user interface for End-User authentication.</td>
-</tr>
-<tr>
-<td><code>account_selection_required</code></td>
-<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#AuthError">OIDC</a></td>
-<td>Authorize</td>
-<td>The End-User is REQUIRED to select a session at the Authorization Server. The End-User MAY be authenticated at the Authorization Server with different associated accounts, but the End-User did not select a session. This error MAY be returned when the prompt parameter value in the Authentication Request is none, but the Authentication Request cannot be completed without displaying a user interface to prompt for a session to use.</td>
-</tr>
-<tr>
-<td><code>consent_required</code></td>
-<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#AuthError">OIDC</a></td>
-<td>Authorize</td>
-<td>The Authorization Server requires End-User consent. This error MAY be returned when the prompt parameter value in the Authentication Request is none, but the Authentication Request cannot be completed without displaying a user interface for End-User consent.</td>
-</tr>
-<tr>
-<td><code>invalid_request_uri</code></td>
-<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#AuthError">OIDC</a></td>
-<td>Authorize</td>
-<td>The request_uri in the Authorization Request returns an error or contains invalid data.</td>
-</tr>
-<tr>
-<td><code>invalid_request_object</code></td>
-<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#AuthError">OIDC</a></td>
-<td>Authorize</td>
-<td>The request parameter contains an invalid Request Object.</td>
-</tr>
-<tr>
-<td><code>request_not_supported</code></td>
-<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#AuthError">OIDC</a></td>
-<td>Authorize</td>
-<td>The OP does not support use of the request parameter defined in Section 6.</td>
-</tr>
-<tr>
-<td><code>request_uri_not_supported</code></td>
-<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#AuthError">OIDC</a></td>
-<td>Authorize</td>
-<td>The OP does not support use of the request_uri parameter defined in Section 6.</td>
-</tr>
-<tr>
-<td><code>registration_not_supported</code></td>
-<td><a href="http://openid.net/specs/openid-connect-core-1_0.html#AuthError">OIDC</a></td>
-<td>Authorize</td>
-<td>The OP does not support use of the registration parameter defined in Section 7.2.1.</td>
-</tr>
-<tr>
-<td><code>invalid_request</code></td>
-<td><a href="https://tools.ietf.org/html/rfc6749#section-5.2">OAuth2</a></td>
-<td>Authorize, Token</td>
-<td>The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed.</td>
-</tr>
-<tr>
-<td><code>unauthorized_client</code></td>
-<td><a href="https://tools.ietf.org/html/rfc6749#section-5.2">OAuth2</a></td>
-<td>Authorize, Token</td>
-<td>The client is not authorized to request an authorization code using this method.</td>
-</tr>
-<tr>
-<td><code>access_denied</code></td>
-<td><a href="https://tools.ietf.org/html/rfc6749#section-5.2">OAuth2</a></td>
-<td>Authorize, Token</td>
-<td>The resource owner or authorization server denied the request.</td>
-</tr>
-<tr>
-<td><code>unsupported_response_type</code></td>
-<td><a href="https://tools.ietf.org/html/rfc6749#section-5.2">OAuth2</a></td>
-<td>Authorize, Token</td>
-<td>The authorization server does not support obtaining an authorization code using this method.</td>
-</tr>
-<tr>
-<td><code>invalid_scope</code></td>
-<td><a href="https://tools.ietf.org/html/rfc6749#section-5.2">OAuth2</a></td>
-<td>Authorize, Token</td>
-<td>The requested scope is invalid, unknown, or malformed.</td>
-</tr>
-<tr>
-<td><code>server_error</code></td>
-<td><a href="https://tools.ietf.org/html/rfc6749#section-5.2">OAuth2</a></td>
-<td>Authorize, Token</td>
-<td>The authorization server encountered an unexpected condition that prevented it from fulfilling the request.</td>
-</tr>
-<tr>
-<td><code>temporarily_unavailable</code></td>
-<td><a href="https://tools.ietf.org/html/rfc6749#section-5.2">OAuth2</a></td>
-<td>Authorize, Token</td>
-<td>The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.</td>
-</tr>
-<tr>
-<td><code>invalid_request</code></td>
-<td><a href="http://tools.ietf.org/html/rfc6750#section-3.1">Bearer</a></td>
-<td>UserInfo</td>
-<td>The request is missing a required parameter, includes an unsupported parameter or parameter value, repeats the same parameter, uses more than one method for including an access token, or is otherwise malformed.  The resource server SHOULD respond with the HTTP 400 (Bad Request) status code.</td>
-</tr>
-<tr>
-<td><code>invalid_token</code></td>
-<td><a href="http://tools.ietf.org/html/rfc6750#section-3.1">Bearer</a></td>
-<td>UserInfo</td>
-<td>The access token provided is expired, revoked, malformed, or invalid for other reasons.  The resource SHOULD respond with the HTTP 401 (Unauthorized) status code.  The client MAY request a new access token and retry the protected resource request.</td>
-</tr>
-<tr>
-<td><code>insufficient_scope</code></td>
-<td><a href="http://tools.ietf.org/html/rfc6750#section-3.1">Bearer</a></td>
-<td>UserInfo</td>
-<td>The request requires higher privileges than provided by the access token.  The resource server SHOULD respond with the HTTP 403 (Forbidden) status code and MAY include the &ldquo;scope&rdquo; attribute with the scope necessary to access the protected resource.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="terminology">Terminology</h2>
-<p>Some terminology used in this documentation.</p>
-<dl>
-<dt>Authentiq ID</dt>
-<dd>The name of the Authentiq mobile app that manages the mobile cryptographic identity of the end-user. Authentiq ID is currently available on iOS, but will also be ported to Android.</dd>
-<dt>AuthentiqJS</dt>
-<dd>The name of the Authentiq native JavaScript snippet.</dd>
-<dt>Authentiq Connect</dt>
-<dd>The authentication protocol defined by Authentiq.</dd>
-<dt>Authentiq Connect Provider</dt>
-<dd>The daemon that serves the Authentiq Connect protocol, acting as a bridge between website and app. The provider is packaged as <code>authentiqd</code> in the context of SysV-style init scripts.</dd>
-<dt>Authentiq Connect SDK</dt>
-<dd>The combination of the hosted (or installable) Authentiq Connect Provider and AuthentiqJS.</dd>
-<dt>Third-party Integration</dt>
-<dd>The combination of the hosted (or installable) Authentiq Connect Provider and a third-party OAuth 2.0 or OIDC client library.</dd>
-<dt>App, Client, or Relying Party</dt>
-<dd>The client website or application that end-users authenticate to. Client and Relying Party are used interchangeably in the OpenID Connect specification.</dd>
-<dt>Certificate Authority List</dt>
-<dd>A public list of signature authorities that allows a Relying Party to verify that a certain identity claim was signed by an active trusted party.</dd>
-<dt>Certificate Revocation List</dt>
-<dd>A public list of unique end-user and (hashed) device identifiers that can be used by a Relying Party to verify that a user is still active and their device hasn&rsquo;t been revoked.</dd>
-</dl>
+<p>Requested scopes are <em>optional</em> by default, leaving the choice of providing any of the details to the end-user, who will be able to opt out of the requested scopes on the <abbr title="Your personal mobile identity wallet.">Authentiq ID</abbr> consent screen.</p>
+<p>As a website it is possible to mark essential scopes as required too, by appending <code>~r</code>.</p>
 <h1 id="support">Support</h1>
-<p>Nothing is perfect right from the start, but we&rsquo;re here to help and we&rsquo;re listening too! These are the best ways to contact us&hellip;</p>
-<h2 id="chat">Chat</h2>
-<p>Join Authentiq on IRC at <a href="irc://freenode.net/#authentiq">#authentiq@freenode.net</a> to discuss general topics, or to let us know your joys or pains with Authentiq. We&rsquo;re quite an accessible bunch of friends.</p>
-<h2 id="email">Email</h2>
-<p>You can contact us via email at <a href="mailto:support@authentiq.com">support@authentiq.com</a>.</p>
-<h2 id="tweet">Tweet</h2>
-<p>Sometimes a simple <a href="https://twitter.com/AuthentiqID">tweet</a> is best.</p>
-<h2 id="hack">Hack</h2>
-<p>Discuss bugs or new features on <a href="https://github.com/AuthentiqID/authentiq-provider/issues">GitHub</a>.</p>
-<h2 id="write">Write</h2>
-<p>Spotted an error in this documentation? Let us know or fork <a href="https://github.com/AuthentiqID/authentiq-docs/">this repository</a> straight away and press Edit.</p>
-<h2 id="security">Security</h2>
-<p>Please report security issues by email <a href="mailto:security@authentiq.com">security@authentiq.com</a>.</p>
-<p class="alert alert-warning mdi-warning" role="alert">We&rsquo;ll set up a GPG key for the security team soon.</p>
+<p>Get in touch with us on <a href="mailto:support@authentiq.com">support@authentiq.com</a>.</p>
+<p>Please report security issues to <a href="mailto:security@authentiq.com">security@authentiq.com</a>.</p>
 
 <footer id="footer" class="col-md-12">
     <ul class="text-center list-inline">

@@ -4,47 +4,31 @@
     
     <url>
      <loc>http://developers.authentiq.io//</loc>
-     <lastmod>2016-09-12</lastmod>
+     <lastmod>2017-03-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
     <url>
-     <loc>http://developers.authentiq.io//integration/</loc>
-     <lastmod>2016-09-12</lastmod>
+     <loc>http://developers.authentiq.io//gettingstarted/</loc>
+     <lastmod>2017-03-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
-    <url>
-     <loc>http://developers.authentiq.io//installation/</loc>
-     <lastmod>2016-09-12</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-        
     <url>
      <loc>http://developers.authentiq.io//api-provider/</loc>
-     <lastmod>2016-09-12</lastmod>
+     <lastmod>2017-03-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
-        
-    <url>
-     <loc>http://developers.authentiq.io//api-issuer/</loc>
-     <lastmod>2016-09-12</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
     
 
     
     <url>
      <loc>http://developers.authentiq.io//faq/</loc>
-     <lastmod>2016-09-12</lastmod>
+     <lastmod>2017-03-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
