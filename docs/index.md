@@ -48,7 +48,7 @@ When a user signs in with Authentiq ID, the website session is also visible in t
 
 ## Webhooks
 
-Create rich integrations by listening to Authentiq's [Security Event Token](https://tools.ietf.org/html/draft-ietf-secevent-token) webhooks. Use a webhook for instance to add new users to your newsletter easily. Coming soon.
+Create rich integrations by listening to Authentiq's [Security Event Token](https://tools.ietf.org/html/draft-ietf-secevent-token) webhooks. Use a webhook, for instance, to add new users to your newsletter easily. Coming soon.
 
 
 ## Single Sign-On
