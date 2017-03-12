@@ -1,12 +1,12 @@
-{% if meta.source %}
+{% if page.meta.source %}
 <div class="source-links">
-{% for filename in meta.source %}
+{% for filename in page.meta.source %}
     <span class="label label-primary">{{ filename }}</span>
 {% endfor %}
 </div>
 {% endif %}
 
-{{ content }}
+{{ page.content }}
 
 <footer id="footer" class="col-md-12">
     <ul class="text-center list-inline">
@@ -22,7 +22,7 @@
         </li>
     </ul>
 
-    {% if copyright %}
-        <center><small>{{ copyright }}</small></center>
+    {% if config.content %}
+        <center><small>{{ config.content }}</small></center>
     {% endif %}
 </footer>

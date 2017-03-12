@@ -12,7 +12,7 @@
             </button>
 
             <!-- Main title -->
-            <a class="navbar-brand" href="{{ homepage_url }}" title="{{ site_name }}"><img src="{{ base_url }}/img/logo.svg" /></a>
+            <a class="navbar-brand" href="{{ nav.homepage.url }}" title="{{ config.site_name }}"><img src="{{ base_url }}/img/logo.svg" /></a>
         </div>
 
         <!-- Expanded navigation -->
@@ -54,15 +54,15 @@
                 </li>
                 #}
 
-                {% if repo_url %}
+                {% if config.repo_url %}
                 <li>
-                    <a href="{{ repo_url }}">
-                        {% if repo_name == 'GitHub' %}
+                    <a href="{{ config.repo_url }}">
+                        {% if config.repo_name == 'GitHub' %}
                             <i class="fa fa-github"></i>
-                        {% elif repo_name == 'Bitbucket' %}
+                        {% elif config.repo_name == 'Bitbucket' %}
                             <i class="fa fa-bitbucket"></i>
                         {% endif %}
-                        {{ repo_name }}
+                        {{ config.repo_name }}
                     </a>
                 </li>
                 {% endif %}
