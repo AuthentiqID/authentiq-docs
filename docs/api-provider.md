@@ -26,11 +26,7 @@ content_javascript: ../swagger/lib/custom.js
 ## GET /client/&lt;client_id&gt;
 ## PUT /client/&lt;client_id&gt;
 # Session Management
-## /authorize/logout
 ## /authorize/iframe
-# Sessions
-## /session
-## /client/&lt;client_id&gt;/session
   </div>
 
 <div class="row">
