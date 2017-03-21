@@ -2,6 +2,7 @@ site_name: Authentiq Connect
 site_url: http://developers.authentiq.io/
 site_description: Documentation for the Authentiq OAuth 2.0 and OpenID Connect Provider.
 site_author: The Authentiq team
+site_favicon: images/favicon.png
 repo_url: https://github.com/AuthentiqID/authentiq-docs/
 edit_uri: tree/master/docs/
 # include_search: false
