@@ -20,8 +20,11 @@ content_javascript: ../swagger/lib/custom.js
 ## /token
 ## /userinfo
 # Client Management
-## /client
-## /client/&lt;client_id&gt;
+## GET /client
+## POST /client
+## DELETE /client/&lt;client_id&gt;
+## GET /client/&lt;client_id&gt;
+## PUT /client/&lt;client_id&gt;
 # Session Management
 ## /authorize/iframe
   </div>
@@ -48,10 +51,7 @@ content_javascript: ../swagger/lib/custom.js
       supportedSubmitMethods: [],
       // supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
       onComplete: function(swaggerApi, swaggerUi){
-
         $('#temp-anchor-links').remove();
-
-        $('body').scrollspy('refresh');
 
         $('pre code').each(function(i, e) {
           hljs.highlightBlock(e)

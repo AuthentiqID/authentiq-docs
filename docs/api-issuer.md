@@ -19,8 +19,6 @@ content_javascript: ../swagger/lib/custom.js
 # Get
 # Head
 # Key
-## /key
-## /key/1234
 # Login
 # Post
 # Put
@@ -49,8 +47,6 @@ content_javascript: ../swagger/lib/custom.js
       supportedSubmitMethods: [],
       onComplete: function(swaggerApi, swaggerUi){
         $('#temp-anchor-links').remove();
-
-        $('body').scrollspy('refresh');
 
         $('pre code').each(function(i, e) {
           hljs.highlightBlock(e)
