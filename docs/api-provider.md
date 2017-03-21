@@ -1,10 +1,10 @@
 content_css:        ../swagger/css/custom.css
-content_javascript: ../swagger/lib/object-assign-pollyfill.js
+content_javascript: ../swagger/lib/custom.js
+                    ../swagger/lib/object-assign-pollyfill.js
                     ../swagger/lib/jquery.slideto.min.js
                     ../swagger/lib/jquery.wiggle.min.js
                     ../swagger/lib/jquery.ba-bbq.min.js
-                    ../swagger/lib/handlebars-2.0.0.js
-                    ../swagger/lib/js-yaml.min.js
+                    ../swagger/lib/handlebars-4.0.5.js
                     ../swagger/lib/lodash.min.js
                     ../swagger/lib/backbone-min.js
                     ../swagger/swagger-ui.min.js
@@ -20,8 +20,11 @@ content_javascript: ../swagger/lib/object-assign-pollyfill.js
 ## /token
 ## /userinfo
 # Client Management
-## /client
-## /client/&lt;client_id&gt;
+## GET /client
+## POST /client
+## DELETE /client/&lt;client_id&gt;
+## GET /client/&lt;client_id&gt;
+## PUT /client/&lt;client_id&gt;
 # Session Management
 ## /authorize/logout
 ## /authorize/iframe
@@ -41,22 +44,24 @@ content_javascript: ../swagger/lib/object-assign-pollyfill.js
   $(function () {
     var url = '/swagger/provider.yaml';
 
+    // Pre load translate...
+    if(window.SwaggerTranslator) {
+        window.SwaggerTranslator.translate();
+    }
+
     window.swaggerUi = new SwaggerUi({
       url: url,
       dom_id: "swagger-ui-container",
       supportedSubmitMethods: [],
       // supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
       onComplete: function(swaggerApi, swaggerUi){
-
         $('#temp-anchor-links').remove();
-
-        $('body').scrollspy('refresh');
 
         $('pre code').each(function(i, e) {
           hljs.highlightBlock(e)
         });
 
-        addApiKeyAuthorization();
+        // addApiKeyAuthorization();
 
         if(window.SwaggerTranslator) {
           window.SwaggerTranslator.translate();
@@ -69,7 +74,8 @@ content_javascript: ../swagger/lib/object-assign-pollyfill.js
       apisSorter: "alpha",
       jsonEditor: false,
       defaultModelRendering: 'schema',
-      showRequestHeaders: false
+      showRequestHeaders: false,
+      showOperationIds: false
     });
 
     function addApiKeyAuthorization(){
