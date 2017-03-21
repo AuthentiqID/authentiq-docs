@@ -12,11 +12,6 @@
 
         <title>{% if page_title %}{{ page_title }} - {% endif %}{{ site_name }}</title>
 
-        <link href="//cdn.authentiq.io/theme/3.3.7aq1/css/bootstrap-theme.min.css" rel="stylesheet">
-        {# <link href="http://0.0.0.0:9001/dist/css/bootstrap-theme.css" rel="stylesheet"> #}
-
-        <link href="{{ base_url }}/css/base.css" rel="stylesheet">
-
         {%- for path in extra_css %}
         <link href="{{ path }}" rel="stylesheet" type="text/css">
         {%- endfor %}
@@ -24,8 +19,6 @@
         {%- for path in meta.content_css %}
         <link href="{{ path }}" rel="stylesheet">
         {%- endfor %}
-
-        <link href="//fonts.googleapis.com/css?family=Montserrat:400,700|Noto+Serif:400|Material+Icons" rel="stylesheet" type="text/css">
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -81,7 +74,7 @@
         {% endif %}
     </head>
 
-    <body class="full-bg" data-spy="scroll" data-target=".toc" data-offset="145">
+    <body class="full-bg anchor-sticky-menu" data-spy="scroll" data-target=".toc" data-offset="145">
         {% include "nav.html" %}
         <div class="container">
             {% if meta.hide_toc %}

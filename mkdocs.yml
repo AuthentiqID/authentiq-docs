@@ -10,7 +10,11 @@ copyright: '<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc
 # google_analytics: ['UA-X-Y', 'authentiq.io']
 theme_dir: 'theme'
 extra_css:
-  - "//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro"
+#- "http://0.0.0.0:9001/dist/css/bootstrap-theme.css"
+- "//cdn.authentiq.io/theme/3.3.7aq1/css/bootstrap-theme.min.css"
+- "//fonts.googleapis.com/css?family=Montserrat:400,700|Noto+Serif:400|Material+Icons"
+- "css/base.css"
+#   - "//fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono|Anonymous+Pro|PT+Mono|Roboto+Mono|Droid+Sans+Mono|Inconsolata|Fira+Mono|Source+Code+Pro"
 markdown_extensions:
   - markdown.extensions.attr_list
   - markdown.extensions.codehilite
@@ -23,13 +27,12 @@ pages:
   - 'API Reference':
     - 'Connect': 'api-provider.md'
     - 'Issuer': 'api-issuer.md'
-  # - 'Your Apps': 'yourapps.md'
   - 'FAQs': 'faq.md'
 extra:
     version: 0.1.0  # {{ config.extra.version }}
     enable_tota11y: true
     snippet:
-      url: https://cdn.authentiq.io/authentiqjs/0.1.0/authentiq.js
+      url: https://cdn.authentiq.io/authentiqjs/0.1.1-2/authentiq.js
 #      provider_uri: http://localhost:5000/
 #      client_id: authentiq-connect-docs-dev
       provider_uri: https://connect.authentiq.io/
@@ -37,7 +40,5 @@ extra:
       redirect_uri: /redirect.html
       scope: openid email~rs aq:name aq:push
 extra_templates:
-  - redirect.html
-  - console.html
   - examples/signin.html
   - examples/events.html
