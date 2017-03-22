@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+<div class="navbar navbar-fixed-top navbar-default" role="navigation">
     <div class="container">
 
         <!-- Collapsed navigation -->
@@ -12,13 +12,13 @@
             </button>
 
             <!-- Main title -->
-            <a class="navbar-brand" href="{{ homepage_url }}">{{ site_name }}</a>
+            <a class="navbar-brand" href="{{ nav.homepage.url }}" title="{{ config.site_name }}"><img src="{{ base_url }}/img/logo.svg" /></a>
         </div>
 
         <!-- Expanded navigation -->
         <div class="navbar-collapse collapse">
             <!-- Main navigation -->
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav top-nav">
             {% for nav_item in nav %}
             {% if nav_item.children %}
                 <li class="dropdown{% if nav_item.active %} active{% endif %}">
@@ -54,15 +54,15 @@
                 </li>
                 #}
 
-                {% if repo_url %}
+                {% if config.repo_url %}
                 <li>
-                    <a href="{{ repo_url }}">
-                        {% if repo_name == 'GitHub' %}
+                    <a href="{{ config.repo_url }}">
+                        {% if config.repo_name == 'GitHub' %}
                             <i class="fa fa-github"></i>
-                        {% elif repo_name == 'Bitbucket' %}
+                        {% elif config.repo_name == 'Bitbucket' %}
                             <i class="fa fa-bitbucket"></i>
                         {% endif %}
-                        {{ repo_name }}
+                        {{ config.repo_name }}
                     </a>
                 </li>
                 {% endif %}

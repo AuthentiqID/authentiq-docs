@@ -12,14 +12,14 @@ There are a few important differences to consider when evaluating integration op
 
 Our native Authentiq Connect SDK is easy to use and leverages features of OpenID Connect to obtain a rich authentication experience. But our protocol also works with many of the great third-party OAuth 2.0 client libraries out there already. Deciding what works best for you depends heavily on your situation. In practice, generic OAuth 2.0 libraries tend to work well, but will be less optimized in terms of performance and user experience.
 
-OpenID Connect is an extention to OAuth 2.0 that standardizes user authentication and forms the basis of Authentiq Connect. 
+OpenID Connect is an extention to OAuth 2.0 that standardizes user authentication and forms the basis of Authentiq Connect.
 {: class="alert alert-success" role="alert" }
 
 ## Register a client
 
 [TBD]
 
-Whether or not your integration is going to be native or third-party, you will need to [register your application](clients.md) with an Authentiq Connect Provider and obtain a unique client identifier. Use the `client_id` in your preferred OAuth 2.0 client library, or when customizing your AuthentiqJS snippet below. 
+Whether or not your integration is going to be native or third-party, you will need to [register your application](clients.md) with an Authentiq Connect Provider and obtain a unique client identifier. Use the `client_id` in your preferred OAuth 2.0 client library, or when customizing your AuthentiqJS snippet below.
 
 
 # AuthentiqJS
@@ -28,7 +28,7 @@ In terms of user experience, the smoothest integration option is to simply inclu
 
 ## Button
 
-<div class="panel panel-default">
+<!-- <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">1. Pick an Authentiq client <small>[Sign in first]</small></h3>
   </div>
@@ -43,11 +43,11 @@ In terms of user experience, the smoothest integration option is to simply inclu
       <a href="#/clients/add" id="add-client-button" class="btn btn-primary disabled" data-toggle="modal" data-angular-link data-target="#add-client">Create new client</a>
     </form>
   </div>
-</div>
+</div> -->
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">2. Button options</h3>
+    <h3 class="panel-title">Button options</h3>
   </div>
   <div class="panel-body">
     <form class="form-horizontal">
@@ -63,6 +63,7 @@ In terms of user experience, the smoothest integration option is to simply inclu
         <label for="opts-theme" class="col-sm-2 control-label">Theme</label>
         <div class="col-md-4">
           <select class="form-control" id="opts-theme" data-authentiq-key="theme">
+            <option value="none">Plain</option>
             <option value="">Basic</option>
             <option value="orange">Orange</option>
             <option value="grey">Grey</option>
@@ -92,7 +93,7 @@ In terms of user experience, the smoothest integration option is to simply inclu
 </div>
 
 <div class="well text-center">
-  <button id="authentiq" class="btn authentiq-button">
+  <button id="authentiq" class="btn authentiq-button" data-theme="none">
     Sign in
   </button>
 </div>
@@ -138,7 +139,7 @@ In terms of user experience, the smoothest integration option is to simply inclu
 ## Example
 
 ```html5
-    <script src="//cdn.authentiq.io/authentiq.io/1.0/authentiq.js"></script>
+    <script src="//cdn.authentiq.io/authentiqjs/0.1.0/authentiq.js"></script>
     <button class="authentiq-button"
             data-client-id="62a90b31-db29-4510-adf4-3d4d7d932d14"
             data-provider-uri="https://connect.authentiq.io/authorize"
@@ -151,7 +152,7 @@ In terms of user experience, the smoothest integration option is to simply inclu
 
 The following `data-*` attributes are available for the AuthentiqJS `<script>` and `<button>` tags.
 
-Attribute | Description | Default value 
+Attribute | Description | Default value
 --------- | ----------- | -------------
 client-id | Your registered application ID. | None, obtain a unique ID from the [Client Console](clients.md).
 provider-uri | Provider Authorization URL. Change this for [self-hosted installs](installation.md). | `https://connect.authentiq.io/authorize`
@@ -162,7 +163,7 @@ response-type | OIDC response type. Valid options are `id_token`, `code` and `co
 response-mode | OIDC response mode. Valid options are `query` and `fragment`. Can usually be left alone, unless you need need to bypass AuthentiqJS and redirect directly to a server endpoint; in that case manually select `query`. | Usually `fragment`.
 redirect-uri | OAuth 2.0 redirect URL. Unless you need to redirect to a server side endpoint you can leave this alone and let AuthentiqJS use the URL of the current page. | The current page, from *window.href.location*.
 state | Client application state to prevent [cross site request forgeries (XSRF)](http://en.wikipedia.org/wiki/Cross-site_request_forgery). To support [older browsers](http://caniuse.com/#feat=getrandomvalues) it is possible to pass in a server generated nonce. | 32 bytes from *crypto.getRandomValues()*.
-client-response-uri | URL to POST the received authorization response to for server side validation or processing. Method should return 200 or 400. This parameter is only used when `response_mode=fragment`, since otherwise . | None 
+client-response-uri | URL to POST the received authorization response to for server side validation or processing. Method should return 200 or 400. This parameter is only used when `response_mode=fragment`, since otherwise . | None
 
 ## Events
 
@@ -173,7 +174,7 @@ Event name | Description | Callback parameters
 `authorized` | Emitted after successful authentication. | An object containing the URL fragments the provider sent upon successful authentication, e.g. one or more of `code`, `id_token`, `access_token`, `expires_in`, `expires_at` and `state`.
 `authorized:code` | Emitted after successful authentication when the response included an authorization code as is the case with response type `code` or `code id_token`. | The authorization `code` received from the provider.
 `authorized:access_token` | Emitted after successful authentication when the response included an access token as is the case with response type `token` or `token id_token`. | The `access_token` and `expires_in` values returned by the provider.
-`authorized:id_token` | Emitted after successful authentication when the response included an ID Token as is the case with response type `id_token` or `code id_token`. | The un-decoded `id_token` as a JWT. 
+`authorized:id_token` | Emitted after successful authentication when the response included an ID Token as is the case with response type `id_token` or `code id_token`. | The un-decoded `id_token` as a JWT.
 `profile` | Emitted after successful authentication when the response included an ID Token the token was validated and decoded successfully. | The decoded `id_token` object.
 `concluded` | Emitted when the authentication session was concluded by the user signing out on the website, or terminating the session from the Authentiq ID mobile app. | N/A
 `error` | Emitted when an error occurs. Possible errors are liste. Note that depending on the [`show_errors` option](#ss) the error may have already been shown to the user by the provider. In this case, you may still find this event useful to silently gather error statistics. | The `error` code and `error_description` as defined by the OAuth 2.0, OIDC or Bearer Token RFCs.
@@ -182,53 +183,46 @@ Event name | Description | Callback parameters
 
 To subscribe to an event, use a pattern like the following.
 
-Q: Is there no way to run this normally (i.e. not after DOMContentLoaded)?   
-{: class="alert alert-danger" role="alert" }
-
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-    
-        authentiq.subscribe('profile', function(profile) {
-        
-          // Profile
-          // {
-          //   "scope": "email aq:name",
-          //   "name": "George Orwell",
-          //   "given_name": "George",
-          //   "family_name": "Orwell",
-          //   "email": "george@1984.net",
-          //   "email_verified": false
-          // }
+      authentiq.subscribe('profile', function(profile) {
 
-        });
-    
-        authentiq.subscribe('error', function(error) {
-        
-          // Error
-          // {
-          //   "error": "client_error",
-          //   "error_description": "Invalid state parameter"
-          // }
+        // Profile
+        // {
+        //   "scope": "email aq:name",
+        //   "name": "George Orwell",
+        //   "given_name": "George",
+        //   "family_name": "Orwell",
+        //   "email": "george@1984.net",
+        //   "email_verified": false
+        // }
 
-        });
-    
-      }, false);
+      });
+
+      authentiq.subscribe('error', function(error) {
+
+        // Error
+        // {
+        //   "error": "client_error",
+        //   "error_description": "Invalid state parameter"
+        // }
+
+      });
     </script>
-   
+
 You can see how events work in another [live example](examples/events.html).
 
-The code that subscribes to the events must be placed before the AuthentiqJS script tag itself.
+The code that subscribes to the events must be placed after the AuthentiqJS script tag itself.
 {: class="alert alert-info" role="alert" }
 
 
 ## Server side processing
 
-If the response mode is set to `fragment` (recommended), then `client_response_uri` can be used to still proxy the authorization response to your backend servers, as if you had specified `query` response mode. The backend server may do one or more of the following tasks:  
+If the response mode is set to `fragment` (recommended), then `client_response_uri` can be used to still proxy the authorization response to your backend servers, as if you had specified `query` response mode. The backend server may do one or more of the following tasks:
 
 - Validate the ID Token, if present, using cryptographic functions available on the server and return a 400 response in case of a validation error.
 - Consume the authorization code, if present, and exchange it for an access and/or refresh token at the Authentiq Connect token endpoint.
 
-The endpoint should return one of the following status codes. 
+The endpoint should return one of the following status codes.
 
 HTTP status code | Action
 ---------------- | ------
@@ -242,7 +236,7 @@ TBD
 
 Typical option | What to fill in
 -------------- | ---------------
-`client_id` | The client_id you obtained above.  
+`client_id` | The client_id you obtained above.
 `scope` | Space delimited list of [Authentiq Connect scopes](index.md#scopes).
 `redirect_uri` | The URL in *your* application that the Provider should redirect to after authenticating a user.
 `authorize_uri` | `https://connect.authentiq.io/authorize`
@@ -258,7 +252,7 @@ There is a [fork of HelloJS](https://github.com/skion/hello.js) that includes an
 
 At least two OAuth 2.0 modules exist for AngularJS, both of which have been tested to work with Authentiq Connect.
 
-- [OAuth-ng](https://github.com/andreareginato/oauth-ng/blob/master/README.md) 
+- [OAuth-ng](https://github.com/andreareginato/oauth-ng/blob/master/README.md)
 - [Angular-OAuth](https://github.com/seegno/angular-oauth2)
 
 ## Flask
@@ -267,15 +261,15 @@ There are several authentication extensions for Flask... [TBD]
 
 # Other integrations
 
-As support for OpenID Connect increases, we expect to see more and more sites that will allow administrators to configure external OIDC identity provider for user authentication, vastly improving the ecosystem for Authentiq ID integrations as well. We already see companies like Amazon and SalesForce making this possible.   
+As support for OpenID Connect increases, we expect to see more and more sites that will allow administrators to configure external OIDC identity provider for user authentication, vastly improving the ecosystem for Authentiq ID integrations as well. We already see companies like Amazon and SalesForce making this possible.
 
 ## Amazon AWS
 
-Amazon allows an administrator to configure an external OpenID Connect identity provider as a source for their [AWS](http://aws.amazon.com/) console. We're planning to supporting this integration at a later stage so that teams will be able to sign in to AWS using their Authentiq ID. 
+Amazon allows an administrator to configure an external OpenID Connect identity provider as a source for their [AWS](http://aws.amazon.com/) console. We're planning to supporting this integration at a later stage so that teams will be able to sign in to AWS using their Authentiq ID.
 
 ## Amazon Cognito
 
-Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com/cognito/) with external OpenID Connect identity providers, enabling an app to authenticate users from social networks and a variety of sources. We're planning to supporting this integration at a later stage so that mobile app developers will be able to register and authenticate users by their Authentiq ID. 
+Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com/cognito/) with external OpenID Connect identity providers, enabling an app to authenticate users from social networks and a variety of sources. We're planning to supporting this integration at a later stage so that mobile app developers will be able to register and authenticate users by their Authentiq ID.
 
 ## SalesForce
 
@@ -313,7 +307,7 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
       $('[data-authentiq-key]').each(function(index){
         key = $(this).data('authentiq-key');
         val = $(this).val();
-      
+
         if (val != '') {
           opts[key] = val;
         }
@@ -368,7 +362,7 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
     }
 
     function console_iframe_loaded() {
-      
+
       var self = $('#add-client');
       var iframe = self.find('iframe').contents();
       var app = iframe.find('#app');
@@ -378,7 +372,7 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
 
       iframe.find('.progress').hide().find('.progress-bar').width('0%');
       app.show();
-      
+
       app.on('click', '#save-button', function(){
         app.hide();
         iframe.find('.progress').show().find('.progress-bar').addClass('progress-bar-anim').width('100%');
@@ -396,7 +390,7 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
           });
         }, 3000);
       });
-      
+
       app.on('click', '#cancel-button', function(){
         self.modal('hide');
       });
@@ -437,12 +431,12 @@ Amazon allows mobile app developers to configure [Cognito](http://aws.amazon.com
       $('#add-client')
         .on('show.bs.modal', function(e) {
           console_iframe_loaded();
-        })  
-        
+        })
+
         .on('hidden.bs.modal', function(e) {
           $(this).find('iframe')[0].contentWindow.location.hash = '/clients/add';
         });
-      
+
       $('#get-code-modal').on('show.bs.modal', function(e) {
         var button_opts = {}, script_opts = {},
           key, val, opt, code = '', button_text;
