@@ -18,7 +18,7 @@ markdown_extensions:
   - markdown.extensions.smarty
 pages:
   - 'Overview': 'index.md'
-  - 'Get Started': 'gettingstarted.md'
+#  - 'Get Started': 'gettingstarted.md'
   - 'API Reference': 'api-provider.md'
   - 'FAQ': 'faq.md'
 extra:
