@@ -100,7 +100,7 @@ paths:
           in: query
           type: string
           description: >
-           	Space-delimited, case sensitive list of ASCII string values that specifies whether the Authorization Server prompts the End-User for reauthentication and consent. The supported values are: `none`, `login`, `consent`. If `consent` the end-user is asked to (re)confirm what claims they share. Use `none` to check for an active session.
+            Space-delimited, case sensitive list of ASCII string values that specifies whether the Authorization Server prompts the End-User for reauthentication and consent. The supported values are: `none`, `login`, `consent`. If `consent` the end-user is asked to (re)confirm what claims they share. Use `none` to check for an active session.
           required: false
           default: login
         - name: max_age
@@ -233,6 +233,10 @@ paths:
           $ref: '#/responses/OAuth2Error'
         default:
           $ref: '#/responses/OAuth2Error'
+      security:
+        - oauth_code: [oidc, email, phone, address, aq:location, aq:name, aq:push]
+        - oauth_implicit: [oidc, email, phone, address, aq:location, aq:name, aq:push]
+
 
   /client:
     get:
@@ -604,7 +608,6 @@ definitions:
           type: string
       application_type:
         type: string
-        default: web
       contacts:
         type: array
         items:
@@ -619,22 +622,14 @@ definitions:
         type: string
       tos_uri:
         type: string
-      subject_type:
-        type: string
-        default: public
-      id_token_signed_response_alg:
-        type: string
-        default: HS256
-      token_endpoint_auth_method:
-        type: string
-        default: client_secret_basic
       default_max_age:
         type: integer
-        format: int32
-      backchannel_logout_uri:
-        type: string
-      backchannel_logout_session_required:
-        type: boolean
+        format: int64
+      default_scopes:
+        type: array
+        items:
+          type: string
+
 
 parameters:
   Client:

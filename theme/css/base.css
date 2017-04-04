@@ -1,34 +1,21 @@
-// body {
-//     padding-top: 72px;
-// }
+#main {
+    padding-top: 25px;
+}
 
-// h1[id]:before, h2[id]:before, h3[id]:before, h4[id]:before, h5[id]:before, h6[id]:before {
-//     content: "";
-//     display: block;
-//     margin-top: -75px;
-//     height: 75px;
-// }
-
-// ul.nav li.main {
-//     font-weight: bold;
-// }
-
-// div.col-md-3 {
-//     padding-left: 0;
-// }
-
-// div.col-md-9 {
-//     padding-bottom: 100px;
-// }
+/* this rule is very broad and might cause trouble */
+#main > :first-child,
+#main > :first-child :first-child {
+    margin-top: 0;
+}
 
 div.source-links {
     float: right;
 }
 
-button.authentiq-button {
-    font-family: inherit;
-}
+/*button.authentiq-button {*/
+    /*font-family: inherit;*/
+/*}*/
 
-button.authentiq-button.white-theme {
-    background-color: #fff;
-}
+/*button.authentiq-button.white-theme {*/
+    /*background-color: #fff;*/
+/*}*/
