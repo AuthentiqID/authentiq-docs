@@ -2,23 +2,63 @@
     "docs": [
         {
             "location": "/",
-            "text": "Introduction\n\n\nAuthentiq Connect is an easy-to-use Identity Provider with a focus on privacy that is built on top of OAuth 2.0 and OpenID Connect.\n\n\nWe created it to make it easy for websites and apps to move beyond usernames and passwords, while safeguarding the end-user\u2019s privacy. Our aim is to make modern authentication easy, flexible, transparent and safe.\n\n\nContinue reading to learn more about the service. Or check out a \ncode example\n or the \nmanagement dashboard\n first.\n\n\nAuthentiq Connect is running as a highly-available cloud service and we are making it ready for on-premises installations as well.\n\n\nFeatures\n\n\nAuthentication Methods\n\n\nBy enabling Authentiq you make the following authentication methods available to your site\u2019s users.\n\n\n\n\n\n\n\n\nAuthentication Method\n\n\nApplication\n\n\nType\n\n\nSupport\n\n\n\n\n\n\n\n\n\n\nPasswordless\n\n\nAuthentiq ID\n\n\nQR code, \nPN\n, Handle\n\n\nSupported\n\n\n\n\n\n\nVirtual 2FA\n\n\nAuthentiq ID\n, Google Authenticator\n\n\nTOTP\n\n\nSupported\n\n\n\n\n\n\nPhysical 2FA\n\n\nYubiKey\n\n\nUSB Token\n\n\nComing soon\n\n\n\n\n\n\nOne-time authentication\n\n\nEmail\n\n\nMagic link\n\n\nComing soon\n\n\n\n\n\n\n\n\nThese methods can work in addition to or conjunction with your existing login system.\n\n\nWe often see sites that already integrate with social login providers adding passwordless authentication via \nAuthentiq ID\n, this way providing their users with a privacy-aware alternative to signing in with Google or Facebook.\n\n\nAnother common pattern is to use Authentiq Connect to effortlessly add two-step verification on top of usernames and passwords that are kept in-house.\n\n\nAuthentiq ID\n\n\nThe \nAuthentiq ID\n mobile app (available on \nAndroid\n and \niOS\n) are the key to your end-user\u2019s privacy. It acts as a mobile identity wallet that can be used to identify to websites. A user\u2019s \nAuthentiq ID\n can be seen as their personal cryptographic passport that holds profile information.\n\n\nWhen signing in, the user decides what information will be shared.\nPhone number and email address will already have been verified by Authentiq so that the website doesn\u2019t have to.\n\n\nRemote Sign-Out\n\n\nWhen a user signs in with \nAuthentiq ID\n, the website session is also visible in the mobile app. Walking away from a computer\n\n\nWebhooks\n\n\nCreate rich integrations by listening to Authentiq\u2019s \nSecurity Event Token\n webhooks. Use a webhook, for instance, to add new users to your newsletter easily. Coming soon.\n\n\nSingle Sign-On\n\n\nOn intranets authentication is often synchronized between applications. You can configure Authentiq Connect for Single Sign-on to support this. Coming soon.\n\n\nPairwise UUIDs\n\n\nThe ability to get a different user ID for every site you log in to, protecting your privacy better in case a site is breached. Coming soon.\n\n\nCompatibility\n\n\nStandards\n\n\nTo integrate with modern applications with good user experience, Authentiq Connect supports a growing number of web standards.\n\n\n\n\n\n\n\n\nStandard\n\n\nSupport\n\n\n\n\n\n\n\n\n\n\nOAuth 2.0 Support\n\n\ncode, token\n\n\n\n\n\n\nOIDC\n Support\n\n\ncode, id_token, hybrid\n\n\n\n\n\n\nOIDC\n Discovery\n\n\nSupported\n\n\n\n\n\n\nOIDC\n Client Registration\n\n\nSupported\n\n\n\n\n\n\nOIDC Session Management\n\n\nSupported\n\n\n\n\n\n\nOIDC Back-Channel Logout\n\n\nSupported\n\n\n\n\n\n\nOIDC\n Front-Channel Logout\n\n\nComing soon\n\n\n\n\n\n\nOAuth 2.0 Multiple Response Types\n\n\nSupported\n\n\n\n\n\n\nOAuth 2.0 Form Post Response Mode\n\n\nSupported\n\n\n\n\n\n\nSecurity Event Tokens\n\n\nComing soon\n\n\n\n\n\n\n\n\nIdentity claims\n\n\nAuthentiq Connect leverages \nOIDC\n\u2018s scopes to specify what profile information to request from a user.\n\n\nscopes from \nOIDC\n where possible.\n\n\n\n\n\n\n\n\nScope\n name\n\n\nDescription\n\n\nVerified\n\n\n\n\n\n\n\n\n\n\nemail\n\n\nA user\u2019s (verified) email address\n\n\nYes\n\n\n\n\n\n\nphone\n\n\nA user\u2019s (verified) phone number\n\n\nYes\n\n\n\n\n\n\naddress\n\n\nA user\u2019s home address\n\n\nNo\n\n\n\n\n\n\naq:name\n\n\nA user\u2019s full name\n\n\nNo\n\n\n\n\n\n\naq:location\n\n\nA user\u2019s current location\n\n\nNo\n\n\n\n\n\n\n\n\nRequested scopes are \noptional\n by default, leaving the choice of providing any of the details to the end-user, who will be able to opt out of the requested scopes on the \nAuthentiq ID\n consent screen.\n\n\nAs a website it is possible to mark essential scopes as required too, by appending \n~r\n.\n\n\nSupport\n\n\nGet in touch with us on \nsupport@authentiq.com\n.\n\n\nPlease report security issues to \nsecurity@authentiq.com\n.",
+            "text": "\u2013 Promise belofte aan developers (zie andere websites?)\n\n\n\u2013 Easy of integration tastbaar maken\n\n\n\u2013 Promises van paragrafen eruit halen in subtitels (want hoofdtitels komen ook in de zijbalk terug)\n\n\nIntroduction (pakkende subtitel)\n\n\n\n\nassasa\n\n\n\n\nAuthentiq Connect is an easy-to-use Identity Provider with a focus on privacy that is built on top of OAuth 2.0 and OpenID Connect.\n\n\n\u2013 Geen \u201cwe/ours\u201d wel \u201cyou\u201d\n\n\n\u2013 Geen \u201cWe created\u201d, meer \u201choe ga je mij helpen\u201d\n\n\nWe created it to make it easy for websites and apps to move beyond usernames and passwords, while safeguarding the end-user\u2019s privacy. Our aim is to make modern authentication easy, flexible, transparent and safe.\n\n\nContinue reading to learn more about the service. Or check out a \ncode example\n or the \nmanagement dashboard\n first.\n\n\n\u2013 Geen on-prem, maar in eigen AWS of Cloud\n\n\nAuthentiq Connect is running as a highly-available cloud service and we are making it ready for on-premises installations as well.\n\n\nFeatures (weg)\n\n\nAuthentication Methods\n\n\nBy enabling Authentiq you make the following authentication methods available to your site\u2019s users.\n\n\n\n\n\n\n\n\nAuthentication Method\n\n\nApplication\n\n\nType\n\n\nSupport\n\n\n\n\n\n\n\n\n\n\nPasswordless\n\n\nAuthentiq ID\n\n\nQR code, \nPN\n, Handle\n\n\nSupported\n\n\n\n\n\n\nVirtual 2FA\n\n\nAuthentiq ID\n, Google Authenticator\n\n\nTOTP\n\n\nSupported\n\n\n\n\n\n\nPhysical 2FA\n\n\nYubiKey\n\n\nUSB Token\n\n\nComing soon\n\n\n\n\n\n\nOne-time authentication\n\n\nEmail\n\n\nMagic link\n\n\nComing soon\n\n\n\n\n\n\n\n\n\u2013 Optionally connecting to authentication endpoint.\n\n\nThese methods can work in addition to or conjunction with your existing login system.\n\n\n\u2013 As an privacy aware alternative to social logins\n\n\nWe often see sites that already integrate with social login providers adding passwordless authentication via \nAuthentiq ID\n, this way providing their users with a privacy-aware alternative to signing in with Google or Facebook.\n\n\nAnother common pattern is to use Authentiq Connect to effortlessly add two-step verification on top of usernames and passwords that are kept in-house.\n\n\nAuthentiq ID\n\n\nThe \nAuthentiq ID\n mobile app (available on \nAndroid\n and \niOS\n) are the key to your end-user\u2019s privacy. It acts as a mobile identity wallet that can be used to identify to websites. A user\u2019s \nAuthentiq ID\n can be seen as their personal cryptographic passport that holds profile information.\n\n\nWhen signing in, the user decides what information will be shared.\nPhone number and email address will already have been verified by Authentiq so that the website doesn\u2019t have to.\n\n\nRemote Sign-Out\n\n\n\u2013 Finish\n\n\nWhen a user signs in with \nAuthentiq ID\n, the website session is also visible in the mobile app. Walking away from a computer\n\n\nWebhooks\n\n\nCreate rich integrations by listening to Authentiq\u2019s \nSecurity Event Token\n webhooks. Use a webhook, for instance, to add new users to your newsletter easily. Coming soon.\n\n\nSingle Sign-On\n\n\nOn intranets authentication is synchronized between applications. You can configure Authentiq Connect for Single Sign-on to support this. Coming soon.\n\n\nCompatibility\n\n\nStandards\n\n\nTo integrate with modern applications with good user experience, Authentiq Connect supports a growing number of web standards.\n\n\n\n\n\n\n\n\nStandard\n\n\nSupport\n\n\n\n\n\n\n\n\n\n\nOAuth 2.0 Support\n\n\ncode, token\n\n\n\n\n\n\nOIDC\n Support\n\n\ncode, id_token, hybrid\n\n\n\n\n\n\nOIDC\n Discovery\n\n\nSupported\n\n\n\n\n\n\nOIDC\n Client Registration\n\n\nSupported\n\n\n\n\n\n\nOIDC Session Management\n\n\nSupported\n\n\n\n\n\n\nOIDC Back-Channel Logout\n\n\nSupported\n\n\n\n\n\n\nOIDC\n Front-Channel Logout\n\n\nComing soon\n\n\n\n\n\n\nOAuth 2.0 Multiple Response Types\n\n\nSupported\n\n\n\n\n\n\nOAuth 2.0 Form Post Response Mode\n\n\nSupported\n\n\n\n\n\n\nOAuth 2.0 User-Managed Access Profile\n\n\nPlanned\n\n\n\n\n\n\nSAML\n\n\nPlanned\n\n\n\n\n\n\nSecurity Event Tokens\n\n\nComing soon\n\n\n\n\n\n\n\n\nIdentity claims\n\n\nAuthentiq Connect leverages \nOIDC\n\u2018s scopes to specify what profile information to request from a user.\n\n\nscopes from \nOIDC\n where possible.\n\n\n\n\n\n\n\n\nScope\n name\n\n\nDescription\n\n\nVerified\n\n\n\n\n\n\n\n\n\n\nemail\n\n\nA user\u2019s (verified) email address\n\n\nYes\n\n\n\n\n\n\nphone\n\n\nA user\u2019s (verified) phone number\n\n\nYes\n\n\n\n\n\n\naddress\n\n\nA user\u2019s home address\n\n\nNo\n\n\n\n\n\n\naq:name\n\n\nA user\u2019s full name\n\n\nNo\n\n\n\n\n\n\naq:location\n\n\nA user\u2019s current location\n\n\nNo\n\n\n\n\n\n\nPrivate scopes\n\n\nComing soon\n\n\nYes\n\n\n\n\n\n\n\n\nRequested scopes are \noptional\n by default, leaving the choice of providing any of the details to the end-user, who will be able to opt out of the requested scopes on the \nAuthentiq ID\n consent screen.\n\n\nAs a website it is possible to mark essential scopes as required too, by appending \n~r\n.\n\n\nSupport\n\n\nGet in touch with us on \nsupport@authentiq.com\n.\n\n\nPlease report security issues to \nsecurity@authentiq.com\n.",
             "title": "Overview"
         },
         {
-            "location": "/#introduction",
-            "text": "Authentiq Connect is an easy-to-use Identity Provider with a focus on privacy that is built on top of OAuth 2.0 and OpenID Connect.  We created it to make it easy for websites and apps to move beyond usernames and passwords, while safeguarding the end-user\u2019s privacy. Our aim is to make modern authentication easy, flexible, transparent and safe.  Continue reading to learn more about the service. Or check out a  code example  or the  management dashboard  first.  Authentiq Connect is running as a highly-available cloud service and we are making it ready for on-premises installations as well.",
-            "title": "Introduction"
+            "location": "/#-promise-belofte-aan-developers-zie-andere-websites",
+            "text": "",
+            "title": "-- Promise belofte aan developers (zie andere websites?)"
         },
         {
-            "location": "/#features",
+            "location": "/#-easy-of-integration-tastbaar-maken",
             "text": "",
-            "title": "Features"
+            "title": "-- Easy of integration tastbaar maken"
+        },
+        {
+            "location": "/#-promises-van-paragrafen-eruit-halen-in-subtitels-want-hoofdtitels-komen-ook-in-de-zijbalk-terug",
+            "text": "",
+            "title": "-- Promises van paragrafen eruit halen in subtitels (want hoofdtitels komen ook in de zijbalk terug)"
+        },
+        {
+            "location": "/#introduction-pakkende-subtitel",
+            "text": "assasa   Authentiq Connect is an easy-to-use Identity Provider with a focus on privacy that is built on top of OAuth 2.0 and OpenID Connect.",
+            "title": "Introduction (pakkende subtitel)"
+        },
+        {
+            "location": "/#-geen-weours-wel-you",
+            "text": "",
+            "title": "-- Geen \"we/ours\" wel \"you\""
+        },
+        {
+            "location": "/#-geen-we-created-meer-hoe-ga-je-mij-helpen",
+            "text": "We created it to make it easy for websites and apps to move beyond usernames and passwords, while safeguarding the end-user\u2019s privacy. Our aim is to make modern authentication easy, flexible, transparent and safe.  Continue reading to learn more about the service. Or check out a  code example  or the  management dashboard  first.",
+            "title": "-- Geen \"We created\", meer \"hoe ga je mij helpen\""
+        },
+        {
+            "location": "/#-geen-on-prem-maar-in-eigen-aws-of-cloud",
+            "text": "Authentiq Connect is running as a highly-available cloud service and we are making it ready for on-premises installations as well.",
+            "title": "-- Geen on-prem, maar in eigen AWS of Cloud"
+        },
+        {
+            "location": "/#features-weg",
+            "text": "",
+            "title": "Features (weg)"
         },
         {
             "location": "/#authentication-methods",
-            "text": "By enabling Authentiq you make the following authentication methods available to your site\u2019s users.     Authentication Method  Application  Type  Support      Passwordless  Authentiq ID  QR code,  PN , Handle  Supported    Virtual 2FA  Authentiq ID , Google Authenticator  TOTP  Supported    Physical 2FA  YubiKey  USB Token  Coming soon    One-time authentication  Email  Magic link  Coming soon     These methods can work in addition to or conjunction with your existing login system.  We often see sites that already integrate with social login providers adding passwordless authentication via  Authentiq ID , this way providing their users with a privacy-aware alternative to signing in with Google or Facebook.  Another common pattern is to use Authentiq Connect to effortlessly add two-step verification on top of usernames and passwords that are kept in-house.",
+            "text": "By enabling Authentiq you make the following authentication methods available to your site\u2019s users.     Authentication Method  Application  Type  Support      Passwordless  Authentiq ID  QR code,  PN , Handle  Supported    Virtual 2FA  Authentiq ID , Google Authenticator  TOTP  Supported    Physical 2FA  YubiKey  USB Token  Coming soon    One-time authentication  Email  Magic link  Coming soon",
             "title": "Authentication Methods"
+        },
+        {
+            "location": "/#-optionally-connecting-to-authentication-endpoint",
+            "text": "These methods can work in addition to or conjunction with your existing login system.",
+            "title": "-- Optionally connecting to authentication endpoint."
+        },
+        {
+            "location": "/#-as-an-privacy-aware-alternative-to-social-logins",
+            "text": "We often see sites that already integrate with social login providers adding passwordless authentication via  Authentiq ID , this way providing their users with a privacy-aware alternative to signing in with Google or Facebook.  Another common pattern is to use Authentiq Connect to effortlessly add two-step verification on top of usernames and passwords that are kept in-house.",
+            "title": "-- As an privacy aware alternative to social logins"
         },
         {
             "location": "/#authentiq-id",
@@ -27,8 +67,13 @@
         },
         {
             "location": "/#remote-sign-out",
-            "text": "When a user signs in with  Authentiq ID , the website session is also visible in the mobile app. Walking away from a computer",
+            "text": "",
             "title": "Remote Sign-Out"
+        },
+        {
+            "location": "/#-finish",
+            "text": "When a user signs in with  Authentiq ID , the website session is also visible in the mobile app. Walking away from a computer",
+            "title": "-- Finish"
         },
         {
             "location": "/#webhooks",
@@ -37,13 +82,8 @@
         },
         {
             "location": "/#single-sign-on",
-            "text": "On intranets authentication is often synchronized between applications. You can configure Authentiq Connect for Single Sign-on to support this. Coming soon.",
+            "text": "On intranets authentication is synchronized between applications. You can configure Authentiq Connect for Single Sign-on to support this. Coming soon.",
             "title": "Single Sign-On"
-        },
-        {
-            "location": "/#pairwise-uuids",
-            "text": "The ability to get a different user ID for every site you log in to, protecting your privacy better in case a site is breached. Coming soon.",
-            "title": "Pairwise UUIDs"
         },
         {
             "location": "/#compatibility",
@@ -52,12 +92,12 @@
         },
         {
             "location": "/#standards",
-            "text": "To integrate with modern applications with good user experience, Authentiq Connect supports a growing number of web standards.     Standard  Support      OAuth 2.0 Support  code, token    OIDC  Support  code, id_token, hybrid    OIDC  Discovery  Supported    OIDC  Client Registration  Supported    OIDC Session Management  Supported    OIDC Back-Channel Logout  Supported    OIDC  Front-Channel Logout  Coming soon    OAuth 2.0 Multiple Response Types  Supported    OAuth 2.0 Form Post Response Mode  Supported    Security Event Tokens  Coming soon",
+            "text": "To integrate with modern applications with good user experience, Authentiq Connect supports a growing number of web standards.     Standard  Support      OAuth 2.0 Support  code, token    OIDC  Support  code, id_token, hybrid    OIDC  Discovery  Supported    OIDC  Client Registration  Supported    OIDC Session Management  Supported    OIDC Back-Channel Logout  Supported    OIDC  Front-Channel Logout  Coming soon    OAuth 2.0 Multiple Response Types  Supported    OAuth 2.0 Form Post Response Mode  Supported    OAuth 2.0 User-Managed Access Profile  Planned    SAML  Planned    Security Event Tokens  Coming soon",
             "title": "Standards"
         },
         {
             "location": "/#identity-claims",
-            "text": "Authentiq Connect leverages  OIDC \u2018s scopes to specify what profile information to request from a user.  scopes from  OIDC  where possible.     Scope  name  Description  Verified      email  A user\u2019s (verified) email address  Yes    phone  A user\u2019s (verified) phone number  Yes    address  A user\u2019s home address  No    aq:name  A user\u2019s full name  No    aq:location  A user\u2019s current location  No     Requested scopes are  optional  by default, leaving the choice of providing any of the details to the end-user, who will be able to opt out of the requested scopes on the  Authentiq ID  consent screen.  As a website it is possible to mark essential scopes as required too, by appending  ~r .",
+            "text": "Authentiq Connect leverages  OIDC \u2018s scopes to specify what profile information to request from a user.  scopes from  OIDC  where possible.     Scope  name  Description  Verified      email  A user\u2019s (verified) email address  Yes    phone  A user\u2019s (verified) phone number  Yes    address  A user\u2019s home address  No    aq:name  A user\u2019s full name  No    aq:location  A user\u2019s current location  No    Private scopes  Coming soon  Yes     Requested scopes are  optional  by default, leaving the choice of providing any of the details to the end-user, who will be able to opt out of the requested scopes on the  Authentiq ID  consent screen.  As a website it is possible to mark essential scopes as required too, by appending  ~r .",
             "title": "Identity claims"
         },
         {
@@ -117,13 +157,8 @@
         },
         {
             "location": "/faq/",
-            "text": "Frequently Asked Questions\n\n\nSome answers to questions people have asked. Do you have a different question? Please \nget in touch with us\n.\n\n\nGeneral\n\n\nWhat is an Authentiq ID?\n\n\nWhen you download our app and create a profile, that is your very own Authentiq ID. Use it to sign into websites, or share your details in other ways.\n\n\nWhat is Authentiq Connect?\n\n\nAuthentiq Connect is the SDK you can use to let your users sign in to your stuff. On the server side it implements both the OAuth 2.0 and OpenID Connect protocols, giving developers the most flexible integration options. The AuthentiqJS snippet is basically an OIDC client, but specifically built for Authentiq.\n\n\nWhat is OpenID Connect?\n\n\nOpenID Connect 1.0\n is a set of extensions to OAuth 2.0, focusing on authentication as opposed to authorization. Many global players are backing OpenID Connect to authenticate users. OpenID Connect is technically very different from the older OpenID.\n\n\nWho signs the Authentiq ID claims?\n\n\nAt the moment we verify and sign the email and phone number claims when a user registers their Authentiq ID, so that you don\u2019t have to time and money doing your own email and SMS verification. At some point in the future we will open up our signing APIs to allow external signature providers to issue and sign additional claims, for instance an employee number, or a car registration.\n\n\nHow does \nOne-click sign in\n work?\n\n\nOne-click sign in\n allows end-users, on repeated visits, to sign in to your site by simply tapping a push notification instead of scanning a QR code. It works by setting a cookie that links the user\u2019s browser and their phone. \n\n\nTechnical\n\n\nCan I use AuthentiqJS with a server application?\n\n\nYes, even though the AuthentiqJS snippet is running in the user agent it supports the authorization code flow in two ways. First, you can let AuthentiqJS catch the authorization code from the Authentiq Provider via a fragment redirect and then POST it to your own server side resource. This method is great for \nhybrid\n apps where both the user agent and the server must be authenticated. Alternatively, you can point the redirect URL directly to a server-side resource, bypassing the snippet entirely upon authentication and following the traditional OAuth 2.0 code flow.\n\n\nCan I use Authentiq Connect with Framework X?\n\n\nIf your framework includes a decent OAuth 2.0 or OIDC client library, then most likely yes, out of the box (we\u2019d be super grateful if you can \ncontribute an example\n in this case!). If not, then you can use the AuthentiqJS snippet to initiate the \nOAuth dance\n and catch the user\u2019s profile via an \nevent listener\n in JavaScript. For server side applications you will need to code a HTTP endpoint that can validate the ID Token sent.\n\n\nSecurity\n\n\nHow does Authentiq encrypt my data on my phone?\n\n\nOn iOS, your Authentiq ID is automatically encrypted by the OS when the phone is locked, and decrypted when the phone is unlocked. For this reason it is important that the device has a passcode set, even though the Authentiq ID app itself can be protected with a PIN.\n\n\nHow does Authentiq encrypt my data in transit?\n\n\nAt registration time, your email and phone number are transmitted over TLS for verification purposes, but not persisted afterwards. When signing in to a website, your profile is transmitted over an TLS connection to the Authentiq Connect Provider, which in turn will send the profile data to the client, also using TLS. Our hosted provider currently has an A+ rating on \nSSL Labs\n.\n\n\nWhat data does the Authentiq Connect Provider persist?\n\n\nAs little as possible, although we \nare\n still working on the details at the moment. We are very privacy-aware ourselves and our goal is to avoid persisting any data when not needed, including metadata. Pretty soon we will offer a mode that supports end-to-end encryption between the phone and the client application. When used, the Authentiq Connect Provider will be unable to decrypt the ID Token that is transmitted and is merely acting as a gateway. When it\u2019s finalized, we\u2019ll properly document it too.",
+            "text": "Answers to the questions developers have asked us.  Please see the \ngeneral FAQ\n for non-technical questions about Authentiq.\n\n\nDo you have a different question? \nEmail us\n!\n\n\nGeneral\n\n\nWhat is an Authentiq ID?\n\n\nWhen you download our app and create a profile, that is your very own Authentiq ID. Use it to sign into websites, or share your details in other ways.\n\n\nWhat is Authentiq Connect?\n\n\nAuthentiq Connect is the SDK you can use to let your users sign in to your stuff. On the server side it implements both the OAuth 2.0 and OpenID Connect protocols, giving developers the most flexible integration options. The AuthentiqJS snippet is basically an OIDC client, but specifically built for Authentiq.\n\n\nWhat is OpenID Connect?\n\n\nOpenID Connect 1.0\n is a set of extensions to OAuth 2.0, focusing on authentication as opposed to authorization. Many global players are backing OpenID Connect to authenticate users. OpenID Connect is technically very different from the older OpenID.\n\n\nWhy not SAML?\n\n\nSupport for SAML is on our roadmap as we recognize the need to support integrations between Authentiq and existing enterprise systems.\n\n\nBut we also believe the future of authentication will converge towards the OpenID Connect family of standards. If you are building an application from scratch and have a choice, then you should consider OIDC.\n\n\nWho signs the Authentiq ID claims?\n\n\nAt the moment we verify and sign the email and phone number claims when a user registers their Authentiq ID, so that you don\u2019t have to. In the future we will open up our signing API to allow external signature providers to issue and sign additional claims to store in your \nidentity wallet\n. Typical verifiable claims include an employee or student number, or a car registration.\n\n\nHow does \nOne-click sign in\n work?\n\n\nWith \nOne-click sign in\n users can sign in to your site by simply tapping a notification. It works by saving a cryptographically signed token to the user\u2019s device in the browser. Centrally we persist only a mapping of the user\u2019s handle to the mobile Device ID.\n\n\nUse cases\n\n\nAnswers to questions about common use cases.\n\n\nDoes Authentiq support scenario X?\n\n\nLet\u2019s \nfind out\n! With Authentiq our goal is to make it easy for developers to do the \nright thing\n. Yet, every authentication use case is different. We are always keen to hear how we can make Authentiq work in your situation.\n\n\nIntegrations\n\n\nAnswers to questions about specific client integrations.\n\n\nDoes Authentiq support Framework X?\n\n\nIn general, if your framework includes a standard OAuth 2.0 or OIDC client library, then most likely yes, out of the box.\n\n\nWe have examples or native integrations for e.g. \nPython Flask\n, \nRuby OmniAuth\n, or \nPHP\n.\n\n\nAlternatively, JavaScript applications can use the AuthentiqJS snippet and obtain the end user profile via a JavaScript event hook.\n\n\nFor server side applications you will need to create an HTTP endpoint that retrieves and validates the ID Token from the \nToken Endpoint\n.\n\n\nCan I use AuthentiqJS with a server application?\n\n\nYes, even though the AuthentiqJS snippet is running in the browser it supports the authorization code flow in two ways. First, you can let AuthentiqJS catch the authorization code from Authentiq Connect via a fragment redirect and then POST it to your own server side resource. This method is great for \nhybrid\n apps where both the user agent and the server must be authenticated. Alternatively, you can point the redirect URL directly to a server-side resource, bypassing the snippet entirely upon authentication and following the traditional OAuth 2.0 code flow.\n\n\nPrivacy & Security\n\n\nAnswers to questions about how Authentiq manages a user\u2019s privacy. See our \nPrivacy Policy\n for details.\n\n\nHow does Authentiq encrypt my data on my phone?\n\n\nOn iOS, your Authentiq ID is automatically encrypted by the OS when the phone is locked, and decrypted when the phone is unlocked. For this reason it is important that the device has a passcode set, even though the Authentiq ID app itself can be protected with a PIN.\n\n\nHow does Authentiq encrypt data in transit?\n\n\nAt registration time, your email and phone number are transmitted over TLS for verification purposes, but not persisted afterwards. When signing in to a website, your profile is transmitted over an TLS connection to the Authentiq Connect Provider, which in turn will send the profile data to the client, also using TLS. Our hosted provider currently has an A rating on \nSSL Labs\n.\n\n\nWhat data does the Authentiq Connect Provider persist?\n\n\nAs little as possible. We are very privacy-aware ourselves and our goal is to avoid persisting any data when not needed, including metadata. We are making Authentiq compatible with the \nGDPR\n and also plan to offer a mode that supports end-to-end encryption between the phone and the client application. When used, the Authentiq Connect Provider will be unable to decrypt the ID Token that is transmitted and is merely acting as a gateway.",
             "title": "FAQ"
-        },
-        {
-            "location": "/faq/#frequently-asked-questions",
-            "text": "Some answers to questions people have asked. Do you have a different question? Please  get in touch with us .",
-            "title": "Frequently Asked Questions"
         },
         {
             "location": "/faq/#general",
@@ -146,34 +181,49 @@
             "title": "What is OpenID Connect?"
         },
         {
+            "location": "/faq/#why-not-saml",
+            "text": "Support for SAML is on our roadmap as we recognize the need to support integrations between Authentiq and existing enterprise systems.  But we also believe the future of authentication will converge towards the OpenID Connect family of standards. If you are building an application from scratch and have a choice, then you should consider OIDC.",
+            "title": "Why not SAML?"
+        },
+        {
             "location": "/faq/#who-signs-the-authentiq-id-claims",
-            "text": "At the moment we verify and sign the email and phone number claims when a user registers their Authentiq ID, so that you don\u2019t have to time and money doing your own email and SMS verification. At some point in the future we will open up our signing APIs to allow external signature providers to issue and sign additional claims, for instance an employee number, or a car registration.",
+            "text": "At the moment we verify and sign the email and phone number claims when a user registers their Authentiq ID, so that you don\u2019t have to. In the future we will open up our signing API to allow external signature providers to issue and sign additional claims to store in your  identity wallet . Typical verifiable claims include an employee or student number, or a car registration.",
             "title": "Who signs the Authentiq ID claims?"
         },
         {
             "location": "/faq/#how-does-one-click-sign-in-work",
-            "text": "One-click sign in  allows end-users, on repeated visits, to sign in to your site by simply tapping a push notification instead of scanning a QR code. It works by setting a cookie that links the user\u2019s browser and their phone.",
+            "text": "With  One-click sign in  users can sign in to your site by simply tapping a notification. It works by saving a cryptographically signed token to the user\u2019s device in the browser. Centrally we persist only a mapping of the user\u2019s handle to the mobile Device ID.",
             "title": "How does One-click sign in work?"
         },
         {
-            "location": "/faq/#technical",
-            "text": "",
-            "title": "Technical"
+            "location": "/faq/#use-cases",
+            "text": "Answers to questions about common use cases.",
+            "title": "Use cases"
+        },
+        {
+            "location": "/faq/#does-authentiq-support-scenario-x",
+            "text": "Let\u2019s  find out ! With Authentiq our goal is to make it easy for developers to do the  right thing . Yet, every authentication use case is different. We are always keen to hear how we can make Authentiq work in your situation.",
+            "title": "Does Authentiq support scenario X?"
+        },
+        {
+            "location": "/faq/#integrations",
+            "text": "Answers to questions about specific client integrations.",
+            "title": "Integrations"
+        },
+        {
+            "location": "/faq/#does-authentiq-support-framework-x",
+            "text": "In general, if your framework includes a standard OAuth 2.0 or OIDC client library, then most likely yes, out of the box.  We have examples or native integrations for e.g.  Python Flask ,  Ruby OmniAuth , or  PHP .  Alternatively, JavaScript applications can use the AuthentiqJS snippet and obtain the end user profile via a JavaScript event hook.  For server side applications you will need to create an HTTP endpoint that retrieves and validates the ID Token from the  Token Endpoint .",
+            "title": "Does Authentiq support Framework X?"
         },
         {
             "location": "/faq/#can-i-use-authentiqjs-with-a-server-application",
-            "text": "Yes, even though the AuthentiqJS snippet is running in the user agent it supports the authorization code flow in two ways. First, you can let AuthentiqJS catch the authorization code from the Authentiq Provider via a fragment redirect and then POST it to your own server side resource. This method is great for  hybrid  apps where both the user agent and the server must be authenticated. Alternatively, you can point the redirect URL directly to a server-side resource, bypassing the snippet entirely upon authentication and following the traditional OAuth 2.0 code flow.",
+            "text": "Yes, even though the AuthentiqJS snippet is running in the browser it supports the authorization code flow in two ways. First, you can let AuthentiqJS catch the authorization code from Authentiq Connect via a fragment redirect and then POST it to your own server side resource. This method is great for  hybrid  apps where both the user agent and the server must be authenticated. Alternatively, you can point the redirect URL directly to a server-side resource, bypassing the snippet entirely upon authentication and following the traditional OAuth 2.0 code flow.",
             "title": "Can I use AuthentiqJS with a server application?"
         },
         {
-            "location": "/faq/#can-i-use-authentiq-connect-with-framework-x",
-            "text": "If your framework includes a decent OAuth 2.0 or OIDC client library, then most likely yes, out of the box (we\u2019d be super grateful if you can  contribute an example  in this case!). If not, then you can use the AuthentiqJS snippet to initiate the  OAuth dance  and catch the user\u2019s profile via an  event listener  in JavaScript. For server side applications you will need to code a HTTP endpoint that can validate the ID Token sent.",
-            "title": "Can I use Authentiq Connect with Framework X?"
-        },
-        {
-            "location": "/faq/#security",
-            "text": "",
-            "title": "Security"
+            "location": "/faq/#privacy-security",
+            "text": "Answers to questions about how Authentiq manages a user\u2019s privacy. See our  Privacy Policy  for details.",
+            "title": "Privacy &amp; Security"
         },
         {
             "location": "/faq/#how-does-authentiq-encrypt-my-data-on-my-phone",
@@ -181,13 +231,13 @@
             "title": "How does Authentiq encrypt my data on my phone?"
         },
         {
-            "location": "/faq/#how-does-authentiq-encrypt-my-data-in-transit",
-            "text": "At registration time, your email and phone number are transmitted over TLS for verification purposes, but not persisted afterwards. When signing in to a website, your profile is transmitted over an TLS connection to the Authentiq Connect Provider, which in turn will send the profile data to the client, also using TLS. Our hosted provider currently has an A+ rating on  SSL Labs .",
-            "title": "How does Authentiq encrypt my data in transit?"
+            "location": "/faq/#how-does-authentiq-encrypt-data-in-transit",
+            "text": "At registration time, your email and phone number are transmitted over TLS for verification purposes, but not persisted afterwards. When signing in to a website, your profile is transmitted over an TLS connection to the Authentiq Connect Provider, which in turn will send the profile data to the client, also using TLS. Our hosted provider currently has an A rating on  SSL Labs .",
+            "title": "How does Authentiq encrypt data in transit?"
         },
         {
             "location": "/faq/#what-data-does-the-authentiq-connect-provider-persist",
-            "text": "As little as possible, although we  are  still working on the details at the moment. We are very privacy-aware ourselves and our goal is to avoid persisting any data when not needed, including metadata. Pretty soon we will offer a mode that supports end-to-end encryption between the phone and the client application. When used, the Authentiq Connect Provider will be unable to decrypt the ID Token that is transmitted and is merely acting as a gateway. When it\u2019s finalized, we\u2019ll properly document it too.",
+            "text": "As little as possible. We are very privacy-aware ourselves and our goal is to avoid persisting any data when not needed, including metadata. We are making Authentiq compatible with the  GDPR  and also plan to offer a mode that supports end-to-end encryption between the phone and the client application. When used, the Authentiq Connect Provider will be unable to decrypt the ID Token that is transmitted and is merely acting as a gateway.",
             "title": "What data does the Authentiq Connect Provider persist?"
         }
     ]
