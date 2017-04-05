@@ -3,7 +3,7 @@ site_url: http://developers.authentiq.com/
 site_description: Documentation for the Authentiq OAuth 2.0 and OpenID Connect Provider.
 site_author: The Authentiq team
 repo_url: https://github.com/AuthentiqID/authentiq-docs/
-edit_uri: tree/master/docs/
+edit_uri: edit/master/docs/
 # include_search: false
 # use_absolute_urls: true
 use_directory_urls: true
@@ -25,6 +25,9 @@ markdown_extensions:
 pages:
   - 'Overview': 'index.md'
 #  - 'Get Started': 'gettingstarted.md'
+  - 'Use Cases':
+    - 'Signing in without a password': 'use-cases/passwordless-authentication.md'
+    - 'Replacing two-step verification': 'use-cases/replace-two-step-verification.md'
   - 'API Reference': 'api-provider.md'
   - 'FAQ': 'faq.md'
 extra:
