@@ -42,5 +42,3 @@ extra:
 extra_templates:
   - examples/signin.html
   - examples/events.html
-extra_javascript:
-  -
