@@ -7,7 +7,11 @@ $( document ).ready(function() {
   $('table').addClass('table table-striped table-hover');
 
   // add tooltip support for abbreviations
-  $('abbr').tooltip();
+  $('abbr').tooltip({
+    placement: 'auto',
+    delay: { show: 500 },
+    // trigger: 'click',
+  });
 });
 
 /* Prevent disabled links from causing a page reload */
