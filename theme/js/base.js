@@ -1,6 +1,6 @@
 
-/* Highlight */
 $( document ).ready(function() {
+  /* code highlight */
   hljs.initHighlightingOnLoad();
 
   // add styling for tables
@@ -9,7 +9,7 @@ $( document ).ready(function() {
   // add tooltip support for abbreviations
   $('abbr').tooltip({
     placement: 'auto',
-    delay: { show: 500 },
+    delay: { show: 1000 },
     // trigger: 'click',
   });
 });
