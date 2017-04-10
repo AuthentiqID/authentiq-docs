@@ -1,10 +1,8 @@
-# Authentiq Connect documentation
+# Authentiq Connect Developer Documentation
 
-This repository contains the [Authentiq Connect developer documentation](http://developers.authentiq.io/) source files.
+This repository contains the [Authentiq Connect Developer Documentation](http://developers.authentiq.com/) source files.
 
-# Contributing
-
-We appreciate your help! Please don't hesitate to improve this documentation by creating feature or pull requests in this repository. 
+Don't hesitate to hit Edit on any of these pages and improve them. We appreciate your help!
 
 ## Running locally
 
@@ -12,15 +10,15 @@ The documentation is built using [MkDocs](http://www.mkdocs.org/). You can build
 
     mkdocs build
 
-Or run a local docs server with:
+Or serve local docs with:
 
     mkdocs serve
 
-# API reference documentation
+## Deploying
 
-The API reference documentation is based on Swagger.
+    ./deploy.sh [prod|test]
 
-![Valid?](http://online.swagger.io/validator?url=https://connect.authentiq.io/reference)
+You'll need appropriate S3 access for this.
 
 # Licence
 
