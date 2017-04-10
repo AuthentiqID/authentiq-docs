@@ -22,3 +22,4 @@ aws s3 cp --recursive "$SOURCE" "$DEST"
 
 echo
 echo "Developer Docs deployed, view them at $URL"
+echo
