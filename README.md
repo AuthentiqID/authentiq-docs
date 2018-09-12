@@ -6,7 +6,11 @@ Don't hesitate to hit Edit on any of these pages and improve them. We appreciate
 
 ## Running locally
 
-The documentation is built using [MkDocs](http://www.mkdocs.org/). You can build the documentation locally using:
+The documentation is built using [MkDocs](http://www.mkdocs.org/). 
+
+    pip install awscli mkdocs
+
+You can build the documentation locally using:
 
     mkdocs build
 
