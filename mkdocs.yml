@@ -9,7 +9,9 @@ edit_uri: tree/master/docs/
 use_directory_urls: true
 copyright: '<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type"><a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/AuthentiqID/authentiq-docs" rel="dct:source">Authentiq Connect Developer Documentation</a></span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.'
 google_analytics: ['UA-74615018-3', 'developers.authentiq.com']
-theme_dir: 'theme'
+theme:
+  name: null
+  custom_dir: theme
 extra_css:
   - "//cdn.authentiq.io/theme/3.3.7aq1/css/bootstrap-theme.min.css"
   # - "http://0.0.0.0:9001/dist/css/bootstrap-theme.css"
@@ -24,7 +26,7 @@ markdown_extensions:
   - markdown.extensions.codehilite
   - markdown.extensions.def_list
   - markdown.extensions.smarty
-pages:
+nav:
   - 'Overview': 'index.md'
 #  - 'Get Started': 'gettingstarted.md'
   - 'API Reference': 'api-provider.md'
