@@ -1,5 +1,6 @@
+---
 one_level_toc: true
-
+...
 Answers to the questions developers have asked us.  Please see the [general FAQ](https://www.authentiq.com/faq) for non-technical questions about Authentiq.
 
 Do you have a different question? [Email us](mailto:ask@authentiq.com)!

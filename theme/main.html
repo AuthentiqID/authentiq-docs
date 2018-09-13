@@ -11,12 +11,12 @@
 
         <title>{% if page.title %}{{ page.title }} - {% endif %}{{ config.site_name }}</title>
 
-        {%- for path in extra_css %}
-        <link href="{{ path }}" rel="stylesheet" type="text/css">
+        {%- for path in config['extra_css'] %}
+        <link href="{{ path|url }}" rel="stylesheet" type="text/css">
         {%- endfor %}
 
         {%- for path in page.meta.content_css %}
-        <link href="{{ path }}" rel="stylesheet">
+        <link href="{{ path|url }}" rel="stylesheet">
         {%- endfor %}
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -86,8 +86,8 @@
         <script src="{{ base_url }}/js/base.js"></script>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
-        {# {%- for path in extra_javascript %}
-        <!-- // <script src="{{ path }}"></script> -->
+        {# {%- for path in config['extra_javascript'] %}
+        <!-- // <script src="{{ path|url }}"></script> -->
         {%- endfor %} #}
 
         {%- if config.extra.enable_tota11y %}

@@ -1,36 +1,29 @@
 site_name: Authentiq Connect
-site_url: http://developers.authentiq.com/
+site_url: https://developers.authentiq.com/
 site_description: Documentation for the Authentiq OAuth 2.0 and OpenID Connect Provider.
-site_author: The Authentiq team
+site_author: Team Authentiq
 repo_url: https://github.com/AuthentiqID/authentiq-docs/
-edit_uri: tree/master/docs/
-# include_search: false
-# use_absolute_urls: true
+edit_uri: tree/develop/docs/
 use_directory_urls: true
-copyright: '<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type"><a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/AuthentiqID/authentiq-docs" rel="dct:source">Authentiq Connect Developer Documentation</a></span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.'
-google_analytics: ['UA-74615018-3', 'developers.authentiq.com']
 theme:
   name: null
   custom_dir: theme
+nav:
+  - 'Overview': 'index.md'
+  - 'API Reference': 'api-provider.md'
+  - 'FAQ': 'faq.md'
 extra_css:
-  - "//cdn.authentiq.io/theme/3.3.7aq1/css/bootstrap-theme.min.css"
-  # - "http://0.0.0.0:9001/dist/css/bootstrap-theme.css"
-  - "//fonts.googleapis.com/css?family=Montserrat:400,700|Noto+Serif:400|Material+Icons"
+  - "https://cdn.authentiq.io/theme/3.3.7aq1/css/bootstrap-theme.min.css"
+  - "https://fonts.googleapis.com/css?family=Montserrat:400,700|Noto+Serif:400|Material+Icons"
   - "css/base.css"
-# the `extra_javascript` is ignored from the Themes code, although this suppress the mkdocs warning
-extra_javascript:
-  - "js/base.js"
 markdown_extensions:
   - markdown.extensions.abbr
   - markdown.extensions.attr_list
   - markdown.extensions.codehilite
   - markdown.extensions.def_list
   - markdown.extensions.smarty
-nav:
-  - 'Overview': 'index.md'
-#  - 'Get Started': 'gettingstarted.md'
-  - 'API Reference': 'api-provider.md'
-  - 'FAQ': 'faq.md'
+copyright: '<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type"><a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/AuthentiqID/authentiq-docs" rel="dct:source">Authentiq Connect Developer Documentation</a></span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.'
+google_analytics: ['UA-74615018-3', 'developers.authentiq.com']
 extra:
     version: 0.1.0  # {{ config.extra.version }}
     enable_tota11y: true

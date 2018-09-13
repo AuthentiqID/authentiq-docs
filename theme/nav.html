@@ -12,7 +12,7 @@
             </button>
 
             <!-- Main title -->
-            <a class="navbar-brand" href="{{ nav.homepage.url }}" title="{{ config.site_name }}"><img src="{{ base_url }}/img/logo.svg" /></a>
+            <a class="navbar-brand" href="{{ nav.homepage.url|url }}" title="{{ config.site_name }}"><img src="{{ base_url }}/img/logo.svg" /></a>
         </div>
 
         <!-- Expanded navigation -->
@@ -26,14 +26,14 @@
                     <ul class="dropdown-menu">
                     {% for nav_item in nav_item.children %}
                         <li {% if nav_item.active %}class="active"{% endif %}>
-                            <a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
+                            <a href="{{ nav_item.url|url }}">{{ nav_item.title }}</a>
                         </li>
                     {% endfor %}
                     </ul>
                 </li>
             {% else %}
                 <li {% if nav_item.active %}class="active"{% endif %}>
-                    <a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
+                    <a href="{{ nav_item.url|url }}">{{ nav_item.title }}</a>
                 </li>
             {% endif %}
             {% endfor %}

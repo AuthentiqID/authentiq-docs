@@ -1,19 +1,22 @@
-content_css:        ../swagger/css/custom.css
-content_javascript: ../swagger/lib/custom.js
-                    ../swagger/lib/object-assign-pollyfill.js
-                    ../swagger/lib/jquery.slideto.min.js
-                    ../swagger/lib/jquery.wiggle.min.js
-                    ../swagger/lib/jquery.ba-bbq.min.js
-                    ../swagger/lib/handlebars-4.0.5.js
-                    ../swagger/lib/lodash.min.js
-                    ../swagger/lib/backbone-min.js
-                    ../swagger/swagger-ui.min.js
-                    ../swagger/lib/highlight.9.1.0.pack.js
-                    ../swagger/lib/highlight.9.1.0.pack_extended.js
-                    ../swagger/lib/jsoneditor.min.js
-                    ../swagger/lib/marked.js
-                    ../swagger/lib/swagger-oauth.js
-
+---
+content_css:
+    - ../swagger/css/custom.css
+content_javascript:
+    - ../swagger/lib/custom.js
+    - ../swagger/lib/object-assign-pollyfill.js
+    - ../swagger/lib/jquery.slideto.min.js
+    - ../swagger/lib/jquery.wiggle.min.js
+    - ../swagger/lib/jquery.ba-bbq.min.js
+    - ../swagger/lib/handlebars-4.0.5.js
+    - ../swagger/lib/lodash.min.js
+    - ../swagger/lib/backbone-min.js
+    - ../swagger/swagger-ui.min.js
+    - ../swagger/lib/highlight.9.1.0.pack.js
+    - ../swagger/lib/highlight.9.1.0.pack_extended.js
+    - ../swagger/lib/jsoneditor.min.js
+    - ../swagger/lib/marked.js
+    - ../swagger/lib/swagger-oauth.js
+...
   <div id="temp-anchor-links" class="hidden">
 # Delete
 # Get
