@@ -17,6 +17,7 @@ content_javascript:
     - ../swagger/lib/marked.js
     - ../swagger/lib/swagger-oauth.js
 ...
+
   <div id="temp-anchor-links" class="hidden">
 # Authentication
 ## /authorize
@@ -35,67 +36,49 @@ content_javascript:
 <div class="row">
   <div class="swagger-section col-md-12">
     <div id="message-bar" class="swagger-ui-wrap">&nbsp;</div>
-    <div id="swagger-ui-container" class="swagger-ui-wrap" style="min-height: 250px;"></div>
+    <div id="swagger-ui" class="swagger-ui-wrap" style="min-height: 250px;"></div>
   </div>
 </div>
 
-<script type="text/javascript">
-  $(function () {
-    var url = '/swagger/provider.yaml';
+<link rel="stylesheet" type="text/css" href="/swagger/swagger-ui.css" >
+<link href="/swagger/css/custom.css" rel="stylesheet" type="text/css"/>
 
-    // Pre load translate...
-    if(window.SwaggerTranslator) {
-        window.SwaggerTranslator.translate();
-    }
+<script src="/swagger/swagger-ui-bundle.js"> </script>
+<script src="/swagger/swagger-ui-standalone-preset.js"> </script>
+<script>
+window.onload = function() {
 
-    window.swaggerUi = new SwaggerUi({
-      url: url,
-      dom_id: "swagger-ui-container",
-      supportedSubmitMethods: [],
-      // supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
-      onComplete: function(swaggerApi, swaggerUi){
+  // Build a system
+  const ui = SwaggerUIBundle({
+    url: "/swagger/provider.yaml",
+    dom_id: '#swagger-ui',
+    deepLinking: true,
+    onComplete: function(swaggerApi, swaggerUi) {
         $('#temp-anchor-links').remove();
-
+        
         $('pre code').each(function(i, e) {
           hljs.highlightBlock(e)
         });
-
+    
         // addApiKeyAuthorization();
-
+    
         if(window.SwaggerTranslator) {
           window.SwaggerTranslator.translate();
         }
-      },
-      onFailure: function(data) {
-        log("Unable to Load SwaggerUI");
-      },
-      docExpansion: "none",
-      apisSorter: "alpha",
-      jsonEditor: false,
-      defaultModelRendering: 'schema',
-      showRequestHeaders: false,
-      showOperationIds: false
-    });
+    },
+    onFailure: function(data) {
+        log("Unable to load the UI.");
+    },
+    presets: [
+      SwaggerUIBundle.presets.apis,
+    ],
+    plugins: [
+    ],
+    docExpansion: "list",
+    defaultModelRendering: "example",
+    supportedSubmitMethods: []
+  })
 
-    function addApiKeyAuthorization(){
-      var key;
-      if ('authentiq' in window) {
-        key = window.authentiq.Token.getAuthorizationHeader();
-      }
-
-      if(key && key.trim() != "") {
-          var token = new SwaggerClient.ApiKeyAuthorization("authorization", key, "header");
-          window.swaggerUi.api.clientAuthorizations.add("Authorization", token);
-          log("added key " + key);
-      }
-    }
-
-    window.swaggerUi.load();
-
-    function log() {
-      if ('console' in window) {
-        console.log.apply(console, arguments);
-      }
-    }
-  });
+  window.ui = ui
+}
 </script>
