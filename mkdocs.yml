@@ -10,9 +10,9 @@ theme:
   custom_dir: theme
 nav:
   - 'Overview': index.md
+  - 'Get Started': get-started.md
   - 'API Reference': api-provider.md
   - 'FAQ': faq.md
-  - 'Dashboard': https://dashboard.authentiq.com/?utm_source=docs
 extra_css:
   - "https://cdn.authentiq.io/theme/3.3.7aq1/css/bootstrap-theme.min.css"
   - "https://fonts.googleapis.com/css?family=Montserrat:400,700|Noto+Serif:400|Material+Icons"

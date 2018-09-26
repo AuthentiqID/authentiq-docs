@@ -6,20 +6,18 @@ Continue reading to explore [features](#features), [integrations](#integrations)
 
 Alternatively, learn more about [Authentiq](https://www.authentiq.com/developers/?utm_source=docs&utm_medium=docs&utm_campaign=index){:target="_blank"} first, or check out a code example by signing into the [Dashboard](https://dashboard.authentiq.com/?utm_source=docs&utm_medium=docs&utm_campaign=index){:target="_blank"} straight away. 
 
-## Basics
+## The basics
 
 Authentiq Connect...
 
 - is built on top of OpenID Connect, supporting [many](#supported-standards) open standards;
-- leverages *scopes* to request [identity claims](#identity-claims) from end users;
+- leverages *scopes* to request [identity scopes](#identity-scopes) from end users;
 - supports both *passwordless authentication* (Authentiq ID) and *two-step verification* (TOTP); and <!-- ### use cases -->
-- works well with server side, JavaScript (SPA's), native and hybrid applications.
+- works well with server side, JavaScript (SPA's), native (desktop or mobile) and hybrid applications.
 
-It is usually a matter of minutes to configure your favorite OAuth 2.0 or OIDC [client library or framework](#integrations) for Authentiq Connect. Try it now, or continue reading...
+It is usually a matter of minutes to configure your favorite OAuth 2.0 or OIDC [client library or framework](#integrations) for Authentiq Connect. [Try it now](get-started.md), or continue reading first...
 
-<a href="https://dashboard.authentiq.com/?utm_source=docs&utm_medium=index&utm_campaign=tryitnow" class="btn btn-default btn-outline btn-cta" data-theme=“basic”>Try it now</a>
-
-# Features
+# OpenID Connect
 
 ## Supported standards
 
@@ -38,23 +36,23 @@ Authentiq Connect is based on [OpenID Connect](https://openid.net/connect){:targ
 [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636){:target="_blank"} | Planned | Mitigate some attack vectors for your native app. Contact us for more details.
 [Security Event Tokens](https://tools.ietf.org/html/draft-hunt-idevent-token){:target="_blank"} | Planned | Respond to authentication events in a customized fashion. Contact support if you are interested in participating in the beta.
 
-## Identity claims
+## Identity scopes
 
 Authentiq Connect leverages [predefined](http://openid.net/specs/openid-connect-core-1_0.html#ScopeClaims){:target="_blank"} and custom scopes to request identity details from the end user.
 
-**Scope name** | **Description**
-:------------- | :--------------
-`openid` | Required to indicate support for OIDC
-`profile` | A user's typical profile, including name
-`email` | A user's verified email address
-`phone` | A user's verified phone number
-`address` | A user's home address
-`aq:name` | A user's full name
-`aq:location` | A user's current location
-`aq:username` | A user's preferred username
-`aq:locale` | A user's preferred locale
-`aq:zoneinfo` | A user's preferred timezone
-`aq:push` | To enable one-click sign in
+**Scope name** | **Claims** | **Description**
+:------------- | :--------- | :--------------
+`openid` | N/A | Required to indicate support for OIDC
+`profile` |  `name`, `family_name`, `given_name`, `middle_name`, `nickname`, `preferred_username`, `zoneinfo`, `locale` | A user's typical profile, including name
+`email` | `email`, `email_verified` | A user's verified email address
+`phone` | `phone_number`, `phone_number_verified` | A user's verified phone number
+`address` | `address` | A user's home address
+`aq:name` | `name`, `family_name`, `given_name`, `middle_name`, `nickname` | A user's full name
+`aq:location` | `aq:location` | A user's current location
+`aq:username` | `preferred_username` | A user's preferred username
+`aq:locale` | `locale` | A user's preferred locale
+`aq:zoneinfo` | `zoneinfo` | A user's preferred timezone
+`aq:push` | N/A | To enable one-click sign in
 
 Requested scopes are *optional* by default, leaving the choice of providing any of the details to the end-user, who will be able to opt out of the requested scopes on the Authentiq ID consent screen.
 
@@ -63,6 +61,8 @@ It is possible to mark essential scopes as *required* by appending `~r`.
 Individual scopes are concatenated in a space separated list. A typical scope parameter might look like:
 
     openid profile email~r aq:locale aq:zoneinfo aq:push
+
+# Features
 
 ## Authentiq ID
 
@@ -135,10 +135,12 @@ Authentiq JS | JavaScript
 [WordPress native](https://github.com/AuthentiqID/wordpress-authentiq) | PHP
 [WordPress Social Login](https://github.com/AuthentiqID/wordpress-social-login) | PHP
 [Zend](https://github.com/AuthentiqID/zend-framework-1-oauth-2-library) | PHP
-[Django](https://github.com/AuthentiqID/django-allauth) | Python
+[Django AllAuth](https://github.com/AuthentiqID/django-allauth) | Python
+[Django OIDC](https://mozilla-django-oidc.readthedocs.io/en/stable/) | Python
 [Flask](https://github.com/AuthentiqID/examples-flask) | Python
+[Flask OIDC](https://flask-oidc.readthedocs.io/en/latest/) | Python
 [OAuthlib](https://oauthlib.readthedocs.io/en/latest/) | Python
-[Requests-Oauthlib](https://requests-oauthlib.readthedocs.io/en/latest/) | Python
+[Requests-OAuthlib](https://requests-oauthlib.readthedocs.io/en/latest/) | Python
 [GitLab](https://gitlab.com) | Ruby
 [OmniAuth](https://github.com/AuthentiqID/omniauth-authentiq) | Ruby
 [SalesForce](https://github.com/AuthentiqID/authentiq-salesforce-registration-handler) | Other
