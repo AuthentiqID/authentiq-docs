@@ -12,6 +12,10 @@ div.source-links {
     float: right;
 }
 
+.m-3 {
+    margin: 24px;
+}
+
 /*button.authentiq-button {*/
     /*font-family: inherit;*/
 /*}*/

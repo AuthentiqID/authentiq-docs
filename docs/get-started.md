@@ -11,9 +11,9 @@ The first step to integrating Authentiq Connect in your project is to register t
 - Sign in to the [Authentiq Dashboard](https://dashboard.authentiq.com/).
 - Click **Add your first application**.
 - Select the appropriate type for your app, [see here](faq.md#application-types) if unsure what to choose.
-  ![Application types](images/dashboard-new-client-type.png "Choose app type"){:class="img-responsive img-thumbnail"}
+  ![Application types](images/dashboard-new-client-type.png "Choose app type"){:class="img-responsive img-thumbnail m-3 text-left"}
 - Give your app a descriptive name in the **Client name** field.
-  ![Application options](images/dashboard-new-client-options.png "Provide application details"){:class="img-responsive"}
+  ![Application options](images/dashboard-new-client-options.png "Provide application details"){:class="img-responsive m-3 text-left"}
   You can leave the **Redirect URIs** field empty while testing.
 - If you can, provide a logo for your project.
 - Save your app.
