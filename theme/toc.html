@@ -3,8 +3,9 @@
     {% for toc_item in page.toc %}
         <li class="main {% if toc_item.active %}active{% endif %}"><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
         {% if not page.meta.one_level_toc %}
-            {% for toc_item in toc_item.children %}
-                <li><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
+            {% for child_toc_item in toc_item.children %}
+                <li>
+                    <a href="{{ toc_item.url }}-{{ child_toc_item.url[1:] }}">{{ child_toc_item.title }}</a></li>
             {% endfor %}
         {% endif %}
     {% endfor %}

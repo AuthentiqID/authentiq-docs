@@ -1,36 +1,25 @@
 ---
 content_css:
+    - ../swagger/swagger-ui.css
     - ../swagger/css/custom.css
 content_javascript:
-    - ../swagger/lib/custom.js
-    - ../swagger/lib/object-assign-pollyfill.js
-    - ../swagger/lib/jquery.slideto.min.js
-    - ../swagger/lib/jquery.wiggle.min.js
-    - ../swagger/lib/jquery.ba-bbq.min.js
-    - ../swagger/lib/handlebars-4.0.5.js
-    - ../swagger/lib/lodash.min.js
-    - ../swagger/lib/backbone-min.js
-    - ../swagger/swagger-ui.min.js
-    - ../swagger/lib/highlight.9.1.0.pack.js
-    - ../swagger/lib/highlight.9.1.0.pack_extended.js
-    - ../swagger/lib/jsoneditor.min.js
-    - ../swagger/lib/marked.js
-    - ../swagger/lib/swagger-oauth.js
+    - ../swagger/swagger-ui-bundle.js
+    - ../swagger/swagger-ui-standalone-preset.js
 ...
 
   <div id="temp-anchor-links" class="hidden">
 # Authentication
-## /authorize
-## /token
-## /userinfo
+## GET /authorize
+## POST /token
+## GET /userinfo
 # Client Management
 ## GET /client
 ## POST /client
-## DELETE /client/&lt;client_id&gt;
-## GET /client/&lt;client_id&gt;
-## PUT /client/&lt;client_id&gt;
+## GET /client/&lcub;client_id&rcub;
+## PUT /client/&lcub;client_id&rcub;
+## DELETE /client/&lcub;client_id&rcub;
 # Session Management
-## /authorize/iframe
+## GET /&lcub;client_id&rcub;/iframe
   </div>
 
 <div class="row">
@@ -40,11 +29,6 @@ content_javascript:
   </div>
 </div>
 
-<link rel="stylesheet" type="text/css" href="/swagger/swagger-ui.css" >
-<link href="/swagger/css/custom.css" rel="stylesheet" type="text/css"/>
-
-<script src="/swagger/swagger-ui-bundle.js"> </script>
-<script src="/swagger/swagger-ui-standalone-preset.js"> </script>
 <script>
 window.onload = function() {
 
@@ -71,9 +55,9 @@ window.onload = function() {
     },
     presets: [
       SwaggerUIBundle.presets.apis,
+      SwaggerUIStandalonePreset
     ],
-    plugins: [
-    ],
+    plugins: [],
     docExpansion: "list",
     defaultModelRendering: "example",
     supportedSubmitMethods: []

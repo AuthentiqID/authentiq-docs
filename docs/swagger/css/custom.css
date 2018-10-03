@@ -1,40 +1,40 @@
 code {
-    color: inherit
+  color: inherit;
 }
 
-.swagger-section .swagger-ui-wrap .model-signature .propName {
-    margin-left: 18px;
-    font-weight: 700
+.swagger-ui-wrap .model-signature .propName {
+  margin-left: 18px;
+  font-weight: 700;
 }
 
 .swagger-section .swagger-ui-wrap .model-signature .propType {
-    color: #895fc0
+  color: #895fc0;
 }
 
 .swagger-section .swagger-ui-wrap .model-signature .propOpt {
-    color: #ddd
+  color: #ddd;
 }
 
 .swagger-section .swagger-ui-wrap .model-signature .propOptKey {
-    font-style: italic
+  font-style: italic;
 }
 
 .swagger-section .panel-heading .desc p {
-    margin-bottom: 0
+  margin-bottom: 0;
 }
 
 .swagger-section .panel-heading .path {
-    font-weight: 400
+  font-weight: 400;
 }
 
 .swagger-section .panel-title {
-    font-size: 16px
+  font-size: 16px;
 }
 
 .swagger-section .information-container {
-    display: none
+  display: none;
 }
 
 .swagger-section .scheme-container {
-    display: none
+  display: none;
 }
