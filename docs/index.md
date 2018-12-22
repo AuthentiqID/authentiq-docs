@@ -138,6 +138,7 @@ Authentiq JS | JavaScript
 [Django AllAuth](https://github.com/AuthentiqID/django-allauth) | Python
 [Django OIDC](https://mozilla-django-oidc.readthedocs.io/en/stable/) | Python
 [Flask](https://github.com/AuthentiqID/examples-flask) | Python
+[Flask-Dance](https://flask-dance.readthedocs.io/en/latest/providers.html) | Python
 [Flask OIDC](https://flask-oidc.readthedocs.io/en/latest/) | Python
 [OAuthlib](https://oauthlib.readthedocs.io/en/latest/) | Python
 [Requests-OAuthlib](https://requests-oauthlib.readthedocs.io/en/latest/) | Python
