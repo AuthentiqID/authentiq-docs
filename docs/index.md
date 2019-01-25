@@ -1,6 +1,6 @@
 # Introduction
 
-Authentiq Connect is an easy-to-use Identity Provider built on top of OpenID Connect that makes it easy for websites and apps to move beyond usernames and passwords while safeguarding the end-user’s privacy. 
+Authentiq Connect is an easy-to-use OpenID Connect Identity Provider (IdP) that makes it easy for websites and apps to move beyond usernames and passwords while safeguarding the end-user’s privacy. 
 
 Continue reading to explore [features](#features), [integrations](#integrations), to browse use cases and [frequently asked questions](faq.md). 
 
@@ -10,6 +10,7 @@ Alternatively, learn more about [Authentiq](https://www.authentiq.com/developers
 
 Authentiq Connect...
 
+- is hosted in Europe and GDPR-friendly;
 - is built on top of OpenID Connect, supporting [many](#supported-standards) open standards;
 - leverages *scopes* to request [identity scopes](#identity-scopes) from end users;
 - supports both *passwordless authentication* (Authentiq ID) and *two-step verification* (TOTP); and <!-- ### use cases -->
@@ -35,6 +36,8 @@ Authentiq Connect is based on [OpenID Connect](https://openid.net/connect){:targ
 [OAuth 2.0 Form Post Response Mode](http://openid.net/specs/oauth-v2-form-post-response-mode-1_0.html){:target="_blank"} | Supported | Authentiq Connect is able to POST back the authentication response in case your app requires that. Contact support to learn how to enable it.
 [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636){:target="_blank"} | Planned | Mitigate some attack vectors for your native app. Contact us for more details.
 [Security Event Tokens](https://tools.ietf.org/html/draft-hunt-idevent-token){:target="_blank"} | Planned | Respond to authentication events in a customized fashion. Contact support if you are interested in participating in the beta.
+[Decentralized Identifiers](https://w3c-ccg.github.io/did-spec/){:target="_blank"} | Planned | Decentralized Identifiers (DIDs) are a new type of identifier for verifiable, "self-sovereign" digital identity, designed to work well with distributed ledgers.
+
 
 ## Identity scopes
 
@@ -155,3 +158,7 @@ What do you think?
 A penny for your thoughts... Get in touch with us on [support@authentiq.com](mailto:support@authentiq.com).
 
 Please report security issues to [security@authentiq.com](mailto:security@authentiq.com).
+
+
+*[GDPR]: The EU's General Data Protection Regulation
+
