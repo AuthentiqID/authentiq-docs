@@ -35,7 +35,7 @@ Authentiq Connect is based on [OpenID Connect](https://openid.net/connect){:targ
 [OAuth 2.0 Multiple Response Types](http://openid.net/specs/oauth-v2-multiple-response-types-1_0.html){:target="_blank"} | Supported | Fine tune your users' authentication experience by using these response types for hybrid (server+browser) apps.
 [OAuth 2.0 Form Post Response Mode](http://openid.net/specs/oauth-v2-form-post-response-mode-1_0.html){:target="_blank"} | Supported | Authentiq Connect is able to POST back the authentication response in case your app requires that. Contact support to learn how to enable it.
 [Proof Key for Code Exchange](https://tools.ietf.org/html/rfc7636){:target="_blank"} | Planned | Mitigate some attack vectors for your native app. Contact us for more details.
-[Security Event Tokens](https://tools.ietf.org/html/draft-hunt-idevent-token){:target="_blank"} | Planned | Respond to authentication events in a customized fashion. Contact support if you are interested in participating in the beta.
+[Security Event Tokens](https://tools.ietf.org/html/rfc8417){:target="_blank"} | Planned | Respond to authentication events in a customized fashion. Contact support if you are interested in participating in the beta.
 [Decentralized Identifiers](https://w3c-ccg.github.io/did-spec/){:target="_blank"} | Planned | Decentralized Identifiers (DIDs) are a new type of identifier for verifiable, "self-sovereign" digital identity, designed to work well with distributed ledgers.
 
 
